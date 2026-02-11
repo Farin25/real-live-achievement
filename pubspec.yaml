@@ -1,5 +1,5 @@
 name: real_live_achievments
-description: "A new Flutter project."
+description: "An app for real-life achievements."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -41,6 +41,8 @@ dependencies:
   health: ^13.3.1
   workmanager: ^0.9.0+3
   change_app_package_name: ^1.5.0
+  flutter_dotenv: ^6.0.0
+  app_links: ^6.4.1
 
 dev_dependencies:
   flutter_test:
@@ -58,11 +60,15 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
-  # The following line ensures that the Material Icons font is
+   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  assets:
+    - .env
+
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:
