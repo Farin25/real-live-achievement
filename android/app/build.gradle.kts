@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "de.farin.real_live_achievments"
+    namespace = "de.farin.reallifeachievements"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -21,7 +21,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "de.farin.real_live_achievments"
+        applicationId = "de.farin.reallifeachievements"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = 26

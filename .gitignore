@@ -33,3 +33,10 @@ macos/Flutter/ephemeral/
 # OS
 .DS_Store
 Thumbs.db
+
+# Secrets
+*.env
+
+# Others
+*.log
+/old

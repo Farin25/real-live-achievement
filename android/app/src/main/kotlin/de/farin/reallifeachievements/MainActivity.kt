@@ -1,4 +1,4 @@
-package com.example.real_live_achievments
+package de.farin.reallifeachievements
 
 import io.flutter.embedding.android.FlutterActivity
 
