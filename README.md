@@ -42,3 +42,6 @@ The Idea is a app that give you achievements in real life.
  Das Ziel ist es die Leute zu anmieren wieder mehr rauszugeben oder zu erleben. 
 
  Die App soll Später als APK für Android geräte zur verfügung sein so wie als App aus dem Playstore optional vieleicht auch im Playstore. Es soll auf jeden fall auch eine version für wear os geben.
+
+ ### Copyright (C) 2026 of Liam and [farin](https://farin-langner.de)
+ - Distributed under the terms of the MIT License.
