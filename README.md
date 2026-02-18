@@ -16,10 +16,10 @@ The Idea is a app that give you achievements in real life.
 | Maker | besuche 1 Makerfaire | GPS / Standort und Datum |
 | Maker I | besuche 3 Makerfaires | GPS / Standort und Datum |
 | Maker II | besuche 5 Makerfaires | GPS / Standort und Datum  |
-| bushcamper I | Übernachte eine nacht in der Wildniss |GPS / Standort Daten und Zeit |
-| bushcamper II | bleibe länger als 3 Tage in der Wildniss | GPS / Standort Daten und Zeit |
-| wanderer |Wandere an einem Tag mehr als 12 km | GPS / Standort Daten und Zeit |
-| Wander II | Wandere an einem Tag 18km | GPS / Standort Daten und Zeit |
+| bushcamper I | Übernachte eine nacht in der Wildniss |GPS / Standort und Zeit |
+| bushcamper II | bleibe länger als 3 Tage in der Wildniss | GPS / Standort und Zeit |
+| wanderer |Wandere an einem Tag mehr als 12 km | GPS / Standort und Zeit |
+| Wander II | Wandere an einem Tag 18km | GPS / Standort und Zeit |
 | Survive Covid 19 | Geboren vor 2021 | Geburstdatum + Zeit |
 | Early Bird | Vor 5 Uhr mehr als 200 Schritte | Schritte + Zeit |
 | Touch Grass | Mehr als 2 Stunden Druaußen verbracht | Zeit + GPS / Standort |
@@ -42,6 +42,18 @@ The Idea is a app that give you achievements in real life.
  Das Ziel ist es die Leute zu anmieren wieder mehr rauszugeben oder zu erleben. 
 
  Die App soll Später als APK für Android geräte zur verfügung sein so wie als App aus dem Playstore optional vieleicht auch im Playstore. Es soll auf jeden fall auch eine version für wear os geben.
+
+# Design
+
+### Home/Start Seite Aussehen:
+
+<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/design/c8yGChsbMJQMn2IkW5oKEh/Ohne-Namen?node-id=0-1&embed-host=share" allowfullscreen></iframe>
+
+
+### Achievments Seite:
+
+<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/design/c8yGChsbMJQMn2IkW5oKEh/Ohne-Namen?node-id=7-6&embed-host=share" allowfullscreen></iframe>
+
 
 # Changelog
 ## Beta 1.0
