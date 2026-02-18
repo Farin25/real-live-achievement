@@ -7,9 +7,9 @@
 | Maker | besuche 1 Makerfaire | GPS / Standort und Datum |
 | Maker I | besuche 3 Makerfaires | GPS / Standort und Datum |
 | Maker II | besuche 5 Makerfaires | GPS / Standort und Datum  |
-| bushcamper I | Übernachte eine nacht in der Wildniss |GPS / Standort Daten und Zeit |
-| bushcamper II | bleibe länger als 3 Tage in der Wildniss | GPS / Standort Daten und Zeit |
-| wanderer |Wandere an einem Tag mehr als 12 km | GPS / Standort Daten und Zeit |
+| bushcamper I | Übernachte eine nacht in der Wildniss |GPS / Standortund Zeit |
+| bushcamper II | bleibe länger als 3 Tage in der Wildniss | GPS / Standort  und Zeit |
+| wanderer |Wandere an einem Tag mehr als 12 km | GPS / Standort und Zeit |
 | Wander II | Wandere an einem Tag 18km | GPS / Standort Daten und Zeit |
 | Survive Covid 19 | Geboren vor 2021 | Geburstdatum + Zeit |
 | Early Bird | Vor 5 Uhr mehr als 200 Schritte | Schritte + Zeit |
