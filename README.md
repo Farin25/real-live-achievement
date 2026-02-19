@@ -1,12 +1,44 @@
-# The Idea
+<h1 align="center">RealLife Achievements</h1>
 
-The Idea is a app that give you achievements in real life.
+<p align="center">
+  <img src="https://github.com/Farin25/real-live-achievement" />
+  <img src="https://github.com/Farin25/real-live-achievement" />
+  <img src="https://github.com/Farin25/real-live-achievement" />
+  <img src="https://github.com/Farin25/real-live-achievement" />
+</p>
+
+<p align="center">
+  Achievement system for real-world events.
+</p>
+
+---
 
 
-### de
+
 
 # Die Idee
- Die Idee iste es eine app zu entwickeln die achievements also erfolge wie in Viedeospielen in real life vergibt. Sie ien ähnliches system gibt es teilweise schon in sammsung health mit Plaketten. Zum beispiel gibt es dann Folgende achivments:
+ Die Idee iste es eine app zu entwickeln die achievements also erfolge wie in Viedeospielen in real life vergibt. So ein ähnliches system gibt es teilweise schon in sammsung health mit Plaketten.
+
+
+
+##  Demo & Presentation
+
+<p align="center">
+  <a href="./Konzept/Bilder/Upmark Werbung Finished.mp4">
+    <img src="https://img.shields.io/badge/🎥%20Watch%20Video-000000?style=for-the-badge"/>
+  </a><a href="./Konzept/PowerPo1nt/Upmark.odp">
+    <img src="https://img.shields.io/badge/📊%20Presentation-000000?style=for-the-badge"/>
+  </a>
+    </a><a href="./CHANGELOG.md">
+    <img src="https://img.shields.io/badge/📝%20Changelog-000000?style=for-the-badge"/>
+  </a>
+</p>
+
+
+
+
+## Achievments
+
 | achivment | wie bekommt man es: | wie wird es erfasst |
 |-----|----|-----|
 | traveler I | besuche 3 verschiedene Länder | GPS / Standort|
@@ -36,32 +68,44 @@ The Idea is a app that give you achievements in real life.
 | Music Lover | Mehr als 5 Stunden Musik an einem tag gehört | Musikwiedergabe |
 | Adventure | Mehr als 20000 Schritte und eine neuer ort +  50km entfernt von Zuhause | Schritte + Standort|
 
+### Detection Logic Overview
 
- # Das Ziel
+- GPS: Standort, Distanz, Höhe
+- Time: Tageszeit, Dauer, Account-Age
+- Health Data: Schritte
+- External APIs: Wetterdaten
+- Pattern Analysis: Routenvergleich
+- Media API: Musiknutzung
+
+ ## Das Ziel
 
  Das Ziel ist es die Leute zu anmieren wieder mehr rauszugeben oder zu erleben. 
 
  Die App soll Später als APK für Android geräte zur verfügung sein so wie als App aus dem Playstore optional vieleicht auch im Playstore. Es soll auf jeden fall auch eine version für wear os geben.
 
-# Design
+## Design
 
-### Home/Start Seite Aussehen:
+<table align="center">
+<tr>
+<td align="center">
+<h3>Home</h3>
+<img src="./Konzept/Bilder/Home.png" width="250"/><br>
+<sub>Dein Dashboard mit Fortschritt & Highlights</sub>
+</td>
 
-<img src="./Konzept/Bilder/Home.png" height="400px">
+<td align="center">
+<h3>Achievements</h3>
+<img src="./Konzept/Bilder/Achivments.png" width="250"/><br>
+<sub>Alle Erfolge im Überblick</sub>
+</td>
 
-
-
-### Achievments Seite:
-
-<img src="./Konzept/Bilder/Achivments.png" height="400px">
-
-
-### Social Menu:
-
-<img src="./Konzept/Bilder/Social.png" height="400px">
-
-
-
+<td align="center">
+<h3>Social</h3>
+<img src="./Konzept/Bilder/Social.png" width="250"/><br>
+<sub>Vergleiche dich mit Freunden</sub>
+</td>
+</tr>
+</table>
 
 
 
@@ -73,14 +117,9 @@ Die Veröffentlichung von Upmark ist derzeit für den 19. Juli 2026 geplant. Das
 Unser Team arbeitet mit voller Motivation und großem Engagement an der Umsetzung dieser Vision. Funktionen werden kontinuierlich weiterentwickelt, das Design optimiert und die App intensiv getestet, um ein hochwertiges Endprodukt zu gewährleisten. Wir freuen uns darauf, Upmark bald mit euch zu teilen und sind gespannt auf den gemeinsamen Start.
 
 
-# Changelog
-## Beta 1.0
-**11.02.2026**  
--Erste Version
-- Bestätigungs Link funktioniert 
-- Loggin
+### Support & Community
+- [Discord](https://discord.gg/6J4Ws5ckYX)
 
-# Star History
 ## Star History
 
 <a href="https://www.star-history.com/#Farin25/real-live-achievement&type=date&legend=top-left">
@@ -91,6 +130,5 @@ Unser Team arbeitet mit voller Motivation und großem Engagement an der Umsetzun
  </picture>
 </a>
 
- ### Copyright (C) 2026 of Liam and [farin](https://farin-langner.de)
- - Distributed under the terms of the MIT License.  
-liams desing
+ ### Copyright (C) 2026 of [Liam Selent](https://github.com/Lionhacker270411) and [Farin Langner](https://farin-langner.de)
+ - Distributed under the terms of the MIT License.
