@@ -47,13 +47,18 @@ The Idea is a app that give you achievements in real life.
 
 ### Home/Start Seite Aussehen:
 
-<img src="F:/MakerSpace/Farin & Liams Trash/Apps/App/real-live-achievement/Konzept/Bilder/Ohne Namen.png" alt="Beschreibung des Bildes">
+<img src="./Konzept/Bilder/Home.png" height="400px">
 
 
 
 ### Achievments Seite:
 
+<img src="./Konzept/Bilder/Achivments.png" height="400px">
 
+
+### Social Menu:
+
+<img src="./Konzept/Bilder/Social.png" height="400px">
 
 
 # Changelog
