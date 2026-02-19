@@ -80,6 +80,16 @@ Unser Team arbeitet mit voller Motivation und großem Engagement an der Umsetzun
 - Bestätigungs Link funktioniert 
 - Loggin
 
+# Star History
+## Star History
+
+<a href="https://www.star-history.com/#Farin25/real-live-achievement&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Farin25/real-live-achievement&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Farin25/real-live-achievement&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Farin25/real-live-achievement&type=date&legend=top-left" />
+ </picture>
+</a>
 
  ### Copyright (C) 2026 of Liam and [farin](https://farin-langner.de)
  - Distributed under the terms of the MIT License.  
