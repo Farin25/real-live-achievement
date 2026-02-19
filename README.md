@@ -47,12 +47,12 @@ The Idea is a app that give you achievements in real life.
 
 ### Home/Start Seite Aussehen:
 
-<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/design/c8yGChsbMJQMn2IkW5oKEh/Ohne-Namen?node-id=0-1&embed-host=share" allowfullscreen></iframe>
+
 
 
 ### Achievments Seite:
 
-<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/design/c8yGChsbMJQMn2IkW5oKEh/Ohne-Namen?node-id=7-6&embed-host=share" allowfullscreen></iframe>
+
 
 
 # Changelog
