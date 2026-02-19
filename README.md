@@ -64,4 +64,4 @@ The Idea is a app that give you achievements in real life.
 
 
  ### Copyright (C) 2026 of Liam and [farin](https://farin-langner.de)
- - Distributed under the terms of the MIT License.
+ - Distributed under the terms of the MIT License.  
