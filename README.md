@@ -61,6 +61,18 @@ The Idea is a app that give you achievements in real life.
 <img src="./Konzept/Bilder/Social.png" height="400px">
 
 
+
+
+
+
+
+#### REALEASE:
+
+Die Veröffentlichung von Upmark ist derzeit für den 19. Juli 2026 geplant. Das genaue Releasedatum kann jedoch je nach Betriebssystem und Entwicklungsfortschritt variieren. Verzögerungen sind möglich, da wir sicherstellen möchten, dass die App auf allen Plattformen stabil, leistungsstark und benutzerfreundlich funktioniert.
+
+Unser Team arbeitet mit voller Motivation und großem Engagement an der Umsetzung dieser Vision. Funktionen werden kontinuierlich weiterentwickelt, das Design optimiert und die App intensiv getestet, um ein hochwertiges Endprodukt zu gewährleisten. Wir freuen uns darauf, Upmark bald mit euch zu teilen und sind gespannt auf den gemeinsamen Start.
+
+
 # Changelog
 ## Beta 1.0
 **11.02.2026**  
