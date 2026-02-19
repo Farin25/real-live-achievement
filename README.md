@@ -47,12 +47,30 @@ The Idea is a app that give you achievements in real life.
 
 ### Home/Start Seite Aussehen:
 
-<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/design/c8yGChsbMJQMn2IkW5oKEh/Ohne-Namen?node-id=0-1&embed-host=share" allowfullscreen></iframe>
+<img src="./Konzept/Bilder/Home.png" height="400px">
+
 
 
 ### Achievments Seite:
 
-<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://embed.figma.com/design/c8yGChsbMJQMn2IkW5oKEh/Ohne-Namen?node-id=7-6&embed-host=share" allowfullscreen></iframe>
+<img src="./Konzept/Bilder/Achivments.png" height="400px">
+
+
+### Social Menu:
+
+<img src="./Konzept/Bilder/Social.png" height="400px">
+
+
+
+
+
+
+
+#### REALEASE:
+
+Die Veröffentlichung von Upmark ist derzeit für den 19. Juli 2026 geplant. Das genaue Releasedatum kann jedoch je nach Betriebssystem und Entwicklungsfortschritt variieren. Verzögerungen sind möglich, da wir sicherstellen möchten, dass die App auf allen Plattformen stabil, leistungsstark und benutzerfreundlich funktioniert.
+
+Unser Team arbeitet mit voller Motivation und großem Engagement an der Umsetzung dieser Vision. Funktionen werden kontinuierlich weiterentwickelt, das Design optimiert und die App intensiv getestet, um ein hochwertiges Endprodukt zu gewährleisten. Wir freuen uns darauf, Upmark bald mit euch zu teilen und sind gespannt auf den gemeinsamen Start.
 
 
 # Changelog
@@ -74,4 +92,5 @@ The Idea is a app that give you achievements in real life.
 </a>
 
  ### Copyright (C) 2026 of Liam and [farin](https://farin-langner.de)
- - Distributed under the terms of the MIT License.
+ - Distributed under the terms of the MIT License.  
+liams desing
