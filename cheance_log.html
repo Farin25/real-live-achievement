@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1 {
+            font-family: 'Arial', sans-serif;
+            color: #972828;
+            text-align: center;
+            margin-top: 50px;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #ffffff;
+        }
+        main {
+            flex: 1;
+        }
+        .site-footer {
+            background: #f8f8f8;
+            color: #333333;
+            text-align: center;
+            padding: 20px 12px;
+            border-top: 1px solid #e6e6e6;
+            font-size: 14px;
+        }
+        .site-footer a {
+            color: #972828;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        .site-footer .small {
+            color: #666666;
+            font-size: 13px;
+            display: block;
+            margin-top: 6px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1 class="h1">Real Live Achievements</h1>
+    </main>
+
+    <footer class="site-footer">
+        <div>Real Live Achievements — <a href="#">Impressum</a> · <a href="#">Datenschutz</a></div>
+        <div class="small">© <span id="year"></span> Real Live Achievements. Distributed under the terms of the MIT License.</div>
+    </footer>
+
+    <script>
+        (function(){
+            var y = document.getElementById('year');
+            if(y) y.textContent = new Date().getFullYear();
+        })();
+    </script>
+</body>
+</html>
