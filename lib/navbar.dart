@@ -18,7 +18,7 @@ class Navbar extends StatelessWidget {
       type: BottomNavigationBarType.fixed,
       backgroundColor: Colors.white.withOpacity(0.1),
       elevation: 0,
-      selectedItemColor: Theme.of(context).primaryColor,    
+      selectedItemColor: Theme.of(context).iconTheme.color?.withOpacity(0.6),  
       unselectedItemColor: Theme.of(context).iconTheme.color?.withOpacity(0.6),
       onTap: (index) {
 

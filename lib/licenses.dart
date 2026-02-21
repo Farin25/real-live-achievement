@@ -8,22 +8,11 @@ class LicensesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Open Source Lizenzen"),
+      body: LicensePage(
+        applicationName: AppConfig.appname,
+        applicationVersion: AppConfig.version,
       ),
-      body: Center(
-        child: ElevatedButton(
-          child: const Text("Lizenz anzeigen"),
-          onPressed: () {
-            showLicensePage(
-              context: context,
-              applicationName: "${AppConfig.appname}",
-              applicationVersion: "${AppConfig.version}",
-           );
-          }
-        ),
-      ),
-      bottomNavigationBar: Navbar(),
+      bottomNavigationBar: Navbar(),// mal schaune ob drin alssen oder rausnehmen
     );
   }
 }
