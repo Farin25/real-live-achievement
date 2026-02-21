@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'variabels.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super .key});
@@ -14,12 +15,12 @@ class AboutPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              "Mark UP",
+            Text(
+              "${AppConfig.appname}",
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
-            const Text("Version: BETA 0.5",
+            Text("Version: ${AppConfig.version}",
             style: TextStyle(fontSize: 16),
            ),
            const SizedBox(height: 16),

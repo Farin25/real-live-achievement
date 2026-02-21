@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'variabels.dart';
 
 class LicensesPage extends StatelessWidget {
   const LicensesPage({super.key});
@@ -15,8 +16,8 @@ class LicensesPage extends StatelessWidget {
           onPressed: () {
             showLicensePage(
               context: context,
-              applicationName: "Mark UP",
-              applicationVersion: "BETA 0.5",
+              applicationName: "${AppConfig.appname}",
+              applicationVersion: "${AppConfig.version}",
            );
           }
         ),
