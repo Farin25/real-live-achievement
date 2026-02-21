@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'navbar.dart';
 
-class acountsite extends StatelessWidget {
+class AcountPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +10,7 @@ class acountsite extends StatelessWidget {
         title: Text('Acount'),
       ),
       body: Center(
-        child: Text('Hier kannst du deinen Acount verwalten und einstellungen Setzen',
+        child: Text('Hier kommen die Acount Settings hin also hier kanhnsrt du dann so sachen wie username usw einstellen',
         style: TextStyle(fontSize: 20),
       ),
      ),

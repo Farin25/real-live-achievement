@@ -5,6 +5,7 @@ import 'package:real_live_achievments/social.dart';
 import 'dart:ui';
 import 'home.dart';
 import 'social.dart';
+import 'settings.dart';
 
 class Navbar extends StatelessWidget {
 
@@ -34,7 +35,7 @@ class Navbar extends StatelessWidget {
         }
 
          else if (index == 3) {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => acountsite()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsPage()));
         }
 
 
