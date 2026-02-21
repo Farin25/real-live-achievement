@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'variabels.dart';
+import 'navbar.dart';
 
 class LicensesPage extends StatelessWidget {
   const LicensesPage({super.key});
@@ -22,6 +23,7 @@ class LicensesPage extends StatelessWidget {
           }
         ),
       ),
+      bottomNavigationBar: Navbar(),
     );
   }
 }
