@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Confirm your Signup</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: #0f0f13;
+      font-family: 'Inter', sans-serif;
+      color: #e2e2e2;
+      padding: 40px 16px;
+    }
+
+    .wrapper {
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .header a {
+      text-decoration: none;
+    }
+
+    .header .app-name {
+      font-size: 24px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+      display: block;
+    }
+
+    .header .app-name span {
+      color: #7c6dfa;
+    }
+
+    .header .app-subtitle {
+      font-size: 11px;
+      font-weight: 500;
+      color: #5a5a72;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 4px;
+      display: block;
+    }
+
+    .card {
+      background: linear-gradient(145deg, #1a1a24, #141420);
+      border: 1px solid #2a2a3d;
+      border-radius: 20px;
+      padding: 48px 40px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(124,109,250,0.08);
+    }
+
+    .icon-wrap {
+      width: 72px;
+      height: 72px;
+      background: linear-gradient(135deg, #7c6dfa22, #a78bfa22);
+      border: 1px solid #7c6dfa44;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+    }
+
+    .icon-wrap svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    .card h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 14px;
+      letter-spacing: -0.5px;
+    }
+
+    .card p {
+      font-size: 15px;
+      color: #9090a8;
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #7c6dfa, #a78bfa);
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 14px 36px;
+      border-radius: 12px;
+      letter-spacing: 0.2px;
+      box-shadow: 0 4px 24px rgba(124,109,250,0.35);
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #2a2a3d;
+      margin: 36px 0;
+    }
+
+    .fallback {
+      font-size: 12px;
+      color: #5a5a72;
+      line-height: 1.6;
+      word-break: break-all;
+    }
+
+    .fallback a {
+      color: #7c6dfa;
+      text-decoration: none;
+    }
+
+    .links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin: 28px 0 20px;
+      flex-wrap: wrap;
+    }
+
+    .links a {
+      font-size: 12px;
+      color: #5a5a72;
+      text-decoration: none;
+    }
+
+    .links a:hover { color: #a78bfa; }
+
+    .footer {
+      text-align: center;
+      font-size: 11px;
+      color: #3d3d52;
+      line-height: 1.8;
+      margin-top: 8px;
+    }
+
+    .footer p + p { margin-top: 4px; }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+
+    <!-- Logo / App Name -->
+    <div class="header">
+      <a href="https://github.com/Farin25/real-live-achievement">
+        <span class="app-name">Mark <span>up</span></span>
+        <span class="app-subtitle">Real life Achievements</span>
+      </a>
+    </div>
+
+    <!-- Card -->
+    <div class="card">
+      <div class="icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+      </div>
+
+      <h1>Confirm your Signup</h1>
+      <p>Welcome to Mark up! Please confirm your email address to activate your account and start tracking your real life achievements.</p>
+
+      <a href="{{ .ConfirmationURL }}" class="btn">Confirm your Email</a>
+
+      <hr class="divider" />
+
+      <p class="fallback">
+        If the button doesn't work, copy and paste this link into your browser:<br />
+        <a href="{{ .ConfirmationURL }}">{{ .ConfirmationURL }}</a>
+      </p>
+    </div>
+
+    <!-- Footer Links -->
+    <div class="links">
+      <a href="https://github.com/Farin25/real-live-achievement">Website</a>
+      <a href="https://github.com/Farin25/real-live-achievement">Datenschutzerklärung</a>
+      <a href="https://github.com/Farin25/real-live-achievement">Impressum</a>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>&copy; 2026 All Rights Reserved &mdash; <a href="https://farin-langner.de" style="color: #5a5a72; text-decoration: none;">Farin Langner</a> & Liam Selent</p>
+      <p>This email was sent automatically. Please do not reply to this email.</p>
+    </div>
+
+  </div>
+</body>
+</html>
