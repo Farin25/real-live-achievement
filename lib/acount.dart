@@ -14,7 +14,7 @@ class AcountPage extends StatelessWidget {
         style: TextStyle(fontSize: 20),
       ),
      ),
-     bottomNavigationBar: Navbar(),
+    // bottomNavigationBar: Navbar(),
     );
   }
 }

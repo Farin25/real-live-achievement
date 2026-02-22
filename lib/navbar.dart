@@ -1,64 +1,71 @@
 import 'package:flutter/material.dart';
 import 'package:real_live_achievments/achievments.dart';
-import 'package:real_live_achievments/acount.dart';
+import 'package:real_live_achievments/home.dart';
+import 'package:real_live_achievments/settings.dart';
 import 'package:real_live_achievments/social.dart';
-import 'dart:ui';
-import 'home.dart';
-import 'social.dart';
-import 'settings.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
-class Navbar extends StatelessWidget {
+
+
+
+class GoogleBottomBar extends StatefulWidget {
+  const GoogleBottomBar({super.key});
+
+  @override
+  State<GoogleBottomBar> createState() => _GoogleBottomBarState();
+}
+
+class _GoogleBottomBarState extends State<GoogleBottomBar> {
+  int _selectedIndex = 0;
+
+  final List<Widget> _pages = [
+    HomePage(),
+    AchievmentSeite(),
+    Socialsite(),
+    SettingsPage(),
+  ];
+
+
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return Container (
-      padding: EdgeInsets.only(bottom: 0),
-      child: BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      backgroundColor: Colors.white.withOpacity(0.1),
-      elevation: 0,
-      selectedItemColor: Theme.of(context).iconTheme.color?.withOpacity(0.6),  
-      unselectedItemColor: Theme.of(context).iconTheme.color?.withOpacity(0.6),
-      onTap: (index) {
-
-        if (index == 0) {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
-        }
-
-         else if (index == 1) {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => AchievmentSeite()));
-        }
-
-        else if (index == 2) {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => Socialsite()));
-        }
-
-         else if (index == 3) {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsPage()));
-        }
-
-
-      },
-      items: [
-      BottomNavigationBarItem(
-        icon: Icon(Icons.home),
-        label: '',
+    return Scaffold(
+     // appBar: AppBar(title: const Text('Google Bottom Bar')), // Auskomentiert Weil app bar ist auf jeder seite festgelegt
+      body: _pages[_selectedIndex],
+      bottomNavigationBar: SalomonBottomBar(
+        currentIndex: _selectedIndex,
+        selectedItemColor: const Color(0xff6200ee),
+        unselectedItemColor: const Color(0xff757575),
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        items: _navBarItems,
       ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.emoji_events),
-        label: '',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.people),
-        label: '',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.account_circle),
-        label: '',
-      ),
-    ],
-    ),
     );
   }
 }
+
+final _navBarItems = [
+  SalomonBottomBarItem(
+    icon: const Icon(Icons.home),
+    title: const Text("Home"),
+    selectedColor: Colors.purple,
+  ),
+  SalomonBottomBarItem(
+    icon: const Icon(Icons.emoji_events),
+    title: const Text("Achievments"),
+    selectedColor: Colors.pink,
+  ),
+  SalomonBottomBarItem(
+    icon: const Icon(Icons.people),
+    title: const Text("Social"),
+    selectedColor: Colors.orange,
+  ),
+  SalomonBottomBarItem(
+    icon: const Icon(Icons.settings),
+    title: const Text("Settings"),
+    selectedColor: Colors.teal,
+  ),
+];
