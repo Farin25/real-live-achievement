@@ -40,10 +40,10 @@ class NewsFeedPage1 extends StatelessWidget {
                                     children: [
                                       TextSpan(
                                         text: item.user.fullName,
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16,
-                                          color: Colors.black,
+                                          color: Theme.of(context).textTheme.bodyLarge?.color,
                                         ),
                                       ),
                                       TextSpan(
@@ -110,68 +110,19 @@ class _AvatarImage extends StatelessWidget {
   }
 }
 
-class _ActionsRow extends StatelessWidget {
-  final FeedItem item;
-  const _ActionsRow({required this.item});
 
-  @override
-  Widget build(BuildContext context) {
-    return Theme(
-      data: Theme.of(context).copyWith(
-        iconTheme: const IconThemeData(color: Colors.grey, size: 18),
-        textButtonTheme: TextButtonThemeData(
-          style: ButtonStyle(
-            foregroundColor: WidgetStateProperty.all(Colors.grey),
-          ),
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          TextButton.icon(
-            onPressed: () {},
-            icon: const Icon(Icons.mode_comment_outlined),
-            label: Text(
-              item.commentsCount == 0 ? '' : item.commentsCount.toString(),
-            ),
-          ),
-          TextButton.icon(
-            onPressed: () {},
-            icon: const Icon(Icons.repeat_rounded),
-            label: Text(
-              item.retweetsCount == 0 ? '' : item.retweetsCount.toString(),
-            ),
-          ),
-          TextButton.icon(
-            onPressed: () {},
-            icon: const Icon(Icons.favorite_border),
-            label: Text(item.likesCount == 0 ? '' : item.likesCount.toString()),
-          ),
-          IconButton(
-            icon: const Icon(CupertinoIcons.share_up),
-            onPressed: () {},
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 class FeedItem {
   final String? content;
   final String? imageUrl;
   final User user;
-  final int commentsCount;
-  final int likesCount;
-  final int retweetsCount;
+
 
   FeedItem({
     this.content,
     this.imageUrl,
     required this.user,
-    this.commentsCount = 0,
-    this.likesCount = 0,
-    this.retweetsCount = 0,
+
   });
 }
 
