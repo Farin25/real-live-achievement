@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Invite User - Mark up</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: #0f0f13;
+      font-family: 'Inter', sans-serif;
+      color: #e2e8f0;
+      padding: 40px 20px;
+    }
+
+    .wrapper {
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      padding: 40px 20px 30px;
+    }
+
+    .app-name {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: #ffffff;
+    }
+
+    .app-name span {
+      color: #a855f7;
+    }
+
+    .app-subtitle {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      color: #6b7280;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    .card {
+      background: #1a1a24;
+      border-radius: 20px;
+      padding: 48px 40px;
+      border: 1px solid #2d2d3d;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+    }
+
+    .icon-wrap {
+      width: 72px;
+      height: 72px;
+      background: linear-gradient(135deg, #a855f7, #7c3aed);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+      font-size: 32px;
+    }
+
+    .card h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #ffffff;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+
+    .card p {
+      font-size: 15px;
+      color: #9ca3af;
+      text-align: center;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .site-url {
+      color: #a855f7;
+      font-weight: 600;
+    }
+
+    .invite-box {
+      background: #12121a;
+      border: 1px solid #2d2d3d;
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin: 24px 0;
+      text-align: center;
+    }
+
+    .invite-box p {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 6px;
+    }
+
+    .invite-box .invite-text {
+      font-size: 15px;
+      font-weight: 600;
+      color: #a855f7;
+      margin: 0;
+    }
+
+    .btn-wrap {
+      text-align: center;
+      margin: 32px 0 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #a855f7, #7c3aed);
+      color: #ffffff !important;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 16px 48px;
+      border-radius: 50px;
+      letter-spacing: 0.3px;
+      box-shadow: 0 8px 30px rgba(168, 85, 247, 0.35);
+    }
+
+    .fallback {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .fallback p {
+      font-size: 12px;
+      color: #4b5563;
+      margin-bottom: 6px;
+    }
+
+    .fallback a {
+      font-size: 12px;
+      color: #6b7280;
+      word-break: break-all;
+    }
+
+    .warning-box {
+      background: rgba(234, 179, 8, 0.07);
+      border: 1px solid rgba(234, 179, 8, 0.2);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-top: 28px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .warning-box .warn-icon {
+      font-size: 18px;
+      margin-top: 1px;
+    }
+
+    .warning-box p {
+      font-size: 13px;
+      color: #ca8a04;
+      text-align: left;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .divider {
+      height: 1px;
+      background: #2d2d3d;
+      margin: 32px 0;
+    }
+
+    .links {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .links a {
+      color: #6b7280;
+      text-decoration: none;
+      font-size: 13px;
+      margin: 0 12px;
+    }
+
+    .links a:hover { color: #a855f7; }
+
+    .footer {
+      text-align: center;
+      padding: 10px 0 20px;
+    }
+
+    .footer p {
+      font-size: 12px;
+      color: #4b5563;
+      line-height: 1.8;
+    }
+
+    .footer a {
+      color: #6b7280;
+      text-decoration: none;
+    }
+
+    .footer a:hover { color: #a855f7; }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+
+    <div class="header">
+      <div class="app-name">Mark <span>up</span></div>
+      <div class="app-subtitle">Real life Achievements</div>
+    </div>
+
+    <div class="card">
+      <div class="icon-wrap">🎉</div>
+
+      <h1>You've Been Invited!</h1>
+
+      <p>You have been invited to create an account on <span class="site-url">{{ .SiteURL }}</span>. Join us and start tracking your real life achievements!</p>
+
+      <div class="invite-box">
+        <p>You have been invited to join</p>
+        <p class="invite-text">{{ .SiteURL }}</p>
+      </div>
+
+      <p>Click the button below to accept your invite and set up your account.</p>
+
+      <div class="btn-wrap">
+        <a href="{{ .ConfirmationURL }}" class="btn">Accept the Invite</a>
+      </div>
+
+      <div class="fallback">
+        <p>If the button doesn't work, copy and paste this link into your browser:</p>
+        <a href="{{ .ConfirmationURL }}">{{ .ConfirmationURL }}</a>
+      </div>
+
+      <div class="warning-box">
+        <span class="warn-icon">⚠️</span>
+        <p>If you did not expect this invitation, you can safely ignore this email. Your account will not be created unless you click the button above.</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="links">
+        <a href="https://github.com/Farin25/real-live-achievement">Website</a>
+        <a href="https://github.com/Farin25/real-live-achievement">Privacy Policy</a>
+        <a href="https://github.com/Farin25/real-live-achievement">Imprint</a>
+      </div>
+
+      <div class="footer">
+        <p>© 2026 All Rights Reserved</p>
+        <p><a href="https://farin-langner.de">Farin Langner</a> & Liam Selent</p>
+        <p style="margin-top:6px;">This email was sent automatically. Please do not reply to this email.</p>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
