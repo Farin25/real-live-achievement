@@ -26,13 +26,8 @@ class MyApp extends StatelessWidget {
       brightness: Brightness.dark,
     ),
   ),
-  home: Scaffold(                    // ← Das fehlt dir!
-    body: Center(
-      child: Text('Test'),
-    ),
-    bottomNavigationBar: Navbar(),   // ← Hier gehört es hin
-  ),
-);
+  home: GoogleBottomBar(),
+    );
 
 }
 
