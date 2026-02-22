@@ -19,7 +19,7 @@ class _GoogleBottomBarState extends State<GoogleBottomBar> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
-    HomePage(),
+    NewsFeedPage1 (),
     AchievmentSeite(),
     Socialsite(),
     SettingsPage(),

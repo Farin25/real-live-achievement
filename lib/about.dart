@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'navbar.dart';
-
+import 'variabels.dart';
 class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class AboutPage extends StatelessWidget {
             // App Name
             Center(
               child: Text(
-                'Real Live Achievements',
+                AppConfig.appname,
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -44,7 +44,7 @@ class AboutPage extends StatelessWidget {
             // Version
             Center(
               child: Text(
-                'Version 1.0.0',
+                AppConfig.version,
                 style: TextStyle(
                   fontSize: 16,
                   color: Colors.grey[600],
