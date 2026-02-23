@@ -135,12 +135,31 @@ const config = {
           //    }, Auskommentiert weil kein block
               {
                 label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                href: 'https://github.com/Farin25/real-live-achievement',
+                
               },
             ],
+            
           },
+          {
+            title: 'Rechtliches',
+            items: [
+                 {
+                label: 'impressum',
+                href: 'https://farin25.github.io/real-live-achievement/docs/Rechtliches/impressum',
+                
+              },
+                 {
+                label: 'Datenschutzerklärung',
+                href: 'https://farin25.github.io/real-live-achievement/docs/Rechtliches/impressum',
+                
+              },
+             
+            ]
+      }
+          
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Mark Up by Farin & Liam <br/> Built with Docusaurus`,
+        copyright: `Copyright © ${new Date().getFullYear()} Mark Up by Farin Langner & Liam Selent <br/> Built with Docusaurus`,
       },
       prism: {
         theme: prismThemes.github,
