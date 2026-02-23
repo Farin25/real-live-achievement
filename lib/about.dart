@@ -10,7 +10,7 @@ class AboutPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Über die App'),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,9 +70,11 @@ class AboutPage extends StatelessWidget {
             ),
             SizedBox(height: 30),
             
+ 
+            
             // Developer
             Text(
-              'Entwickler:',
+              'Entwickler / Herausgeber:',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -100,7 +102,7 @@ class AboutPage extends StatelessWidget {
                        
           
                       },
-                    ),
+            ),
                   
                     TextSpan(
                       text: ' & ',
@@ -118,17 +120,53 @@ class AboutPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 30),
+
               Text(
-              '© 2025-2026 Real Live Achievements',
+                'Rechtliches & Links:',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
+              SizedBox(height: 10),
+
+              linkTile('Webseite', 'https://farin25.github.io/real-live-achievement/'),
+              linkTile('Impressum', 'https://farin-langner.de/impressum'),
+              linkTile('Datenschutzerklärung', 'https://farin-langner.de/datenschutz'),
+
+              SizedBox(height: 30),
+              Text(
+              '© 2025-2026 Farin Langner & Liam Selent Alle Rechte Vorbehalten',
               style: TextStyle(
                 fontSize: 14,
                  color: Theme.of(context).textTheme.bodyLarge?.color ?? Colors.black,
               ),
+              
             ),
+            
+            
           ],
         ),
       ),
    //   bottomNavigationBar: Navbar(),
     );
   }
+}
+
+Widget linkTile(String title, String url) {
+  return ListTile(
+    contentPadding: EdgeInsets.zero,
+    title: Text(
+      title,
+      style: TextStyle(
+        color: Colors.blue,
+        decoration: TextDecoration.underline,
+      ),
+    ),
+    onTap: () async {
+      final Uri uri = Uri.parse(url);
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    },
+  );
 }
