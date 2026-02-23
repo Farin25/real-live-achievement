@@ -10,7 +10,6 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
@@ -28,12 +27,11 @@ jobs:
         working-directory: docs
         run: npm run build
 
-      - name: Debug - confirm homepage content in build
+      - name: Verify homepage content exists in build
         run: |
-          echo "=== Grep for 'RealLife Achievements' in built assets ==="
-          grep -R "RealLife Achievements" -n docs/build | head -n 20 || true
-          echo "=== Show first lines of docs/build/index.html ==="
-          sed -n '1,80p' docs/build/index.html
+          echo "Looking for homepage markers..."
+          grep -R "Verwandle dein Leben in ein Spiel" -n docs/build | head -n 20
+          grep -R "RealLife Achievements" -n docs/build | head -n 20
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
