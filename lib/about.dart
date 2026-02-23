@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'navbar.dart';
 import 'variabels.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+import 'addins.dart';
 class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -70,6 +72,7 @@ class AboutPage extends StatelessWidget {
             ),
             SizedBox(height: 30),
             
+            VimeoVideo(),
  
             
             // Developer
@@ -132,8 +135,8 @@ class AboutPage extends StatelessWidget {
               SizedBox(height: 10),
 
               linkTile('Webseite', 'https://farin25.github.io/real-live-achievement/'),
-              linkTile('Impressum', 'https://farin-langner.de/impressum'),
-              linkTile('Datenschutzerklärung', 'https://farin-langner.de/datenschutz'),
+              linkTile('Impressum', 'https://farin25.github.io/real-live-achievement/docs/Rechtliches/impressum/'),
+              linkTile('Datenschutzerklärung', 'https://github.com/Farin25/real-live-achievement'),
 
               SizedBox(height: 30),
               Text(
@@ -151,8 +154,10 @@ class AboutPage extends StatelessWidget {
       ),
    //   bottomNavigationBar: Navbar(),
     );
+    
   }
 }
+
 
 Widget linkTile(String title, String url) {
   return ListTile(
