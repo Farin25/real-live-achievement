@@ -3,7 +3,6 @@ import clsx from 'clsx';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import styles from './index.module.css';
 
 function HomepageHeader() {
@@ -41,7 +40,7 @@ export default function Home() {
                   <h2>Verwandle dein Leben in ein Spiel 🎮</h2>
                   <p>
                     Upmark motiviert dich, wieder mehr rauszugehen und echte Abenteuer zu erleben. 
-                    Sammle Achievements wie in Videospielen - aber im echten Leben!
+                    Sammle Achievements wie in Videospielen – aber im echten Leben!
                   </p>
                 </div>
               </div>
@@ -76,7 +75,7 @@ export default function Home() {
                   <h3>Momente erleben</h3>
                   <p>
                     Erlebe die Golden Hour, trotze dem Wetter oder gehe bei Mondschein 
-                    raus - für "Golden Hour", "Weather Resistant" und "Goblin Mode"
+                    raus – für "Golden Hour", "Weather Resistant" und "Goblin Mode"
                   </p>
                 </div>
               </div>
@@ -84,14 +83,22 @@ export default function Home() {
 
             <div className="row margin-top--lg">
               <div className="col col--6">
-                <div className={styles.demoSection}>
+                {/* --- Neuer, ansprechender Demo-Bereich mit Vimeo-Video --- */}
+                <div className={styles.demoSectionEnhanced}>
                   <h3>🎥 Demo ansehen</h3>
-                  <p>Schau dir das Konzeptvideo an und erlebe, wie Upmark funktioniert!</p>
-                  <Link
-                    className="button button--primary"
-                    href="./Konzept/Bilder/Upmark Werbung Finished.mp4">
-                    Video anschauen
-                  </Link>
+                  <p className={styles.demoText}>
+                    Schau dir das Konzeptvideo an und erlebe, wie Upmark funktioniert!
+                  </p>
+                  <div className={styles.videoWrapper}>
+                    <iframe
+                      src="https://player.vimeo.com/video/1167330665"
+                      className={styles.responsiveVideo}
+                      frameBorder="0"
+                      allow="autoplay; fullscreen; picture-in-picture"
+                      allowFullScreen
+                      title="Demo Video"
+                    />
+                  </div>
                 </div>
               </div>
               
@@ -117,16 +124,16 @@ export default function Home() {
                   <h3>🏆 Beliebte Achievements</h3>
                   <div className={styles.achievementGrid}>
                     <div className={styles.achievement}>
-                      <strong>Tutorial Finished</strong> - Werde 18 Jahre alt
+                      <strong>Tutorial Finished</strong> – Werde 18 Jahre alt
                     </div>
                     <div className={styles.achievement}>
-                      <strong>Touch Grass</strong> - Verbringe 2+ Stunden draußen
+                      <strong>Touch Grass</strong> – Verbringe 2+ Stunden draußen
                     </div>
                     <div className={styles.achievement}>
-                      <strong>Early Bird</strong> - 200+ Schritte vor 5 Uhr morgens
+                      <strong>Early Bird</strong> – 200+ Schritte vor 5 Uhr morgens
                     </div>
                     <div className={styles.achievement}>
-                      <strong>Offline Mode</strong> - 1 Tag ohne Internet
+                      <strong>Offline Mode</strong> – 1 Tag ohne Internet
                     </div>
                   </div>
                 </div>

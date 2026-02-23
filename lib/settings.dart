@@ -44,12 +44,12 @@ class SettingsPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                      'Gaming2easy',// Nutzername später aus DB
+                      'kosivonhonig',// Nutzername später aus DB
                       style: TextStyle(fontSize: 20,
                       fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        'Leon Pappendorf', // Richtiger name Später AUS db
+                        'Konstatin Kaiser', // Richtiger name Später AUS db
                         style: TextStyle(
                           fontSize: 16,
                           color: Colors.grey[600]),
