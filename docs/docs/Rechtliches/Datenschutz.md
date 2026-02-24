@@ -10,7 +10,7 @@ Stand: Februar 2026
 Diese Datenschutzerklärung gilt für:
 
 - die App *Real Live Achievements*  
-- die zugehörige Webseite: https://farin-langner.de (gehostet als GitHub Page / Docusaurus)  
+- die zugehörige Webseite: https://farin25.github.io/real-live-achievement (gehostet als GitHub Page / Docusaurus)  
 
 ---
 

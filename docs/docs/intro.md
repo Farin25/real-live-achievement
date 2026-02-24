@@ -1,4 +1,5 @@
 ---
+title: Itruction
 sidebar_position: 1
 ---
 ## Werbe Viedeo
@@ -7,3 +8,5 @@ sidebar_position: 1
         allow="autoplay; fullscreen" allowfullscreen>
 </iframe>
 
+
+<img src="./docs/static/img/visualisierungen/Achievments.png" width="250"/>
