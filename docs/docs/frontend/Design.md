@@ -1,5 +1,6 @@
 
 
+
  ### Das Erste Design
 
  Den Ersten Design Entwurf haben wir noch mit Figma gemacht:
@@ -7,6 +8,8 @@
 <img src="/img/old/Home.png" alt="Home" width="300" />
 <img src="/img/old/Social.png" alt="social" width="300" />
 <img src="/img/old/Achivments.png" alt="Achievments" width="300"/>
+
+Danach haben wir das Desing mit Flutter umgesetzt dabei haben wir es ein wenig abgeändernt.
 
 
 ### Das Design ind er App
