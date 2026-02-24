@@ -28,3 +28,9 @@
 | Recovery Day | Weniger als 3000 Schritte an einem Tag | Tag +  Zeit |
 | Music Lover | Mehr als 5 Stunden Musik an einem tag gehört | Musikwiedergabe |
 | Adventure | Mehr als 20000 Schritte und eine neuer ort +  50km entfernt von Zuhause | Schritte + Standort|
+| Adventure | Mehr als 20000 Schritte und eine neuer ort +  50km entfernt von Zuhause | Schritte + Standort|
+|Night Walker|Mehr als 5 km zwischen 22–4 Uhr|GPS+ Zeit |
+|30k Club| 30000 Schritte an einem Tag | GPS | Zeit |
+|Lost Signal| 2 Stunden ohne internet und gps verbindung | GPS + Internet |
+|Homebody|48|Stunden haus nicht verlassen| GPS|
+|Minimalist|unter 2000 schritte an einem Tag |steps + Time|

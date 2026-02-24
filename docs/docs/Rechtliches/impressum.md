@@ -18,7 +18,7 @@ E-Mail: achievements@holzideen.org
 
 ## Angaben gemäß § 5 TMG
 
-Die App *Real Live Achievements* sowie die Webseite https://farin-langner.de werden betrieben von:
+Die App *Real Live Achievements* sowie die Webseite https://farin25.github.io/real-live-achievement werden betrieben von:
 
 - Farin Langner  
 - Liam Selent  
