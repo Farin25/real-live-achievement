@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 
-// Krasses Webeviedeo
+//Krasses Werbeviedeo
 class VimeoVideo extends StatefulWidget {
   const VimeoVideo({super.key});
 
@@ -11,17 +11,15 @@ class VimeoVideo extends StatefulWidget {
 }
 
 class _VimeoVideoState extends State<VimeoVideo> {
-  late final WebViewController controller;
+  WebViewController? controller;
+  bool _accepted = false;
 
-  @override
-  void initState() {
-    super.initState();
-
+  void _loadVideo() {
     controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..loadHtmlString('''
         <html>
-          <body style="margin:0;">
+          <body style="margin:0; background:black;">
             <iframe 
               src="https://player.vimeo.com/video/1167330665"
               width="100%" 
@@ -33,13 +31,47 @@ class _VimeoVideoState extends State<VimeoVideo> {
           </body>
         </html>
       ''');
+
+    setState(() {
+      _accepted = true;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
       aspectRatio: 16 / 9,
-      child: WebViewWidget(controller: controller),
+      child: _accepted
+          ? WebViewWidget(controller: controller!)
+          : Container(
+              color: Colors.black,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  const Icon(Icons.play_circle_fill,
+                      size: 80, color: Colors.white70),
+                  Positioned(
+                    bottom: 20,
+                    left: 20,
+                    right: 20,
+                    child: Column(
+                      children: [
+                        const Text(
+                          "Externer Inhalt von Vimeo\nDurch Klick wird eine Verbindung zu Vimeo hergestellt.",
+                          style: TextStyle(color: Colors.white70),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 12),
+                        ElevatedButton(
+                          onPressed: _loadVideo,
+                          child: const Text("Video laden"),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
     );
   }
 }
