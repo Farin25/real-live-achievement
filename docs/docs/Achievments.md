@@ -33,3 +33,4 @@
 |Lost Signal| 2 Stunden ohne internet und gps verbindung | GPS + Internet |
 |Homebody|48 Stunden haus nicht verlassen| GPS|
 |Minimalist|unter 2000 schritte an einem Tag |steps + Time|
+|Void|IN Bielefeld gewesen| GPS |

@@ -14,3 +14,5 @@
 - Docs Geupdatet (Liam)
 - GitHub Page eingerichtet (Farin) 
 - Chanelog angefangen (Liam)
+- Dsgvo Banner vor Werbeviedeo auf Abot Seite(Farin)
+- pubspec.ymal Repariert(Farin)
