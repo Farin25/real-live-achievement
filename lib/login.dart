@@ -47,7 +47,7 @@ class _Logo extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            "Welcome to Mark Up",
+            "Welcome to Up Mark",
             textAlign: TextAlign.center,
             style: isSmallScreen
                 ? Theme.of(context).textTheme.titleMedium
