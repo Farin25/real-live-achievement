@@ -83,7 +83,7 @@ const config = {
         respectPrefersColorScheme: true,
       },
       navbar: {
-        title: 'Mark Up',
+        title: 'Up Mark',
         logo: {
           alt: 'img/favicon.png',
           src: 'img/favicon.png',
