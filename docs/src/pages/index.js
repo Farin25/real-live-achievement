@@ -1,3 +1,4 @@
+// src/pages/index.tsx  (oder .js)
 import React from 'react';
 import clsx from 'clsx';
 import Link from '@docusaurus/Link';
@@ -6,17 +7,26 @@ import Layout from '@theme/Layout';
 import styles from './index.module.css';
 
 function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
   return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
+    <header className={styles.hero}>
       <div className="container">
-        <h1 className="hero__title">RealLife Achievements</h1>
-        <p className="hero__subtitle">Achievement system for real-world events 🏆</p>
+        <h1 className={styles.title}>
+          RealLife<br />Achievements
+        </h1>
+        <p className={styles.subtitle}>
+          Dein echtes Leben wird zum Spiel.<br />
+          Sammle echte Abenteuer – nicht nur Punkte.
+        </p>
         <div className={styles.buttons}>
           <Link
-            className="button button--secondary button--lg"
+            className={styles.ctaPrimary}
             to="/docs/intro">
-            Entdecke die App 🚀
+            Jetzt App entdecken 🚀
+          </Link>
+          <Link
+            className={styles.ctaSecondary}
+            to="#demo">
+            Video ansehen
           </Link>
         </div>
       </div>
@@ -26,118 +36,109 @@ function HomepageHeader() {
 
 export default function Home() {
   const {siteConfig} = useDocusaurusContext();
+
   return (
-    <Layout
-      title={`${siteConfig.title}`}
-      description="Achievement system for real-world events">
+    <Layout title={siteConfig.title} description="Achievement system for real-world events">
       <HomepageHeader />
+
       <main>
+        {/* Intro */}
+        <section className={styles.intro}>
+          <div className="container">
+            <h2>Verwandle dein Leben in ein Spiel</h2>
+            <p>
+              Upmark belohnt dich für echtes Leben. Gehe raus, entdecke die Welt und sammle Achievements wie in deinem Lieblingsspiel – nur besser.
+            </p>
+          </div>
+        </section>
+
+        {/* Features */}
         <section className={styles.features}>
           <div className="container">
             <div className="row">
-              <div className="col col--12">
-                <div className="text--center">
-                  <h2>Verwandle dein Leben in ein Spiel 🎮</h2>
-                  <p>
-                    Upmark motiviert dich, wieder mehr rauszugehen und echte Abenteuer zu erleben. 
-                    Sammle Achievements wie in Videospielen – aber im echten Leben!
-                  </p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="row">
-              <div className="col col--4">
-                <div className="text--center">
-                  <div className={styles.featureIcon}>🗺️</div>
+              <div className={clsx('col col--4', styles.featureCol)}>
+                <div className={styles.featureCard}>
+                  <svg className={styles.featureIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
                   <h3>Entdecker werden</h3>
-                  <p>
-                    Bereise neue Länder, erkunde unbekannte Orte und sammle 
-                    Travel-Achievements wie "Traveler I-III" oder "Unknown Chunk Loaded"
-                  </p>
+                  <p>Neue Orte, neue Länder, neue Stories. Von „First Summit“ bis „Unknown Chunk Loaded“.</p>
                 </div>
               </div>
-              
-              <div className="col col--4">
-                <div className="text--center">
-                  <div className={styles.featureIcon}>🥾</div>
+
+              <div className={clsx('col col--4', styles.featureCol)}>
+                <div className={styles.featureCard}>
+                  <svg className={styles.featureIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+                    <path d="M4 4h16v16H4z" />
+                    <path d="M4 8h16M8 4v16" />
+                  </svg>
                   <h3>Aktiv bleiben</h3>
-                  <p>
-                    Wandere neue Strecken, campe in der Wildnis und hole dir 
-                    "Wanderer", "Bushcamper" oder "Adventure" Achievements
-                  </p>
+                  <p>Wandern, Campen, Trailrunning – hol dir „Bushcamper“, „Epic Hike“ oder „1000 km Club“.</p>
                 </div>
               </div>
-              
-              <div className="col col--4">
-                <div className="text--center">
-                  <div className={styles.featureIcon}>🌅</div>
+
+              <div className={clsx('col col--4', styles.featureCol)}>
+                <div className={styles.featureCard}>
+                  <svg className={styles.featureIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 8v4l3 3" />
+                  </svg>
                   <h3>Momente erleben</h3>
-                  <p>
-                    Erlebe die Golden Hour, trotze dem Wetter oder gehe bei Mondschein 
-                    raus – für "Golden Hour", "Weather Resistant" und "Goblin Mode"
-                  </p>
+                  <p>Golden Hour, Sternenhimmel, Gewitter – „Weather Warrior“, „Goblin Mode“, „Midnight Magic“.</p>
                 </div>
               </div>
             </div>
+          </div>
+        </section>
 
-            <div className="row margin-top--lg">
-              <div className="col col--6">
-                {/* --- Neuer, ansprechender Demo-Bereich mit Vimeo-Video --- */}
-                <div className={styles.demoSectionEnhanced}>
-                  <h3>🎥 Demo ansehen</h3>
-                  <p className={styles.demoText}>
-                    Schau dir das Konzeptvideo an und erlebe, wie Upmark funktioniert!
-                  </p>
-                  <div className={styles.videoWrapper}>
-                    <iframe
-                      src="https://player.vimeo.com/video/1167330665"
-                      className={styles.responsiveVideo}
-                      frameBorder="0"
-                      allow="autoplay; fullscreen; picture-in-picture"
-                      allowFullScreen
-                      title="Demo Video"
-                    />
-                  </div>
-                </div>
-              </div>
-              
-              <div className="col col--6">
-                <div className={styles.releaseSection}>
-                  <h3>📅 Release: Juli 2026</h3>
-                  <p>
-                    Verfügbar für Android als APK und im Play Store. 
-                    Auch für Wear OS geplant!
-                  </p>
-                  <Link
-                    className="button button--secondary"
-                    href="https://discord.gg/6J4Ws5ckYX">
-                    Discord beitreten
-                  </Link>
-                </div>
-              </div>
+        {/* Demo Video */}
+        <section id="demo" className={styles.demoSection}>
+          <div className="container">
+            <h2 className={styles.demoTitle}>So funktioniert Upmark</h2>
+            <div className={styles.videoWrapper}>
+              <iframe
+                src="https://player.vimeo.com/video/1167330665"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowFullScreen
+                title="Upmark Demo"
+              />
             </div>
+          </div>
+        </section>
 
-            <div className="row margin-top--lg">
-              <div className="col col--12">
-                <div className="text--center">
-                  <h3>🏆 Beliebte Achievements</h3>
-                  <div className={styles.achievementGrid}>
-                    <div className={styles.achievement}>
-                      <strong>Tutorial Finished</strong> – Werde 18 Jahre alt
-                    </div>
-                    <div className={styles.achievement}>
-                      <strong>Touch Grass</strong> – Verbringe 2+ Stunden draußen
-                    </div>
-                    <div className={styles.achievement}>
-                      <strong>Early Bird</strong> – 200+ Schritte vor 5 Uhr morgens
-                    </div>
-                    <div className={styles.achievement}>
-                      <strong>Offline Mode</strong> – 1 Tag ohne Internet
-                    </div>
-                  </div>
+        {/* Achievements */}
+        <section className={styles.achievements}>
+          <div className="container">
+            <h2>Beliebte Achievements</h2>
+            <div className={styles.achievementGrid}>
+              {[
+                { title: "Tutorial Finished", desc: "Werde 18 Jahre alt" },
+                { title: "Touch Grass", desc: "2+ Stunden draußen" },
+                { title: "Early Bird", desc: "200+ Schritte vor 5 Uhr" },
+                { title: "Offline Mode", desc: "1 Tag ohne Internet" },
+                { title: "Golden Hour", desc: "Sonnenuntergang erleben" },
+                { title: "Bushcamper", desc: "Nacht im Wald" },
+              ].map((a, i) => (
+                <div key={i} className={styles.achievementCard}>
+                  <div className={styles.badge}>🏆</div>
+                  <strong>{a.title}</strong>
+                  <span>{a.desc}</span>
                 </div>
-              </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Release CTA */}
+        <section className={styles.ctaSection}>
+          <div className="container">
+            <h2>Release: Juli 2026</h2>
+            <p>Android • Wear OS • Play Store</p>
+            <div className={styles.ctaButtons}>
+              <a href="https://discord.gg/6J4Ws5ckYX" target="_blank" className={styles.ctaSecondary}>
+                Discord beitreten
+              </a>
             </div>
           </div>
         </section>
