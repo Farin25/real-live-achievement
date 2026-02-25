@@ -22,7 +22,7 @@ class SettingsPage extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 Navigator.push(context,
-                MaterialPageRoute(builder: (context) => AcountPage()));
+                MaterialPageRoute(builder: (context) => AccountPage()));
               },
            //Der Profiel Bereich Wichtig und richtig
            child: Container(
@@ -75,7 +75,7 @@ class SettingsPage extends StatelessWidget {
                     trailing: Icon(Icons.arrow_forward_ios),
                     onTap: () {
                       Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => AcountPage()));
+                      MaterialPageRoute(builder: (context) => AccountPage()));
                 
                     },
                   ),
