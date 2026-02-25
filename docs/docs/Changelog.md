@@ -8,6 +8,7 @@
 - Changelog neuste nach oben verschoben (Farin)
 - Acount Löschen und Abmelden boutton zur acount Page hinzugefügt(Farin)
 - count Löschen funktion in Subase erstellt (Farin)
+- added Singup (Farin)
 
 
 ## 24.02.2026
