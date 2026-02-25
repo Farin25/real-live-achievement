@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'singup.dart';
 
 class SignInPage2 extends StatelessWidget {
   const SignInPage2({super.key});
@@ -183,7 +184,18 @@ class __FormContentState extends State<_FormContent> {
                     }
                   }
                 },
+
               ),
+              
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const SignUpPage()),
+                );
+              },
+              child: const Text("Noch keinen Account? Registrieren"),
             ),
           ],
         ),
