@@ -114,7 +114,7 @@ export default function Home() {
             <div className={styles.achievementGrid}>
               {[
                 { title: "Tutorial Finished", desc: "Werde 18 Jahre alt" },
-                { title: "Touch Grass", desc: "2+ Stunden draußen" },
+                { title: "Travler I", desc: "Besuche 5 Länder" },
                 { title: "Early Bird", desc: "200+ Schritte vor 5 Uhr" },
                 { title: "Offline Mode", desc: "1 Tag ohne Internet" },
                 { title: "Golden Hour", desc: "Sonnenuntergang erleben" },

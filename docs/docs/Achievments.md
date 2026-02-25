@@ -34,3 +34,5 @@
 |Homebody|48 Stunden haus nicht verlassen| GPS|
 |Minimalist|unter 2000 schritte an einem Tag |steps + Time|
 |Void|In Bielefeld gewesen| GPS |
+|first user | sei mit unter den ersten 50 usern | zeit + userzahl |
+|
