@@ -113,12 +113,12 @@ export default function Home() {
             <h2>Beliebte Achievements</h2>
             <div className={styles.achievementGrid}>
               {[
-                { title: "Tutorial Finished", desc: "Werde 18 Jahre alt" },
-                { title: "Travler I", desc: "Besuche 5 Länder" },
-                { title: "Early Bird", desc: "200+ Schritte vor 5 Uhr" },
-                { title: "Offline Mode", desc: "1 Tag ohne Internet" },
-                { title: "Golden Hour", desc: "Sonnenuntergang erleben" },
-                { title: "Bushcamper", desc: "Nacht im Wald" },
+                { title: "Tutorial Finished", desc: " Werde 18 Jahre alt" },
+                { title: "Travler I", desc: " Besuche 5 Länder" },
+                { title: "Early Bird", desc: " 200+ Schritte vor 5 Uhr" },
+                { title: "Offline Mode", desc: " 1 Tag ohne Internet" },
+                { title: "Golden Hour", desc: " Sonnenuntergang erleben" },
+                { title: "Bushcamper", desc: " Nacht im Wald" },
               ].map((a, i) => (
                 <div key={i} className={styles.achievementCard}>
                   <div className={styles.badge}>🏆</div>
