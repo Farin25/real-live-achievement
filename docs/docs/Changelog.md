@@ -6,6 +6,8 @@
 - Namen und webseite richtig gemacht.(Farin & Liam)
 - Update Webseite Css (Farin)
 - Changelog neuste nach oben verschoben (Farin)
+- Acount Löschen und Abmelden boutton zur acount Page hinzugefügt(Farin)
+- count Löschen funktion in Subase erstellt (Farin)
 
 
 ## 24.02.2026
