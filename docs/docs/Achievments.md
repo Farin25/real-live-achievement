@@ -19,7 +19,7 @@
 | Touch Grass II | Mehr als 5 Stunden Draußen verbracht |
 | Unknown Chunk Loaded | Ein neues gebiet zum ersten mal betretten (nach einem jahr nutzung)| GPS / Standort |
 | Miner I | sei 500 Meter dem unter meerespiegel  | ? |
-| Golden Hour | Draußen zwischen sonnenuntergang oder Aufgang | GPS/Standort + Zeit | 
+| Golden Hour | Draußen zwischen bei einem Sonnenuntergang oder Aufgang | GPS/Standort + Zeit | 
 | Weather Resistant | Draußen trotz Regen und unter 5 grad | Wetterbericht API + Standort |
 | Offline Mode | 1 Tag Offline | Internettverbindung |
 | Autopilot Disabled Anderen Weg als sonst zu gelichem Ziel genommen | Standort |
@@ -35,4 +35,4 @@
 |Minimalist|unter 2000 schritte an einem Tag |steps + Time|
 |Void|In Bielefeld gewesen| GPS |
 |first user | sei mit unter den ersten 50 usern | zeit + userzahl |
-|
+|Traveller Sarah extrem | Besuche 10 Lnder | GPS |
