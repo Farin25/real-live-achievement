@@ -50,19 +50,54 @@ class MyApp extends StatelessWidget {
 
 
 class AuthGate extends StatelessWidget {
+  const AuthGate({super.key});
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<AuthState>(
       stream: Supabase.instance.client.auth.onAuthStateChange,
       builder: (context, snapshot) {
-        final session = Supabase.instance.client.auth.currentSession;
+
+        final session = snapshot.data?.session;
 
         if (session == null) {
-          return SignInPage2();
-        } else {
-          return GoogleBottomBar();
+          return const SignInPage2();
         }
+
+        return FutureBuilder(
+          future: _ensureProfileExists(session.user),
+          builder: (context, profileSnapshot) {
+
+            if (profileSnapshot.connectionState == ConnectionState.waiting) {
+              return const Scaffold(
+                body: Center(child: CircularProgressIndicator()),
+              );
+            }
+
+            return const GoogleBottomBar();
+          },
+        );
       },
     );
+  }
+
+  Future<void> _ensureProfileExists(User user) async {
+    final supabase = Supabase.instance.client;
+
+    final existing = await supabase
+        .from('profiles')
+        .select('id')
+        .eq('id', user.id)
+        .maybeSingle();
+
+    if (existing == null) { 
+      await supabase.from('profiles').insert({
+        'id': user.id,
+        'first_name': user.userMetadata?['first_name'],
+        'last_name': user.userMetadata?['last_name'],
+        'username': user.userMetadata?['username'],
+        'birthdate': user.userMetadata?['birthdate'],
+      });
+    }
   }
 }

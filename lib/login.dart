@@ -14,7 +14,7 @@ class SignInPage2 extends StatelessWidget {
         child: isSmallScreen
             ? const Column(
                 mainAxisSize: MainAxisSize.min,
-                children: [_Logo(), const _FormContent()],
+                children: [_Logo(), _FormContent()],
               )
             : Container(
                 padding: const EdgeInsets.all(32.0),
@@ -22,7 +22,7 @@ class SignInPage2 extends StatelessWidget {
                 child: const Row(
                   children: [
                     Expanded(child: _Logo()),
-                    Expanded(child: Center(child: const _FormContent())),
+                    Expanded(child: Center(child: _FormContent())),
                   ],
                 ),
               ),
@@ -61,20 +61,18 @@ class _Logo extends StatelessWidget {
 }
 
 class _FormContent extends StatefulWidget {
-   const _FormContent();
+  const _FormContent();
 
   @override
   State<_FormContent> createState() => __FormContentState();
-
 }
 
 class __FormContentState extends State<_FormContent> {
   bool _isPasswordVisible = false;
-  bool _rememberMe = false;
+  bool _isLoading = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   @override
@@ -85,109 +83,70 @@ class __FormContentState extends State<_FormContent> {
         key: _formKey,
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // Eemail
             TextFormField(
-            controller: _emailController,
-            validator: (value) {
-              if (value == null || value.isEmpty) return 'Please enter some text';
-
-              final emailValid = RegExp(
-                r"^[a-zA-Z0-9.!#$%&'*+\-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+$",
-              ).hasMatch(value);
-
-              if (!emailValid) return 'Please enter a valid email';
-              return null;
-            },
-            decoration: const InputDecoration(
-              labelText: 'Email',
-              hintText: 'Enter your email',
-              prefixIcon: Icon(Icons.email_outlined),
-              border: OutlineInputBorder(),
-            ),
-            ),
-            _gap(),
-            TextFormField(
-                controller: _passwordController,
+              controller: _emailController,
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter some text';
-                }
-
-                if (value.length < 6) {
-                  return 'Password must be at least 6 characters';
+                  return 'Email eingeben';
                 }
                 return null;
               },
-              obscureText: !_isPasswordVisible,
-              decoration: InputDecoration(
-                labelText: 'Password',
-                hintText: 'Enter your password',
-                prefixIcon: const Icon(Icons.lock_outline_rounded),
-                border: const OutlineInputBorder(),
-           suffixIcon: IconButton(
-            icon: Icon(
-              _isPasswordVisible
-                  ? Icons.visibility_off
-                  : Icons.visibility,
+              decoration: const InputDecoration(
+                labelText: 'Email',
+                border: OutlineInputBorder(),
+                prefixIcon: Icon(Icons.email_outlined),
+              ),
             ),
-            onPressed: () {
-              setState(() {
-                _isPasswordVisible = !_isPasswordVisible;
-              });
-            },
-          ),
-        ),
-      ),
 
-            _gap(),
-            CheckboxListTile(
-              value: _rememberMe,
-              onChanged: (value) {
-                if (value == null) return;
-                setState(() {
-                  _rememberMe = value;
-                });
+            const SizedBox(height: 16),
+
+            // pw feld
+            TextFormField(
+              controller: _passwordController,
+              obscureText: !_isPasswordVisible,
+              validator: (value) {
+                if (value == null || value.length < 6) {
+                  return 'Mindestens 6 Zeichen';
+                }
+                return null;
               },
-              title: const Text('Remember me'),
-              controlAffinity: ListTileControlAffinity.leading,
-              dense: true,
-              contentPadding: const EdgeInsets.all(0),
+              decoration: InputDecoration(
+                labelText: 'Passwort',
+                border: const OutlineInputBorder(),
+                prefixIcon: const Icon(Icons.lock_outline),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _isPasswordVisible
+                        ? Icons.visibility_off
+                        : Icons.visibility,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _isPasswordVisible = !_isPasswordVisible;
+                    });
+                  },
+                ),
+              ),
             ),
-            _gap(),
+
+            const SizedBox(height: 20),
+
+            // LOGIN BUTTON
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Text(
-                    'Sign in',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                 onPressed: () async {
-                  if (_formKey.currentState?.validate() ?? false) {
-                    try {
-                      await Supabase.instance.client.auth.signInWithPassword(
-                        email: _emailController.text.trim(),
-                        password: _passwordController.text.trim(),
-                      );
-                    } on AuthException catch (e) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text(e.message)),
-                      );
-                    }
-                  }
-                },
-
+                onPressed: _isLoading ? null : _login,
+                child: _isLoading
+                    ? const CircularProgressIndicator(color: Colors.white)
+                    : const Text("Sign in"),
               ),
-              
             ),
+
+            const SizedBox(height: 10),
+
+            // REGISTER BUTTON
             TextButton(
               onPressed: () {
                 Navigator.push(
@@ -203,12 +162,56 @@ class __FormContentState extends State<_FormContent> {
     );
   }
 
+  Future<void> _login() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    setState(() => _isLoading = true);
+
+    final supabase = Supabase.instance.client;
+
+    try {
+      final response = await supabase.auth.signInWithPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+
+      final user = response.user;
+
+      // 🔥 Email Bestätigung prüfen
+      if (user != null && user.emailConfirmedAt == null) {
+        await supabase.auth.signOut(scope: SignOutScope.local);
+
+        if (!mounted) return;
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Bitte bestätige zuerst deine Email-Adresse."),
+          ),
+        );
+
+        setState(() => _isLoading = false);
+        return;
+      }
+
+      // Wenn email bestätigt dannb AuthGate übernimmt automatisch
+
+    } on AuthException catch (e) {
+      if (!mounted) return;
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(e.message)),
+      );
+    }
+
+    if (mounted) {
+      setState(() => _isLoading = false);
+    }
+  }
+
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
-}
-
-  Widget _gap() => const SizedBox(height: 16);
+  }
 }

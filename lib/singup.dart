@@ -11,9 +11,14 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
 
   final _formKey = GlobalKey<FormState>();
+
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
+  final _usernameController = TextEditingController();
 
+  DateTime? _birthDate;
   bool _isLoading = false;
 
   @override
@@ -21,89 +26,160 @@ class _SignUpPageState extends State<SignUpPage> {
     final supabase = Supabase.instance.client;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Sign Up"),
-      ),
-      body: Padding(
+      appBar: AppBar(title: const Text("Sign Up")),
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Form(
           key: _formKey,
           child: Column(
             children: [
 
-              TextFormField(
-                controller: _emailController,
-                decoration: const InputDecoration(
-                  labelText: "Email",
-                  border: OutlineInputBorder(),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return "Email eingeben";
-                  }
-                  return null;
-                },
-              ),
+              // Vorname
+              _buildTextField(_firstNameController, "Vorname"),
 
               const SizedBox(height: 16),
 
-              TextFormField(
-                controller: _passwordController,
-                obscureText: true,
-                decoration: const InputDecoration(
-                  labelText: "Passwort",
-                  border: OutlineInputBorder(),
+              // Nachname
+              _buildTextField(_lastNameController, "Nachname"),
+
+              const SizedBox(height: 16),
+
+              // Username
+              _buildTextField(_usernameController, "Username"),
+
+              const SizedBox(height: 16),
+
+              // Email
+              _buildTextField(_emailController, "Email"),
+
+              const SizedBox(height: 16),
+
+              // Passwort
+              _buildTextField(_passwordController, "Passwort", isPassword: true),
+
+              const SizedBox(height: 16),
+
+              // Geburtsdatum
+              ListTile(
+                title: Text(
+                  _birthDate == null
+                      ? "Geburtsdatum auswählen"
+                      : "Geburtsdatum: ${_birthDate!.toString().split(' ')[0]}",
                 ),
-                validator: (value) {
-                  if (value == null || value.length < 6) {
-                    return "Mindestens 6 Zeichen";
+                trailing: const Icon(Icons.calendar_today),
+                onTap: () async {
+                  final picked = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime(2005),
+                    firstDate: DateTime(1900),
+                    lastDate: DateTime.now(),
+                  );
+
+                  if (picked != null) {
+                    setState(() => _birthDate = picked);
                   }
-                  return null;
                 },
               ),
 
               const SizedBox(height: 20),
 
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: _isLoading ? null : () async {
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: _isLoading ? null : () async {
 
-                    if (!_formKey.currentState!.validate()) return;
+                  if (!_formKey.currentState!.validate()) return;
 
-                    setState(() => _isLoading = true);
+                  if (_birthDate == null) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text("Geburtsdatum auswählen")),
+                    );
+                    return;
+                  }
 
-                    try {
-                      await supabase.auth.signUp(
-                        email: _emailController.text.trim(),
-                        password: _passwordController.text.trim(),
-                      );
+                  setState(() => _isLoading = true);
 
-                      if (mounted) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("Registrierung erfolgreich!"),
-                          ),
-                        );
-                        Navigator.pop(context);
-                      }
+                  try {
 
-                    } on AuthException catch (e) {
+                    final username = _usernameController.text.trim();
+
+                    // 1️⃣ USERNAME PRÜFEN
+                    final existing = await supabase
+                        .from('profiles')
+                        .select('id')
+                        .eq('username', username)
+                        .maybeSingle();
+
+                    if (existing != null) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text(e.message)),
+                        const SnackBar(
+                          content: Text("Dieser Username ist bereits vergeben."),
+                        ),
                       );
+                      setState(() => _isLoading = false);
+                      return;
                     }
 
-                    setState(() => _isLoading = false);
-                  },
-                  child: _isLoading
-                      ? const CircularProgressIndicator(color: Colors.white)
-                      : const Text("Registrieren"),
-                ),
+                    // 2️⃣ SIGN UP
+                    await supabase.auth.signUp(
+                      email: _emailController.text.trim(),
+                      password: _passwordController.text.trim(),
+                      data: {
+                        'first_name': _firstNameController.text.trim(),
+                        'last_name': _lastNameController.text.trim(),
+                        'username': username,
+                        'birthdate': _birthDate!.toString().split(' ')[0],
+                      },
+                    );
+
+                    if (!mounted) return;
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("Bitte Email bestätigen."),
+                      ),
+                    );
+
+                    Navigator.pop(context);
+
+                  } on AuthException catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text(e.message)),
+                    );
+                  } catch (e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("Fehler: $e")),
+                    );
+                  }
+
+                  setState(() => _isLoading = false);
+                },
+                child: _isLoading
+                    ? const CircularProgressIndicator(color: Colors.white)
+                    : const Text("Registrieren"),
               ),
+            ),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildTextField(TextEditingController controller, String label,
+      {bool isPassword = false}) {
+    return TextFormField(
+      controller: controller,
+      obscureText: isPassword,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return "$label eingeben";
+        }
+        return null;
+      },
+      decoration: InputDecoration(
+        labelText: label,
+        border: const OutlineInputBorder(),
       ),
     );
   }
@@ -112,6 +188,9 @@ class _SignUpPageState extends State<SignUpPage> {
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _usernameController.dispose();
     super.dispose();
   }
 }
