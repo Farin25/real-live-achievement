@@ -123,6 +123,10 @@ const config = {
                 label: 'Discord',
                 href: 'https://discord.com/invite/6J4Ws5ckYX',
               },
+              {
+                label: 'Stoat',
+                href: 'https://stt.gg/V6hDbKnq',
+              },
           
             ],
           },
@@ -136,6 +140,11 @@ const config = {
               {
                 label: 'GitHub',
                 href: 'https://github.com/Farin25/real-live-achievement',
+                
+              },
+                {
+                label: 'Status',
+                href: 'https://status.farin-langner.de/status/upmark',
                 
               },
             ],

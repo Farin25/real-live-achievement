@@ -1,13 +1,19 @@
 # Changelog
 
 
+## 27.02.2026
+#### Webseite
+- Achievment Polarbear hinzugefügt (Liam & Farin)
+- Neue Seite mit Statzistiken hinzugefügt (Farin)
+- Stuseite eingerichtet (Farin)
+
 
 ## 26.02.2026
 - finished Sing Up (Farin)
 - prüfung ob username schon exestirt (Farin)
 - AGB hinzugefügt (Farin)
 - Achievment einreiche Seite zur Webseite hinzugefügt. (Liam & Farin)
--
+
 
 
 ## 25.02.2026
