@@ -1,132 +1,187 @@
 import 'package:flutter/material.dart';
-import 'navbar.dart';
+import 'acount.dart';
 import 'licenses.dart';
 import 'about.dart';
-import 'acount.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
+class SettingsPage extends StatefulWidget {
+  const SettingsPage({super.key});
 
+  @override
+  State<SettingsPage> createState() => _SettingsPageState();
+}
 
-class SettingsPage extends StatelessWidget {
+class _SettingsPageState extends State<SettingsPage> {
+
+  Map<String, dynamic>? profile;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadProfile();
+  }
+
+  Future<void> _loadProfile() async {
+    final supabase = Supabase.instance.client;
+    final user = supabase.auth.currentUser;
+
+    if (user != null) {
+      final data = await supabase
+          .from('profiles')
+          .select()
+          .eq('id', user.id)
+          .single();
+
+      setState(() {
+        profile = data;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Settings"),
+        title: const Text("Settings"),
         automaticallyImplyLeading: false,
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
+
+            /// PROFILE CARD
             GestureDetector(
               onTap: () {
-                Navigator.push(context,
-                MaterialPageRoute(builder: (context) => AccountPage()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AccountPage()),
+                );
               },
-           //Der Profiel Bereich Wichtig und richtig
-           child: Container(
-              padding: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Theme.of(context).cardColor,
-                borderRadius: BorderRadius.circular(12),
+              child: Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).cardColor,
+                  borderRadius: BorderRadius.circular(12),
                 ),
-              child: Row(
-                children: [
-                  // Profiel Icon Auch sehr wichtig
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundColor: Theme.of(context).primaryColor,
-                    child: Icon(Icons.person, size: 35, color: Colors.white),
-                  ),
-                  SizedBox(width: 16,),
-                  // Fast am Wichtigsten der NAme und der USername
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                      'kosivonhonig',// Nutzername später aus DB
-                      style: TextStyle(fontSize: 20,
-                      fontWeight: FontWeight.bold),
+                child: profile == null
+                    ? const Center(child: CircularProgressIndicator())
+                    : Row(
+                        children: [
+                          CircleAvatar(
+                            radius: 30,
+                            backgroundColor:
+                                Theme.of(context).primaryColor,
+                            child: const Icon(Icons.person,
+                                size: 35, color: Colors.white),
+                          ),
+                          const SizedBox(width: 16),
+                          Column(
+                            crossAxisAlignment:
+                                CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                profile!['username'] ?? '',
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                "${profile!['first_name'] ?? ''} ${profile!['last_name'] ?? ''}",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.grey[600],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
-                      Text(
-                        'Konstatin Kaiser', // Richtiger name Später AUS db
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.grey[600]),
-                      ),
-                    ],
-                  ),
-                ],
               ),
             ),
-            ),
-            SizedBox(height: 30),
-            Divider(),
-            //Die Settings
+
+            const SizedBox(height: 30),
+            const Divider(),
+
+            /// SETTINGS LIST
             Expanded(
               child: ListView(
                 children: [
-                  //Settings für Dark mode/white mode
-                  ListTile(
-                    leading: Icon(Icons.brightness_6),
-                    title: Text("Design"),
-                    subtitle: Text("Dark Mode, Light Mode"),
-                    trailing: Icon(Icons.arrow_forward_ios),
-                    onTap: () {
-                      Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => AccountPage()));
-                
-                    },
-                  ),
-                  Divider(),
 
-                  // Sprach Settings
                   ListTile(
-                    leading: Icon(Icons.language),
-                    title: Text("Sprache"),
-                    subtitle: Text("Deutch DE"),
-                    trailing: Icon(Icons.arrow_forward_ios),
+                    leading: const Icon(Icons.brightness_6),
+                    title: const Text("Design"),
+                    subtitle:
+                        const Text("Dark Mode, Light Mode"),
+                    trailing:
+                        const Icon(Icons.arrow_forward_ios),
+                    onTap: () {},
+                  ),
+
+                  const Divider(),
+
+                  ListTile(
+                    leading: const Icon(Icons.language),
+                    title: const Text("Sprache"),
+                    subtitle: const Text("Deutsch DE"),
+                    trailing:
+                        const Icon(Icons.arrow_forward_ios),
                     onTap: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Sprachen kommen bald')),
-                
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(
+                        const SnackBar(
+                            content: Text(
+                                'Sprachen kommen bald')),
                       );
                     },
-                   ),
-                   Divider(),
-                   //About Seite
-                   ListTile(
-                    leading: Icon(Icons.info),
-                    title: Text("info"),
-                    subtitle: Text("über die App"),
-                    trailing: Icon(Icons.arrow_forward_ios),
-                    onTap: () {
-                      Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => AboutPage()));
-                    },
-                   ),
-                   Divider(),
+                  ),
 
-                   //Lizenzen
+                  const Divider(),
 
-                   ListTile(
-                    leading: Icon(Icons.description),
-                    title: Text("Open Source Lizenzen"),
-                    subtitle: Text("Verwendete Bibiotheken und Software"),
-                    trailing: Icon(Icons.arrow_forward_ios),
+                  ListTile(
+                    leading: const Icon(Icons.info),
+                    title: const Text("Info"),
+                    subtitle:
+                        const Text("Über die App"),
+                    trailing:
+                        const Icon(Icons.arrow_forward_ios),
                     onTap: () {
-                      Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LicensesPage()));
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                 AboutPage()),
+                      );
                     },
-                   ),   
+                  ),
+
+                  const Divider(),
+
+                  ListTile(
+                    leading: const Icon(Icons.description),
+                    title: const Text(
+                        "Open Source Lizenzen"),
+                    subtitle: const Text(
+                        "Verwendete Bibliotheken"),
+                    trailing:
+                        const Icon(Icons.arrow_forward_ios),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const LicensesPage()),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
-          ], 
+          ],
         ),
       ),
-      //bottomNavigationBar: Navbar(),
     );
   }
 }
