@@ -2,7 +2,24 @@
 title: Statistiken
 
 ---
+# Service Status
+## Durchschnitt
+![Status](https://status.farin-langner.de/api/badge/32/status)
+![Uptime](https://status.farin-langner.de/api/badge/32/uptime)
+![Ping](https://status.farin-langner.de/api/badge/32/ping)
 
+
+## Backend
+
+### Auth
+![Status](https://status.farin-langner.de/api/badge/34/status)
+![Ping](https://status.farin-langner.de/api/badge/34/ping)
+![Uptime](https://status.farin-langner.de/api/badge/34/uptime)
+
+### REST / PostgREST
+![Status](https://status.farin-langner.de/api/badge/33/status)
+![Ping](https://status.farin-langner.de/api/badge/33/ping)
+![Uptime](https://status.farin-langner.de/api/badge/33/uptime)
 
 # Repository Live Statistics
 
