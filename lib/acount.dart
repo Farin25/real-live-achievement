@@ -1,8 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class AccountPage extends StatelessWidget {
+class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
+
+  @override
+  State<AccountPage> createState() => _AccountPageState();
+}
+
+class _AccountPageState extends State<AccountPage> {
+
+  Map<String, dynamic>? profile;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadProfile();
+  }
+
+  Future<void> _loadProfile() async {
+    final supabase = Supabase.instance.client;
+    final user = supabase.auth.currentUser;
+
+    if (user != null) {
+      final data = await supabase
+          .from('profiles')
+          .select()
+          .eq('id', user.id)
+          .single();
+
+      setState(() {
+        profile = data;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,35 +45,51 @@ class AccountPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
-        child: Column( // Alle Widgets müssen in DIESE Column
-          mainAxisAlignment: MainAxisAlignment.start,
+        child: Column(
           children: [
-            Row(
-              children: [
-                CircleAvatar(
-                  radius: 30,
-                  backgroundColor: Theme.of(context).primaryColor,
-                  child: const Icon(Icons.person, size: 35, color: Colors.white),
-                ),
-                const SizedBox(width: 15), // Kleiner Abstand zwischen Bild und Text
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Text(_usernameController.text)',
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      'Liam Selent',
-                      style: TextStyle(fontSize: 16, color: Colors.grey[600]),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            
-            const SizedBox(height: 30), // Hier war der Tippfehler "cons"
 
+            /// PROFILE HEADER
+            profile == null
+                ? const Center(child: CircularProgressIndicator())
+                : Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 30,
+                        backgroundColor:
+                            Theme.of(context).primaryColor,
+                        child: const Icon(
+                          Icons.person,
+                          size: 35,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(width: 15),
+                      Column(
+                        crossAxisAlignment:
+                            CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            profile!['username'] ?? '',
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            "${profile!['first_name'] ?? ''} ${profile!['last_name'] ?? ''}",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.grey[600],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+
+            const SizedBox(height: 30),
+
+            /// PLATZHALTER
             const Expanded(
               child: Center(
                 child: Text(
@@ -53,7 +100,7 @@ class AccountPage extends StatelessWidget {
               ),
             ),
 
-            /// Logout Button
+            /// LOGOUT BUTTON
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
@@ -66,21 +113,22 @@ class AccountPage extends StatelessWidget {
 
             const SizedBox(height: 12),
 
-            /// Danger Zone: Account Löschen
+            /// ACCOUNT LÖSCHEN
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.red,
-                  foregroundColor: Colors.white, // Textfarbe auf Rot-Button weiß
+                  foregroundColor: Colors.white,
                 ),
-                onPressed: () async {
+                onPressed: () {
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
                       title: const Text('Account wirklich löschen?'),
                       content: const Text(
-                          'Dieser Vorgang kann nicht rückgängig gemacht werden.'),
+                        'Dieser Vorgang kann nicht rückgängig gemacht werden.',
+                      ),
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.pop(context),
@@ -88,7 +136,9 @@ class AccountPage extends StatelessWidget {
                         ),
                         TextButton(
                           onPressed: () async {
-                            final user = supabase.auth.currentUser;
+                            final user =
+                                supabase.auth.currentUser;
+
                             if (user != null) {
                               await supabase.rpc(
                                 'delete_user',
@@ -96,11 +146,15 @@ class AccountPage extends StatelessWidget {
                               );
                               await supabase.auth.signOut();
                             }
-                            if (context.mounted) Navigator.pop(context);
+
+                            if (context.mounted) {
+                              Navigator.pop(context);
+                            }
                           },
                           child: const Text(
                             'Löschen',
-                            style: TextStyle(color: Colors.red),
+                            style:
+                                TextStyle(color: Colors.red),
                           ),
                         ),
                       ],
