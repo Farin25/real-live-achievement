@@ -132,3 +132,5 @@ Unser Team arbeitet mit voller Motivation und großem Engagement an der Umsetzun
 
  ### Copyright (C) 2026 of [Liam Selent](https://github.com/Lionhacker270411) and [Farin Langner](https://farin-langner.de)
  - Distributed under the terms of the MIT License.
+
+-Der Projektname sowie das zugehörige Logo sind nicht Bestandteil der Open-Source-Lizenz. Alle Rechte am Namen und am Logo bleiben vorbehalten.
