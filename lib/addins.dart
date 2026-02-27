@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 
-//Krasses Werbeviedeo
+//Erstellt Widget für Werbe Viedeo
 class VimeoVideo extends StatefulWidget {
   const VimeoVideo({super.key});
 
   @override
   State<VimeoVideo> createState() => _VimeoVideoState();
 }
-
+// Lädt Vimeo Viedeo im iframe
 class _VimeoVideoState extends State<VimeoVideo> {
   WebViewController? controller;
   bool _accepted = false;
@@ -37,7 +37,7 @@ class _VimeoVideoState extends State<VimeoVideo> {
     });
   }
 
-  @override
+  @override// DSGVO Boutton
   Widget build(BuildContext context) {
     return AspectRatio(
       aspectRatio: 16 / 9,

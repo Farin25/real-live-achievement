@@ -97,30 +97,31 @@ class _SignUpPageState extends State<SignUpPage> {
                     return;
                   }
 
+                  // username
                   setState(() => _isLoading = true);
 
                   try {
 
                     final username = _usernameController.text.trim();
 
-                    // 1️⃣ USERNAME PRÜFEN
-                    final existing = await supabase
-                        .from('profiles')
-                        .select('id')
-                        .eq('username', username)
-                        .maybeSingle();
+                    
+                   final exists = await supabase.rpc(
+                      'username_exists',
+                      params: {'name': username},
+                    );
 
-                    if (existing != null) {
+                    if (exists == true) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text("Dieser Username ist bereits vergeben."),
+                        const SnackBar(content: Text("Dieser Uername ist bereits vergeben"),
                         ),
-                      );
+                      ); 
+
                       setState(() => _isLoading = false);
                       return;
+                      
+                 
                     }
-
-                    // 2️⃣ SIGN UP
+                    // Sing up
                     await supabase.auth.signUp(
                       email: _emailController.text.trim(),
                       password: _passwordController.text.trim(),

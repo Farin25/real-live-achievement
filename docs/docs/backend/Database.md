@@ -1,5 +1,5 @@
 hier ist eine visualliesierung der Datenbank:
-<img src="/img/supabase-schema-uqrjhrhzvbvuaeurpcse.png" width="250"/>
+<img src="![/img/supabase-schema-uqrjhrhzvbvuaeurpcse.png](https://github.com/Farin25/real-live-achievement/blob/main/docs/static/img/supabase-schema-uqrjhrhzvbvuaeurpcse.png)" width="250"/>
 
 
 ### Aufbau des backends und der Datenbank:

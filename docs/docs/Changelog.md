@@ -3,9 +3,10 @@
 
 ## 27.02.2026
 #### Webseite
-- Achievment Polarbear hinzugefügt (Liam & Farin)
+- Achievment Polarbear un dev hinzugefügt (Liam & Farin)
 - Neue Seite mit Statzistiken hinzugefügt (Farin)
 - Stuseite eingerichtet (Farin)
+- Username vergeben meldung funktioniert (farin)
 
 
 ## 26.02.2026
@@ -13,6 +14,7 @@
 - prüfung ob username schon exestirt (Farin)
 - AGB hinzugefügt (Farin)
 - Achievment einreiche Seite zur Webseite hinzugefügt. (Liam & Farin)
+
 
 
 
@@ -41,4 +43,4 @@
 - Docs und Webseite mit Docosaurus (Farin)
 
 
-Die genauen änderungen sind auf Github ind en Commits zu [finden](https://github.com/Farin25/real-live-achievement/commits/main/)
+Die genauen änderungen sind auf Github ind den Commits zu [finden](https://github.com/Farin25/real-live-achievement/commits/main/)

@@ -29,14 +29,14 @@ class MyApp extends StatelessWidget { // NEue Klasse name: MyApp las ein statles
       theme: ThemeData( //Das Deisgn so ähnlich wie css
       useMaterial3: true, // Aktiviert das Mdoerne Design material 3 Nutzt eine Frabpaltettte von 28 Vaerschiedenen Farbtännen die alle aus der grundfarbe untenfestgelegt generiret werden
         colorScheme: ColorScheme.fromSeed( // grundfarbe 
-          seedColor: Colors.blue,// Blau
-          brightness: Brightness.light, // helll
+          seedColor: Colors.blue,
+          brightness: Brightness.light,
         ),// Helles Blau als Grundfarbe
       ),
       darkTheme: ThemeData( // Dark Mode
         colorScheme: ColorScheme.fromSeed( //Wider die grundfarbe
-          seedColor: Colors.blue,//Wieder blau
-          brightness: Brightness.dark, // Diesmal aber Dunkel
+          seedColor: Colors.blue,
+          brightness: Brightness.dark,
         ),
       ),// Dark mode blau dunkel
       home: AuthGate(), //Startet das Auth Gate
