@@ -37,3 +37,4 @@
 |first user | sei mit unter den ersten 50 usern | zeit + userzahl |
 |Traveller Sarah extrem | Besuche 10 Lnder | GPS |
 |Polar bear|Bereise die Antaktis|GPS |
+| Up Mark dev | MAche eine erfolgreiche Pull reqest zu Up Mark | Github API |

@@ -1,7 +1,6 @@
----
-title: Statistiken
+# Statistiken
 
----
+
 # Service Status
 ## Durchschnitt
 ![Status](https://status.farin-langner.de/api/badge/32/status)
