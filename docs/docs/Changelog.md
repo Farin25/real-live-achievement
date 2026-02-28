@@ -1,5 +1,8 @@
 # Changelog
 
+## 28,02.2026
+- Nutzernammen ding endlich fertig (Farin)
+- Dark / light Mode setiings hinzugefügt (Farin)
 
 ## 27.02.2026
 #### Webseite
@@ -7,6 +10,7 @@
 - Neue Seite mit Statzistiken hinzugefügt (Farin)
 - Stuseite eingerichtet (Farin)
 - Username vergeben meldung funktioniert (farin)
+- Status seite eingerichtet (Liam)
 
 
 ## 26.02.2026

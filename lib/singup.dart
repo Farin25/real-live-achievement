@@ -20,6 +20,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   DateTime? _birthDate;
   bool _isLoading = false;
+  String? _usernameError;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,21 @@ class _SignUpPageState extends State<SignUpPage> {
               const SizedBox(height: 16),
 
               // Username
-              _buildTextField(_usernameController, "Username"),
+              TextFormField(
+                controller: _usernameController,
+                decoration: InputDecoration(
+                  labelText: "Username",
+                  border: const OutlineInputBorder(),
+                  errorText: _usernameError,
+
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "username eingeben";
+                  }
+                  return null;
+                },
+              ),
 
               const SizedBox(height: 16),
 
@@ -104,6 +119,10 @@ class _SignUpPageState extends State<SignUpPage> {
 
                     final username = _usernameController.text.trim();
 
+                    setState(() {
+                      _usernameError = null;
+                    });
+
                     
                    final exists = await supabase.rpc(
                       'username_exists',
@@ -114,12 +133,14 @@ class _SignUpPageState extends State<SignUpPage> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text("Dieser Uername ist bereits vergeben"),
                         ),
-                      ); 
+                      );
+                        setState(() {
+                          _usernameError = "Dieser Username ist Bereits vergeben";
+                          _isLoading = false;
+                        }); 
 
-                      setState(() => _isLoading = false);
                       return;
-                      
-                 
+
                     }
                     // Sing up
                     await supabase.auth.signUp(

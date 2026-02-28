@@ -5,7 +5,10 @@ import 'about.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SettingsPage extends StatefulWidget {
-  const SettingsPage({super.key});
+  final Function(ThemeMode) onThemeChanged;
+  const SettingsPage({super.key,
+  required this.onThemeChanged});
+
 
   @override
   State<SettingsPage> createState() => _SettingsPageState();
@@ -111,14 +114,22 @@ class _SettingsPageState extends State<SettingsPage> {
                 children: [
 
                   ListTile(
-                    leading: const Icon(Icons.brightness_6),
-                    title: const Text("Design"),
-                    subtitle:
-                        const Text("Dark Mode, Light Mode"),
-                    trailing:
-                        const Icon(Icons.arrow_forward_ios),
-                    onTap: () {},
+                    leading: const Icon(Icons.dark_mode),
+                    title: const Text("Dark Mode"),
+                    trailing: Switch(
+                      value: Theme.of(context).brightness == Brightness.dark,
+                      onChanged: (Value) {
+                        if (Value) {
+                          widget.onThemeChanged(ThemeMode.dark);
+
+                        }
+                        else {
+                          widget.onThemeChanged(ThemeMode.light);
+                        }
+                      },
+                    ),
                   ),
+               
 
                   const Divider(),
 

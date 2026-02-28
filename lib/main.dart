@@ -19,13 +19,29 @@ Future<void> main() async { //main funktion wird immer als erstes ausgeführt
   runApp(const MyApp()); // Startet die klasse MY app 
 }
 
-class MyApp extends StatelessWidget { // NEue Klasse name: MyApp las ein statless widget
+class MyApp extends StatefulWidget { // NEue Klasse name: MyApp las ein statless widget
   const MyApp({super.key}); // Leitet das an das Widget weiter
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+
+}
+
+class _MyAppState extends State<MyApp> {
+
+  ThemeMode _themeMode = ThemeMode.system;
+
+  void changeTheme(ThemeMode mode) {
+    setState(() {
+      _themeMode = mode;
+    });
+
+
+    }
   @override //Überschreibt das Widget Design
   Widget build(BuildContext context) { // baut das Widget im eigenen design wie unten angegeben 
     return MaterialApp( //Eine art Herzstück gibt es nur einmal
-      debugShowCheckedModeBanner: false, // Debug banner oben rechts also ob false = nicht anzeifgen oder halt true = anzeigen
+      debugShowCheckedModeBanner: true, // Debug banner oben rechts also ob false = nicht anzeifgen oder halt true = anzeigen
       theme: ThemeData( //Das Deisgn so ähnlich wie css
       useMaterial3: true, // Aktiviert das Mdoerne Design material 3 Nutzt eine Frabpaltettte von 28 Vaerschiedenen Farbtännen die alle aus der grundfarbe untenfestgelegt generiret werden
         colorScheme: ColorScheme.fromSeed( // grundfarbe 
@@ -39,20 +55,24 @@ class MyApp extends StatelessWidget { // NEue Klasse name: MyApp las ein statles
           brightness: Brightness.dark,
         ),
       ),// Dark mode blau dunkel
-      home: AuthGate(), //Startet das Auth Gate
+
+      themeMode: _themeMode,
+
+      home: AuthGate(onThemeChanged: changeTheme),//Startet das Auth Gate und reicht die funktion zum thme ändern weietr
 
     );
-    
-    
-  }
 
+  }
   
-  
+
 }
 
-
 class AuthGate extends StatelessWidget { //Klasse Auth Gate als Statless widget also auch wieder statisch
-  const AuthGate({super.key}); // GIbt wider an das widget weiter
+  const AuthGate({super.key, required this.onThemeChanged}); // GIbt wider an das widget weiter
+
+   final Function(ThemeMode) onThemeChanged;
+
+   
 
   @override // Wieder das eigene Design
   Widget build(BuildContext context) { // Baut dAs widget nach  den untesnstehenden design
@@ -75,8 +95,9 @@ class AuthGate extends StatelessWidget { //Klasse Auth Gate als Statless widget 
                 body: Center(child: CircularProgressIndicator()), // Erstellt in dem Grundgerüst (Scaffold) einen Runden Ladebalken
               );
             }
+            
 
-            return const GoogleBottomBar(); //Wenn die Antwort der Db kommt setze die Navbar ein also die Navigationsleiste unten
+            return GoogleBottomBar(onThemeChanged: onThemeChanged); //Wenn die Antwort der Db kommt setze die Navbar ein also die Navigationsleiste unten
           },
         );
       },
@@ -103,6 +124,7 @@ class AuthGate extends StatelessWidget { //Klasse Auth Gate als Statless widget 
     }
   }
 }
+
 
 
 //ENDE
