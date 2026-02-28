@@ -118,6 +118,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   ListTile(
                     leading: const Icon(Icons.dark_mode),
                     title: const Text("Dark Mode"),
+                    subtitle: const Text("Mein Tip: Immer an machen"),
                     trailing: Switch(
                       value: Theme.of(context).brightness == Brightness.dark,
                       onChanged: (Value) {
@@ -153,7 +154,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
                   const Divider(),
                   ListTile(
-                    leading: Icon(Icons.security),
+                    leading: Icon(Icons.settings),
                     title: Text("App Settings"),
                     subtitle:  Text("Berechtigung, Benachrichtigungen usw..."),
                     trailing: Icon(Icons.arrow_forward_ios),

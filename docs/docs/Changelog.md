@@ -4,6 +4,7 @@
 - Nutzernammen ding endlich fertig (Farin)
 - Dark / light Mode setiings hinzugefügt (Farin)
 - Luink zu systemseting ind en settings (Farin)
+- Serttings neu angeordnet(Farin)
 
 ## 27.02.2026
 #### Webseite
