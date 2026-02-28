@@ -3,6 +3,7 @@
 ## 28,02.2026
 - Nutzernammen ding endlich fertig (Farin)
 - Dark / light Mode setiings hinzugefügt (Farin)
+- Luink zu systemseting ind en settings (Farin)
 
 ## 27.02.2026
 #### Webseite
@@ -10,13 +11,13 @@
 - Neue Seite mit Statzistiken hinzugefügt (Farin)
 - Stuseite eingerichtet (Farin)
 - Username vergeben meldung funktioniert (farin)
-- Status seite eingerichtet (Liam)
+- Status seite eingerichtet (Liam & Farin)
 
 
 ## 26.02.2026
 - finished Sing Up (Farin)
 - prüfung ob username schon exestirt (Farin)
-- AGB hinzugefügt (Farin)
+- AGB hinzugefügt (Farin & Liam)
 - Achievment einreiche Seite zur Webseite hinzugefügt. (Liam & Farin)
 
 
