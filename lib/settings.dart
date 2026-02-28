@@ -1,9 +1,12 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'acount.dart';
 import 'licenses.dart';
 import 'about.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class SettingsPage extends StatefulWidget {
@@ -29,7 +32,6 @@ class _SettingsPageState extends State<SettingsPage> {
   Future<void> _loadProfile() async {
     final supabase = Supabase.instance.client;
     final user = supabase.auth.currentUser;
-
     if (user != null) {
       final data = await supabase
           .from('profiles')
@@ -165,6 +167,27 @@ class _SettingsPageState extends State<SettingsPage> {
 
                   const Divider(),
 
+                          ListTile(
+                    leading: const Icon(Icons.notifications_active),
+                    title: const Text(
+                        "App Benachrichtigungen"),
+                    subtitle: const Text(
+                        "Benachrichtigungen"),
+                    trailing:
+                        const Icon(Icons.arrow_forward_ios),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const Appmessages()),
+                      );
+                    },
+                  ),
+
+                  const Divider(),
+                  
+
                   ListTile(
                     leading: const Icon(Icons.description),
                     title: const Text(
@@ -207,4 +230,161 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
     );
   }
+}
+
+
+
+//App BEnachrichtigungen setings seite:
+
+
+
+class Appmessages extends StatefulWidget {
+  const Appmessages({super.key});
+
+  @override
+  State<Appmessages> createState() => _Appmessages();
+}
+
+class _Appmessages extends State<Appmessages> {
+
+  bool pushnewFriendship = true;
+  bool pushFriendnewAchievment = true;
+  bool pushnewAchievment = true;
+  bool Achievmentfasterricht = true;
+
+  // für Master Schalter
+  bool get notifyAll =>
+    pushnewFriendship &&
+    pushFriendnewAchievment &&
+    pushnewAchievment &&
+    Achievmentfasterricht;
+  
+  @override
+  void initState() {
+    super.initState();
+    loadSettings();
+  }
+  Widget build(BuildContext content) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Benachrichtigungen"),
+      ),
+      body: ListView(
+        children: [
+
+          SwitchListTile(
+            title: Text("Beachrichtigungen"),
+            subtitle: const Text("Benachrichtigungen von der App",
+            style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            value: notifyAll,
+            onChanged: (value) {
+              setState(() {
+                pushnewFriendship = value;
+                pushFriendnewAchievment = value;
+                pushnewAchievment = value;
+                Achievmentfasterricht = value;
+              });
+              saveSettings();
+            },
+          ),
+
+          const Divider(),
+
+          SwitchListTile(
+            title: const Text("Fast ereichtes Achievment"),
+            subtitle: const Text("Wenn du kurtz davor bist ein Achivemnt zu ereichen"),
+            value: Achievmentfasterricht,
+            onChanged: (value) {
+              setState(() {
+                Achievmentfasterricht = value;
+              });
+              saveSettings();
+            },
+          ),
+
+
+          SwitchListTile(
+            title: const Text("Neuem Achievment"),
+            subtitle: const Text("Wenn due in neues Achievment Freigeschaltet hast"),
+            value: pushnewAchievment,
+            onChanged: (value) {
+              setState(() {
+                pushnewAchievment = value;
+              });
+              saveSettings();
+            },
+          ),
+
+          const Divider(),
+          // Freunde Subtitel
+        Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Text(
+          "Freunde",
+          style:
+          TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+          ),
+        ),
+ 
+          SwitchListTile(
+            title: const Text("Freunde Neues Achievment"),
+            subtitle: const Text("wenn einer deiner Freunde Ein Neues Achievment bekommen hat"),
+            value: pushFriendnewAchievment,
+            onChanged: (value) {
+              setState(() {
+                pushFriendnewAchievment = value;
+              });
+              saveSettings();
+            }
+          ),
+
+          SwitchListTile(
+            title: const Text("Freundschaftsanfragen"),
+            subtitle: const Text("Wennd du eine Neue Freundschaftsanftage bekommst"),
+            value: pushnewFriendship,
+            onChanged: (value) {
+              setState(() {
+                pushnewFriendship = value;
+              });
+              saveSettings();
+            },
+          ),
+
+         const Divider(),
+        ],
+      ),
+    );
+  }
+
+  Future<void> saveSettings() async {
+  final prefs = await SharedPreferences.getInstance();
+
+  await prefs.setBool('pushnewFriendship', pushnewFriendship);
+  await prefs.setBool('pushFriendnewAchievment', pushFriendnewAchievment);
+  await prefs.setBool('pushnewAchievment', pushnewAchievment);
+  await prefs.setBool('Achievmentfasterricht', Achievmentfasterricht);
+}
+
+Future<void> loadSettings() async {
+  final prefs = await SharedPreferences.getInstance();
+
+  setState(() {
+    pushnewFriendship =
+        prefs.getBool('pushnewFriendship') ?? true;
+
+    pushFriendnewAchievment =
+        prefs.getBool('pushFriendnewAchievment') ?? true;
+
+    pushnewAchievment =
+        prefs.getBool('pushnewAchievment') ?? true;
+
+    Achievmentfasterricht =
+        prefs.getBool('Achievmentfasterricht') ?? true;
+  });
+}
+
 }
