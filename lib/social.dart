@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'navbar.dart';
+
 
 class Socialsite extends StatelessWidget {
 
