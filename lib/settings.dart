@@ -3,6 +3,8 @@ import 'acount.dart';
 import 'licenses.dart';
 import 'about.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:permission_handler/permission_handler.dart';
+
 
 class SettingsPage extends StatefulWidget {
   final Function(ThemeMode) onThemeChanged;
@@ -150,21 +152,13 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
 
                   const Divider(),
-
                   ListTile(
-                    leading: const Icon(Icons.info),
-                    title: const Text("Info"),
-                    subtitle:
-                        const Text("Über die App"),
-                    trailing:
-                        const Icon(Icons.arrow_forward_ios),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                 AboutPage()),
-                      );
+                    leading: Icon(Icons.security),
+                    title: Text("App Settings"),
+                    subtitle:  Text("Berechtigung, Benachrichtigungen usw..."),
+                    trailing: Icon(Icons.arrow_forward_ios),
+                    onTap: () async {
+                      await openAppSettings();
                     },
                   ),
 
@@ -184,6 +178,23 @@ class _SettingsPageState extends State<SettingsPage> {
                         MaterialPageRoute(
                             builder: (context) =>
                                 const LicensesPage()),
+                      );
+                    },
+                  ),
+                  const Divider(),
+                  ListTile(
+                    leading: const Icon(Icons.info),
+                    title: const Text("Info"),
+                    subtitle:
+                        const Text("Über die App"),
+                    trailing:
+                        const Icon(Icons.arrow_forward_ios),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                 AboutPage()),
                       );
                     },
                   ),
