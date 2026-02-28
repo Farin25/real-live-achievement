@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'acount.dart';
 import 'licenses.dart';
@@ -7,6 +5,7 @@ import 'about.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 
 
 class SettingsPage extends StatefulWidget {
@@ -109,7 +108,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
             ),
 
-            const SizedBox(height: 30),
+            const SizedBox(height: 10),
             const Divider(),
 
             /// SETTINGS LIST
@@ -118,21 +117,15 @@ class _SettingsPageState extends State<SettingsPage> {
                 children: [
 
                   ListTile(
-                    leading: const Icon(Icons.dark_mode),
-                    title: const Text("Dark Mode"),
-                    subtitle: const Text("Mein Tip: Immer an machen"),
-                    trailing: Switch(
-                      value: Theme.of(context).brightness == Brightness.dark,
-                      onChanged: (Value) {
-                        if (Value) {
-                          widget.onThemeChanged(ThemeMode.dark);
-
-                        }
-                        else {
-                          widget.onThemeChanged(ThemeMode.light);
-                        }
-                      },
-                    ),
+                    leading: const Icon(Icons.design_services),
+                    title: const Text("Design"),
+                    subtitle: const Text("Dark Mode, Farben, Theme"),
+                    trailing: Icon(Icons.arrow_forward_ios),
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => Design(onThemeChanged: widget.onThemeChanged)
+                      ),
+                      );
+                    },
                   ),
                
 
@@ -154,17 +147,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     },
                   ),
 
-                  const Divider(),
-                  ListTile(
-                    leading: Icon(Icons.settings),
-                    title: Text("App Settings"),
-                    subtitle:  Text("Berechtigung, Benachrichtigungen usw..."),
-                    trailing: Icon(Icons.arrow_forward_ios),
-                    onTap: () async {
-                      await openAppSettings();
-                    },
-                  ),
-
+          
                   const Divider(),
 
                           ListTile(
@@ -222,6 +205,17 @@ class _SettingsPageState extends State<SettingsPage> {
                       );
                     },
                   ),
+                 const Divider(),
+                  ListTile(
+                    leading: Icon(Icons.settings),
+                    title: Text("App Settings"),
+                    subtitle:  Text("Berechtigung, Benachrichtigungen usw..."),
+                    trailing: Icon(Icons.arrow_forward_ios),
+                    onTap: () async {
+                      await openAppSettings();
+                    },
+                  ),
+
                 ],
               ),
             ),
@@ -386,5 +380,61 @@ Future<void> loadSettings() async {
         prefs.getBool('Achievmentfasterricht') ?? true;
   });
 }
+
+}
+// Design Wichtig und Richtig
+
+class Design extends StatefulWidget {
+  final Function(ThemeMode) onThemeChanged;
+  const Design({super.key,
+   required this.onThemeChanged});
+
+
+  @override
+  State<Design> createState() => _Design();
+}
+
+class _Design extends State<Design> {
+
+
+
+  @override
+  void initState() {
+    super.initState();
+
+  }
+  
+  Widget build(BuildContext content) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const
+        Text("Design & Stil"),
+      ),
+      body: ListView(
+        children: [
+
+          ListTile(
+           leading: const Icon(Icons.design_services),
+           title: const Text("Dark Mode"),
+           subtitle: const Text("Meine Empfehlung: Immer an"),
+           trailing: Switch(
+             value: Theme.of(context).brightness == Brightness.dark,
+             onChanged: (Value) {
+               if (Value) {
+                 widget.onThemeChanged(ThemeMode.dark);
+
+               }
+               else {
+                 widget.onThemeChanged(ThemeMode.light);
+               }
+             },
+           ),
+          ),
+
+        ],
+      ),
+    );
+  }
+
 
 }
