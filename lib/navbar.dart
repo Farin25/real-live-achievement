@@ -8,8 +8,15 @@ import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 
 
+
 class GoogleBottomBar extends StatefulWidget {
-  const GoogleBottomBar({super.key});
+  final Function(ThemeMode) onThemeChanged;
+  
+
+  const GoogleBottomBar({super.key,
+  required this.onThemeChanged,
+  });
+  
 
   @override
   State<GoogleBottomBar> createState() => _GoogleBottomBarState();
@@ -18,20 +25,22 @@ class GoogleBottomBar extends StatefulWidget {
 class _GoogleBottomBarState extends State<GoogleBottomBar> {
   int _selectedIndex = 0;
 
-  final List<Widget> _pages = [
-    NewsFeedPage1 (),
-    AchievmentSeite(),
-    Socialsite(),
-    SettingsPage(),
-  ];
-
 
 
   @override
   Widget build(BuildContext context) {
+
+      final pages = [
+    NewsFeedPage1(),
+    AchievmentSeite(),
+    Socialsite(),
+    SettingsPage(
+      onThemeChanged: widget.onThemeChanged,
+    ),
+  ];
     return Scaffold(
      // appBar: AppBar(title: const Text('Google Bottom Bar')), // Auskomentiert Weil app bar ist auf jeder seite festgelegt
-      body: _pages[_selectedIndex],
+      body: pages[_selectedIndex],
       bottomNavigationBar: SalomonBottomBar(
         currentIndex: _selectedIndex,
         selectedItemColor: const Color(0xff6200ee),
