@@ -1,11 +1,22 @@
-# Changelog
+# Changelog#
+
+## TODOs
+- Imprssum und Datenschutzerklärung in email footer anpassen (Liam)
+- Achievments in DB eintragen (Liam)
+- Lokaler Acount bzw ohne login(Farin)
+- Push Systembenachrichtigungen evtl. mit firebase(Farin)
+
 
 ## 28,02.2026
 - Nutzernammen ding endlich fertig (Farin)
 - Dark / light Mode setiings hinzugefügt (Farin)
-- Luink zu systemseting ind en settings (Farin)
 - Serttings neu angeordnet(Farin)
 - Settings für Benachrichtigungen hinzugefügt (Fain)
+- notification.dart für System Push benachrichtigungen hinzugefügt (Farin)
+- Berechtigungen für Standort und benachrichtigungen gesetzt (Farin)
+- Bug behobeen das der zurückboutton von den settingsunterseiten nicht wieder auf home führt sondern wieder zu settingsPage.(Farin)
+- navbar Speichert jetzt was ausgewählt ist (Farin)
+
 
 ## 27.02.2026
 #### Webseite

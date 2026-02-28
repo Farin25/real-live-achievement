@@ -10,11 +10,15 @@ import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 
 class GoogleBottomBar extends StatefulWidget {
+  final int initalIndex;
   final Function(ThemeMode) onThemeChanged;
+ final Function(int) onIndexChanged;
   
 
   const GoogleBottomBar({super.key,
   required this.onThemeChanged,
+  required this.initalIndex,
+  required this.onIndexChanged,
   });
   
 
@@ -23,14 +27,18 @@ class GoogleBottomBar extends StatefulWidget {
 }
 
 class _GoogleBottomBarState extends State<GoogleBottomBar> {
-  int _selectedIndex = 0;
+  late int _selectedIndex;
 
 
 
   @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.initalIndex;
+  }
   Widget build(BuildContext context) {
 
-      final pages = [
+    final pages = [
     NewsFeedPage1(),
     AchievmentSeite(),
     Socialsite(),
@@ -49,6 +57,7 @@ class _GoogleBottomBarState extends State<GoogleBottomBar> {
           setState(() {
             _selectedIndex = index;
           });
+          widget.onIndexChanged(index);
         },
         items: _navBarItems,
       ),

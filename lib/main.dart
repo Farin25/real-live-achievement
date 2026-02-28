@@ -3,7 +3,7 @@ import 'package:supabase_flutter/supabase_flutter.dart'; // Import der Subase Li
 import 'package:flutter_dotenv/flutter_dotenv.dart'; //import dotenv libary für die env datei für secretts weil flutter/dart das in vanilla nicht kann
 import 'login.dart'; // import der login.dart damit das Authgate weiß wo es hinleiten muss
 import 'navbar.dart'; // Import der Datei wo die nav bar also die NAvigationsleite ist damit sie eingebunden werden kann
-/*    TODO Username Prüfung !Wichtig!
+/*    Die Ganzen Komentare NErven übelst vieleicht entferne ich sie wieder.
 */
 
 Future<void> main() async { //main funktion wird immer als erstes ausgeführt
@@ -28,13 +28,17 @@ class MyApp extends StatefulWidget { // NEue Klasse name: MyApp las ein statless
 }
 
 class _MyAppState extends State<MyApp> {
+  
 
   ThemeMode _themeMode = ThemeMode.system;
+  int _selectedIndex = 0;
+  
 
   void changeTheme(ThemeMode mode) {
     setState(() {
       _themeMode = mode;
     });
+    
 
 
     }
@@ -58,7 +62,13 @@ class _MyAppState extends State<MyApp> {
 
       themeMode: _themeMode,
 
-      home: AuthGate(onThemeChanged: changeTheme),//Startet das Auth Gate und reicht die funktion zum thme ändern weietr
+      home: AuthGate(onThemeChanged: changeTheme,
+      selectedIndex: _selectedIndex,
+      onIndexChanged: (index) {
+        setState(() {
+          _selectedIndex = index;
+        });
+      }),//Startet das Auth Gate und reicht die funktion zum thme ändern weietr
 
     );
 
@@ -67,10 +77,18 @@ class _MyAppState extends State<MyApp> {
 
 }
 
-class AuthGate extends StatelessWidget { //Klasse Auth Gate als Statless widget also auch wieder statisch
-  const AuthGate({super.key, required this.onThemeChanged}); // GIbt wider an das widget weiter
+class AuthGate extends StatelessWidget { 
 
    final Function(ThemeMode) onThemeChanged;
+   final int selectedIndex;
+   final Function(int) onIndexChanged;
+
+
+   const AuthGate({super.key,
+   required this.onThemeChanged,
+   required this.selectedIndex,
+   required this.onIndexChanged
+   }); 
 
    
 
@@ -97,12 +115,17 @@ class AuthGate extends StatelessWidget { //Klasse Auth Gate als Statless widget 
             }
             
 
-            return GoogleBottomBar(onThemeChanged: onThemeChanged); //Wenn die Antwort der Db kommt setze die Navbar ein also die Navigationsleiste unten
+            return GoogleBottomBar(
+            onThemeChanged: onThemeChanged,
+            initalIndex: selectedIndex,
+            onIndexChanged: onIndexChanged,
+            ); //Wenn die Antwort der Db kommt setze die Navbar ein also die Navigationsleiste unten
           },
         );
-      },
-    );
+      }
+     );
   }
+
 
   Future<void> _ensureProfileExists(User user) async { // die oben aufgerufene Funktion 
     final supabase = Supabase.instance.client;
