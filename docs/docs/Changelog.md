@@ -6,9 +6,9 @@
 - Achievments in DB eintragen (Liam)
 - Lokaler Acount bzw ohne login(Farin)
 - Push Systembenachrichtigungen evtl. mit firebase(Farin)
-- Achievment Seite (Farin & Liam)
 - DB Policys (Farin & Liam)
 - Ladebalken Bug wenn man die app ohne acount nutzt fixen (Farin)
+- Achievment liste Download (Farin)
 
 ## 01.03.2026
 - FAQ hinzugefügt  (Farin & Liam)
@@ -16,6 +16,7 @@
 - Möglichkeit die app ohne Login zu nutzen hinzugefügt (Farin)
 - Achievment Seite Angefangen (Farin)
 - Policy Erstellt das Jeder die Achievments lessen kann (Farin)
+- Achievments werden jetzt local gespeicher (Farin)
 
 
 ## 28,02.2026

@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+// https://pub.dev/packages/shared_preferences
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
+//Für Nur Wlan download
+// import 'package:connectivity_plus/connectivity_plus.dart'; Auskommentiert weil kommt später
 
 class AchievmentSeite extends StatefulWidget {
   const AchievmentSeite({super.key});
@@ -16,12 +21,14 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
   @override
   void initState() {
     super.initState();
+    _loadlocalAchievments();
     _loadAchievements();
   }
 
   Future<void> _loadAchievements() async {
     final supabase = Supabase.instance.client;
     final user = supabase.auth.currentUser;
+
 
     if (user == null) return;
 
@@ -35,6 +42,13 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
           .select()
           .eq('user_id', user.id);
 
+      final prefs = await SharedPreferences.getInstance();
+
+       await prefs.setString(
+          'cached_achievements',
+          jsonEncode(achievements),
+        );
+
       setState(() {
         _achievements = achievements;
         _userAchievements = userAchievements;
@@ -43,6 +57,18 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
 
     } catch (e) {
       print("Fehler beim achievments Laden: $e");
+    }
+  }
+
+  Future<void> _loadlocalAchievments() async {
+    final prefs = await SharedPreferences.getInstance();
+    final cached = prefs.getString('cached_achievements');
+
+    if (cached != null) {
+      setState(() {
+        _achievements = jsonDecode(cached);
+        _isLoading = false;
+      });
     }
   }
 
