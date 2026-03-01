@@ -6,6 +6,9 @@
 - Lokaler Acount bzw ohne login(Farin)
 - Push Systembenachrichtigungen evtl. mit firebase(Farin)
 
+## 01.03.2026
+- FAQ hinzugefügt  (Farin & Liam)
+- Acheivemnt Beta user hinzugefügt (Farin & Liam)
 
 ## 28,02.2026
 - Nutzernammen ding endlich fertig (Farin)
@@ -16,6 +19,7 @@
 - Berechtigungen für Standort und benachrichtigungen gesetzt (Farin)
 - Bug behobeen das der zurückboutton von den settingsunterseiten nicht wieder auf home führt sondern wieder zu settingsPage.(Farin)
 - navbar Speichert jetzt was ausgewählt ist (Farin)
+- Dark Mode von der main settings seite uaf eine extra Design Settings seite verschoben wo dann später auch noch settings für Aktzentfarben usw hinkommen. (Farin)
 
 
 ## 27.02.2026
