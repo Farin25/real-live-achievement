@@ -173,7 +173,8 @@ class __FormContentState extends State<_FormContent> {
                   content: const Text(
                     "Wenn du ohne Anmeldunk fotfährst,"
                     "hast du keinen zugriff auf Cloud-Speicherung "
-                    "oder auf soziale Funktionen wie das Ranking usw.",
+                    "oder auf soziale Funktionen wie das Ranking usw."
+                    "Der Lokale Acount Befindet sich noch in der Entwicklung wodurch fehler auftreten können",
                   ),
                   actions: [
                     TextButton(onPressed: () => Navigator.pop(context), 
@@ -211,7 +212,7 @@ class __FormContentState extends State<_FormContent> {
 
       final user = response.user;
 
-      // 🔥 Email Bestätigung prüfen
+      //  Email Bestätigung prüfen
       if (user != null && user.emailConfirmedAt == null) {
         await supabase.auth.signOut(scope: SignOutScope.local);
 

@@ -7,13 +7,16 @@
 - Lokaler Acount bzw ohne login(Farin)
 - Push Systembenachrichtigungen evtl. mit firebase(Farin)
 - Achievment Seite (Farin & Liam)
-- DB (Farin)
-
+- DB Policys (Farin & Liam)
+- Ladebalken Bug wenn man die app ohne acount nutzt fixen (Farin)
 
 ## 01.03.2026
 - FAQ hinzugefügt  (Farin & Liam)
 - Acheivemnt Beta user hinzugefügt (Farin & Liam)
 - Möglichkeit die app ohne Login zu nutzen hinzugefügt (Farin)
+- Achievment Seite Angefangen (Farin)
+- Policy Erstellt das Jeder die Achievments lessen kann (Farin)
+
 
 ## 28,02.2026
 - Nutzernammen ding endlich fertig (Farin)
