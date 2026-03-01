@@ -9,6 +9,7 @@
 - DB Policys (Farin & Liam)
 - Ladebalken Bug wenn man die app ohne acount nutzt fixen (Farin)
 - Erweiterte Einstellungen auf der main settings seite verlinken (Farin)
+- Zwischeninfo bei acounte rstellen (Farin)
 
 ## 01.03.2026
 - FAQ hinzugefügt  (Farin & Liam)
@@ -19,6 +20,7 @@
 - Achievments werden jetzt local gespeicher (Farin)
 - Achievments werden nur gedownloaded bei Wlan verbindung (Farin)
 - Advanced Settings seite erstellt für settings wie wlan download usw. (Farin)
+- connectivity_plus Bibilothek für Netzwerk informationen hinzugefügt (Farin)
 
 
 ## 28,02.2026
