@@ -3,7 +3,9 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'singup.dart';
 
 class SignInPage2 extends StatelessWidget {
-  const SignInPage2({super.key});
+  final VoidCallback onContinueAsGuest;
+  const SignInPage2({super.key,
+  required this.onContinueAsGuest});
 
   @override
   Widget build(BuildContext context) {
@@ -12,17 +14,18 @@ class SignInPage2 extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: isSmallScreen
-            ? const Column(
+            ? Column(
                 mainAxisSize: MainAxisSize.min,
-                children: [_Logo(), _FormContent()],
+                children: [_Logo(),
+                _FormContent(onContinueAsGuest: onContinueAsGuest),
+                ],
               )
             : Container(
                 padding: const EdgeInsets.all(32.0),
                 constraints: const BoxConstraints(maxWidth: 800),
-                child: const Row(
+                child: Row(
                   children: [
                     Expanded(child: _Logo()),
-                    Expanded(child: Center(child: _FormContent())),
                   ],
                 ),
               ),
@@ -61,7 +64,11 @@ class _Logo extends StatelessWidget {
 }
 
 class _FormContent extends StatefulWidget {
-  const _FormContent();
+  final VoidCallback onContinueAsGuest;
+
+  const _FormContent({
+    required this.onContinueAsGuest,
+  });
 
   @override
   State<_FormContent> createState() => __FormContentState();
@@ -156,6 +163,33 @@ class __FormContentState extends State<_FormContent> {
               },
               child: const Text("Noch keinen Account? Registrieren"),
             ),
+            TextButton(
+              onPressed: () {
+                showDialog(context: context,
+                 builder: (context) => AlertDialog(
+                  title: const Text(
+                    "Ohne Anmeldung fortfahren"
+                  ),
+                  content: const Text(
+                    "Wenn du ohne Anmeldunk fotfährst,"
+                    "hast du keinen zugriff auf Cloud-Speicherung "
+                    "oder auf soziale Funktionen wie das Ranking usw.",
+                  ),
+                  actions: [
+                    TextButton(onPressed: () => Navigator.pop(context), 
+                    child: const Text("Abbrsechen")),
+                    ElevatedButton(onPressed: () {
+                      Navigator.pop(context);
+                      widget.onContinueAsGuest();
+                    },
+                    child: const Text("Ich verstehe die Risiken"),
+                    ),
+                  ],
+                 ),
+                 );
+              },
+              child: const Text("ohne Anmeldung Weitermachen"),
+            )
           ],
         ),
       ),

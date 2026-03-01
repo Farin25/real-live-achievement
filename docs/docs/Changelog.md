@@ -2,13 +2,18 @@
 
 ## TODOs
 - Imprssum und Datenschutzerklärung in email footer anpassen (Liam)
+- AGBs in Email bestätigung mail verlinken (Liam)
 - Achievments in DB eintragen (Liam)
 - Lokaler Acount bzw ohne login(Farin)
 - Push Systembenachrichtigungen evtl. mit firebase(Farin)
+- Achievment Seite (Farin & Liam)
+- DB (Farin)
+
 
 ## 01.03.2026
 - FAQ hinzugefügt  (Farin & Liam)
 - Acheivemnt Beta user hinzugefügt (Farin & Liam)
+- Möglichkeit die app ohne Login zu nutzen hinzugefügt (Farin)
 
 ## 28,02.2026
 - Nutzernammen ding endlich fertig (Farin)
