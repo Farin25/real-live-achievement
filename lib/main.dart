@@ -28,6 +28,8 @@ class MyApp extends StatefulWidget { // NEue Klasse name: MyApp las ein statless
 }
 
 class _MyAppState extends State<MyApp> {
+
+  bool _isGuest = false;
   
 
   ThemeMode _themeMode = ThemeMode.system;
@@ -38,10 +40,15 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _themeMode = mode;
     });
-    
-
 
     }
+
+      void continueAsGuest() {
+      setState(() {
+        _isGuest = true;
+      });
+    }
+
   @override //Überschreibt das Widget Design
   Widget build(BuildContext context) { // baut das Widget im eigenen design wie unten angegeben 
     return MaterialApp( //Eine art Herzstück gibt es nur einmal
@@ -68,7 +75,10 @@ class _MyAppState extends State<MyApp> {
         setState(() {
           _selectedIndex = index;
         });
-      }),//Startet das Auth Gate und reicht die funktion zum thme ändern weietr
+      },
+      isGuest: _isGuest,
+      onContinueAsGuest: continueAsGuest,
+      ),//Startet das Auth Gate und reicht die funktion zum thme ändern weietr
 
     );
 
@@ -78,8 +88,12 @@ class _MyAppState extends State<MyApp> {
 }
 
 class AuthGate extends StatelessWidget { 
-
+   // GAst bzw. Localer Acount
+   final bool isGuest;
+   final VoidCallback onContinueAsGuest;
+   // Dark / light mode
    final Function(ThemeMode) onThemeChanged;
+   // nav bar asugewählte seite
    final int selectedIndex;
    final Function(int) onIndexChanged;
 
@@ -87,7 +101,9 @@ class AuthGate extends StatelessWidget {
    const AuthGate({super.key,
    required this.onThemeChanged,
    required this.selectedIndex,
-   required this.onIndexChanged
+   required this.onIndexChanged,
+   required this.isGuest,
+   required this.onContinueAsGuest
    }); 
 
    
@@ -100,8 +116,17 @@ class AuthGate extends StatelessWidget {
 
         final session = snapshot.data?.session; // Hier wird das was der stream schikt entschlüßelt. Das ? Zeichen ist null Staftey also wenn nichts zurückgegeben wird wird einfach aufg null gesetzt
 
+        if (isGuest) {
+          return GoogleBottomBar(
+            onThemeChanged: onThemeChanged,
+            initalIndex: selectedIndex,
+            onIndexChanged: onIndexChanged,
+          );
+        }
+
         if (session == null) { // Wenn nichts zurückgegeben wird halt null
-          return const SignInPage2(); // Dann Gehe zur SingInPage 2 
+          return SignInPage2(
+          onContinueAsGuest: onContinueAsGuest); // Dann Gehe zur SingInPage 2 
         }
 
         return FutureBuilder( // wrnn nicht null entpackt wird
