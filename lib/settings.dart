@@ -438,3 +438,67 @@ class _Design extends State<Design> {
 
 
 }
+
+class AdvancedSettings extends StatefulWidget {
+  const AdvancedSettings({super.key});
+
+  @override
+  State<AdvancedSettings> createState() => _AdvancedSettingsState();
+}
+
+class _AdvancedSettingsState extends State<AdvancedSettings> {
+
+  bool achievementDownloadOverWifi = true;
+
+  @override
+  void initState() {
+    super.initState();
+    loadSettings();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Erweiterte Einstellungen"),
+      ),
+      body: ListView(
+        children: [
+
+          SwitchListTile(
+            secondary: const Icon(Icons.wifi),
+            title: const Text("Achievements über Wlan Doenload"),
+            subtitle: const Text(
+              "Lorem ispum oder so",
+            ),
+            value: achievementDownloadOverWifi,
+            onChanged: (value) {
+              setState(() {
+                achievementDownloadOverWifi = value;
+              });
+              saveSettings();
+            },
+          ),
+
+        ],
+      ),
+    );
+  }
+
+  Future<void> saveSettings() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(
+      'achievementDownloadOverWifi',
+      achievementDownloadOverWifi,
+    );
+  }
+
+  Future<void> loadSettings() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    setState(() {
+      achievementDownloadOverWifi =
+          prefs.getBool('achievementDownloadOverWifi') ?? true;
+    });
+  }
+}

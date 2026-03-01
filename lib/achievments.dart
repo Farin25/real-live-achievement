@@ -4,7 +4,8 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 //Für Nur Wlan download
-// import 'package:connectivity_plus/connectivity_plus.dart'; Auskommentiert weil kommt später
+import 'package:connectivity_plus/connectivity_plus.dart';
+
 
 class AchievmentSeite extends StatefulWidget {
   const AchievmentSeite({super.key});
@@ -25,7 +26,25 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
     _loadAchievements();
   }
 
+
+
+
+
   Future<void> _loadAchievements() async {
+
+   final connectivityResult = await Connectivity().checkConnectivity();
+   final prefs = await SharedPreferences.getInstance();
+   final achievementDownloadOverWifi =
+    prefs.getBool('achievementDownloadOverWifi') ?? true;
+
+
+    if (achievementDownloadOverWifi &&
+        connectivityResult != ConnectivityResult.wifi) {
+      print("Keine WLAN verbindung Achievment Download übersprungen");
+      return;
+    }
+
+
     final supabase = Supabase.instance.client;
     final user = supabase.auth.currentUser;
 
@@ -124,3 +143,5 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
     );
   }
 */
+
+

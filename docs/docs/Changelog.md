@@ -8,7 +8,7 @@
 - Push Systembenachrichtigungen evtl. mit firebase(Farin)
 - DB Policys (Farin & Liam)
 - Ladebalken Bug wenn man die app ohne acount nutzt fixen (Farin)
-- Achievment liste Download (Farin)
+- Erweiterte Einstellungen auf der main settings seite verlinken (Farin)
 
 ## 01.03.2026
 - FAQ hinzugefügt  (Farin & Liam)
@@ -17,6 +17,8 @@
 - Achievment Seite Angefangen (Farin)
 - Policy Erstellt das Jeder die Achievments lessen kann (Farin)
 - Achievments werden jetzt local gespeicher (Farin)
+- Achievments werden nur gedownloaded bei Wlan verbindung (Farin)
+- Advanced Settings seite erstellt für settings wie wlan download usw. (Farin)
 
 
 ## 28,02.2026
