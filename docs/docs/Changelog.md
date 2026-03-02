@@ -10,6 +10,13 @@
 - Ladebalken Bug wenn man die app ohne acount nutzt fixen (Farin)
 - Erweiterte Einstellungen auf der main settings seite verlinken (Farin)
 - Zwischeninfo bei acounte rstellen (Farin)
+- Acount daten Cachen (Farin) 
+- Benachrichtigunegen variabeln eindeutiger bennenen (Farin)
+
+## 02.03.2026
+- Erweiterte einstellung in den main einstellungen verlinkt (Farin)
+- Achievments über Wlan Downloaden funktion fertigestellt (Farin)
+- Debug Ausgabe bei Einstellungsänderungen Hinzugefügt (Farin)
 
 ## 01.03.2026
 - FAQ hinzugefügt  (Farin & Liam)

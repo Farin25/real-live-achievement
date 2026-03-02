@@ -168,6 +168,26 @@ class _SettingsPageState extends State<SettingsPage> {
                     },
                   ),
 
+                    const Divider(),
+
+                          ListTile(
+                    leading: const Icon(Icons.settings),
+                    title: const Text(
+                        "Erweiterte Einstellungen"),
+                    subtitle: const Text(
+                        "Die Einstellungen für Experten"),
+                    trailing:
+                        const Icon(Icons.arrow_forward_ios),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const AdvancedSettings()),
+                      );
+                    },
+                  ),
+
                   const Divider(),
                   
 
@@ -294,6 +314,7 @@ class _Appmessages extends State<Appmessages> {
                 Achievmentfasterricht = value;
               });
               saveSettings();
+              print("Benachrichtigungsettings Aktualliesiert: Achievmentfasteerreicht = $Achievmentfasterricht ");
             },
           ),
 
@@ -307,6 +328,7 @@ class _Appmessages extends State<Appmessages> {
                 pushnewAchievment = value;
               });
               saveSettings();
+              print("Benachrichtigungs Einstellungen Aktualliesiert: pushnewachievment = $pushnewAchievment");
             },
           ),
 
@@ -333,6 +355,7 @@ class _Appmessages extends State<Appmessages> {
                 pushFriendnewAchievment = value;
               });
               saveSettings();
+              print("Benachrichtigungs Einstellungen Aktualliesiert: pushFriendnewAchievment = $pushFriendnewAchievment");
             }
           ),
 
@@ -345,6 +368,7 @@ class _Appmessages extends State<Appmessages> {
                 pushnewFriendship = value;
               });
               saveSettings();
+              print("Benachrichtigungs Einstellungen Aktualliesiert: pushnewFriendship = $pushnewFriendship");
             },
           ),
 
@@ -427,6 +451,7 @@ class _Design extends State<Design> {
                else {
                  widget.onThemeChanged(ThemeMode.light);
                }
+               print("Dark Mode Settings Aktualliesiert auf: ThemeMMode = $ThemeMode.");
              },
            ),
           ),
@@ -467,9 +492,9 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
 
           SwitchListTile(
             secondary: const Icon(Icons.wifi),
-            title: const Text("Achievements über Wlan Doenload"),
+            title: const Text("Achievements WLAN Download"),
             subtitle: const Text(
-              "Lorem ispum oder so",
+              "Achievements nur bei WLAN Verbindung  herunterladen",
             ),
             value: achievementDownloadOverWifi,
             onChanged: (value) {
@@ -477,6 +502,7 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
                 achievementDownloadOverWifi = value;
               });
               saveSettings();
+              print("Achievment Wlan Einstellungen Aktualliesiert: Achievments über Wlan Downlaoden = $achievementDownloadOverWifi");
             },
           ),
 

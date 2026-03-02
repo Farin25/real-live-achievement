@@ -38,4 +38,5 @@
 |Traveller Sarah extrem | Besuche 10 Lnder | GPS |
 |Polar bear|Bereise die Antaktis|GPS |
 | Up Mark dev | Mache eine erfolgreiche Pull reqest zu Up Mark | Github API |
-|beta user | nehme am Beta Programm von Upmark Teil und gebe Feedback zu neuen Funktionen. | |
+|beta user | nehme am Beta Programm von Upmark Teil und gebe Feedback zu neuen Funktionen. |A|
+|Streak| Schalte innerhalb von 5 Wochen Pro woche 2 oder mehr Achievments Frei |A |
