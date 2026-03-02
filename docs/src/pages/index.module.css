@@ -1,400 +1,304 @@
-/**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
- */
+/* src/pages/index.module.css — Modern Minimal Vibrant 2026 */
 
-.heroBanner {
-  padding: 4rem 0;
+:root {
+  --text-primary: #0f172a;      /* slate-900 – sehr dunkel, top Kontrast */
+  --text-secondary: #334155;    /* slate-700 – für etwas leichtere Texte */
+}
+
+/* Oder direkt in den Sections */
+.intro p,
+.features p,
+.achievementCard span,
+.demoSection p {
+  color: var(--text-primary);
+  opacity: 1;               
+  line-height: 1.7;
+  font-weight: 400;            
+}
+
+/* Headings bleiben fett & dunkel */
+.intro h2,
+.features h3,
+.achievementCard strong {
+  color: #0f172a;
+}
+
+.hero {
+  padding: 11rem 1rem 9rem;
+  background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.55)), url('https://picsum.photos/id/1015/2000/1200') center/cover no-repeat; /* ersetze durch dein Hero-Bild */
+  color: white;
   text-align: center;
   position: relative;
-  overflow: hidden;
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
-  }
-}
+/* ── Moderne Minimal-Buttons 2026 ──────────────────────────────── */
 
-.buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* --- CSS Variables für konsistente Farben --- */
 :root {
-  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --accent-color: #6366f1;
-  --text-primary: #1f2937;
-  --text-secondary: #6b7280;
-  --text-muted: #9ca3af;
-  --surface: #ffffff;
-  --surface-elevated: rgba(255, 255, 255, 0.8);
-  --border-subtle: rgba(0, 0, 0, 0.06);
-  --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  --radius-small: 12px;
-  --radius-medium: 16px;
-  --spacing-unit: 1.5rem;
+  --btn-radius: 999px;              /* perfekte Pill-Form */
+  --btn-padding: 1rem 2.4rem;
+  --btn-font-size: 1.18rem;
+  --btn-weight: 600;
+  --transition: 0.42s cubic-bezier(0.22, 1, 0.36, 1);  /* smooth & natürlich */
 }
 
-/* --- Globale Schrift-Optimierung --- */
-* {
-  font-feature-settings: 'cv11', 'ss01';
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  line-height: 1.6;
-  color: var(--text-primary);
-}
-
-/* --- Hero Section mit Glasmorphismus --- */
-.heroBanner {
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-  padding: 6rem 0 4rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.heroBanner::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(circle at 30% 20%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
-              radial-gradient(circle at 70% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
-  pointer-events: none;
-}
-
-.hero__title {
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  font-weight: 800;
-  background: var(--primary-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 1rem;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-}
-
-.hero__subtitle {
-  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
-  color: var(--text-secondary);
-  margin-bottom: 3rem;
-  font-weight: 400;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.button {
-  font-size: 1rem;
-  font-weight: 600;
-  padding: 1rem 2rem;
-  border-radius: var(--radius-small);
-  background: var(--accent-color);
-  color: white;
-  border: none;
-  box-shadow: var(--shadow-soft);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: left 0.5s;
-}
-
-.button:hover::before {
-  left: 100%;
-}
-
-.button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-}
-
-/* --- Features Section --- */
-.features {
-  background: var(--surface);
-  padding: 5rem 0;
-  position: relative;
-}
-
-.text--center h2 {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 1rem;
-  letter-spacing: -0.02em;
-}
-
-.text--center > p {
-  font-size: 1.25rem;
-  color: var(--text-secondary);
-  max-width: 800px;
-  margin: 0 auto 4rem;
-  line-height: 1.7;
-}
-
-.featureIcon {
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 20px;
-  padding: 1rem;
+/* Primär-Button ──────────────────────────────────────────────── */
+.ctaPrimary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 80px;
-  height: 80px;
-  transition: transform 0.3s ease;
-}
-
-.featureIcon:hover {
-  transform: translateY(-4px) scale(1.05);
-}
-
-.col--4 h3 {
-  font-size: 1.375rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 0.75rem;
-}
-
-.col--4 p {
-  color: var(--text-secondary);
-  font-size: 1rem;
-  line-height: 1.6;
-}
-
-/* --- Demo Video Section mit Glasmorphismus --- */
-.demoSectionEnhanced {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: var(--radius-medium);
-  padding: 2rem;
-  margin-bottom: 2rem;
-  box-shadow: var(--shadow-medium);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.demoSectionEnhanced:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-}
-
-.demoSectionEnhanced h3 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--accent-color);
-  margin-bottom: 0.5rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.demoText {
-  color: var(--text-secondary);
-  font-size: 1.125rem;
-  margin-bottom: 1.5rem;
-  line-height: 1.6;
-}
-
-.videoWrapper {
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%;
-  border-radius: var(--radius-small);
-  overflow: hidden;
-  box-shadow: var(--shadow-medium);
-  background: #000;
-  transition: transform 0.3s ease;
-}
-
-.videoWrapper:hover {
-  transform: scale(1.02);
-}
-
-.responsiveVideo {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  padding: var(--btn-padding);
+  font-size: var(--btn-font-size);
+  font-weight: var(--btn-weight);
+  line-height: 1.4;
+  border-radius: var(--btn-radius);
   border: none;
+  cursor: pointer;
+  user-select: none;
+  transition: all var(--transition);
+  background: var(--primary);           /* z. B. #6366f1 – deine Akzentfarbe */
+  color: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08); /* extrem subtiler Grundschatten */
 }
 
-/* --- Release Section --- */
-.releaseSection {
-  background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.1));
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(34, 197, 94, 0.2);
-  padding: 2rem;
-  border-radius: var(--radius-medium);
-  box-shadow: var(--shadow-medium);
-  transition: transform 0.3s ease;
+.ctaPrimary:hover,
+.ctaPrimary:focus-visible {
+  background: color-mix(in srgb, var(--primary) 90%, white);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(var(--primary-rgb, 99 102 241), 0.28);
+  outline: none;
 }
 
-.releaseSection:hover {
-  transform: translateY(-4px);
+.ctaPrimary:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
 }
 
-.releaseSection h3 {
-  color: #059669;
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 0.75rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.releaseSection p {
-  color: var(--text-secondary);
-  font-size: 1.125rem;
-  margin-bottom: 1.5rem;
-  line-height: 1.6;
-}
-
-.releaseSection .button {
-  background: linear-gradient(135deg, #10b981, #059669);
-}
-
-.releaseSection .button:hover {
-  background: linear-gradient(135deg, #059669, #047857);
-}
-
-/* --- Achievements Grid --- */
-.achievementGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1rem;
-  margin-top: 2rem;
-}
-
-.achievement {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(99, 102, 241, 0.1);
-  padding: 1rem 1.5rem;
-  border-radius: var(--radius-small);
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  display: flex;
+/* Sekundär-Button (Hero – transparent / glass-like) ───────────── */
+.ctaSecondary {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding: var(--btn-padding);
+  font-size: var(--btn-font-size);
+  font-weight: var(--btn-weight);
+  line-height: 1.4;
+  border-radius: var(--btn-radius);
+  cursor: pointer;
+  transition: all var(--transition);
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(8px);           /* leichter Glass-Effekt */
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.ctaSecondary:hover,
+.ctaSecondary:focus-visible {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.65);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  backdrop-filter: blur(12px);
+}
+
+.ctaSecondary:active {
+  transform: translateY(0);
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* Final-CTA-Buttons im Gradient-Bereich (ctaSection) ──────────── */
+.ctaSection .ctaPrimary {
+  background: white;
+  color: var(--primary-dark);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.ctaSection .ctaPrimary:hover {
+  background: #f8faff;
+  color: var(--primary);
+  box-shadow: 0 8px 28px rgba(var(--primary-rgb), 0.22);
+}
+
+.ctaSection .ctaSecondary {
+  background: transparent;
+  border: 1.5px solid rgba(255,255,255,0.5);
+  color: white;
+}
+
+.ctaSection .ctaSecondary:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: white;
+}
+
+
+.title {
+  font-size: clamp(3.8rem, 10vw, 7rem);
+  font-weight: 900;
+  letter-spacing: -0.07em;
+  line-height: 0.88;
+  margin: 0 0 1.6rem;
+}
+
+.subtitle {
+  font-size: clamp(1.45rem, 4vw, 2.1rem);
+  opacity: 0.95;
+  max-width: 52ch;
+  margin: 0 auto 3.5rem;
+}
+
+.buttons {
+  display: flex;
+  gap: 1.4rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+
+
+/* Intro */
+.intro {
+  padding: 6rem 1rem;
+  text-align: center;
+  background: #f8fafc;
+}
+
+.intro h2 {
+  font-size: 2.9rem;
+  font-weight: 800;
+  margin-bottom: 1.6rem;
+}
+
+.intro p {
+  font-size: 1.35rem;
+  max-width: 62ch;
+  margin: 0 auto;
+  opacity: 0.85;
+}
+
+/* Features */
+.features {
+  padding: 7rem 1rem;
+  background: white;
+}
+
+.featureCard {
+  padding: 3rem 2rem;
+  border-radius: var(--radius);
+  text-align: center;
+  border: 1px solid #e2e8f0;
+  transition: all var(--transition);
+  height: 100%;
+}
+
+.featureCard:hover {
+  border-color: var(--primary);
+  transform: translateY(-12px);
+  box-shadow: 0 25px 50px -12px rgb(99 102 241 / 0.25);
+}
+
+.featureIcon {
+  width: 6.2rem;
+  height: 6.2rem;
+  margin: 0 auto 2rem;
+  color: var(--primary);
+  transition: all var(--transition);
+}
+
+.featureCard:hover .featureIcon {
+  color: var(--accent);
+  transform: scale(1.15) rotate(8deg);
+}
+
+.featureCard h3 {
+  font-size: 1.9rem;
+  margin-bottom: 1rem;
+}
+
+/* Demo */
+.demoSection {
+  padding: 8rem 1rem;
+  background: #0f172a;
+  color: white;
   text-align: center;
 }
 
-.achievement:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-medium);
-  border-color: rgba(99, 102, 241, 0.3);
+.demoTitle {
+  margin-bottom: 3rem;
 }
 
-.achievement strong {
-  color: var(--accent-color);
-  font-weight: 600;
-  margin-right: 0.5rem;
+.videoWrapper {
+  max-width: 920px;
+  margin: 0 auto;
+  border-radius: 1.8rem;
+  overflow: hidden;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.4);
 }
 
-/* --- Responsive Design --- */
+.videoWrapper iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: none;
+}
+
+/* Achievements */
+.achievements {
+  padding: 8rem 1rem;
+  background: #f8fafc;
+}
+
+.achievementGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.8rem;
+  max-width: 1100px;
+  margin: 4rem auto 0;
+}
+
+.achievementCard {
+  background: white;
+  padding: 2.2rem 1.8rem;
+  border-radius: var(--radius);
+  text-align: center;
+  border: 1px solid #e2e8f0;
+  transition: all var(--transition);
+}
+
+.achievementCard:hover {
+  border-color: var(--accent);
+  transform: scale(1.04);
+  box-shadow: 0 20px 40px rgba(236, 72, 153, 0.2);
+}
+
+.badge {
+  font-size: 3.2rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+/* Final CTA */
+.ctaSection {
+  padding: 9rem 1rem;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: white;
+  text-align: center;
+}
+
+.ctaSection h2 {
+  font-size: 3.2rem;
+  margin-bottom: 1rem;
+}
+
+.ctaButtons {
+  margin-top: 3rem;
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Responsive */
 @media (max-width: 996px) {
-  .heroBanner {
-    padding: 4rem 0 3rem;
-  }
-  
-  .features {
-    padding: 3rem 0;
-  }
-  
-  .demoSectionEnhanced,
-  .releaseSection {
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  .achievementGrid {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
-  }
-  
-  .buttons {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .button {
-    width: 100%;
-    max-width: 300px;
-  }
-}
-
-/* --- Scroll-basierte Animationen --- */
-@media (prefers-reduced-motion: no-preference) {
-  .col--4,
-  .demoSectionEnhanced,
-  .releaseSection {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.6s ease forwards;
-  }
-  
-  .col--4:nth-child(1) { animation-delay: 0.1s; }
-  .col--4:nth-child(2) { animation-delay: 0.2s; }
-  .col--4:nth-child(3) { animation-delay: 0.3s; }
-  .demoSectionEnhanced { animation-delay: 0.4s; }
-  .releaseSection { animation-delay: 0.5s; }
-}
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* --- Dark Mode Support --- */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text-primary: #f9fafb;
-    --text-secondary: #d1d5db;
-    --text-muted: #9ca3af;
-    --surface: #111827;
-    --surface-elevated: rgba(17, 24, 39, 0.8);
-    --border-subtle: rgba(255, 255, 255, 0.1);
-  }
-  
-  .heroBanner {
-    background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
-  }
-  
-  .features {
-    background: var(--surface);
-  }
+  .hero { padding: 8rem 1rem 7rem; }
+  .features, .achievements, .demoSection { padding: 5rem 1rem; }
 }

@@ -1,11 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'navbar.dart';
 import 'variabels.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 import 'addins.dart';
-class AboutPage extends StatelessWidget {
+
+class AboutPage extends StatelessWidget { // Stateless widget weil braucht keine änderungen
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +20,7 @@ class AboutPage extends StatelessWidget {
               child: Container(
                 width: 80,
                 height: 80,
-                decoration: BoxDecoration(
+                decoration: BoxDecoration( // Lädt Icon
                   borderRadius: BorderRadius.circular(16),
                   image: DecorationImage(
                     image: AssetImage('assets/icon.png'),
@@ -71,11 +70,11 @@ class AboutPage extends StatelessWidget {
               style: TextStyle(fontSize: 16),
             ),
             SizedBox(height: 30),
-            
+            //Lädt das Viedeo aus der VimeoVideo Klasse
             VimeoVideo(),
  
             
-            // Developer
+            // Devs
             Text(
               'Entwickler / Herausgeber:',
               style: TextStyle(
@@ -137,8 +136,10 @@ class AboutPage extends StatelessWidget {
               linkTile('Webseite', 'https://farin25.github.io/real-live-achievement/'),
               linkTile('Impressum', 'https://farin25.github.io/real-live-achievement/docs/Rechtliches/impressum/'),
               linkTile('Datenschutzerklärung', 'https://github.com/Farin25/real-live-achievement'),
+              linkTile('Algemeine GEschäfts Bedingungen', 'http://localhost:3000/real-live-achievement/docs/Rechtliches/agb'),
 
-              SizedBox(height: 30),
+
+              SizedBox(height: 30), // Footer mit Abstand 30px
               Text(
               '© 2025-2026 Farin Langner & Liam Selent Alle Rechte Vorbehalten',
               style: TextStyle(
@@ -152,14 +153,14 @@ class AboutPage extends StatelessWidget {
           ],
         ),
       ),
-   //   bottomNavigationBar: Navbar(),
+   //   bottomNavigationBar: Navbar(), Auskommentiert weil noch nicht sicher ob nav bar aj oder nein
     );
     
   }
 }
 
 
-Widget linkTile(String title, String url) {
+Widget linkTile(String title, String url) { // Design der Links wird oben aufgerufen
   return ListTile(
     contentPadding: EdgeInsets.zero,
     title: Text(

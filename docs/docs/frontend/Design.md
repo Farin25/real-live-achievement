@@ -9,9 +9,9 @@
 <img src="/img/old/Social.png" alt="social" width="300" />
 <img src="/img/old/Achivments.png" alt="Achievments" width="300"/>
 
-Danach haben wir das Desing mit Flutter umgesetzt dabei haben wir es ein wenig abgeändernt.
+Danach haben wir das Desing mit Flutter umgesetzt dabei haben wir es abgeändernt.
 
 
-### Das Design ind er App
+### Das Design in der App
 
 Die Navbar haben wir von Fluttertemplates genommen: https://fluttertemplates.dev/widgets/navigation 
