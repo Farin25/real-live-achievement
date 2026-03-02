@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:flutter/gestures.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -95,6 +94,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   if (picked != null) {
                     setState(() => _birthDate = picked);
                   }
+                  print("Singup Formular fertig geladen");
                 },
               ),
 
@@ -131,6 +131,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               final Uri url = Uri.parse(
                                   "https://farin25.github.io/real-live-achievement/docs/Rechtliches/agb");
                               await launchUrl(url, mode: LaunchMode.externalApplication);
+                              print("AGB im Browser aufgerufen");
                             },
                             child: const Text("AGB anzeigen"),
                           ),
@@ -140,6 +141,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         TextButton(
                           onPressed: () => Navigator.pop(context, false),
                           child: const Text("Abbrechen"),
+                          
                         ),
                         ElevatedButton(
                           onPressed: () => Navigator.pop(context, true),
@@ -148,7 +150,9 @@ class _SignUpPageState extends State<SignUpPage> {
                       ],
                     ),
                   );
-                                    if (accepted != true) return;
+                  if (accepted != true) return;
+
+                  print("Sing up abgeschlossen");
 
                   // username
                   setState(() => _isLoading = true);

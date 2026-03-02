@@ -13,6 +13,7 @@
 - Acount daten Cachen (Farin) 
 - Benachrichtigunegen variabeln eindeutiger bennenen (Farin)
 - FAQ upadten (Fragen: Wird die App kostenlos sein,) (Liam)
+- App in Up mark umbennenen(Farin)
 
 ## 02.03.2026
 - Erweiterte einstellung in den main einstellungen verlinkt (Farin)
