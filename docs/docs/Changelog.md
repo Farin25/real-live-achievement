@@ -12,15 +12,18 @@
 - Zwischeninfo bei acounte rstellen (Farin)
 - Acount daten Cachen (Farin) 
 - Benachrichtigunegen variabeln eindeutiger bennenen (Farin)
+- FAQ upadten (Fragen: Wird die App kostenlos sein,) (Liam)
 
 ## 02.03.2026
 - Erweiterte einstellung in den main einstellungen verlinkt (Farin)
 - Achievments über Wlan Downloaden funktion fertigestellt (Farin)
 - Debug Ausgabe bei Einstellungsänderungen Hinzugefügt (Farin)
+- Achievment liste überarbeitet(Farin)
+- AGB Pop up bei Singup hinzugefügt(Farin)
 
 ## 01.03.2026
-- FAQ hinzugefügt  (Farin & Liam)
-- Acheivemnt Beta user hinzugefügt (Farin & Liam)
+- FAQ hinzugefügt  (Farin)
+- Acheivemnt Beta user hinzugefügt (Farin)
 - Möglichkeit die app ohne Login zu nutzen hinzugefügt (Farin)
 - Achievment Seite Angefangen (Farin)
 - Policy Erstellt das Jeder die Achievments lessen kann (Farin)
@@ -48,14 +51,14 @@
 - Neue Seite mit Statzistiken hinzugefügt (Farin)
 - Stuseite eingerichtet (Farin)
 - Username vergeben meldung funktioniert (farin)
-- Status seite eingerichtet (Liam & Farin)
+- Status seite eingerichtet (Farin)
 
 
 ## 26.02.2026
 - finished Sing Up (Farin)
 - prüfung ob username schon exestirt (Farin)
 - AGB hinzugefügt (Farin & Liam)
-- Achievment einreiche Seite zur Webseite hinzugefügt. (Liam & Farin)
+- Achievment einreiche Seite zur Webseite hinzugefügt. (Farin)
 
 
 
@@ -85,4 +88,4 @@
 - Docs und Webseite mit Docosaurus (Farin)
 
 
-Die genauen änderungen sind auf Github ind den Commits zu [finden](https://github.com/Farin25/real-live-achievement/commits/main/)
+Die genauen änderungen sind auf Github ind den Commits zu [finden](https://github.com/Farin25/real-live-achievement/commits/main/) 0

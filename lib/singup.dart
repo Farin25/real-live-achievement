@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter/gestures.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -111,6 +113,42 @@ class _SignUpPageState extends State<SignUpPage> {
                     );
                     return;
                   }
+                  final accepted = await showDialog<bool>(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text("AGB akzeptieren"),
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "Mit der Registrierung akzeptierst du die AGB "
+                            "und nimmst die Datenschutzerklärung zur Kenntnis.",
+                          ),
+                          const SizedBox(height: 12),
+                          TextButton(
+                            onPressed: () async {
+                              final Uri url = Uri.parse(
+                                  "https://farin25.github.io/real-live-achievement/docs/Rechtliches/agb");
+                              await launchUrl(url, mode: LaunchMode.externalApplication);
+                            },
+                            child: const Text("AGB anzeigen"),
+                          ),
+                        ],
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, false),
+                          child: const Text("Abbrechen"),
+                        ),
+                        ElevatedButton(
+                          onPressed: () => Navigator.pop(context, true),
+                          child: const Text("AGB akzeptieren"),
+                        ),
+                      ],
+                    ),
+                  );
+                                    if (accepted != true) return;
 
                   // username
                   setState(() => _isLoading = true);
@@ -171,14 +209,17 @@ class _SignUpPageState extends State<SignUpPage> {
                   } catch (e) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text("Fehler: $e")),
+                      
                     );
                   }
 
                   setState(() => _isLoading = false);
+                  print("Regestierung wir durchgeführt");
                 },
                 child: _isLoading
                     ? const CircularProgressIndicator(color: Colors.white)
                     : const Text("Registrieren"),
+                    
               ),
             ),
             ],
