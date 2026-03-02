@@ -229,7 +229,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   ListTile(
                     leading: Icon(Icons.settings),
                     title: Text("App Settings"),
-                    subtitle:  Text("Berechtigung, Benachrichtigungen usw..."),
+                    subtitle:  Text("Berechtigung, usw..."),
                     trailing: Icon(Icons.arrow_forward_ios),
                     onTap: () async {
                       await openAppSettings();

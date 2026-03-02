@@ -22,6 +22,9 @@
 - AGB Pop up bei Singup hinzugefügt(Farin)
 - Debug cmd ausgabe beim singup formular hinzugefügt (Farin)
 - Benachrichtigungs variabeln eindeutig benannt alle Variabeln für benachrichtigungen heißen jetzt notify...(Farin)
+- Dankesagung und Links zu aboutseite hinzugefügt(Farin)
+- Aboutsite neu angeordnet(Farin)
+
 
 ## 01.03.2026
 - FAQ hinzugefügt  (Farin)
