@@ -11,7 +11,6 @@
 - Erweiterte Einstellungen auf der main settings seite verlinken (Farin)
 - Zwischeninfo bei acounte rstellen (Farin)
 - Acount daten Cachen (Farin) 
-- Benachrichtigunegen variabeln eindeutiger bennenen (Farin)
 - FAQ upadten (Fragen: Wird die App kostenlos sein,) (Liam)
 - App in Up mark umbennenen(Farin)
 
@@ -21,6 +20,8 @@
 - Debug Ausgabe bei Einstellungsänderungen Hinzugefügt (Farin)
 - Achievment liste überarbeitet(Farin)
 - AGB Pop up bei Singup hinzugefügt(Farin)
+- Debug cmd ausgabe beim singup formular hinzugefügt (Farin)
+- Benachrichtigungs variabeln eindeutig benannt alle Variabeln für benachrichtigungen heißen jetzt notify...(Farin)
 
 ## 01.03.2026
 - FAQ hinzugefügt  (Farin)

@@ -248,9 +248,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
 
 
-//App BEnachrichtigungen setings seite:
-
-
+//App BEnachrichtigungen untersetings:
 
 class Appmessages extends StatefulWidget {
   const Appmessages({super.key});
@@ -261,17 +259,17 @@ class Appmessages extends StatefulWidget {
 
 class _Appmessages extends State<Appmessages> {
 
-  bool pushnewFriendship = true;
-  bool pushFriendnewAchievment = true;
-  bool pushnewAchievment = true;
-  bool Achievmentfasterricht = true;
+  bool notifynewFriendship = true;
+  bool notifyFriendnewAchievment = true;
+  bool notifynewAchievment = true;
+  bool notifyAchievmentfasterricht = true;
 
   // für Master Schalter
   bool get notifyAll =>
-    pushnewFriendship &&
-    pushFriendnewAchievment &&
-    pushnewAchievment &&
-    Achievmentfasterricht;
+    notifynewFriendship &&
+    notifyFriendnewAchievment &&
+    notifynewAchievment &&
+    notifyAchievmentfasterricht;
   
   @override
   void initState() {
@@ -294,10 +292,10 @@ class _Appmessages extends State<Appmessages> {
             value: notifyAll,
             onChanged: (value) {
               setState(() {
-                pushnewFriendship = value;
-                pushFriendnewAchievment = value;
-                pushnewAchievment = value;
-                Achievmentfasterricht = value;
+                notifynewFriendship = value;
+                notifyFriendnewAchievment = value;
+                notifynewAchievment = value;
+                notifyAchievmentfasterricht = value;
               });
               saveSettings();
             },
@@ -308,13 +306,13 @@ class _Appmessages extends State<Appmessages> {
           SwitchListTile(
             title: const Text("Fast ereichtes Achievment"),
             subtitle: const Text("Wenn du kurtz davor bist ein Achivemnt zu ereichen"),
-            value: Achievmentfasterricht,
+            value: notifyAchievmentfasterricht,
             onChanged: (value) {
               setState(() {
-                Achievmentfasterricht = value;
+                notifyAchievmentfasterricht = value;
               });
               saveSettings();
-              print("Benachrichtigungsettings Aktualliesiert: Achievmentfasteerreicht = $Achievmentfasterricht ");
+              print("Benachrichtigungsettings Aktualliesiert: Achievmentfasteerreicht = $notifyAchievmentfasterricht ");
             },
           ),
 
@@ -322,13 +320,13 @@ class _Appmessages extends State<Appmessages> {
           SwitchListTile(
             title: const Text("Neuem Achievment"),
             subtitle: const Text("Wenn due in neues Achievment Freigeschaltet hast"),
-            value: pushnewAchievment,
+            value: notifynewAchievment,
             onChanged: (value) {
               setState(() {
-                pushnewAchievment = value;
+                notifynewAchievment = value;
               });
               saveSettings();
-              print("Benachrichtigungs Einstellungen Aktualliesiert: pushnewachievment = $pushnewAchievment");
+              print("Benachrichtigungs Einstellungen Aktualliesiert: pushnewachievment = $notifynewAchievment");
             },
           ),
 
@@ -349,26 +347,26 @@ class _Appmessages extends State<Appmessages> {
           SwitchListTile(
             title: const Text("Freunde Neues Achievment"),
             subtitle: const Text("wenn einer deiner Freunde Ein Neues Achievment bekommen hat"),
-            value: pushFriendnewAchievment,
+            value: notifyFriendnewAchievment,
             onChanged: (value) {
               setState(() {
-                pushFriendnewAchievment = value;
+                notifyFriendnewAchievment = value;
               });
               saveSettings();
-              print("Benachrichtigungs Einstellungen Aktualliesiert: pushFriendnewAchievment = $pushFriendnewAchievment");
+              print("Benachrichtigungs Einstellungen Aktualliesiert: pushFriendnewAchievment = $notifyFriendnewAchievment");
             }
           ),
 
           SwitchListTile(
             title: const Text("Freundschaftsanfragen"),
             subtitle: const Text("Wennd du eine Neue Freundschaftsanftage bekommst"),
-            value: pushnewFriendship,
+            value: notifynewFriendship,
             onChanged: (value) {
               setState(() {
-                pushnewFriendship = value;
+                notifynewFriendship = value;
               });
               saveSettings();
-              print("Benachrichtigungs Einstellungen Aktualliesiert: pushnewFriendship = $pushnewFriendship");
+              print("Benachrichtigungs Einstellungen Aktualliesiert: pushnewFriendship = $notifynewFriendship");
             },
           ),
 
@@ -381,26 +379,26 @@ class _Appmessages extends State<Appmessages> {
   Future<void> saveSettings() async {
   final prefs = await SharedPreferences.getInstance();
 
-  await prefs.setBool('pushnewFriendship', pushnewFriendship);
-  await prefs.setBool('pushFriendnewAchievment', pushFriendnewAchievment);
-  await prefs.setBool('pushnewAchievment', pushnewAchievment);
-  await prefs.setBool('Achievmentfasterricht', Achievmentfasterricht);
+  await prefs.setBool('pushnewFriendship', notifynewFriendship);
+  await prefs.setBool('pushFriendnewAchievment', notifyFriendnewAchievment);
+  await prefs.setBool('pushnewAchievment', notifynewAchievment);
+  await prefs.setBool('Achievmentfasterricht', notifyAchievmentfasterricht);
 }
 
 Future<void> loadSettings() async {
   final prefs = await SharedPreferences.getInstance();
 
   setState(() {
-    pushnewFriendship =
+    notifynewFriendship =
         prefs.getBool('pushnewFriendship') ?? true;
 
-    pushFriendnewAchievment =
+    notifyFriendnewAchievment =
         prefs.getBool('pushFriendnewAchievment') ?? true;
 
-    pushnewAchievment =
+    notifynewAchievment =
         prefs.getBool('pushnewAchievment') ?? true;
 
-    Achievmentfasterricht =
+    notifyAchievmentfasterricht =
         prefs.getBool('Achievmentfasterricht') ?? true;
   });
 }
@@ -510,7 +508,7 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
       ),
     );
   }
-
+   //settingspeichern
   Future<void> saveSettings() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(
@@ -518,7 +516,7 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
       achievementDownloadOverWifi,
     );
   }
-
+   //Einstellungenladen
   Future<void> loadSettings() async {
     final prefs = await SharedPreferences.getInstance();
 
