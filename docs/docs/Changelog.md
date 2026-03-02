@@ -1,10 +1,8 @@
 # Changelog#
 
 ## TODOs
-- Imprssum und Datenschutzerklärung in email footer anpassen (Liam)
-- AGBs in Email bestätigung mail verlinken (Liam)
+- Webseite in email footer anpassen (Liam)
 - Achievments in DB eintragen (Liam)
-- Lokaler Acount bzw ohne login(Farin)
 - Push Systembenachrichtigungen evtl. mit firebase(Farin)
 - DB Policys (Farin & Liam)
 - Ladebalken Bug wenn man die app ohne acount nutzt fixen (Farin)
@@ -13,6 +11,8 @@
 - Acount daten Cachen (Farin) 
 - FAQ upadten (Fragen: Wird die App kostenlos sein,) (Liam)
 - App in Up mark umbennenen(Farin)
+- Acount settings zumindest grundelegende settings(Farin)
+
 
 ## 02.03.2026
 - Erweiterte einstellung in den main einstellungen verlinkt (Farin)
@@ -24,6 +24,14 @@
 - Benachrichtigungs variabeln eindeutig benannt alle Variabeln für benachrichtigungen heißen jetzt notify...(Farin)
 - Dankesagung und Links zu aboutseite hinzugefügt(Farin)
 - Aboutsite neu angeordnet(Farin)
+- Code aof conduct hinzugefügt(Farin)
+- Agbs in emila footer verlinkt un links zu impressum datenschutz richtig gemacht(liam)
+- Auth Gate um _initializeUser(user) erweitert = Profiel wird jetzt auch lokal gespeichert(Farin)
+- user_local_services.dart zum synchroniesiern der DB mit dem Cache und für lokale Speciherung(Farin)
+- Neue datei: user_data_services.dart Für die daten vom user für die engine(Farin)
+- Alter wird in user_data_services.dart berchnet (Farin)
+- engine angefangen (Farin)
+
 
 
 ## 01.03.2026

@@ -3,8 +3,7 @@ import 'package:supabase_flutter/supabase_flutter.dart'; // Import der Subase Li
 import 'package:flutter_dotenv/flutter_dotenv.dart'; //import dotenv libary für die env datei für secretts weil flutter/dart das in vanilla nicht kann
 import 'login.dart'; // import der login.dart damit das Authgate weiß wo es hinleiten muss
 import 'navbar.dart'; // Import der Datei wo die nav bar also die NAvigationsleite ist damit sie eingebunden werden kann
-/*    Die Ganzen Komentare NErven übelst vieleicht entferne ich sie wieder.
-*/
+import 'user_local_services.dart';
 
 Future<void> main() async { //main funktion wird immer als erstes ausgeführt
   WidgetsFlutterBinding.ensureInitialized(); // verbindung zwischen framework flutetr und der engine flutter sozusagen die Brücke zwischen der hardware und der app
@@ -130,7 +129,7 @@ class AuthGate extends StatelessWidget {
         }
 
         return FutureBuilder( // wrnn nicht null entpackt wird
-          future: _ensureProfileExists(session.user), // Prüft ob es den user schon in der eigenen profieles tabelle in der DB gibt. Ruft dafür die Funktion unten auf
+          future: _initializeUser(session.user), // Prüft ob es den user schon in der eigenen profieles tabelle in der DB gibt. Ruft dafür die Funktion unten auf
           builder: (context, profileSnapshot) { //Fragt den DB (Datenbank) Status ab 
 
             if (profileSnapshot.connectionState == ConnectionState.waiting) {// Wennd er Status warten ist also die DB arbeitet noch
@@ -150,6 +149,29 @@ class AuthGate extends StatelessWidget {
       }
      );
   }
+
+  Future<void> _initializeUser(User user) async {
+  await _ensureProfileExists(user);
+  await _cacheUserProfile(user);
+  }
+
+
+  Future<void> _cacheUserProfile(User user) async {
+  final supabase = Supabase.instance.client;
+
+  final profile = await supabase
+      .from('profiles')
+      .select()
+      .eq('id', user.id)
+      .single();
+
+  await UserLocalServices.saveUserProfile(
+    firstName: profile['first_name'] ?? '',
+    lastName: profile['last_name'] ?? '',
+    username: profile['username'] ?? '',
+    birthdate: profile['birthdate'] ?? '',
+  );
+} 
 
 
   Future<void> _ensureProfileExists(User user) async { // die oben aufgerufene Funktion 
