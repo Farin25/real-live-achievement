@@ -17,6 +17,14 @@
 ## 03.03.2026
 - Acount Settings hinzugefügt(Farin)
 - Mit engine experimentiert(Farin)
+- **auth gate optimiert:**(Farin)
+- Keine DB calls mehr in Ui(Farin)
+- Auth gate prüft jetzt nur noch Status und leitet weiter(Farin)
+- User Session Manager hinzugefügt für: Profiel von Supbase laden, Localen Cache aktualliesieren, logout = Cleart cache und logt supbase aus.(Farin)
+- Localen cache optimiert und erweitert  für offlinefähigkeit(Farin)
+- Achitektur Optimiert und verbessert für schnelleres laden und keine DB Calls mehr ind er Ui(Farin)
+- Performance Optimierungen und offlinefähigkeit durch laden aus Cache und nicht auf DB Warten(Farin)
+
 
 
 ## 02.03.2026

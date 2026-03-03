@@ -17,4 +17,13 @@ class UserLocalServices {
     await prefs.setString('birthdate', birthdate);
   }
 
+
+  static Future<void> clearUserProfile() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    await prefs.remove('first_name');
+    await prefs.remove('last_name');
+    await prefs.remove('username');
+    await prefs.remove('birthdate');
+  }
 }

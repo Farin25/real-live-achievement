@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'user_SessionManager.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
@@ -163,7 +164,7 @@ class _AccountPageState extends State<AccountPage> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () async {
-                  await supabase.auth.signOut();
+                  await UserSessionmanager.logout();
                 },
                 child: const Text('Abmelden'),
               ),
