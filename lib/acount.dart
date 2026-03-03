@@ -18,9 +18,17 @@ class _AccountPageState extends State<AccountPage> {
     _loadProfile();
   }
 
+  final _firstNameController = TextEditingController();
+  final _lastNameController = TextEditingController();
+  final _usernameController = TextEditingController();
+  final _birthdateController = TextEditingController();
+  
+
+
   Future<void> _loadProfile() async {
     final supabase = Supabase.instance.client;
     final user = supabase.auth.currentUser;
+
 
     if (user != null) {
       final data = await supabase
@@ -31,8 +39,27 @@ class _AccountPageState extends State<AccountPage> {
 
       setState(() {
         profile = data;
+        _firstNameController.text = data['first_name'] ?? '';
+        _lastNameController.text = data['last_name'] ?? '';
+        _usernameController.text = data['username'] ?? '';
+        _birthdateController.text = data['birthdate'] ?? '';
+
       });
     }
+  }
+
+  Future<void> _saveProfile() async { 
+    final supabase = Supabase.instance.client;
+    final user = supabase.auth.currentUser;
+    
+    if (user ==  null) return;
+
+    await supabase.from('profiles').update({
+      'first_name':_firstNameController.text,
+      'last_name':_lastNameController.text,
+      'username':_usernameController.text,
+      'birthdate': _birthdateController.text,
+    }).eq('id', user.id);
   }
 
   @override
@@ -88,17 +115,48 @@ class _AccountPageState extends State<AccountPage> {
                   ),
 
             const SizedBox(height: 30),
+            // Profiel bzw. Acount Settings:
 
-            /// PLATZHALTER
-            const Expanded(
-              child: Center(
-                child: Text(
-                  'Hier kommen später deine Account Settings rein.',
-                  style: TextStyle(fontSize: 18),
-                  textAlign: TextAlign.center,
+            Expanded(
+              child: profile == null
+              ? const SizedBox()
+              : ListView(
+                children: [
+
+                TextField(
+                  controller: _firstNameController,
+                  decoration: const InputDecoration(
+                    labelText: 'Vornahme',
+                  ),
                 ),
-              ),
+                const SizedBox(height: 15,),
+                TextField(
+                  controller: _lastNameController,
+                  decoration: const InputDecoration(
+                    labelText: 'Nachname',
+                  ),
+                ),
+                const SizedBox(height: 15,),
+                TextField(
+                  controller: _usernameController,
+                  decoration: const InputDecoration(
+                    labelText: 'username ', 
+                  ),
+                ),
+                TextField(
+                  controller: _birthdateController,
+                  decoration: const InputDecoration(
+                    labelText:'Geburtsdatum',
+                  )
+                ),
+                const SizedBox(height: 25,),
+
+                ElevatedButton(onPressed: _saveProfile, child: const Text('änderungen Speichern'),
+                )
+              ],
             ),
+           ),
+           
 
             /// LOGOUT BUTTON
             SizedBox(
@@ -164,9 +222,9 @@ class _AccountPageState extends State<AccountPage> {
                 child: const Text('Account löschen'),
               ),
             ),
-          ],
+          ]
         ),
       ),
     );
+   }
   }
-}

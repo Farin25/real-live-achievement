@@ -12,6 +12,11 @@
 - FAQ upadten (Fragen: Wird die App kostenlos sein,) (Liam)
 - App in Up mark umbennenen(Farin)
 - Acount settings zumindest grundelegende settings(Farin)
+- Bilder in docs richtig laden
+
+## 03.03.2026
+- Acount Settings hinzugefügt(Farin)
+- Mit engine experimentiert(Farin)
 
 
 ## 02.03.2026

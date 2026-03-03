@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart'; // Import dfer flutter Bibilothek die grundbausteine wie scaffold usw enthält und essenziel ist 
+import 'package:real_live_achievments/engine.dart';
 import 'package:supabase_flutter/supabase_flutter.dart'; // Import der Subase Libary für die Komunikation mit Subase
 import 'package:flutter_dotenv/flutter_dotenv.dart'; //import dotenv libary für die env datei für secretts weil flutter/dart das in vanilla nicht kann
 import 'login.dart'; // import der login.dart damit das Authgate weiß wo es hinleiten muss
@@ -144,6 +145,7 @@ class AuthGate extends StatelessWidget {
             initalIndex: selectedIndex,
             onIndexChanged: onIndexChanged,
             ); //Wenn die Antwort der Db kommt setze die Navbar ein also die Navigationsleiste unten
+ 
           },
         );
       }
