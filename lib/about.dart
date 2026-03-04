@@ -87,8 +87,9 @@ class AboutPage extends StatelessWidget { // Stateless widget weil braucht keine
               SizedBox(height: 10),
 
               linkTile('Webseite', 'https://farin25.github.io/real-live-achievement/'),
-              linkTile('SourceCode', 'https://github.com/Farin25/real-live-achievement'),
               linkTile('Eigenes Achievment Einreichen', 'https://farin25.github.io/real-live-achievement/docs/Dein_Achievment/'),
+              linkTile('SourceCode', 'https://github.com/Farin25/real-live-achievement'),
+              linkTile('Changelog', 'https://farin25.github.io/real-live-achievement/docs/Changelog'),
               
               SizedBox(height: 10),
 

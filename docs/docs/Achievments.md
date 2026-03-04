@@ -64,3 +64,7 @@
 |Big Ben Watcher| IN England m Big ben sein|GPS|
 |Tokyo Drift| Besuche Tokio|GPS|
 |German Explorer|Mindestens 10 deutsche Städte besucht| GPS+ Städte|
+|jufo| Mache bei Jugend Forscht mit| manuell |
+|Jufo I | Mache zum zweiten mal bei Jugend forscht mit | manuell |
+| Jufo II | Mache 4 mal bei Jugendforscht mit | manuell|
+
