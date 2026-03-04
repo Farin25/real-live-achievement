@@ -144,11 +144,22 @@ class _AccountPageState extends State<AccountPage> {
                     labelText: 'username ', 
                   ),
                 ),
+                const SizedBox(height: 15,),
                 TextField(
                   controller: _birthdateController,
+                  readOnly: true,
                   decoration: const InputDecoration(
                     labelText:'Geburtsdatum',
-                  )
+                   prefix: Icon(Icons.calendar_today),
+                   border: OutlineInputBorder(), 
+                  ),
+                  onTap: () async {
+                    DateTime? pickedDate = await showDatePicker(
+                     context: context,
+                     initialDate: DateTime.now(),
+                     firstDate: DateTime(1900),
+                     lastDate: DateTime.now(),);
+                  },
                 ),
                 const SizedBox(height: 25,),
 

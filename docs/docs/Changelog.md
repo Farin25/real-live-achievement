@@ -5,14 +5,19 @@
 - Achievments in DB eintragen (Liam)
 - Push Systembenachrichtigungen evtl. mit firebase(Farin)
 - DB Policys (Farin & Liam)
-- Ladebalken Bug wenn man die app ohne acount nutzt fixen (Farin)
-- Erweiterte Einstellungen auf der main settings seite verlinken (Farin)
-- Zwischeninfo bei acounte rstellen (Farin)
-- Acount daten Cachen (Farin) 
+- Ladebalken Bug wenn man die app ohne acount bzw. Demo mode nutzt fixen (Farin)
 - FAQ upadten (Fragen: Wird die App kostenlos sein,) (Liam)
 - App in Up mark umbennenen(Farin)
-- Acount settings zumindest grundelegende settings(Farin)
 - Bilder in docs richtig laden
+- Acount daten in den settings aus chache laden (Farin)
+- Readme auf neusten stand bringen und alles unötige raus (Farin ~ liam)
+- Docs
+
+# 04.03.2026
+- Text feld durch date Picker bei den acount settings um das geburstdtum zu ändern (Farin)
+
+
+
 
 ## 03.03.2026
 - Acount Settings hinzugefügt(Farin)
