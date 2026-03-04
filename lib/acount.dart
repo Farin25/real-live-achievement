@@ -162,10 +162,19 @@ class _AccountPageState extends State<AccountPage> {
                   ),
                   onTap: () async {
                     DateTime? pickedDate = await showDatePicker(
-                     context: context,
-                     initialDate: DateTime.now(),
-                     firstDate: DateTime(1900),
-                     lastDate: DateTime.now(),);
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(1900),
+                      lastDate: DateTime.now(),
+                    );
+
+                    if (pickedDate != null) {
+                      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+
+                      setState(() {
+                        _birthdateController.text = formattedDate;
+                      });
+                    }
                   },
                 ),
                 const SizedBox(height: 25,),
