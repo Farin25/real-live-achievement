@@ -67,4 +67,36 @@
 |jufo| Mache bei Jugend Forscht mit| manuell |
 |Jufo I | Mache zum zweiten mal bei Jugend forscht mit | manuell |
 | Jufo II | Mache 4 mal bei Jugendforscht mit | manuell|
+| Landlocked  < Besuche ein Land ohne Meerzugang | GPS|
+| Island Hopper| besuche 3 verschiedene Inseln| GPS|
+|Capital Collector|Besuche 10 Hauptstäte|GPS|
+|Border Crosser| überqere 3 verschiedene Landesgrenzen an einem Tag| GPS|
+| Border Kroser I | überqere 5 verschieden Landesgrenzen an einem Tag| GPS|
+| Elevator? Never! | Steige an einem Tag mehr als 50 Stockwerke zu Fuß| |
+| Mathias mode | Benutze den light mode über 30 Tage jahr lang| A |
+|Iron Legs| 7 tage in folge über 10000 Schritte| Schritte|
+|Cyclist | fahre über 50km Fahrad an einem Tag| GPS + GEschwindigkeit |
+| First Snow | bei ersten Schneefall des Jahres draußen | Wetter + GPS|
+|Rainbow Chaser| Draußen direkt nach einem  Regen bei Sonne| GPS + Wetter |
+| Open Source Hero | Mache 5 Pull Reqest zu Open Source Projekten| Github API|
+|Sailor Sarah| Besuche 8 Länder und benutze dabei nur ein schiff| GPS|
+| Duo | Erhalte mit einem Freund gleichzeitig ein Achievment| A |
+| Sagrada Família | Besuche die Sagrada Família  in Barcelona| GPS|
+|Statue of Liberty| Besuche die Freiheitsatue in den USA| GPS|
+| Machu Picchu| Besuche die Ruinnenstad Machu Picchu in Peru| GPS |
+| Flat Earther| Sei an einem Tag Gleichzeitig an einer sehr tiefen stelle und an einer sehr hohen stelle| GPS|
+| 404 Not Found | Laufe in der NAtur mindestens 4 Mal an der selben stelle vorbei| GPS |
+|Konami Code| Gib den  Konami Code in der App ein| |
+|Hello World| Erster App Login| |
+|Old Phone | Benutze die app auf einem Handy was älter als 5 Jahre ist| | 
+| Friday the 13th| Öffne die app an einem Freitag dem 13,| Datum |
+|Palindrome Day| öffne die app an einem Palindrom Datum zb.22.02.2022| Datum|
+|Birthday| öffne die app genau an dienem Geburstag| A| 
+|Four Corners|Stehe an einem punkt wo 4 Länder Zusammentreffen|GPS|
+|Loyal | Nutze die App 365 tage| A|
+|Speed Runner | Schlate 10 Achievments innerhalb von einer Woche Frei | A|
+| Night Coder| Öffne die App zwischen 2 und 4 uhr Morgens| A|
+| Dark Side| Wechsel dauerhaft ind en Dark mode| A|
+|  Bug Hunter | Melde einen Bug in der App| A|
+
 
