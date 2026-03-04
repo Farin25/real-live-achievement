@@ -26,4 +26,13 @@ class UserLocalServices {
     await prefs.remove('username');
     await prefs.remove('birthdate');
   }
+    // Cache Löschen
+static Future<void> clearAchievementCache() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    await prefs.remove('cached_achievements');
+    //Debug Ausgabe
+    print("Achievement Cache gelöscht");
 }
+}
+

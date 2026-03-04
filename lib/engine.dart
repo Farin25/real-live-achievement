@@ -1,6 +1,4 @@
-import 'user_data_services.dart';
-import 'user_local_services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 
 // Berechnet Fortshcritt und wie weit freigeschaltet
 class AchievmentResult {

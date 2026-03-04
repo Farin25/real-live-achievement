@@ -79,7 +79,7 @@
 | First Snow | bei ersten Schneefall des Jahres draußen | Wetter + GPS|
 |Rainbow Chaser| Draußen direkt nach einem  Regen bei Sonne| GPS + Wetter |
 | Open Source Hero | Mache 5 Pull Reqest zu Open Source Projekten| Github API|
-|Sailor Sarah| Besuche 8 Länder und benutze dabei nur ein schiff| GPS|
+|Sailor Sarah| Besuche 8 Länder und benutze dafür nur ein schiff| GPS|
 | Duo | Erhalte mit einem Freund gleichzeitig ein Achievment| A |
 | Sagrada Família | Besuche die Sagrada Família  in Barcelona| GPS|
 |Statue of Liberty| Besuche die Freiheitsatue in den USA| GPS|
@@ -98,5 +98,10 @@
 | Night Coder| Öffne die App zwischen 2 und 4 uhr Morgens| A|
 | Dark Side| Wechsel dauerhaft ind en Dark mode| A|
 |  Bug Hunter | Melde einen Bug in der App| A|
-
-
+| Half Wonder |Besuche drei der 7 Welötwunder | GPS|
+|Wonder of the World|Besuche alle 7 Weltwunder|GPS|
+| Taj Mahal|Besuche das Taj Mahal| GPS|
+|Great Wall Walker| Besuche die Chiesischen Mauer| GPS|
+| Chichen Itza| Besuche das Chichen Itza| GPS|
+| Christ the Redeemer| Besuche den Christus| GPS|
+|Petra| Besuche Petra| GPS|

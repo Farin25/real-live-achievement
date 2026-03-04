@@ -5,6 +5,7 @@ import 'about.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'user_local_services.dart';
 
 
 
@@ -503,6 +504,22 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
               print("Achievment Wlan Einstellungen Aktualliesiert: Achievments über Wlan Downlaoden = $achievementDownloadOverWifi");
             },
           ),
+
+          // Cache
+          ListTile(
+            leading: const Icon(Icons.delete),
+            title: const Text("Achievement Cache leeren"),
+            onTap: () async {
+              await UserLocalServices.clearAchievementCache();
+
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("Achievement Cache gelöscht"),
+                ),
+              );
+            },
+          )
+          
 
         ],
       ),

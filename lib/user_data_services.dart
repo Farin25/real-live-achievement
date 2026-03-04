@@ -1,6 +1,7 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+
  
 class UserDataServices {
 
@@ -22,13 +23,13 @@ class UserDataServices {
 
       final profile = await supabase
           .from('profiles')
-          .select('birthday')
+          .select('birthdate')
           .eq('id', user.id)
           .maybeSingle();
 
-      if (profile == null || profile['birthday'] == null) return null;
+      if (profile == null || profile['birthdate'] == null) return null;
       
-      birthdateString = profile['birthday'];
+      birthdateString = profile['birthdate'];
       
 
       await prefs.setString('birthdate', birthdateString!);

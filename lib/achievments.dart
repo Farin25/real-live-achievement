@@ -122,28 +122,3 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
     );
   }
 }
-
-
-
-
-
-
-
-/*
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Achievments'),
-      ),
-      body: Center(
-        child: Text('Hier Entsteht die Achievments Seite.......',
-        style: TextStyle(fontSize: 20),
-      ),
-     ),
-    );
-  }
-*/
-
-
