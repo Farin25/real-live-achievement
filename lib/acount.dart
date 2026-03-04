@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'user_SessionManager.dart';
+import 'package:intl/intl.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({super.key});
@@ -12,6 +13,12 @@ class AccountPage extends StatefulWidget {
 class _AccountPageState extends State<AccountPage> {
 
   Map<String, dynamic>? profile;
+  String formatDate(String? date) {
+  if (date == null) return "";
+
+  final parsed = DateTime.parse(date);
+  return DateFormat('dd.MM.yyyy').format(parsed);
+}
 
   @override
   void initState() {
@@ -168,6 +175,20 @@ class _AccountPageState extends State<AccountPage> {
               ],
             ),
            ),
+                     if (profile != null) ...[
+            Text(
+              "Letzte änderung: ${formatDate(profile!['updated_at'])}",
+              style: TextStyle(color: Colors.grey[600]),
+           ),
+           const SizedBox(height: 5,),
+
+           Text(
+            "Account erstellt: ${formatDate(profile!['created_at'])}",
+            style: TextStyle(color: Colors.grey[600]),
+           ),
+          const SizedBox(height: 10,),
+           ],
+
            
 
             /// LOGOUT BUTTON
@@ -227,6 +248,8 @@ class _AccountPageState extends State<AccountPage> {
                                 TextStyle(color: Colors.red),
                           ),
                         ),
+                        const SizedBox(height: 15,),
+
                       ],
                     ),
                   );
@@ -234,7 +257,8 @@ class _AccountPageState extends State<AccountPage> {
                 child: const Text('Account löschen'),
               ),
             ),
-          ]
+
+         ]
         ),
       ),
     );
