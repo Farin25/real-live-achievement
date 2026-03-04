@@ -79,6 +79,8 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
     }
   }
 
+  
+
   Future<void> _loadlocalAchievments() async {
     final prefs = await SharedPreferences.getInstance();
     final cached = prefs.getString('cached_achievements');

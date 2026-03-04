@@ -1,18 +1,36 @@
 # Changelog#
 
 ## TODOs
-- Imprssum und Datenschutzerklärung in email footer anpassen (Liam)
-- AGBs in Email bestätigung mail verlinken (Liam)
+- Webseite in email footer anpassen (Liam)
 - Achievments in DB eintragen (Liam)
-- Lokaler Acount bzw ohne login(Farin)
 - Push Systembenachrichtigungen evtl. mit firebase(Farin)
 - DB Policys (Farin & Liam)
-- Ladebalken Bug wenn man die app ohne acount nutzt fixen (Farin)
-- Erweiterte Einstellungen auf der main settings seite verlinken (Farin)
-- Zwischeninfo bei acounte rstellen (Farin)
-- Acount daten Cachen (Farin) 
+- Ladebalken Bug wenn man die app ohne acount bzw. Demo mode nutzt fixen (Farin)
 - FAQ upadten (Fragen: Wird die App kostenlos sein,) (Liam)
 - App in Up mark umbennenen(Farin)
+- Bilder in docs richtig laden
+- Acount daten in den settings aus chache laden (Farin)
+- Readme auf neusten stand bringen und alles unötige raus (Farin ~ liam)
+- Docs
+
+# 04.03.2026
+- Text feld durch date Picker bei den acount settings um das geburstdtum zu ändern (Farin)
+
+
+
+
+## 03.03.2026
+- Acount Settings hinzugefügt(Farin)
+- Mit engine experimentiert(Farin)
+- **auth gate optimiert:**(Farin)
+- Keine DB calls mehr in Ui(Farin)
+- Auth gate prüft jetzt nur noch Status und leitet weiter(Farin)
+- User Session Manager hinzugefügt für: Profiel von Supbase laden, Localen Cache aktualliesieren, logout = Cleart cache und logt supbase aus.(Farin)
+- Localen cache optimiert und erweitert  für offlinefähigkeit(Farin)
+- Achitektur Optimiert und verbessert für schnelleres laden und keine DB Calls mehr ind er Ui(Farin)
+- Performance Optimierungen und offlinefähigkeit durch laden aus Cache und nicht auf DB Warten(Farin)
+
+
 
 ## 02.03.2026
 - Erweiterte einstellung in den main einstellungen verlinkt (Farin)
@@ -24,6 +42,14 @@
 - Benachrichtigungs variabeln eindeutig benannt alle Variabeln für benachrichtigungen heißen jetzt notify...(Farin)
 - Dankesagung und Links zu aboutseite hinzugefügt(Farin)
 - Aboutsite neu angeordnet(Farin)
+- Code aof conduct hinzugefügt(Farin)
+- Agbs in emila footer verlinkt un links zu impressum datenschutz richtig gemacht(liam)
+- Auth Gate um _initializeUser(user) erweitert = Profiel wird jetzt auch lokal gespeichert(Farin)
+- user_local_services.dart zum synchroniesiern der DB mit dem Cache und für lokale Speciherung(Farin)
+- Neue datei: user_data_services.dart Für die daten vom user für die engine(Farin)
+- Alter wird in user_data_services.dart berchnet (Farin)
+- engine angefangen (Farin)
+
 
 
 ## 01.03.2026

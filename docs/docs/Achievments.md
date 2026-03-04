@@ -2,7 +2,6 @@
 
 | achivment | wie bekommt man es: | wie wird es erfasst |
 |-----|----|-----|
-
 | traveler I | besuche 3 verschiedene Länder | GPS / Standort|
 | traveler II | besuche 5 verschiedene Länder | GPS / Standort |
 | traveler III | besuche 8 verschiedene Länder | GPS / Standort |
