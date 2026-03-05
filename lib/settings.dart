@@ -504,6 +504,18 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
               print("Achievment Wlan Einstellungen Aktualliesiert: Achievments über Wlan Downlaoden = $achievementDownloadOverWifi");
             },
           ),
+          const Divider(),
+        Padding(
+         padding: const EdgeInsets.all(16.0),
+         child: Text(
+          "Dev / Debuging Settings",
+          style:
+          TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+          ),
+        ),
 
           // Cache
           ListTile(

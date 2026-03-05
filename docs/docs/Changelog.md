@@ -13,9 +13,12 @@
 - Readme auf neusten stand bringen und alles unötige raus (Farin ~ liam)
 - Docseben 
 - Prüfng ob username vergeben wenn in den stting sien neuer gesetzt wird(Farin)
-- dev/Debug settings(farin)
+- dev/Debug settings(farin) 
 
-# 04.03.2026
+##
+- Dev/ Debuging Settings zu den Settings hinzugefügt(Farin)
+
+## 04.03.2026
 - Text feld durch date Picker bei den acount settings um das geburstdtum zu ändern (Farin)
 - updated_at und created_at wird jetzt auf der acount seite angezeigt (Farin)
 - Links auf Abozt seite neu angeordnet und changelog verlinkt (Farin)
