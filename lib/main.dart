@@ -129,11 +129,14 @@ class AuthGate extends StatelessWidget {
           return SignInPage2(
           onContinueAsGuest: onContinueAsGuest);
         }
-
-          Future.microtask(() async {
-            await UserSessionmanager.initialize();
-            await AchievementRunner.run();
-          });
+        Future.microtask(() async {
+          await UserSessionmanager.initialize();
+          // AchievementRunner in separatem Isolate/compute laufen lassen
+          // Oder einfach mit kleiner Verzögerung starten
+          // damit die UI erstmal aufgebaut werden kann
+          await Future.delayed(const Duration(seconds: 3));
+          await AchievementRunner.run();
+        });
 
         return GoogleBottomBar(onThemeChanged: onThemeChanged, initalIndex: selectedIndex, onIndexChanged: onIndexChanged);
 

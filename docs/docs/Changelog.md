@@ -15,8 +15,9 @@
 - Prüfng ob username vergeben wenn in den stting sien neuer gesetzt wird(Farin)
 - dev/Debug settings(farin) 
 
-##
+## 05.03.2026
 - Dev/ Debuging Settings zu den Settings hinzugefügt(Farin)
+- Standort BErechtigungen hinzugefügt und neue dartei für standort services und erkennenung welche Stadt
 
 ## 04.03.2026
 - Text feld durch date Picker bei den acount settings um das geburstdtum zu ändern (Farin)
