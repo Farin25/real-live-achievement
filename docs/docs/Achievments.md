@@ -58,7 +58,6 @@
 |Speedster| Mehr als 200km/h in einem fahrzeug|GPS+Zeit = GEschwindigkeit|
 |Culture Seeker|Besuche 5 Museen in einem Monat|GPS+Zeit|
 |Mountain Goat|Besteige einen berg über 2000 m | GPS+Höhe+ Zeit |
-|Get a Smartphone| Habe eine Handy| USer|
 |Eiffel Gazer| In Frankreich am eifelturm gewesen|GPS|
 |Colosseum Visitor|In Italien im Kolosseum gewese|GPS|
 |Big Ben Watcher| IN England m Big ben sein|GPS|

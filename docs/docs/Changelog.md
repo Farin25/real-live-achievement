@@ -17,7 +17,8 @@
 
 ## 05.03.2026
 - Dev/ Debuging Settings zu den Settings hinzugefügt(Farin)
-- Standort BErechtigungen hinzugefügt und neue dartei für standort services und erkennenung welche Stadt
+- Standort BErechtigungen hinzugefügt und neue dartei für standort services und erkennenung welche Stadt(Farin)
+-Ersten 100 Achievments in die DB Eingetragen (Farin)
 
 ## 04.03.2026
 - Text feld durch date Picker bei den acount settings um das geburstdtum zu ändern (Farin)
