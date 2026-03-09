@@ -4,7 +4,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'variabels.dart';
 import 'addins.dart';
 
-class AboutPage extends StatelessWidget { // Stateless widget weil braucht keine änderungen
+class AboutPage extends StatelessWidget {
+  const AboutPage({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +65,7 @@ class AboutPage extends StatelessWidget { // Stateless widget weil braucht keine
             ),
             SizedBox(height: 10),
             Text(
-              'Real Live Achievements motiviert dich, echte Ziele im Leben zu erreichen! '
+              'Up Mark motiviert dich, echte Ziele im Leben zu erreichen! '
               'Sammle Achievements im Echten Leben! '
               'Teile deine Erfolge mit Freunden und lass dich von ihren Achievements inspirieren.',
               style: TextStyle(fontSize: 16),
