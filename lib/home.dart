@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class NewsFeedPage1 extends StatelessWidget {
@@ -7,84 +6,20 @@ class NewsFeedPage1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Activity Feed"),
+        centerTitle: false,
+      ),
       body: Center(
-        child: Container(
-          constraints: const BoxConstraints(maxWidth: 400),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 520),
           child: ListView.separated(
+            padding: const EdgeInsets.all(16),
             itemCount: _feedItems.length,
-            separatorBuilder: (BuildContext context, int index) {
-              return const Divider();
-            },
-            itemBuilder: (BuildContext context, int index) {
+            separatorBuilder: (_, __) => const SizedBox(height: 14),
+            itemBuilder: (context, index) {
               final item = _feedItems[index];
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _AvatarImage(item.user.imageUrl),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                child: RichText(
-                                  overflow: TextOverflow.ellipsis,
-                                  text: TextSpan(
-                                    children: [
-                                      TextSpan(
-                                        text: item.user.fullName,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                          color: Theme.of(context).textTheme.bodyLarge?.color,
-                                        ),
-                                      ),
-                                      TextSpan(
-                                        text: " @${item.user.userName}",
-                                        style: Theme.of(
-                                          context,
-                                        ).textTheme.bodySmall,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Text(
-                                '· 5m',
-                                style: Theme.of(context).textTheme.bodySmall,
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.only(left: 8.0),
-                                child: Icon(Icons.more_horiz),
-                              ),
-                            ],
-                          ),
-                          if (item.content != null) Text(item.content!),
-                          if (item.imageUrl != null)
-                            Container(
-                              height: 200,
-                              margin: const EdgeInsets.only(top: 8.0),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8.0),
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: NetworkImage(item.imageUrl!),
-                                ),
-                              ),
-                            ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              );
+              return _FeedCard(item: item);
             },
           ),
         ),
@@ -93,81 +28,247 @@ class NewsFeedPage1 extends StatelessWidget {
   }
 }
 
-class _AvatarImage extends StatelessWidget {
-  final String url;
-  const _AvatarImage(this.url);
+class _FeedCard extends StatelessWidget {
+  final FeedItem item;
+
+  const _FeedCard({required this.item});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 60,
-      height: 60,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        image: DecorationImage(image: NetworkImage(url)),
+    final theme = Theme.of(context);
+
+    return Card(
+      elevation: 2,
+      clipBehavior: Clip.antiAlias,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(14),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _TypeIconBubble(type: item.type),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Wrap(
+                        spacing: 8,
+                        runSpacing: 6,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          Text(
+                            item.title,
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          _FeedTypeChip(type: item.type),
+                        ],
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        item.time,
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: theme.colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.more_horiz),
+                ),
+              ],
+            ),
+
+            if (item.content != null) ...[
+              const SizedBox(height: 12),
+              Text(
+                item.content!,
+                style: theme.textTheme.bodyMedium?.copyWith(height: 1.4),
+              ),
+            ],
+
+            if (item.imageUrl != null) ...[
+              const SizedBox(height: 14),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: AspectRatio(
+                  aspectRatio: 16 / 9,
+                  child: Image.network(
+                    item.imageUrl!,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ],
+          ],
+        ),
       ),
     );
   }
 }
 
+class _TypeIconBubble extends StatelessWidget {
+  final FeedType type;
 
+  const _TypeIconBubble({required this.type});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 52,
+      height: 52,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: _backgroundColor(context, type),
+      ),
+      child: Icon(
+        _iconForType(type),
+        size: 26,
+        color: _iconColor(context, type),
+      ),
+    );
+  }
+
+  IconData _iconForType(FeedType type) {
+    switch (type) {
+      case FeedType.achievement:
+        return Icons.emoji_events_rounded;
+      case FeedType.friend:
+        return Icons.person_add_alt_1_rounded;
+      case FeedType.unlock:
+        return Icons.lock_open_rounded;
+      case FeedType.promo:
+        return Icons.campaign_rounded;
+    }
+  }
+
+  Color _backgroundColor(BuildContext context, FeedType type) {
+    final scheme = Theme.of(context).colorScheme;
+    switch (type) {
+      case FeedType.achievement:
+        return scheme.primaryContainer;
+      case FeedType.friend:
+        return scheme.secondaryContainer;
+      case FeedType.unlock:
+        return scheme.tertiaryContainer;
+      case FeedType.promo:
+        return scheme.surfaceVariant;
+    }
+  }
+
+  Color _iconColor(BuildContext context, FeedType type) {
+    final scheme = Theme.of(context).colorScheme;
+    switch (type) {
+      case FeedType.achievement:
+        return scheme.onPrimaryContainer;
+      case FeedType.friend:
+        return scheme.onSecondaryContainer;
+      case FeedType.unlock:
+        return scheme.onTertiaryContainer;
+      case FeedType.promo:
+        return scheme.onSurfaceVariant;
+    }
+  }
+}
+
+class _FeedTypeChip extends StatelessWidget {
+  final FeedType type;
+
+  const _FeedTypeChip({required this.type});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(999),
+        color: Theme.of(context).colorScheme.surfaceContainerHighest,
+      ),
+      child: Text(
+        _label(type),
+        style: Theme.of(context).textTheme.labelMedium,
+      ),
+    );
+  }
+
+  String _label(FeedType type) {
+    switch (type) {
+      case FeedType.achievement:
+        return "Achievement";
+      case FeedType.friend:
+        return "Friend";
+      case FeedType.unlock:
+        return "Unlock";
+      case FeedType.promo:
+        return "Promo";
+    }
+  }
+}
+
+enum FeedType {
+  achievement,
+  friend,
+  unlock,
+  promo,
+}
 
 class FeedItem {
+  final String title;
   final String? content;
   final String? imageUrl;
-  final User user;
-
+  final String time;
+  final FeedType type;
 
   FeedItem({
+    required this.title,
     this.content,
     this.imageUrl,
-    required this.user,
-
+    required this.time,
+    required this.type,
   });
 }
 
-class User {
-  final String fullName;
-  final String imageUrl;
-  final String userName;
-
-  User(this.fullName, this.userName, this.imageUrl);
-}
-
-final List<User> _users = [
-  User("John Doe", "john_doe", "https://picsum.photos/id/1062/80/80"),
-  User("Jane Doe", "jane_doe", "https://picsum.photos/id/1066/80/80"),
-  User("Jack Doe", "jack_doe", "https://picsum.photos/id/1072/80/80"),
-  User("Jill Doe", "jill_doe", "https://picsum.photos/id/133/80/80"),
-];
-
 final List<FeedItem> _feedItems = [
-  
   FeedItem(
-    content:
-        "New Achievment unlockt Travler II",
-    user: _users[0],
-
+    title: "Traveler II unlocked",
+    content: "You visited a new place and earned 250 XP.",
+    time: "5 min ago",
+    type: FeedType.achievement,
+    imageUrl: "https://picsum.photos/id/1015/1200/700",
   ),
   FeedItem(
-    user: _users[1],
-    content: 
-    "New Achievfgment Unlocked Tutorial finisht",
+    title: "Tutorial completed",
+    content: "Nice — your onboarding is finished. More achievements are now available.",
+    time: "12 min ago",
+    type: FeedType.unlock,
   ),
   FeedItem(
-    user: _users[0],
-    content:
-        "Freundschaftsanfrage von TheH3nriG",
-
+    title: "Friend request",
+    content: "TheH3nriG sent you a friend request.",
+    time: "24 min ago",
+    type: FeedType.friend,
   ),
   FeedItem(
-    user: _users[1],
-    content:
-        "Du hast Maker I Freigeschaltet",
-
+    title: "Maker I unlocked",
+    content: "Your first maker-related achievement is now active.",
+    time: "38 min ago",
+    type: FeedType.achievement,
+    imageUrl: "https://picsum.photos/id/1060/1200/700",
   ),
   FeedItem(
-    user: _users[2],
-    content: "Freunschaftsanfrage von GamingBalha",
+    title: "Spring Challenge",
+    content: "Join the limited community event and unlock exclusive rewards.",
+    time: "1 h ago",
+    type: FeedType.promo,
+    imageUrl: "https://picsum.photos/id/1040/1200/700",
   ),
 ];
