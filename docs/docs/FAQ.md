@@ -59,7 +59,7 @@ Wir legen Wert auf Transparenz, Datenschutz und ein motivierendes Nutzererlebnis
 
 ## Gibt es Support oder Kontakt?
 
-Für Fragen, Anregungen oder Probleme kannst du uns unter der E-Mail-Adresse **achievements@holzideen.org** kontaktieren.
+Für Fragen, Anregungen oder Probleme kannst du uns unter der E-Mail-Adresse **achievements@holzideen.org** oder **upmark@holzideen.org** kontaktieren.
 
 ---
 

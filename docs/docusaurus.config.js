@@ -10,7 +10,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Mark Up',
+  title: 'Up Mark',
   tagline: 'Real life achievments',
   favicon: 'img/favicon.png',
 
@@ -50,7 +50,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/Farin25/real-live-achievement',
+            'https://github.com/Farin25/real-live-achievement/tree/main/',
         },
         blog: {
           showReadingTime: true,
@@ -61,7 +61,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/Farin25/real-live-achievement',
+            'https://github.com/Farin25/real-live-achievement/tree/main/',
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
@@ -110,7 +110,7 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Start',
+                label: 'introduction',
                 to: '/docs/intro',
               },
             ],
@@ -154,12 +154,17 @@ const config = {
             title: 'Rechtliches',
             items: [
                  {
-                label: 'impressum',
+                label: 'imprint',
                 href: 'https://farin25.github.io/real-live-achievement/docs/Rechtliches/impressum',
                 
               },
-                 {
-                label: 'Datenschutzerklärung',
+              {
+                label: 'Privacy policy',
+                href: 'https://farin25.github.io/real-live-achievement/docs/Rechtliches/impressum',
+                
+              },
+              {
+                label: 'terms and conditions',
                 href: 'https://farin25.github.io/real-live-achievement/docs/Rechtliches/impressum',
                 
               },
@@ -168,7 +173,7 @@ const config = {
       }
           
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Mark Up by Farin Langner & Liam Selent <br/> Built with Docusaurus`,
+        copyright: `Copyright © ${new Date().getFullYear()} Mark Up by liam Selent & Farin Langner </br> developed with 💜 in germany!`,
       },
       prism: {
         theme: prismThemes.github,
