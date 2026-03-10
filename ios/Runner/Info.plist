@@ -29,6 +29,12 @@
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UISupportedInterfaceOrientations</key>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Wird für Achievements benötigt</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Wird für Achievements benötigt</string>
+<string>Diese App benötigt deinen Standort um Standort Basierte Achievments wie Traveler zu ermöglichen.</string>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>

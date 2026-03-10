@@ -10,7 +10,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Mark Up',
+  title: 'Up Mark',
   tagline: 'Real life achievments',
   favicon: 'img/favicon.png',
 
@@ -20,15 +20,15 @@ const config = {
   },
 
   // Set the production url of your site here
-  url: 'https://farin-langner.de',
+  url: 'https://farin25.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: '/real-live-achievement/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'Farin Labs', // Usually your GitHub org/user name.
-  projectName: 'Mark Up', // Usually your repo name.
+  organizationName: 'Farin25', // Usually your GitHub org/user name.
+  projectName: 'real-live-achievement', // Usually your repo name.
 
   onBrokenLinks: 'throw',
 
@@ -50,7 +50,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/Farin25/real-live-achievement',
+            'https://github.com/Farin25/real-live-achievement/tree/main/',
         },
         blog: {
           showReadingTime: true,
@@ -61,7 +61,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/Farin25/real-live-achievement',
+            'https://github.com/Farin25/real-live-achievement/tree/main/',
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
@@ -83,7 +83,7 @@ const config = {
         respectPrefersColorScheme: true,
       },
       navbar: {
-        title: 'Mark Up',
+        title: 'Up Mark',
         logo: {
           alt: 'img/favicon.png',
           src: 'img/favicon.png',
@@ -110,7 +110,7 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Start',
+                label: 'introduction',
                 to: '/docs/intro',
               },
             ],
@@ -122,6 +122,10 @@ const config = {
               {
                 label: 'Discord',
                 href: 'https://discord.com/invite/6J4Ws5ckYX',
+              },
+              {
+                label: 'Stoat',
+                href: 'https://stt.gg/V6hDbKnq',
               },
           
             ],
@@ -135,12 +139,41 @@ const config = {
           //    }, Auskommentiert weil kein block
               {
                 label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                href: 'https://github.com/Farin25/real-live-achievement',
+                
+              },
+                {
+                label: 'Status',
+                href: 'https://status.farin-langner.de/status/upmark',
+                
               },
             ],
+            
           },
+          {
+            title: 'Rechtliches',
+            items: [
+                 {
+                label: 'imprint',
+                href: 'https://farin25.github.io/real-live-achievement/docs/Rechtliches/impressum',
+                
+              },
+              {
+                label: 'Privacy policy',
+                href: 'https://farin25.github.io/real-live-achievement/docs/Rechtliches/impressum',
+                
+              },
+              {
+                label: 'terms and conditions',
+                href: 'https://farin25.github.io/real-live-achievement/docs/Rechtliches/impressum',
+                
+              },
+             
+            ]
+      }
+          
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Mark Up by Farin & Liam <br/> Built with Docusaurus`,
+        copyright: `Copyright © ${new Date().getFullYear()} Up Mark by liam Selent & Farin Langner </br> developed with 💜 in germany!`,
       },
       prism: {
         theme: prismThemes.github,

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Anmeldung bestätigen – UpMark Newsletter</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: #0f0f13;
+      font-family: 'Inter', sans-serif;
+      color: #e2e8f0;
+      padding: 40px 16px;
+    }
+
+    .wrapper {
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    /* HEADER */
+    .header {
+      text-align: center;
+      padding: 40px 0 32px;
+    }
+
+    .app-name {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: #ffffff;
+    }
+
+    .app-name span {
+      color: #a855f7;
+    }
+
+    .app-subtitle {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      color: #6b7280;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    /* CARD */
+    .card {
+      background: #1a1a24;
+      border: 1px solid #2d2d3d;
+      border-radius: 20px;
+      padding: 48px 40px;
+      text-align: center;
+    }
+
+    .icon-wrap {
+      width: 72px;
+      height: 72px;
+      background: linear-gradient(135deg, #a855f7, #7c3aed);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+      font-size: 32px;
+    }
+
+    .card h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 14px;
+      letter-spacing: -0.5px;
+    }
+
+    .card p {
+      font-size: 15px;
+      color: #9ca3af;
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+
+    /* INFO BOX */
+    .info-box {
+      background: linear-gradient(135deg, #7c3aed15, #a855f715);
+      border: 1px solid #a855f730;
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin-bottom: 32px;
+      text-align: left;
+    }
+
+    .info-box-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: #a855f7;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .info-box-text {
+      font-size: 13px;
+      color: #9ca3af;
+      line-height: 1.6;
+    }
+
+    .info-box-text span {
+      color: #e2e8f0;
+      font-weight: 500;
+    }
+
+    /* BUTTON */
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      color: #ffffff !important;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 16px 48px;
+      border-radius: 12px;
+      letter-spacing: 0.3px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 24px #a855f730;
+    }
+
+    /* FALLBACK */
+    .fallback {
+      font-size: 12px;
+      color: #6b7280;
+      margin-bottom: 0;
+      line-height: 1.6;
+    }
+
+    .fallback a {
+      color: #a855f7;
+      text-decoration: none;
+      word-break: break-all;
+    }
+
+    /* WARNING */
+    .warning {
+      background: #1f1a2e;
+      border: 1px solid #3b2d5e;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-top: 24px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .warning-icon { font-size: 18px; margin-top: 1px; }
+
+    .warning p {
+      font-size: 13px;
+      color: #9ca3af;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* DIVIDER */
+    .divider {
+      border: none;
+      border-top: 1px solid #2d2d3d;
+      margin: 32px 0;
+    }
+
+    /* FOOTER LINKS */
+    .footer-links {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .footer-links a {
+      color: #6b7280;
+      text-decoration: none;
+      font-size: 13px;
+      margin: 0 12px;
+    }
+
+    .footer-links a:hover { color: #a855f7; }
+
+    .footer-links .sep {
+      color: #2d2d3d;
+    }
+
+    /* FOOTER */
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #4b5563;
+      line-height: 1.8;
+    }
+
+    .footer a {
+      color: #6b7280;
+      text-decoration: none;
+    }
+
+    .footer .notice {
+      margin-top: 8px;
+      font-size: 11px;
+      color: #374151;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+
+    <!-- HEADER -->
+    <div class="header">
+      <div class="app-name">Up <span>Mark</span></div>
+      <div class="app-subtitle">Real life Achievements</div>
+    </div>
+
+    <!-- CARD -->
+    <div class="card">
+      <div class="icon-wrap">📬</div>
+      <h1>Fast geschafft!</h1>
+      <p>
+        Du hast dich für den <strong style="color:#ffffff;">UpMark Newsletter</strong> angemeldet. Klicke auf den Button unten um deine E-Mail-Adresse zu bestätigen und dabei zu sein.
+      </p>
+
+      <!-- INFO BOX -->
+      <div class="info-box">
+        <div class="info-box-label">🚀 Was dich erwartet</div>
+        <div class="info-box-text">
+          Updates zu neuen Features, <span>Behind-the-Scenes Einblicke</span> und Early Access – direkt in dein Postfach. Kein Spam. Nur das Wichtigste.
+        </div>
+      </div>
+
+      <a href="{{ doubleoptin }}" class="btn">Anmeldung bestätigen ✓</a>
+
+      <!-- FALLBACK -->
+      <p class="fallback">
+        Button funktioniert nicht? Kopiere diesen Link in deinen Browser:<br/>
+        <a href="{{ doubleoptin }}">{{ doubleoptin }}</a>
+      </p>
+
+      <!-- WARNING -->
+      <div class="warning">
+        <div class="warning-icon">⚠️</div>
+        <p>Wenn du dich nicht angemeldet hast, kannst du diese E-Mail einfach ignorieren. Deine Adresse wird nicht gespeichert.</p>
+      </div>
+    </div>
+
+    <hr class="divider"/>
+
+    <!-- FOOTER LINKS -->
+    <div class="footer-links">
+      <a href="https://farin25.github.io/real-live-achievement">Website</a>
+      <span class="sep"> | </span>
+      <a href="https://farin25.github.io/real-live-achievement/docs/Rechtliches/Datenschutz">Datenschutz</a>
+      <span class="sep"> | </span>
+      <a href="https://farin25.github.io/real-live-achievement/docs/Rechtliches/impressum">Impressum</a>
+      <span class="sep"> | </span>
+      <a href="https://farin25.github.io/real-live-achievement/docs/Rechtliches/agb">AGBs</a>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <p>© 2026 All Rights Reserved · <a href="https://farin-langner.de">Farin Langner</a> & Liam Selent</p>
+      <p class="notice">Diese E-Mail wurde automatisch versendet. Bitte antworte nicht auf diese E-Mail.</p>
+    </div>
+
+  </div>
+</body>
+</html>

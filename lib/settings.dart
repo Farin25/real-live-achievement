@@ -1,131 +1,557 @@
 import 'package:flutter/material.dart';
-import 'navbar.dart';
+import 'acount.dart';
 import 'licenses.dart';
 import 'about.dart';
-import 'acount.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'user_local_services.dart';
 
 
-class SettingsPage extends StatelessWidget {
+
+class SettingsPage extends StatefulWidget {
+  final Function(ThemeMode) onThemeChanged;
+  const SettingsPage({super.key,
+  required this.onThemeChanged});
+
+
+  @override
+  State<SettingsPage> createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
+
+  Map<String, dynamic>? profile;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadProfile();
+  }
+
+  Future<void> _loadProfile() async {
+    final supabase = Supabase.instance.client;
+    final user = supabase.auth.currentUser;
+    if (user != null) {
+      final data = await supabase
+          .from('profiles')
+          .select()
+          .eq('id', user.id)
+          .single();
+
+      setState(() {
+        profile = data;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Settings"),
+        title: const Text("Settings"),
         automaticallyImplyLeading: false,
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
+
+            /// PROFILE CARD
             GestureDetector(
               onTap: () {
-                Navigator.push(context,
-                MaterialPageRoute(builder: (context) => AcountPage()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AccountPage()),
+                );
               },
-           //Der Profiel Bereich Wichtig und richtig
-           child: Container(
-              padding: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Theme.of(context).cardColor,
-                borderRadius: BorderRadius.circular(12),
+              child: Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).cardColor,
+                  borderRadius: BorderRadius.circular(12),
                 ),
-              child: Row(
-                children: [
-                  // Profiel Icon Auch sehr wichtig
-                  CircleAvatar(
-                    radius: 30,
-                    backgroundColor: Theme.of(context).primaryColor,
-                    child: Icon(Icons.person, size: 35, color: Colors.white),
-                  ),
-                  SizedBox(width: 16,),
-                  // Fast am Wichtigsten der NAme und der USername
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                      'kosivonhonig',// Nutzername später aus DB
-                      style: TextStyle(fontSize: 20,
-                      fontWeight: FontWeight.bold),
+                child: profile == null
+                    ? const Center(child: CircularProgressIndicator())
+                    : Row(
+                        children: [
+                          CircleAvatar(
+                            radius: 30,
+                            backgroundColor:
+                                Theme.of(context).primaryColor,
+                            child: const Icon(Icons.person,
+                                size: 35, color: Colors.white),
+                          ),
+                          const SizedBox(width: 16),
+                          Column(
+                            crossAxisAlignment:
+                                CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                profile!['username'] ?? '',
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                "${profile!['first_name'] ?? ''} ${profile!['last_name'] ?? ''}",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.grey[600],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
-                      Text(
-                        'Konstatin Kaiser', // Richtiger name Später AUS db
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.grey[600]),
-                      ),
-                    ],
-                  ),
-                ],
               ),
             ),
-            ),
-            SizedBox(height: 30),
-            Divider(),
-            //Die Settings
+
+            const SizedBox(height: 10),
+            const Divider(),
+
+            /// SETTINGS LIST
             Expanded(
               child: ListView(
                 children: [
-                  //Settings für Dark mode/white mode
-                  ListTile(
-                    leading: Icon(Icons.brightness_6),
-                    title: Text("Design"),
-                    subtitle: Text("Dark Mode, Light Mode"),
-                    trailing: Icon(Icons.arrow_forward_ios),
-                    onTap: () {
-                      Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => AcountPage()));
-                
-                    },
-                  ),
-                  Divider(),
 
-                  // Sprach Settings
                   ListTile(
-                    leading: Icon(Icons.language),
-                    title: Text("Sprache"),
-                    subtitle: Text("Deutch DE"),
+                    leading: const Icon(Icons.design_services),
+                    title: const Text("Design"),
+                    subtitle: const Text("Dark Mode, Farben, Theme"),
                     trailing: Icon(Icons.arrow_forward_ios),
                     onTap: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Sprachen kommen bald')),
-                
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => Design(onThemeChanged: widget.onThemeChanged)
+                      ),
                       );
                     },
-                   ),
-                   Divider(),
-                   //About Seite
-                   ListTile(
-                    leading: Icon(Icons.info),
-                    title: Text("info"),
-                    subtitle: Text("über die App"),
-                    trailing: Icon(Icons.arrow_forward_ios),
-                    onTap: () {
-                      Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => AboutPage()));
-                    },
-                   ),
-                   Divider(),
+                  ),
+               
 
-                   //Lizenzen
+                  const Divider(),
 
-                   ListTile(
-                    leading: Icon(Icons.description),
-                    title: Text("Open Source Lizenzen"),
-                    subtitle: Text("Verwendete Bibiotheken und Software"),
-                    trailing: Icon(Icons.arrow_forward_ios),
+                  ListTile(
+                    leading: const Icon(Icons.language),
+                    title: const Text("Sprache"),
+                    subtitle: const Text("Deutsch DE"),
+                    trailing:
+                        const Icon(Icons.arrow_forward_ios),
                     onTap: () {
-                      Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LicensesPage()));
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(
+                        const SnackBar(
+                            content: Text(
+                                'Sprachen kommen bald')),
+                      );
                     },
-                   ),   
+                  ),
+
+          
+                  const Divider(),
+
+                          ListTile(
+                    leading: const Icon(Icons.notifications_active),
+                    title: const Text(
+                        "App Benachrichtigungen"),
+                    subtitle: const Text(
+                        "Benachrichtigungen"),
+                    trailing:
+                        const Icon(Icons.arrow_forward_ios),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const Appmessages()),
+                      );
+                    },
+                  ),
+
+                    const Divider(),
+
+                          ListTile(
+                    leading: const Icon(Icons.settings),
+                    title: const Text(
+                        "Erweiterte Einstellungen"),
+                    subtitle: const Text(
+                        "Die Einstellungen für Experten"),
+                    trailing:
+                        const Icon(Icons.arrow_forward_ios),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const AdvancedSettings()),
+                      );
+                    },
+                  ),
+
+                  const Divider(),
+                  
+
+                  ListTile(
+                    leading: const Icon(Icons.description),
+                    title: const Text(
+                        "Open Source Lizenzen"),
+                    subtitle: const Text(
+                        "Verwendete Bibliotheken"),
+                    trailing:
+                        const Icon(Icons.arrow_forward_ios),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const LicensesPage()),
+                      );
+                    },
+                  ),
+                  const Divider(),
+                  ListTile(
+                    leading: const Icon(Icons.info),
+                    title: const Text("Info"),
+                    subtitle:
+                        const Text("Über die App"),
+                    trailing:
+                        const Icon(Icons.arrow_forward_ios),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                 AboutPage()),
+                      );
+                    },
+                  ),
+                 const Divider(),
+                  ListTile(
+                    leading: Icon(Icons.settings),
+                    title: Text("App Settings"),
+                    subtitle:  Text("Berechtigung, usw..."),
+                    trailing: Icon(Icons.arrow_forward_ios),
+                    onTap: () async {
+                      await openAppSettings();
+                    },
+                  ),
+
                 ],
               ),
             ),
-          ], 
+          ],
         ),
       ),
-      //bottomNavigationBar: Navbar(),
     );
+  }
+}
+
+
+
+//App BEnachrichtigungen untersetings:
+
+class Appmessages extends StatefulWidget {
+  const Appmessages({super.key});
+
+  @override
+  State<Appmessages> createState() => _Appmessages();
+}
+
+class _Appmessages extends State<Appmessages> {
+
+  bool notifynewFriendship = true;
+  bool notifyFriendnewAchievment = true;
+  bool notifynewAchievment = true;
+  bool notifyAchievmentfasterricht = true;
+
+  // für Master Schalter
+  bool get notifyAll =>
+    notifynewFriendship &&
+    notifyFriendnewAchievment &&
+    notifynewAchievment &&
+    notifyAchievmentfasterricht;
+  
+  @override
+  void initState() {
+    super.initState();
+    loadSettings();
+  }
+  Widget build(BuildContext content) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Benachrichtigungen"),
+      ),
+      body: ListView(
+        children: [
+
+          SwitchListTile(
+            title: Text("Beachrichtigungen"),
+            subtitle: const Text("Benachrichtigungen von der App",
+            style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            value: notifyAll,
+            onChanged: (value) {
+              setState(() {
+                notifynewFriendship = value;
+                notifyFriendnewAchievment = value;
+                notifynewAchievment = value;
+                notifyAchievmentfasterricht = value;
+              });
+              saveSettings();
+            },
+          ),
+
+          const Divider(),
+
+          SwitchListTile(
+            title: const Text("Fast ereichtes Achievment"),
+            subtitle: const Text("Wenn du kurtz davor bist ein Achivemnt zu ereichen"),
+            value: notifyAchievmentfasterricht,
+            onChanged: (value) {
+              setState(() {
+                notifyAchievmentfasterricht = value;
+              });
+              saveSettings();
+              print("Benachrichtigungsettings Aktualliesiert: Achievmentfasteerreicht = $notifyAchievmentfasterricht ");
+            },
+          ),
+
+
+          SwitchListTile(
+            title: const Text("Neuem Achievment"),
+            subtitle: const Text("Wenn due in neues Achievment Freigeschaltet hast"),
+            value: notifynewAchievment,
+            onChanged: (value) {
+              setState(() {
+                notifynewAchievment = value;
+              });
+              saveSettings();
+              print("Benachrichtigungs Einstellungen Aktualliesiert: pushnewachievment = $notifynewAchievment");
+            },
+          ),
+
+          const Divider(),
+          // Freunde Subtitel
+        Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Text(
+          "Freunde",
+          style:
+          TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+          ),
+        ),
+ 
+          SwitchListTile(
+            title: const Text("Freunde Neues Achievment"),
+            subtitle: const Text("wenn einer deiner Freunde Ein Neues Achievment bekommen hat"),
+            value: notifyFriendnewAchievment,
+            onChanged: (value) {
+              setState(() {
+                notifyFriendnewAchievment = value;
+              });
+              saveSettings();
+              print("Benachrichtigungs Einstellungen Aktualliesiert: pushFriendnewAchievment = $notifyFriendnewAchievment");
+            }
+          ),
+
+          SwitchListTile(
+            title: const Text("Freundschaftsanfragen"),
+            subtitle: const Text("Wennd du eine Neue Freundschaftsanftage bekommst"),
+            value: notifynewFriendship,
+            onChanged: (value) {
+              setState(() {
+                notifynewFriendship = value;
+              });
+              saveSettings();
+              print("Benachrichtigungs Einstellungen Aktualliesiert: pushnewFriendship = $notifynewFriendship");
+            },
+          ),
+
+         const Divider(),
+        ],
+      ),
+    );
+  }
+
+  Future<void> saveSettings() async {
+  final prefs = await SharedPreferences.getInstance();
+
+  await prefs.setBool('pushnewFriendship', notifynewFriendship);
+  await prefs.setBool('pushFriendnewAchievment', notifyFriendnewAchievment);
+  await prefs.setBool('pushnewAchievment', notifynewAchievment);
+  await prefs.setBool('Achievmentfasterricht', notifyAchievmentfasterricht);
+}
+
+Future<void> loadSettings() async {
+  final prefs = await SharedPreferences.getInstance();
+
+  setState(() {
+    notifynewFriendship =
+        prefs.getBool('pushnewFriendship') ?? true;
+
+    notifyFriendnewAchievment =
+        prefs.getBool('pushFriendnewAchievment') ?? true;
+
+    notifynewAchievment =
+        prefs.getBool('pushnewAchievment') ?? true;
+
+    notifyAchievmentfasterricht =
+        prefs.getBool('Achievmentfasterricht') ?? true;
+  });
+}
+
+}
+// Design Wichtig und Richtig
+
+class Design extends StatefulWidget {
+  final Function(ThemeMode) onThemeChanged;
+  const Design({super.key,
+   required this.onThemeChanged});
+
+
+  @override
+  State<Design> createState() => _Design();
+}
+
+class _Design extends State<Design> {
+
+
+
+  @override
+  void initState() {
+    super.initState();
+
+  }
+  
+  Widget build(BuildContext content) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const
+        Text("Design & Stil"),
+      ),
+      body: ListView(
+        children: [
+
+          ListTile(
+           leading: const Icon(Icons.design_services),
+           title: const Text("Dark Mode"),
+           subtitle: const Text("Meine Empfehlung: Immer an"),
+           trailing: Switch(
+             value: Theme.of(context).brightness == Brightness.dark,
+             onChanged: (Value) {
+               if (Value) {
+                 widget.onThemeChanged(ThemeMode.dark);
+
+               }
+               else {
+                 widget.onThemeChanged(ThemeMode.light);
+               }
+               print("Dark Mode Settings Aktualliesiert auf: ThemeMMode = $ThemeMode.");
+             },
+           ),
+          ),
+
+        ],
+      ),
+    );
+  }
+
+
+}
+
+class AdvancedSettings extends StatefulWidget {
+  const AdvancedSettings({super.key});
+
+  @override
+  State<AdvancedSettings> createState() => _AdvancedSettingsState();
+}
+
+class _AdvancedSettingsState extends State<AdvancedSettings> {
+
+  bool achievementDownloadOverWifi = true;
+
+  @override
+  void initState() {
+    super.initState();
+    loadSettings();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Erweiterte Einstellungen"),
+      ),
+      body: ListView(
+        children: [
+
+          SwitchListTile(
+            secondary: const Icon(Icons.wifi),
+            title: const Text("Achievements WLAN Download"),
+            subtitle: const Text(
+              "Achievements nur bei WLAN Verbindung  herunterladen",
+            ),
+            value: achievementDownloadOverWifi,
+            onChanged: (value) {
+              setState(() {
+                achievementDownloadOverWifi = value;
+              });
+              saveSettings();
+              print("Achievment Wlan Einstellungen Aktualliesiert: Achievments über Wlan Downlaoden = $achievementDownloadOverWifi");
+            },
+          ),
+          const Divider(),
+        Padding(
+         padding: const EdgeInsets.all(16.0),
+         child: Text(
+          "Dev / Debuging Settings",
+          style:
+          TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+          ),
+        ),
+
+          // Cache
+          ListTile(
+            leading: const Icon(Icons.delete),
+            title: const Text("Achievement Cache leeren"),
+            onTap: () async {
+              await UserLocalServices.clearAchievementCache();
+
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("Achievement Cache gelöscht"),
+                ),
+              );
+            },
+          )
+          
+
+        ],
+      ),
+    );
+  }
+   //settingspeichern
+  Future<void> saveSettings() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(
+      'achievementDownloadOverWifi',
+      achievementDownloadOverWifi,
+    );
+  }
+   //Einstellungenladen
+  Future<void> loadSettings() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    setState(() {
+      achievementDownloadOverWifi =
+          prefs.getBool('achievementDownloadOverWifi') ?? true;
+    });
   }
 }
