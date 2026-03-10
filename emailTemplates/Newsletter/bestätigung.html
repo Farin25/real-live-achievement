@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Magic Link – Mark up</title>
+  <title>Anmeldung bestätigen – UpMark Newsletter</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
@@ -24,14 +24,14 @@
     /* HEADER */
     .header {
       text-align: center;
-      margin-bottom: 32px;
+      padding: 40px 0 32px;
     }
 
     .app-name {
       font-size: 36px;
       font-weight: 800;
-      color: #ffffff;
       letter-spacing: -1px;
+      color: #ffffff;
     }
 
     .app-name span {
@@ -44,7 +44,7 @@
       letter-spacing: 3px;
       color: #6b7280;
       text-transform: uppercase;
-      margin-top: 4px;
+      margin-top: 6px;
     }
 
     /* CARD */
@@ -59,9 +59,8 @@
     .icon-wrap {
       width: 72px;
       height: 72px;
-      background: linear-gradient(135deg, #7c3aed22, #a855f722);
-      border: 1px solid #a855f740;
-      border-radius: 50%;
+      background: linear-gradient(135deg, #a855f7, #7c3aed);
+      border-radius: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -73,7 +72,8 @@
       font-size: 26px;
       font-weight: 700;
       color: #ffffff;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
+      letter-spacing: -0.5px;
     }
 
     .card p {
@@ -83,8 +83,8 @@
       margin-bottom: 32px;
     }
 
-    /* MAGIC LINK BOX */
-    .magic-box {
+    /* INFO BOX */
+    .info-box {
       background: linear-gradient(135deg, #7c3aed15, #a855f715);
       border: 1px solid #a855f730;
       border-radius: 14px;
@@ -93,7 +93,7 @@
       text-align: left;
     }
 
-    .magic-box-label {
+    .info-box-label {
       font-size: 11px;
       font-weight: 600;
       letter-spacing: 2px;
@@ -102,13 +102,13 @@
       margin-bottom: 10px;
     }
 
-    .magic-box-info {
+    .info-box-text {
       font-size: 13px;
       color: #9ca3af;
       line-height: 1.6;
     }
 
-    .magic-box-info span {
+    .info-box-text span {
       color: #e2e8f0;
       font-weight: 500;
     }
@@ -128,10 +128,12 @@
       box-shadow: 0 4px 24px #a855f730;
     }
 
+    /* FALLBACK */
     .fallback {
       font-size: 12px;
       color: #6b7280;
       margin-bottom: 0;
+      line-height: 1.6;
     }
 
     .fallback a {
@@ -142,14 +144,14 @@
 
     /* WARNING */
     .warning {
-      background: #1f1a10;
-      border: 1px solid #d9770630;
-      border-radius: 14px;
+      background: #1f1a2e;
+      border: 1px solid #3b2d5e;
+      border-radius: 12px;
       padding: 16px 20px;
       margin-top: 24px;
       display: flex;
-      align-items: flex-start;
       gap: 12px;
+      align-items: flex-start;
       text-align: left;
     }
 
@@ -158,13 +160,8 @@
     .warning p {
       font-size: 13px;
       color: #9ca3af;
-      margin-bottom: 0;
+      margin: 0;
       line-height: 1.6;
-    }
-
-    .warning p span {
-      color: #d97706;
-      font-weight: 600;
     }
 
     /* DIVIDER */
@@ -185,10 +182,13 @@
       text-decoration: none;
       font-size: 13px;
       margin: 0 12px;
-      transition: color 0.2s;
     }
 
     .footer-links a:hover { color: #a855f7; }
+
+    .footer-links .sep {
+      color: #2d2d3d;
+    }
 
     /* FOOTER */
     .footer {
@@ -202,8 +202,6 @@
       color: #6b7280;
       text-decoration: none;
     }
-
-    .footer a:hover { color: #a855f7; }
 
     .footer .notice {
       margin-top: 8px;
@@ -223,46 +221,52 @@
 
     <!-- CARD -->
     <div class="card">
-      <div class="icon-wrap">✨</div>
-      <h1>Your Magic Link</h1>
-      <p>You requested a magic link to sign in to your account. Click the button below to log in instantly — no password needed.</p>
+      <div class="icon-wrap">📬</div>
+      <h1>Fast geschafft!</h1>
+      <p>
+        Du hast dich für den <strong style="color:#ffffff;">UpMark Newsletter</strong> angemeldet. Klicke auf den Button unten um deine E-Mail-Adresse zu bestätigen und dabei zu sein.
+      </p>
 
-      <!-- MAGIC LINK INFO BOX -->
-      <div class="magic-box">
-        <div class="magic-box-label">⚡ One-Click Login</div>
-        <div class="magic-box-info">
-          This link will log you in to your <span>Mark up</span> account immediately. The link is valid for a limited time and can only be used once.
+      <!-- INFO BOX -->
+      <div class="info-box">
+        <div class="info-box-label">🚀 Was dich erwartet</div>
+        <div class="info-box-text">
+          Updates zu neuen Features, <span>Behind-the-Scenes Einblicke</span> und Early Access – direkt in dein Postfach. Kein Spam. Nur das Wichtigste.
         </div>
       </div>
 
-      <a href="{{ .ConfirmationURL }}" class="btn">Log In to Mark up</a>
+      <a href="{{ doubleoptin }}" class="btn">Anmeldung bestätigen ✓</a>
 
+      <!-- FALLBACK -->
       <p class="fallback">
-        Button not working? Copy and paste this link into your browser:<br />
-        <a href="{{ .ConfirmationURL }}">{{ .ConfirmationURL }}</a>
+        Button funktioniert nicht? Kopiere diesen Link in deinen Browser:<br/>
+        <a href="{{ doubleoptin }}">{{ doubleoptin }}</a>
       </p>
 
       <!-- WARNING -->
       <div class="warning">
         <div class="warning-icon">⚠️</div>
-        <p><span>Didn't request this?</span> If you did not request a magic link, you can safely ignore this email. Someone may have entered your email address by mistake.</p>
+        <p>Wenn du dich nicht angemeldet hast, kannst du diese E-Mail einfach ignorieren. Deine Adresse wird nicht gespeichert.</p>
       </div>
     </div>
 
-    <hr class="divider" />
+    <hr class="divider"/>
 
     <!-- FOOTER LINKS -->
     <div class="footer-links">
-      <a href="https://github.com/Farin25/real-live-achievement">Website</a>
-      <a href="https://farin25.github.io/real-live-achievement/docs/Rechtliches/Datenschutz">Privacy Policy</a>
-      <a href="https://farin25.github.io/real-live-achievement/docs/Rechtliches/impressum">Imprint</a>
+      <a href="https://farin25.github.io/real-live-achievement">Website</a>
+      <span class="sep"> | </span>
+      <a href="https://farin25.github.io/real-live-achievement/docs/Rechtliches/Datenschutz">Datenschutz</a>
+      <span class="sep"> | </span>
+      <a href="https://farin25.github.io/real-live-achievement/docs/Rechtliches/impressum">Impressum</a>
+      <span class="sep"> | </span>
       <a href="https://farin25.github.io/real-live-achievement/docs/Rechtliches/agb">AGBs</a>
     </div>
 
     <!-- FOOTER -->
     <div class="footer">
-      <p>© 2025 All Rights Reserved — <a href="https://farin-langner.de">Farin Langner</a> & Liam Selent</p>
-      <p class="notice">This email was sent automatically. Please do not reply to this email.</p>
+      <p>© 2026 All Rights Reserved · <a href="https://farin-langner.de">Farin Langner</a> & Liam Selent</p>
+      <p class="notice">Diese E-Mail wurde automatisch versendet. Bitte antworte nicht auf diese E-Mail.</p>
     </div>
 
   </div>

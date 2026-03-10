@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Confirm Reauthentication – Mark up</title>
+  <title>Willkommen bei Up Mark</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
@@ -47,6 +47,17 @@
       margin-top: 6px;
     }
 
+    /* BROWSER LINK */
+    .browser-bar {
+      text-align: center;
+      padding: 0 0 20px;
+    }
+    .browser-bar a {
+      color: #4b5563;
+      font-size: 11px;
+      text-decoration: underline;
+    }
+
     /* CARD */
     .card {
       background: #1a1a24;
@@ -61,9 +72,8 @@
       height: 72px;
       background: linear-gradient(135deg, #a855f7, #7c3aed);
       border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: inline-block;
+      line-height: 72px;
       margin: 0 auto 28px;
       font-size: 32px;
     }
@@ -79,40 +89,60 @@
       font-size: 15px;
       color: #9ca3af;
       line-height: 1.7;
-      margin-bottom: 32px;
+      margin-bottom: 0;
     }
 
-    /* CODE BOX */
-    .code-box {
+    /* FOUNDERS CARD */
+    .founders-box {
+      background: #0f0f13;
+      border: 1px solid #7c3aed44;
+      border-left: 4px solid #a855f7;
+      border-radius: 10px;
+      padding: 20px 24px;
+      text-align: left;
+      margin-top: 28px;
+    }
+
+    .founders-box p {
+      font-size: 14px;
+      color: #9ca3af;
+      margin: 0;
+      line-height: 1.8;
+    }
+
+    .founders-box strong {
+      color: #a855f7;
+    }
+
+    /* ACHIEVEMENT BADGE */
+    .achievement-box {
       background: #0f0f13;
       border: 2px solid #a855f7;
       border-radius: 16px;
-      padding: 28px 20px;
-      margin: 0 auto 32px;
-      max-width: 280px;
+      padding: 24px 20px;
+      margin: 28px auto 0;
+      max-width: 320px;
     }
 
-    .code-label {
+    .achievement-label {
       font-size: 11px;
       font-weight: 600;
       letter-spacing: 3px;
       text-transform: uppercase;
       color: #6b7280;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
-    .code-value {
-      font-size: 42px;
+    .achievement-name {
+      font-size: 22px;
       font-weight: 800;
-      letter-spacing: 10px;
       color: #a855f7;
-      font-variant-numeric: tabular-nums;
+      margin-bottom: 6px;
     }
 
-    .code-expires {
+    .achievement-desc {
       font-size: 12px;
       color: #6b7280;
-      margin-top: 10px;
     }
 
     /* WARNING */
@@ -123,7 +153,7 @@
       border-radius: 10px;
       padding: 16px 20px;
       text-align: left;
-      margin-top: 8px;
+      margin-top: 28px;
     }
 
     .warning-box p {
@@ -155,11 +185,6 @@
       font-size: 13px;
       text-decoration: none;
       margin: 0 12px;
-      transition: color 0.2s;
-    }
-
-    .footer-links a:hover {
-      color: #a855f7;
     }
 
     .website-link {
@@ -191,6 +216,10 @@
       font-size: 11px;
       color: #374151;
     }
+
+    @media only screen and (max-width: 480px) {
+      .card { padding: 32px 24px; }
+    }
   </style>
 </head>
 <body>
@@ -199,25 +228,32 @@
     <!-- HEADER -->
     <div class="header">
       <div class="app-name">Up <span>Mark</span></div>
-      <div class="app-subtitle">Real life Achievements</div>
+      <div class="app-subtitle">Real Life Achievements</div>
     </div>
 
     <!-- CARD -->
     <div class="card">
-      <div class="icon-wrap">🔐</div>
-      <h1>Two-Factor Authentication</h1>
-      <p>We received a reauthentication request for your account. Use the code below to confirm your identity. Do not share this code with anyone.</p>
+      <div class="icon-wrap">👋</div>
+      <h1>Hey, danke dass du dabei bist!</h1>
 
-      <!-- CODE BOX -->
-      <div class="code-box">
-        <div class="code-label">Your Code</div>
-        <div class="code-value">{{ .Token }}</div>
-        <div class="code-expires">⏱ This code expires in 10 minutes</div>
+      <!-- FOUNDERS MESSAGE -->
+      <div class="founders-box">
+        <p>
+          Wir sind <strong>Farin & Liam</strong> und wir freuen uns wirklich sehr,
+          dass du dabei bist. Up Mark ist unser Herzensprojekt und jeder neue Nutzer
+          bedeutet uns sehr viel – danke dafür!<br><br>
+          Wir arbeiten ständig daran die App besser zu machen. Wenn du Ideen hast,
+          dir etwas fehlt oder irgendetwas nicht stimmt – schreib uns einfach.
+          Wir lesen und beantworten wirklich jede Nachricht.
+        </p>
       </div>
 
-      <!-- WARNING -->
+      <!-- CONTACT -->
       <div class="warning-box">
-        <p><strong>⚠ Didn't request this?</strong> If you did not request a reauthentication, please ignore this email and make sure your account is secure. Someone may have entered your email address by mistake.</p>
+        <p>
+          <strong>✉ Direkt zu uns:</strong>
+          <a href="mailto:upmark@holzideen.org" style="color: #a855f7;">upmark@holzideen.org</a>
+        </p>
       </div>
     </div>
 
@@ -225,19 +261,25 @@
 
     <!-- FOOTER LINKS -->
     <div class="footer-links">
-      <a href="https://farin25.github.io/real-live-achievement/docs/Rechtliches/Datenschutz">Privacy Policy</a>
-      <a href="https://farin25.github.io/real-live-achievement/docs/Rechtliches/impressum">Imprint</a>
-      <a href="https://farin25.github.io/real-live-achievement/docs/Rechtliches/agb">AGBs</a>
+      <a href="https://farin25.github.io/real-live-achievement/docs/Rechtliches/Datenschutz">Datenschutz</a>
+      <a href="https://farin25.github.io/real-live-achievement/docs/Rechtliches/impressum">Impressum</a>
+      <a href="https://farin25.github.io/real-live-achievement/docs/Rechtliches/agb">AGB</a>
     </div>
 
     <div class="website-link">
-      <a href="https://github.com/Farin25/real-live-achievement">🌐 Visit our Website</a>
+      <a href="https://farin25.github.io/real-live-achievement/">🌐 Zur Website</a>
     </div>
 
     <!-- FOOTER -->
     <div class="footer">
-      <p>© 2026 All Rights Reserved · <a href="https://farin-langner.de" style="color: #5a5a72; text-decoration: none;">Farin Langner</a> & Liam Selent</p>
-      <p class="auto-note">This email was sent automatically. Please do not reply to this email.</p>
+      <p>© 2026 All Rights Reserved ·
+        <a href="https://farin-langner.de" style="color: #5a5a72; text-decoration: none;">Farin Langner</a>
+        & Liam Selent
+      </p>
+      <p class="auto-note">Diese E-Mail wurde automatisch versendet. Bitte nicht direkt antworten.</p>
+      <p style="margin-top: 12px;">
+        <a href="{{ unsubscribe }}" style="color: #4b5563; font-size: 12px;">Abmelden</a>
+      </p>
     </div>
 
   </div>

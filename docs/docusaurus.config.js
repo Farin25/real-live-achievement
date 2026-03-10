@@ -173,7 +173,7 @@ const config = {
       }
           
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Mark Up by liam Selent & Farin Langner </br> developed with 💜 in germany!`,
+        copyright: `Copyright © ${new Date().getFullYear()} Up Mark by liam Selent & Farin Langner </br> developed with 💜 in germany!`,
       },
       prism: {
         theme: prismThemes.github,

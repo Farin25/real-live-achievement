@@ -13,12 +13,25 @@
 - Readme auf neusten stand bringen und alles unötige raus (Farin ~ liam)
 - Docseben 
 - Prüfng ob username vergeben wenn in den stting sien neuer gesetzt wird(Farin)
-- dev/Debug settings(farin) 
+- dev/Debug settings(farin)
+
+## 10.03.2026
+- Newsletter Email Templeates hinzugefügt(Farin)
+- Name in Email Templates zu Up mark geändert(Farin)
+- persönliche wilkommens email beim nesletter(Frain)
+- Upload NEwsletter emailtempleates(Farin)
+- **Docs aufgräumt**
+- Fotter Links Aktualisiert(Farin)
+- Unnötie oder unfertige seiten entfernt(Farin)
+
 
 ## 09.03.2026
 - Artikel für Schülerzeitung geschrieben und Designt(Liam)
 - Feed neu designt für Werbebilder(AI, Farin)
+- Viedeo zu den Umfrageergebnissen (Liam)
 - Super key zu AboutPage hinzugefügt(Farin)
+- Auwertung der Umfargae hinzugefügt(AI, Farin)
+
 
 ## 08.03.2026
 - Newsletter Eingerichtet(Farin)
