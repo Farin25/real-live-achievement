@@ -31,4 +31,6 @@
 
 </div>
 
-### Wir sind weiterhin auf der Suche nach weiteren Werbepartnern/Sponsoren um Server von einem EU oder Schweizer Unternehmen für unser Supabase Backend zu nutzen und die dabei entstehenden Kosten decken zu können. </br> Falls sie Interesse haben melden sie sich bei: markup@holzideen.org
+### Wir sind weiterhin auf der Suche nach weiteren Werbepartnern/Sponsoren um Server von einem EU oder Schweizer Unternehmen für unser Supabase Backend zu nutzen und die dabei entstehenden Kosten decken zu können.  
+
+### Falls sie Interesse haben melden sie sich bei: markup@holzideen.org
