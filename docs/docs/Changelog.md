@@ -21,7 +21,8 @@
 ## 11.03.2026
 - Sponsor und Patners seite Kontaktmöglichkeit und Info hinzugefügt (Liam & Farin)
 - Werbe Plakat für Makerfaire (Liam)
-- En Version der docs angefangen und wichtigste Seitenb übersetzt(Farin)
+- En Version der docs angefangen und die wichtigsten Seiten übersetzt(Farin)
+- Home Seite auf Hochglanz gebracuht und komplett neu gebaut mit dark und light mode support und mit Multilanguage Support(Ai, Farin)
 
 ## 10.03.2026
 - Newsletter Email Templeates hinzugefügt(Farin)
