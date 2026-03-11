@@ -1,17 +1,15 @@
-# Partner
+# Partner 
 
 ## Unsere Partner:
 
-<div style={{ display: 'flex', alignItems: 'center', gap: '2rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
+
+<div style="display:flex; gap:20px; align-items:center; flex-wrap:wrap;">
 
   <a href="https://holzideen.org" target="_blank" rel="noopener noreferrer">
     <img
       src="https://i0.wp.com/holzideen.org/wp-content/uploads/2025/06/Logo-HolzIdeen.png?resize=200%2C64&ssl=1"
       alt="holzideen.org"
       width="150"
-      style={{ borderRadius: '8px', transition: 'transform 0.2s', display: 'block' }}
-      onMouseOver={e => (e.currentTarget.style.transform = 'scale(1.05)')}
-      onMouseOut={e => (e.currentTarget.style.transform = 'scale(1)')}
     />
   </a>
 
@@ -20,22 +18,17 @@
       src="https://www.fasw.de/logo.svg"
       alt="FASW - Freie Aktive Schulen Wülfrath"
       width="150"
-      style={{ borderRadius: '8px', transition: 'transform 0.2s', display: 'block' }}
-      onMouseOver={e => (e.currentTarget.style.transform = 'scale(1.05)')}
-      onMouseOut={e => (e.currentTarget.style.transform = 'scale(1)')}
     />
   </a>
 
-    <a href="https://farin-langner.de" target="_blank" rel="noopener noreferrer">
+  <a href="https://farin-langner.de" target="_blank" rel="noopener noreferrer">
     <img
       src="https://holzideen.org/Farin_Logo.png"
-      alt="Farin Langner"
+      alt="Farins Website"
       width="150"
-      style={{ borderRadius: '8px', transition: 'transform 0.2s', display: 'block' }}
-      onMouseOver={e => (e.currentTarget.style.transform = 'scale(1.05)')}
-      onMouseOut={e => (e.currentTarget.style.transform = 'scale(1)')}
     />
-   </a>
-
+  </a>
 
 </div>
+
+### Wir sind weiterhin auf der Suche nach weiteren Werbepartnern/Sponsoren um Server von einem EU oder Schweizer Unternehmen für unser Supabase Backend zu nutzen und die dabei entstehenden Kosten decken zu können. </br> Falls sie Interesse haben melden sie sich bei: markup@holzideen.org
