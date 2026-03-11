@@ -28,6 +28,7 @@ Some of the best Achievements in the App:
 
 for the full Achievmentlist see: [https://farin25.github.io/real-live-achievement/docs/Achievments](https://farin25.github.io/real-live-achievement/docs/Achievments)
 
+## Become a beta tester
 
 
 ## REALEASE:
