@@ -1,4 +1,4 @@
-# Changelog#
+# Changelog
 
 ## TODOs
 - Webseite in email footer anpassen (Liam)
@@ -15,6 +15,10 @@
 - Prüfng ob username vergeben wenn in den stting sien neuer gesetzt wird(Farin)
 - dev/Debug settings(farin)
 
+## 11.03.2026
+- Sponsor und Patners seite Kontaktmöglichkeit und Info hinzugefügt (Liam & Farin)
+- 
+
 ## 10.03.2026
 - Newsletter Email Templeates hinzugefügt(Farin)
 - Name in Email Templates zu Up mark geändert(Farin)
@@ -30,12 +34,12 @@
 - Feed neu designt für Werbebilder(AI, Farin)
 - Viedeo zu den Umfrageergebnissen (Liam)
 - Super key zu AboutPage hinzugefügt(Farin)
-- Auwertung der Umfargae hinzugefügt(AI, Farin)
+- Auwertung der Umfargae hinzugefügt(AI, Liam & Farin)
 
 
 ## 08.03.2026
 - Newsletter Eingerichtet(Farin)
-- Newsletter Anmelde Seite zu Docs hinzugefügt(Farin)
+- Newsletter Anmelde Seite zu Docs hinzugefügt(Farin + AI)
 
 ## 05.03.2026
 - Dev/ Debuging Settings zu den Settings hinzugefügt(Farin)
