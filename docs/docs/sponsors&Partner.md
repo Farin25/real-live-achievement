@@ -3,7 +3,7 @@
 ## Unsere Partner:
 
 
-<div style="display:flex; gap:20px; align-items:center; flex-wrap:wrap;">
+<div style={{display:"flex", gap:"20px", alignItems:"center", flexWrap:"wrap"}}>
 
   <a href="https://holzideen.org" target="_blank" rel="noopener noreferrer">
     <img
