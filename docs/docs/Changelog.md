@@ -12,11 +12,16 @@
 - Bilder in docs richtig laden
 - Acount daten in den settings aus chache laden (Farin)
 - Readme auf neusten stand bringen und alles unötige raus (Farin ~ liam)
-- Docseben 
+- Docs 
 - Prüfng ob username vergeben wenn in den stting sien neuer gesetzt wird(Farin)
 - dev/Debug settings(farin)
 - Engine grundprinzip
 - Erster Algorytmos für In App Achievments
+- Emojis entfernen
+- evtl. Blog einrichten und block artikel über Makerfaire(Laim ~ Farin)
+- Comming soon Plakate für ind er schule(Liam)
+- Neuen werbespot oder die bilder auswechseln(Liam)
+
 
 ## 11.03.2026
 - Sponsor und Patners seite Kontaktmöglichkeit und Info hinzugefügt (Liam & Farin)

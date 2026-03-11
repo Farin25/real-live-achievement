@@ -4,7 +4,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart'; //import dotenv libary für
 import 'login.dart'; // import der login.dart damit das Authgate weiß wo es hinleiten muss
 import 'navbar.dart'; // Import der Datei wo die nav bar also die NAvigationsleite ist damit sie eingebunden werden kann
 import 'user_SessionManager.dart';
-import 'achievment_runner.dart';
 
 Future<void> main() async { //main funktion wird immer als erstes ausgeführt
   WidgetsFlutterBinding.ensureInitialized(); // verbindung zwischen framework flutetr und der engine flutter sozusagen die Brücke zwischen der hardware und der app
@@ -135,7 +134,6 @@ class AuthGate extends StatelessWidget {
           // Oder einfach mit kleiner Verzögerung starten
           // damit die UI erstmal aufgebaut werden kann
           await Future.delayed(const Duration(seconds: 3));
-          await AchievementRunner.run();
         });
 
         return GoogleBottomBar(onThemeChanged: onThemeChanged, initalIndex: selectedIndex, onIndexChanged: onIndexChanged);
