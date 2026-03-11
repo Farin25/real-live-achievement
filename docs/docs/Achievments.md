@@ -104,4 +104,4 @@
 | Chichen Itza| Besuche das Chichen Itza| GPS|
 | Christ the Redeemer| Besuche den Christus| GPS|
 |Petra| Besuche Petra| GPS|
-
+|Newsletter| Melde dich für den Up Mark Newsletter an|A|
