@@ -7,6 +7,7 @@
 - DB Policys (Farin & Liam)
 - Ladebalken Bug wenn man die app ohne acount bzw. Demo mode nutzt fixen (Farin)
 - FAQ upadten (Fragen: Wird die App kostenlos sein,) (Liam)
+- EN Versiond er Docs bis zur MAkerfaire fertig Stellen(Liam ~ Farin)
 - App in Up mark umbennenen(Farin)
 - Bilder in docs richtig laden
 - Acount daten in den settings aus chache laden (Farin)
@@ -14,10 +15,13 @@
 - Docseben 
 - Prüfng ob username vergeben wenn in den stting sien neuer gesetzt wird(Farin)
 - dev/Debug settings(farin)
+- Engine grundprinzip
+- Erster Algorytmos für In App Achievments
 
 ## 11.03.2026
 - Sponsor und Patners seite Kontaktmöglichkeit und Info hinzugefügt (Liam & Farin)
-- 
+- Werbe Plakat für Makerfaire (Liam)
+- En Version der docs angefangen und wichtigste Seitenb übersetzt(Farin)
 
 ## 10.03.2026
 - Newsletter Email Templeates hinzugefügt(Farin)

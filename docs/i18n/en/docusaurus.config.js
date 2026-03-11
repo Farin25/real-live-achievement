@@ -95,10 +95,6 @@ const config = {
             position: 'left',
             label: 'Docs',
           },
-          {
-          type: 'localeDropdown',
-          position: 'right',
-          },
       //    {to: '/blog', label: 'Blog', position: 'left'}, //auskommentiert weil brauchen wir nicht
           {
             href: 'https://github.com/Farin25/real-live-achievement',

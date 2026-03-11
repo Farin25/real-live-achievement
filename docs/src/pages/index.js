@@ -95,7 +95,7 @@ export default function Home() {
         {/* Demo Video */}
         <section id="demo" className={styles.demoSection}>
           <div className="container">
-            <h2 className={styles.demoTitle}>So funktioniert Upmark</h2>
+            <h2 className={styles.demoTitle}>Werbe Viedeo</h2>
             <div className={styles.videoWrapper}>
               <iframe
                 src="https://player.vimeo.com/video/1167330665"
