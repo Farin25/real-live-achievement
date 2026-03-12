@@ -57,6 +57,14 @@ We value transparency, data protection, and a motivating user experience.
 
 ---
 
+## Will the app be/remain free?
+
+The app will be available as a completely free full version as an APK and in the Google Play Store.
+
+---
+
+
+
 ## Is there support or contact information?
 
 If you have any questions, suggestions, or problems, you can contact us at **achievements@holzideen.org** or **upmark@holzideen.org**.

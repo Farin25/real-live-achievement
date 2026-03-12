@@ -57,6 +57,13 @@ Wir legen Wert auf Transparenz, Datenschutz und ein motivierendes Nutzererlebnis
 
 ---
 
+## Wird die App Kostenlos sein/bleiben
+
+Die App wird als Komplett Kostenlose Vollversion als APK und im Google Playstore verfügbar sein.
+
+
+---
+
 ## Gibt es Support oder Kontakt?
 
 Für Fragen, Anregungen oder Probleme kannst du uns unter der E-Mail-Adresse **achievements@holzideen.org** oder **upmark@holzideen.org** kontaktieren.

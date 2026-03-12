@@ -1,6 +1,6 @@
 # Eigenes Achievement einreichen
 
-## Gestalte Mark Up mit 🚀
+## Gestalte Mark Up mit 
 
 Du hast eine Idee für ein neues Achievement?  
 Dann reiche es hier ein!
@@ -49,5 +49,5 @@ Je klarer dein Vorschlag formuliert ist, desto besser können wir ihn umsetzen.
 
 ---
 
-Vielen Dank für deine Idee! 💡  
+Vielen Dank für deine Idee! 
 Gemeinsam machen wir Mark Up besser.
