@@ -1,6 +1,6 @@
 # Submit your own achievement
 
-## Design Mark Up with 🚀
+## Design Mark Up with 
 
 Do you have an idea for a new achievement?  
 Then submit it here!
@@ -49,5 +49,5 @@ The clearer your suggestion is, the better we can implement it.
 
 ---
 
-Thank you for your idea! 💡  
+Thank you for your idea! 
 Together, we can make Mark Up better.

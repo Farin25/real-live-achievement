@@ -1,8 +1,6 @@
 # Changelog
 
 ## TODOs
-- Webseite in email footer anpassen (Liam)
-- Achievments in DB eintragen (Liam)
 - Push Systembenachrichtigungen evtl. mit firebase(Farin)
 - DB Policys (Farin & Liam)
 - Ladebalken Bug wenn man die app ohne acount bzw. Demo mode nutzt fixen (Farin)
@@ -19,7 +17,6 @@
 - Erster Algorytmos für In App Achievments
 - Emojis entfernen
 - evtl. Blog einrichten und block artikel über Makerfaire(Laim ~ Farin)
-- Comming soon Plakate für ind er schule(Liam)
 - Neuen werbespot oder die bilder auswechseln(Liam)
 
 
