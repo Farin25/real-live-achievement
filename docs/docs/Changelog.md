@@ -20,6 +20,9 @@
 
 ## 17.03.2026
 - Menü punkte auf englisch üersetzt(Farin)
+- Insta acount erstellt (liam)
+- Werbe Viedeo für Newsletter (Liam)
+
 
 ## 12.03.2026
 - FAQ Frage hinzugefügt: "wird die appp kostenlos sein?"
@@ -182,3 +185,7 @@ Die genauen änderungen sind auf Github ind den Commits zu [finden](https://gith
 - Präsentation von Up Mark auf der Makerfaire(Farin)15.03.2026
 - Newsletter (Farin) 08.03.2026
 - Leute solange nerven bis sie sich zum Newsletter anmelden(Liam & Farin)
+- Werbeviedeo für Newsletter (Liam)
+- Vimeo Acount banner (Liam)
+- Instagramm Acount (Liam)
+- Vimeo Acount (Farin)

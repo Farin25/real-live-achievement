@@ -111,11 +111,15 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
+            title: 'Social media',
             items: [
               {
-                label: 'introduction',
-                to: '/docs/intro',
+                label: 'Instagramm',
+                to: 'https://www.instagram.com/upmarkofficial/',
+              },
+              {
+                label: 'Vimeo',
+                to: 'https://vimeo.com/upmark',
               },
             ],
           },
