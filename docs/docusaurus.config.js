@@ -133,7 +133,7 @@ const config = {
               },
               {
                 label: 'Stoat',
-                href: 'https://stt.gg/V6hDbKnq',
+                href: 'https://stt.gg/Xspys4Dq',
               },
 
             ],
