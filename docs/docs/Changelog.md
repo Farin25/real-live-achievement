@@ -4,7 +4,6 @@
 - Push Systembenachrichtigungen evtl. mit firebase(Farin)
 - DB Policys (Farin & Liam)
 - Ladebalken Bug wenn man die app ohne acount bzw. Demo mode nutzt fixen (Farin)
-- FAQ upadten (Fragen: Wird die App kostenlos sein,) (Liam)
 - EN Versiond er Docs bis zur MAkerfaire fertig Stellen(Liam ~ Farin)
 - App in Up mark umbennenen(Farin)
 - Bilder in docs richtig laden
@@ -18,6 +17,11 @@
 - Emojis entfernen
 - evtl. Blog einrichten und block artikel über Makerfaire(Laim ~ Farin)
 - Neuen werbespot oder die bilder auswechseln(Liam)
+
+## 12.03.2026
+- FAQ Frage hinzugefügt: "wird die appp kostenlos sein?"
+- Emojis aus docs entfernt(Liam & farin)
+- Prüfung ob nutzername vergeben beim ändern(Farin)
 
 
 ## 11.03.2026

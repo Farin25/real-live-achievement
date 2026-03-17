@@ -89,13 +89,14 @@ class AboutPage extends StatelessWidget {
 
               linkTile('Webseite', 'https://farin25.github.io/real-live-achievement/'),
               linkTile('Eigenes Achievment Einreichen', 'https://farin25.github.io/real-live-achievement/docs/Dein_Achievment/'),
+              linkTile('Newsletter', 'https://farin25.github.io/real-live-achievement/docs/newsletter'),
               linkTile('SourceCode', 'https://github.com/Farin25/real-live-achievement'),
               linkTile('Changelog', 'https://farin25.github.io/real-live-achievement/docs/Changelog'),
-              
+        
               SizedBox(height: 10),
 
               Text(
-                'Rechtliches:',
+                'Rechtliches:',      
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,

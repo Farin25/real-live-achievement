@@ -13,6 +13,7 @@ class AccountPage extends StatefulWidget {
 class _AccountPageState extends State<AccountPage> {
 
   Map<String, dynamic>? profile;
+  String? _usernameError;
   String formatDate(String? date) {
   if (date == null) return "";
 
@@ -147,9 +148,11 @@ class _AccountPageState extends State<AccountPage> {
                 const SizedBox(height: 15,),
                 TextField(
                   controller: _usernameController,
-                  decoration: const InputDecoration(
-                    labelText: 'username ', 
+                  decoration: InputDecoration(
+                    labelText: 'username ',
+                    errorText: _usernameError 
                   ),
+                  onChanged: (_) => setState(() => _usernameError = null),
                 ),
                 const SizedBox(height: 15,),
                 TextField(
