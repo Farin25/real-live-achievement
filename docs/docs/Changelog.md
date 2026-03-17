@@ -171,4 +171,14 @@
 - Docs und Webseite mit Docosaurus (Farin)
 
 
-Die genauen änderungen sind auf Github ind den Commits zu [finden](https://github.com/Farin25/real-live-achievement/commits/main/) 0
+Die genauen änderungen sind auf Github ind den Commits zu [finden](https://github.com/Farin25/real-live-achievement/commits/main/)
+
+## Werbemaßnahmenn
+- Up Mark Präsentation in der Schule(Liam & Farin) 27.02.2026
+- Artikel für Schülerzeitung(Liam) 16.03.2026
+- Werbe Plakate in der Schule Aufgehangen(Liam & Farin) 
+- Werbe Plakate auf Makerfaire aufgehangen(Farin) 14.03.2026
+- Präsenz auf der Makerfaire (Liam & Farin) 15+15.03.2026
+- Präsentation von Up Mark auf der Makerfaire(Farin)15.03.2026
+- Newsletter (Farin) 08.03.2026
+- Leute solange nerven bis sie sich zum Newsletter anmelden(Liam & Farin)
