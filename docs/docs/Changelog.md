@@ -22,6 +22,7 @@
 - Menü punkte auf englisch üersetzt(Farin)
 - Insta acount erstellt (liam)
 - Werbe Viedeo für Newsletter (Liam)
+- umfrage ergebniss seite entfernt (liam & Farin)
 
 
 ## 12.03.2026
