@@ -18,6 +18,9 @@
 - evtl. Blog einrichten und block artikel über Makerfaire(Laim ~ Farin)
 - Neuen werbespot oder die bilder auswechseln(Liam)
 
+## 17.03.2026
+- Menü punkte auf englisch üersetzt(Farin)
+
 ## 12.03.2026
 - FAQ Frage hinzugefügt: "wird die appp kostenlos sein?"
 - Emojis aus docs entfernt(Liam & farin)

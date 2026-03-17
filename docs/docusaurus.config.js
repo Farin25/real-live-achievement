@@ -4,7 +4,7 @@
 // There are various equivalent ways to declare your Docusaurus config.
 // See: https://docusaurus.io/docs/api/docusaurus-config
 
-import {themes as prismThemes} from 'prism-react-renderer';
+import { themes as prismThemes } from 'prism-react-renderer';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
@@ -96,10 +96,10 @@ const config = {
             label: 'Docs',
           },
           {
-          type: 'localeDropdown',
-          position: 'right',
+            type: 'localeDropdown',
+            position: 'right',
           },
-      //    {to: '/blog', label: 'Blog', position: 'left'}, //auskommentiert weil brauchen wir nicht
+          //    {to: '/blog', label: 'Blog', position: 'left'}, //auskommentiert weil brauchen wir nicht
           {
             href: 'https://github.com/Farin25/real-live-achievement',
             label: 'GitHub',
@@ -122,7 +122,7 @@ const config = {
           {
             title: 'Community',
             items: [
-         
+
               {
                 label: 'Discord',
                 href: 'https://discord.com/invite/6J4Ws5ckYX',
@@ -131,51 +131,51 @@ const config = {
                 label: 'Stoat',
                 href: 'https://stt.gg/V6hDbKnq',
               },
-          
+
             ],
           },
           {
             title: 'More',
             items: [
-        //      {
+              //      {
               //  label: 'Blog',
-            //    to: '/blog',
-          //    }, Auskommentiert weil kein block
+              //    to: '/blog',
+              //    }, Auskommentiert weil kein block
               {
                 label: 'GitHub',
                 href: 'https://github.com/Farin25/real-live-achievement',
-                
+
               },
-                {
+              {
                 label: 'Status',
                 href: 'https://status.farin-langner.de/status/upmark',
-                
+
               },
             ],
-            
+
           },
           {
-            title: 'Rechtliches',
+            title: 'Legal',
             items: [
-                 {
+              {
                 label: 'imprint',
                 href: 'https://farin25.github.io/real-live-achievement/docs/Rechtliches/impressum',
-                
+
               },
               {
                 label: 'Privacy policy',
                 href: 'https://farin25.github.io/real-live-achievement/docs/Rechtliches/impressum',
-                
+
               },
               {
                 label: 'terms and conditions',
                 href: 'https://farin25.github.io/real-live-achievement/docs/Rechtliches/impressum',
-                
+
               },
-             
+
             ]
-      }
-          
+          }
+
         ],
         copyright: `Copyright © ${new Date().getFullYear()} Up Mark by liam Selent & Farin Langner </br> developed with 💜 in germany!`,
       },
