@@ -14,15 +14,24 @@
 - dev/Debug settings(farin)
 - Engine grundprinzip
 - Erster Algorytmos für In App Achievments
-- Emojis entfernen
 - evtl. Blog einrichten und block artikel über Makerfaire(Laim ~ Farin)
 - Neuen werbespot oder die bilder auswechseln(Liam)
+
+**Werbemaßnahmen**
+- Artikel für Schülerzeitung(Liam)
+
+## 18.03.2026
+- Werbe Reel(Liam)
+- Tabelle mit Technischen informationen zur intro hinzugefügt de und en(Farin)
+- FAQ Fragen hinzugefügt de(Farin)
+
 
 ## 17.03.2026
 - Menü punkte auf englisch üersetzt(Farin)
 - Insta acount erstellt (liam)
 - Werbe Viedeo für Newsletter (Liam)
 - umfrage ergebniss seite entfernt (liam & Farin)
+
 
 
 ## 12.03.2026

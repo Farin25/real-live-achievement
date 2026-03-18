@@ -14,5 +14,23 @@ sidebar_position: 1
         allow="autoplay; fullscreen" allowfullscreen>
 </iframe>
 
+## Technical Specifications
 
-<img src="./docs/static/img/visualisierungen/Achievments.png" width="250"/>
+| | |
+|---|---|
+|**Language**| Dart |
+|**Framework**| Flutter |
+|**Plattform**| Android, Wear OS, possibly ios |
+|**Backend**| Supabase |
+|**Database**| PostgresSQL (via Supabase)|
+|**Auth**| Supabase Auth |
+|**weather**| Open-Meteo API |
+|**height**| Baorometer |
+|**Location / GPS**| Geolocator +  Geocoding |
+|**Gesundheitsdaten**| (Health / Google Health Connect) |
+|**Code Lizenz**| MIT |
+|**Logo & Name**| All rights reserved |
+|**Docs**| Docosaurus |
+|**E mail**| Brevo / Supabase SMTP |
+
+

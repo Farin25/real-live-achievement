@@ -1,5 +1,5 @@
 ---
-title: Instruction
+title: Intro
 sidebar_position: 1
 ---
 
@@ -13,5 +13,25 @@ sidebar_position: 1
         allow="autoplay; fullscreen" allowfullscreen>
 </iframe>
 
+## Technische Daten / Infos
 
-<img src="./docs/static/img/visualisierungen/Achievments.png" width="250"/>
+| | |
+|---|---|
+|**Sprache**| Dart |
+|**Framework**| Flutter |
+|**Plattform**| Android, Wear OS, evtl. ios |
+|**Backend**| Supabase |
+|**Datenbank**| PostgresSQL (über Supabase)|
+|**Auth**| Supabase Auth |
+|**Wetter**| Open-Meteo API |
+|**Höhe**| Baorometer |
+|**Standort /GPS**| Geolocator +  Geocoding |
+|**Gesundheitsdaten**| (Health / Google Health Connect) |
+|**Code Lizenz**| MIT |
+|**Logo & Name**| Alle Rechte vorbehalten|
+|**Docs**| Docosaurus |
+|**E mail**| Brevo / Supabase SMTP |
+
+
+
+
