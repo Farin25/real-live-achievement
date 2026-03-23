@@ -17,8 +17,13 @@
 - evtl. Blog einrichten und block artikel über Makerfaire(Laim ~ Farin)
 - Neuen werbespot oder die bilder auswechseln(Liam)
 
-**Werbemaßnahmen**
-- Artikel für Schülerzeitung(Liam)
+### Idden & nice to haves
+- Dankesagung seite
+- JUFO 2027
+
+## 23.03.2026
+- Kleine Formulierungsänderungen auf der Landing Page(Liam)
+- Werbemaßnahmen zu  Changelog hinzugefügt(Farin)
 
 ## 18.03.2026
 - Werbe Reel(Liam)
@@ -187,6 +192,13 @@
 Die genauen änderungen sind auf Github ind den Commits zu [finden](https://github.com/Farin25/real-live-achievement/commits/main/)
 
 ## Werbemaßnahmenn
+
+### Ideen und in Umsetzung
+- Kinowerbung
+
+
+
+### Abgeschloßen
 - Up Mark Präsentation in der Schule(Liam & Farin) 27.02.2026
 - Artikel für Schülerzeitung(Liam) 16.03.2026
 - Werbe Plakate in der Schule Aufgehangen(Liam & Farin) 
@@ -199,3 +211,31 @@ Die genauen änderungen sind auf Github ind den Commits zu [finden](https://gith
 - Vimeo Acount banner (Liam)
 - Instagramm Acount (Liam)
 - Vimeo Acount (Farin)
+
+## Gescheiterte Werbemaßnahmen
+
+
+### Gamescom Stand aufgrund der hohn Kosten:
+
+**Pflichtktkosten(immer on Top)**
+
+| Posten | Betrag |
+|---|---|
+| Energiekostenpauschale | 16,00 €/m² |
+| AUMA-Beitrag | 0,60 €/m² |
+| Marketing Package Indie/Campus | 337,00 € pro Aussteller |
+| Marketing Package Entertainment | 995,00 € pro Aussteller |
+
+**Realistisches Minimum (12 qm, Indie Area)**
+
+| Posten | Betrag |
+|---|---|
+| Fläche 12m² × 188,00 € | 2.256,00 € |
+| Energie 12m² × 16,00 € | 192,00 € |
+| AUMA 12m² × 0,60 € | 7,20 € |
+| Marketing Package | 337,00 € |
+| **Netto** | **2.792,20 €** |
+| + 19% MwSt. | 530,52 € |
+| **Gesamt brutto** | **≈ 3.323 €** |
+
+Nicht enthalten: Standaufbau, Möbel, Transport, Hotel, Hardware, Flyer. In der Praxis locker das Doppelte.
