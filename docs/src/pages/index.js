@@ -10,7 +10,7 @@ const content = {
   de: {
     heroPre: 'Achievement-System für das echte Leben',
     heroTitle: ['Raus. Erleben.', 'Achievement.'],
-    heroSub: 'Upmark belohnt dich nicht für Zeit vor dem Bildschirm – sondern dafür, dass du rausgehst, die Welt entdeckst und Dinge erlebst, die zählen.',
+    heroSub: 'Upmark belohnt dich nicht für Zeit vor dem Bildschirm sondern dafür, dass du rausgehst, die Welt entdeckst und Dinge erlebst, die zählen.',
     ctaPrimary: 'App entdecken',
     ctaVideo: 'Demo ansehen',
     featuredLabel: 'Aus der App',
@@ -26,7 +26,7 @@ const content = {
     howTitle: 'Wie es funktioniert',
     how: [
       { num: '01', title: 'App herunterladen',  desc: 'Verfügbar für Android ab Juli 2026.' },
-      { num: '02', title: 'Leben leben',         desc: 'GPS, Wetter, Schritte – die App trackt automatisch im Hintergrund.' },
+      { num: '02', title: 'Leben leben',         desc: 'GPS, Wetter, Schritte die App trackt automatisch im Hintergrund.' },
       { num: '03', title: 'Achievements sammeln',desc: 'Jedes Achievement ist ein Moment den du wirklich erlebt hast.' },
     ],
     videoTitle: 'Werbevideo',
@@ -40,7 +40,7 @@ const content = {
   en: {
     heroPre: 'Achievement system for real life',
     heroTitle: ['Go out. Live.', 'Achieve.'],
-    heroSub: "Upmark doesn't reward screen time – it rewards you for going outside, exploring the world, and experiencing things that actually matter.",
+    heroSub: "Upmark doesn't reward screen time it rewards you for going outside, exploring the world, and experiencing things that actually matter.",
     ctaPrimary: 'Discover the App',
     ctaVideo: 'Watch Demo',
     featuredLabel: 'From the App',
@@ -56,7 +56,7 @@ const content = {
     howTitle: 'How it works',
     how: [
       { num: '01', title: 'Download the app',      desc: 'Available for Android starting July 2026.' },
-      { num: '02', title: 'Live your life',          desc: 'GPS, weather, steps – the app tracks automatically in the background.' },
+      { num: '02', title: 'Live your life',          desc: 'GPS, weather, steps the app tracks automatically in the background.' },
       { num: '03', title: 'Collect achievements',    desc: 'Every achievement is a moment you actually experienced.' },
     ],
     videoTitle: 'Promo Video',
