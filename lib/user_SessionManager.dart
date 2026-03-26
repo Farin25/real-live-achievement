@@ -1,9 +1,8 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'user_local_services.dart';
-import 'login.dart';
+import 'services.dart';
 
 class UserSessionmanager {
- static final supabase = Supabase.instance.client;
+  static final supabase = Supabase.instance.client;
 
   static Future<void> initialize() async {
     final user = supabase.auth.currentUser;
@@ -30,8 +29,5 @@ class UserSessionmanager {
   static Future<void> logout() async {
     await supabase.auth.signOut();
     await UserLocalServices.clearUserProfile();
-
   }
-
-
 }

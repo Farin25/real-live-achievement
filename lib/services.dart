@@ -1,14 +1,52 @@
-import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter/material.dart';
 
+class UserLocalServices {
+  static Future<void> saveUserProfile({
+    required String firstName,
+    required String lastName,
+    required String username,
+    required String birthdate,
+  }) async {
+    final prefs = await SharedPreferences.getInstance();
 
-//Erstellt Widget für Werbe Viedeo
+    await prefs.setString('first_name', firstName);
+    await prefs.setString('last_name', lastName);
+    await prefs.setString('username', username);
+    await prefs.setString('birthdate', birthdate);
+  }
+
+  static Future<void> clearUserProfile() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    await prefs.remove('first_name');
+    await prefs.remove('last_name');
+    await prefs.remove('username');
+    await prefs.remove('birthdate');
+  }
+
+  // Cache Löschen
+  static Future<void> clearAchievementCache() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    await prefs.remove('cached_achievements');
+    //Debug Ausgabe
+    print("Achievement Cache gelöscht");
+  }
+}
+
+//----------------------------------
+//----------Vimeo Viedeo------------
+//----------------------------------
+
 class VimeoVideo extends StatefulWidget {
   const VimeoVideo({super.key});
 
   @override
   State<VimeoVideo> createState() => _VimeoVideoState();
 }
+
 // Lädt Vimeo Viedeo im iframe
 class _VimeoVideoState extends State<VimeoVideo> {
   WebViewController? controller;
@@ -37,7 +75,7 @@ class _VimeoVideoState extends State<VimeoVideo> {
     });
   }
 
-  @override// DSGVO Boutton
+  @override // DSGVO Boutton
   Widget build(BuildContext context) {
     return AspectRatio(
       aspectRatio: 16 / 9,
@@ -48,8 +86,11 @@ class _VimeoVideoState extends State<VimeoVideo> {
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  const Icon(Icons.play_circle_fill,
-                      size: 80, color: Colors.white70),
+                  const Icon(
+                    Icons.play_circle_fill,
+                    size: 80,
+                    color: Colors.white70,
+                  ),
                   Positioned(
                     bottom: 20,
                     left: 20,

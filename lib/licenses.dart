@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'variabels.dart';
+import 'settings.dart';
 
 class LicensesPage extends StatelessWidget {
   const LicensesPage({super.key});
@@ -11,7 +11,7 @@ class LicensesPage extends StatelessWidget {
         applicationName: AppConfig.appname,
         applicationVersion: AppConfig.version,
       ),
-    //  bottomNavigationBar: Navbar(),// mal schaune ob drin alssen oder rausnehmen
+      //  bottomNavigationBar: Navbar(),// mal schaune ob drin alssen oder rausnehmen
     );
   }
 }

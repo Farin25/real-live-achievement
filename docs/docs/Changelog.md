@@ -13,13 +13,26 @@
 - Prüfng ob username vergeben wenn in den stting sien neuer gesetzt wird(Farin)
 - dev/Debug settings(farin)
 - Engine grundprinzip
-- Erster Algorytmos für In App Achievments
 - evtl. Blog einrichten und block artikel über Makerfaire(Laim ~ Farin)
 - Neuen werbespot oder die bilder auswechseln(Liam)
+- Rechtschreibfehler aus Webseite entfernen !vor Ferien(Markus & Farin)
+- Email Templates in Supabase mit den aus dem repo ersetzen(Liam ~ Farin)
+- Achievment Einreiche Formular Fixen(Farin)
+- Achievment Logik & System(Farin)
 
-### Idden & nice to haves
+### Idden & nice to haves bzw. in Planung
 - Dankesagung seite
-- JUFO 2027
+- **JUFO 2027**
+- Keine Nachnahmen/Vornahmen pflicht = Peronenbezogene Daten minimiren(Privacy First konzept)
+- Umbennenung in Up Mark
+- Eigene Domain
+
+## 26.03.2026
+- **Code Aufgerümt und unnötigen stuff entfernt:**
+- Nervige und unötige komentare & Notizen aus code entfernt(Farin)
+- Eine Zentrale Servics.dart für services und helpers(Farin)
+- Unnötige Dateien Entfernt und addins.dart mit services.dart zusammengelegt(Farin)
+- about.dart gelöscht und AboutPage in Settings verschoben (Farin)
 
 ## 23.03.2026
 - Kleine Formulierungsänderungen auf der Landing Page(Liam)
@@ -36,7 +49,6 @@
 - Insta acount erstellt (liam)
 - Werbe Viedeo für Newsletter (Liam)
 - umfrage ergebniss seite entfernt (liam & Farin)
-
 
 
 ## 12.03.2026
@@ -215,7 +227,7 @@ Die genauen änderungen sind auf Github ind den Commits zu [finden](https://gith
 ## Gescheiterte Werbemaßnahmen
 
 
-### Gamescom Stand aufgrund der hohn Kosten:
+### Gamescom Stand aufgrund der hohen Kosten:
 
 **Pflichtktkosten(immer on Top)**
 

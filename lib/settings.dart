@@ -1,26 +1,29 @@
 import 'package:flutter/material.dart';
 import 'acount.dart';
 import 'licenses.dart';
-import 'about.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'user_local_services.dart';
+import 'services.dart';
+import 'package:flutter/gestures.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-
+class AppConfig {
+  static const String appname = "Up Mark";
+  static const String version = "BETA 0.5(dev)";
+  static const String website =
+      "https://farin25.github.io/real-live-achievement/";
+}
 
 class SettingsPage extends StatefulWidget {
   final Function(ThemeMode) onThemeChanged;
-  const SettingsPage({super.key,
-  required this.onThemeChanged});
-
+  const SettingsPage({super.key, required this.onThemeChanged});
 
   @override
   State<SettingsPage> createState() => _SettingsPageState();
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-
   Map<String, dynamic>? profile;
 
   @override
@@ -56,14 +59,12 @@ class _SettingsPageState extends State<SettingsPage> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-
             /// PROFILE CARD
             GestureDetector(
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => const AccountPage()),
+                  MaterialPageRoute(builder: (context) => const AccountPage()),
                 );
               },
               child: Container(
@@ -78,15 +79,16 @@ class _SettingsPageState extends State<SettingsPage> {
                         children: [
                           CircleAvatar(
                             radius: 30,
-                            backgroundColor:
-                                Theme.of(context).primaryColor,
-                            child: const Icon(Icons.person,
-                                size: 35, color: Colors.white),
+                            backgroundColor: Theme.of(context).primaryColor,
+                            child: const Icon(
+                              Icons.person,
+                              size: 35,
+                              color: Colors.white,
+                            ),
                           ),
                           const SizedBox(width: 16),
                           Column(
-                            crossAxisAlignment:
-                                CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 profile!['username'] ?? '',
@@ -116,19 +118,21 @@ class _SettingsPageState extends State<SettingsPage> {
             Expanded(
               child: ListView(
                 children: [
-
                   ListTile(
                     leading: const Icon(Icons.design_services),
                     title: const Text("Design"),
                     subtitle: const Text("Dark Mode, Farben, Theme"),
                     trailing: Icon(Icons.arrow_forward_ios),
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => Design(onThemeChanged: widget.onThemeChanged)
-                      ),
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              Design(onThemeChanged: widget.onThemeChanged),
+                        ),
                       );
                     },
                   ),
-               
 
                   const Divider(),
 
@@ -136,76 +140,61 @@ class _SettingsPageState extends State<SettingsPage> {
                     leading: const Icon(Icons.language),
                     title: const Text("Sprache"),
                     subtitle: const Text("Deutsch DE"),
-                    trailing:
-                        const Icon(Icons.arrow_forward_ios),
+                    trailing: const Icon(Icons.arrow_forward_ios),
                     onTap: () {
-                      ScaffoldMessenger.of(context)
-                          .showSnackBar(
-                        const SnackBar(
-                            content: Text(
-                                'Sprachen kommen bald')),
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Sprachen kommen bald')),
                       );
                     },
                   ),
 
-          
                   const Divider(),
 
-                          ListTile(
+                  ListTile(
                     leading: const Icon(Icons.notifications_active),
-                    title: const Text(
-                        "App Benachrichtigungen"),
-                    subtitle: const Text(
-                        "Benachrichtigungen"),
-                    trailing:
-                        const Icon(Icons.arrow_forward_ios),
+                    title: const Text("App Benachrichtigungen"),
+                    subtitle: const Text("Benachrichtigungen"),
+                    trailing: const Icon(Icons.arrow_forward_ios),
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                const Appmessages()),
-                      );
-                    },
-                  ),
-
-                    const Divider(),
-
-                          ListTile(
-                    leading: const Icon(Icons.settings),
-                    title: const Text(
-                        "Erweiterte Einstellungen"),
-                    subtitle: const Text(
-                        "Die Einstellungen für Experten"),
-                    trailing:
-                        const Icon(Icons.arrow_forward_ios),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                const AdvancedSettings()),
+                          builder: (context) => const Appmessages(),
+                        ),
                       );
                     },
                   ),
 
                   const Divider(),
-                  
+
+                  ListTile(
+                    leading: const Icon(Icons.settings),
+                    title: const Text("Erweiterte Einstellungen"),
+                    subtitle: const Text("Die Einstellungen für Experten"),
+                    trailing: const Icon(Icons.arrow_forward_ios),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AdvancedSettings(),
+                        ),
+                      );
+                    },
+                  ),
+
+                  const Divider(),
 
                   ListTile(
                     leading: const Icon(Icons.description),
-                    title: const Text(
-                        "Open Source Lizenzen"),
-                    subtitle: const Text(
-                        "Verwendete Bibliotheken"),
-                    trailing:
-                        const Icon(Icons.arrow_forward_ios),
+                    title: const Text("Open Source Lizenzen"),
+                    subtitle: const Text("Verwendete Bibliotheken"),
+                    trailing: const Icon(Icons.arrow_forward_ios),
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                const LicensesPage()),
+                          builder: (context) => const LicensesPage(),
+                        ),
                       );
                     },
                   ),
@@ -213,30 +202,25 @@ class _SettingsPageState extends State<SettingsPage> {
                   ListTile(
                     leading: const Icon(Icons.info),
                     title: const Text("Info"),
-                    subtitle:
-                        const Text("Über die App"),
-                    trailing:
-                        const Icon(Icons.arrow_forward_ios),
+                    subtitle: const Text("Über die App"),
+                    trailing: const Icon(Icons.arrow_forward_ios),
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                 AboutPage()),
+                        MaterialPageRoute(builder: (context) => AboutPage()),
                       );
                     },
                   ),
-                 const Divider(),
+                  const Divider(),
                   ListTile(
                     leading: Icon(Icons.settings),
                     title: Text("App Settings"),
-                    subtitle:  Text("Berechtigung, usw..."),
+                    subtitle: Text("Berechtigung, usw..."),
                     trailing: Icon(Icons.arrow_forward_ios),
                     onTap: () async {
                       await openAppSettings();
                     },
                   ),
-
                 ],
               ),
             ),
@@ -246,8 +230,6 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 }
-
-
 
 //App BEnachrichtigungen untersetings:
 
@@ -259,7 +241,6 @@ class Appmessages extends StatefulWidget {
 }
 
 class _Appmessages extends State<Appmessages> {
-
   bool notifynewFriendship = true;
   bool notifyFriendnewAchievment = true;
   bool notifynewAchievment = true;
@@ -267,28 +248,27 @@ class _Appmessages extends State<Appmessages> {
 
   // für Master Schalter
   bool get notifyAll =>
-    notifynewFriendship &&
-    notifyFriendnewAchievment &&
-    notifynewAchievment &&
-    notifyAchievmentfasterricht;
-  
+      notifynewFriendship &&
+      notifyFriendnewAchievment &&
+      notifynewAchievment &&
+      notifyAchievmentfasterricht;
+
   @override
   void initState() {
     super.initState();
     loadSettings();
   }
+
   Widget build(BuildContext content) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Benachrichtigungen"),
-      ),
+      appBar: AppBar(title: const Text("Benachrichtigungen")),
       body: ListView(
         children: [
-
           SwitchListTile(
             title: Text("Beachrichtigungen"),
-            subtitle: const Text("Benachrichtigungen von der App",
-            style: TextStyle(fontWeight: FontWeight.bold),
+            subtitle: const Text(
+              "Benachrichtigungen von der App",
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
             value: notifyAll,
             onChanged: (value) {
@@ -306,161 +286,156 @@ class _Appmessages extends State<Appmessages> {
 
           SwitchListTile(
             title: const Text("Fast ereichtes Achievment"),
-            subtitle: const Text("Wenn du kurtz davor bist ein Achivemnt zu ereichen"),
+            subtitle: const Text(
+              "Wenn du kurtz davor bist ein Achivemnt zu ereichen",
+            ),
             value: notifyAchievmentfasterricht,
             onChanged: (value) {
               setState(() {
                 notifyAchievmentfasterricht = value;
               });
               saveSettings();
-              print("Benachrichtigungsettings Aktualliesiert: Achievmentfasteerreicht = $notifyAchievmentfasterricht ");
+              print(
+                "Benachrichtigungsettings Aktualliesiert: Achievmentfasteerreicht = $notifyAchievmentfasterricht ",
+              );
             },
           ),
 
-
           SwitchListTile(
             title: const Text("Neuem Achievment"),
-            subtitle: const Text("Wenn due in neues Achievment Freigeschaltet hast"),
+            subtitle: const Text(
+              "Wenn due in neues Achievment Freigeschaltet hast",
+            ),
             value: notifynewAchievment,
             onChanged: (value) {
               setState(() {
                 notifynewAchievment = value;
               });
               saveSettings();
-              print("Benachrichtigungs Einstellungen Aktualliesiert: pushnewachievment = $notifynewAchievment");
+              print(
+                "Benachrichtigungs Einstellungen Aktualliesiert: pushnewachievment = $notifynewAchievment",
+              );
             },
           ),
 
           const Divider(),
           // Freunde Subtitel
-        Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Text(
-          "Freunde",
-          style:
-          TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              "Freunde",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
           ),
-          ),
-        ),
- 
+
           SwitchListTile(
             title: const Text("Freunde Neues Achievment"),
-            subtitle: const Text("wenn einer deiner Freunde Ein Neues Achievment bekommen hat"),
+            subtitle: const Text(
+              "wenn einer deiner Freunde Ein Neues Achievment bekommen hat",
+            ),
             value: notifyFriendnewAchievment,
             onChanged: (value) {
               setState(() {
                 notifyFriendnewAchievment = value;
               });
               saveSettings();
-              print("Benachrichtigungs Einstellungen Aktualliesiert: pushFriendnewAchievment = $notifyFriendnewAchievment");
-            }
+              print(
+                "Benachrichtigungs Einstellungen Aktualliesiert: pushFriendnewAchievment = $notifyFriendnewAchievment",
+              );
+            },
           ),
 
           SwitchListTile(
             title: const Text("Freundschaftsanfragen"),
-            subtitle: const Text("Wennd du eine Neue Freundschaftsanftage bekommst"),
+            subtitle: const Text(
+              "Wennd du eine Neue Freundschaftsanftage bekommst",
+            ),
             value: notifynewFriendship,
             onChanged: (value) {
               setState(() {
                 notifynewFriendship = value;
               });
               saveSettings();
-              print("Benachrichtigungs Einstellungen Aktualliesiert: pushnewFriendship = $notifynewFriendship");
+              print(
+                "Benachrichtigungs Einstellungen Aktualliesiert: pushnewFriendship = $notifynewFriendship",
+              );
             },
           ),
 
-         const Divider(),
+          const Divider(),
         ],
       ),
     );
   }
 
   Future<void> saveSettings() async {
-  final prefs = await SharedPreferences.getInstance();
+    final prefs = await SharedPreferences.getInstance();
 
-  await prefs.setBool('pushnewFriendship', notifynewFriendship);
-  await prefs.setBool('pushFriendnewAchievment', notifyFriendnewAchievment);
-  await prefs.setBool('pushnewAchievment', notifynewAchievment);
-  await prefs.setBool('Achievmentfasterricht', notifyAchievmentfasterricht);
-}
+    await prefs.setBool('pushnewFriendship', notifynewFriendship);
+    await prefs.setBool('pushFriendnewAchievment', notifyFriendnewAchievment);
+    await prefs.setBool('pushnewAchievment', notifynewAchievment);
+    await prefs.setBool('Achievmentfasterricht', notifyAchievmentfasterricht);
+  }
 
-Future<void> loadSettings() async {
-  final prefs = await SharedPreferences.getInstance();
+  Future<void> loadSettings() async {
+    final prefs = await SharedPreferences.getInstance();
 
-  setState(() {
-    notifynewFriendship =
-        prefs.getBool('pushnewFriendship') ?? true;
+    setState(() {
+      notifynewFriendship = prefs.getBool('pushnewFriendship') ?? true;
 
-    notifyFriendnewAchievment =
-        prefs.getBool('pushFriendnewAchievment') ?? true;
+      notifyFriendnewAchievment =
+          prefs.getBool('pushFriendnewAchievment') ?? true;
 
-    notifynewAchievment =
-        prefs.getBool('pushnewAchievment') ?? true;
+      notifynewAchievment = prefs.getBool('pushnewAchievment') ?? true;
 
-    notifyAchievmentfasterricht =
-        prefs.getBool('Achievmentfasterricht') ?? true;
-  });
-}
-
+      notifyAchievmentfasterricht =
+          prefs.getBool('Achievmentfasterricht') ?? true;
+    });
+  }
 }
 // Design Wichtig und Richtig
 
 class Design extends StatefulWidget {
   final Function(ThemeMode) onThemeChanged;
-  const Design({super.key,
-   required this.onThemeChanged});
-
+  const Design({super.key, required this.onThemeChanged});
 
   @override
   State<Design> createState() => _Design();
 }
 
 class _Design extends State<Design> {
-
-
-
   @override
   void initState() {
     super.initState();
-
   }
-  
+
   Widget build(BuildContext content) {
     return Scaffold(
-      appBar: AppBar(
-        title: const
-        Text("Design & Stil"),
-      ),
+      appBar: AppBar(title: const Text("Design & Stil")),
       body: ListView(
         children: [
-
           ListTile(
-           leading: const Icon(Icons.design_services),
-           title: const Text("Dark Mode"),
-           subtitle: const Text("Meine Empfehlung: Immer an"),
-           trailing: Switch(
-             value: Theme.of(context).brightness == Brightness.dark,
-             onChanged: (Value) {
-               if (Value) {
-                 widget.onThemeChanged(ThemeMode.dark);
-
-               }
-               else {
-                 widget.onThemeChanged(ThemeMode.light);
-               }
-               print("Dark Mode Settings Aktualliesiert auf: ThemeMMode = $ThemeMode.");
-             },
-           ),
+            leading: const Icon(Icons.design_services),
+            title: const Text("Dark Mode"),
+            subtitle: const Text("Meine Empfehlung: Immer an"),
+            trailing: Switch(
+              value: Theme.of(context).brightness == Brightness.dark,
+              onChanged: (Value) {
+                if (Value) {
+                  widget.onThemeChanged(ThemeMode.dark);
+                } else {
+                  widget.onThemeChanged(ThemeMode.light);
+                }
+                print(
+                  "Dark Mode Settings Aktualliesiert auf: ThemeMMode = $ThemeMode.",
+                );
+              },
+            ),
           ),
-
         ],
       ),
     );
   }
-
-
 }
 
 class AdvancedSettings extends StatefulWidget {
@@ -471,7 +446,6 @@ class AdvancedSettings extends StatefulWidget {
 }
 
 class _AdvancedSettingsState extends State<AdvancedSettings> {
-
   bool achievementDownloadOverWifi = true;
 
   @override
@@ -483,12 +457,9 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Erweiterte Einstellungen"),
-      ),
+      appBar: AppBar(title: const Text("Erweiterte Einstellungen")),
       body: ListView(
         children: [
-
           SwitchListTile(
             secondary: const Icon(Icons.wifi),
             title: const Text("Achievements WLAN Download"),
@@ -501,21 +472,19 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
                 achievementDownloadOverWifi = value;
               });
               saveSettings();
-              print("Achievment Wlan Einstellungen Aktualliesiert: Achievments über Wlan Downlaoden = $achievementDownloadOverWifi");
+              print(
+                "Achievment Wlan Einstellungen Aktualliesiert: Achievments über Wlan Downlaoden = $achievementDownloadOverWifi",
+              );
             },
           ),
           const Divider(),
-        Padding(
-         padding: const EdgeInsets.all(16.0),
-         child: Text(
-          "Dev / Debuging Settings",
-          style:
-          TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              "Dev / Debuging Settings",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
           ),
-          ),
-        ),
 
           // Cache
           ListTile(
@@ -525,19 +494,16 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
               await UserLocalServices.clearAchievementCache();
 
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text("Achievement Cache gelöscht"),
-                ),
+                const SnackBar(content: Text("Achievement Cache gelöscht")),
               );
             },
-          )
-          
-
+          ),
         ],
       ),
     );
   }
-   //settingspeichern
+
+  //settingspeichern
   Future<void> saveSettings() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(
@@ -545,7 +511,8 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
       achievementDownloadOverWifi,
     );
   }
-   //Einstellungenladen
+
+  //Einstellungenladen
   Future<void> loadSettings() async {
     final prefs = await SharedPreferences.getInstance();
 
@@ -554,4 +521,224 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
           prefs.getBool('achievementDownloadOverWifi') ?? true;
     });
   }
+}
+
+// About Seite
+class AboutPage extends StatelessWidget {
+  const AboutPage({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Über die App')),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              //Icon
+              child: Container(
+                width: 80,
+                height: 80,
+                decoration: BoxDecoration(
+                  // Lädt Icon
+                  borderRadius: BorderRadius.circular(16),
+                  image: DecorationImage(
+                    image: AssetImage('assets/icon.png'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+            // App Name
+            Center(
+              child: Text(
+                AppConfig.appname,
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+            ),
+            SizedBox(height: 10),
+
+            // Version
+            Center(
+              child: Text(
+                AppConfig.version,
+                style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+              ),
+            ),
+            SizedBox(height: 30),
+
+            // Beschreibung
+            Text(
+              'Über die App:',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 10),
+            Text(
+              'Up Mark motiviert dich, echte Ziele im Leben zu erreichen! '
+              'Sammle Achievements im Echten Leben! '
+              'Teile deine Erfolge mit Freunden und lass dich von ihren Achievements inspirieren.',
+              style: TextStyle(fontSize: 16),
+            ),
+            SizedBox(height: 30),
+
+            VimeoVideo(),
+
+            SizedBox(height: 30),
+
+            Text(
+              'Links:',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+
+            SizedBox(height: 10),
+
+            linkTile(
+              'Webseite',
+              'https://farin25.github.io/real-live-achievement/',
+            ),
+            linkTile(
+              'Eigenes Achievment Einreichen',
+              'https://farin25.github.io/real-live-achievement/docs/Dein_Achievment/',
+            ),
+            linkTile(
+              'Newsletter',
+              'https://farin25.github.io/real-live-achievement/docs/newsletter',
+            ),
+            linkTile(
+              'SourceCode',
+              'https://github.com/Farin25/real-live-achievement',
+            ),
+            linkTile(
+              'Changelog',
+              'https://farin25.github.io/real-live-achievement/docs/Changelog',
+            ),
+
+            SizedBox(height: 10),
+
+            Text(
+              'Rechtliches:',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            linkTile(
+              'Impressum',
+              'https://farin25.github.io/real-live-achievement/docs/Rechtliches/impressum/',
+            ),
+            linkTile(
+              'Datenschutzerklärung',
+              'https://github.com/Farin25/real-live-achievement',
+            ),
+            linkTile(
+              'Algemeine Gschäfts Bedingungen',
+              'http://localhost:3000/real-live-achievement/docs/Rechtliches/agb',
+            ),
+            linkTile(
+              'FAQ',
+              'https://farin25.github.io/real-live-achievement/docs/FAQ',
+            ),
+
+            //MAil
+            linkTile(
+              'Support kontaktieren oder Fehler melden',
+              'mailto:Achievments@holzideen.org?subject=Support%20RealLiveAchievement&body=Hallo,%0A%0Aich%20habe%20folgendes%20Problem:%0A',
+            ),
+
+            SizedBox(height: 10),
+
+            Text(
+              'Dankesagung:',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 10),
+
+            RichText(
+              text: TextSpan(
+                style: TextStyle(fontSize: 16, color: Colors.white),
+                children: [
+                  TextSpan(
+                    text:
+                        'Ein großer dank geht an alle tester der Beta Version und an alle Lehrer*innen die an uns Geglaubt haben und es ermöglich haben dieses Projekt im rahmen den Projekt orientiertes lernen zu machen. Wir bedanken uns auch bei allen die Eine Idee für ein Acheievment Eingereicht haben un und Feedback zur App gegeben haben. ',
+                  ),
+                ],
+              ),
+            ),
+
+            SizedBox(height: 20),
+
+            Text(
+              'Entwickler / Herausgeber:',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 20),
+            RichText(
+              text: TextSpan(
+                style: TextStyle(fontSize: 16, color: Colors.black),
+                children: [
+                  TextSpan(
+                    text: 'Farin Langner',
+                    style: TextStyle(
+                      color: Colors.blue,
+                      decoration: TextDecoration.underline,
+                    ),
+                    recognizer: TapGestureRecognizer()
+                      ..onTap = () async {
+                        final Uri url = Uri.parse('https://farin-langner.de');
+                        await launchUrl(url, mode: LaunchMode.platformDefault);
+                      },
+                  ),
+
+                  TextSpan(
+                    text: ' & ',
+                    style: TextStyle(
+                      color:
+                          Theme.of(context).textTheme.bodyLarge?.color ??
+                          Colors.black,
+                    ),
+                  ),
+                  TextSpan(
+                    text: 'Liam Selent',
+                    style: TextStyle(
+                      color:
+                          Theme.of(context).textTheme.bodyLarge?.color ??
+                          Colors.black,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            SizedBox(height: 30), // Footer mit Abstand 30px
+            Text(
+              '© 2025-2026 Farin Langner & Liam Selent Alle Rechte Vorbehalten',
+              style: TextStyle(
+                fontSize: 14,
+                color:
+                    Theme.of(context).textTheme.bodyLarge?.color ??
+                    Colors.black,
+              ),
+            ),
+          ],
+        ),
+      ),
+      //
+    );
+  }
+}
+
+Widget linkTile(String title, String url) {
+  return ListTile(
+    contentPadding: EdgeInsets.zero,
+    title: Text(
+      title,
+      style: TextStyle(
+        color: Colors.blue,
+        decoration: TextDecoration.underline,
+      ),
+    ),
+    onTap: () async {
+      final Uri uri = Uri.parse(url);
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    },
+  );
 }
