@@ -231,8 +231,9 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 }
 
-//App BEnachrichtigungen untersetings:
-
+//--------------------------
+//--------Notifications------
+//--------------------------
 class Appmessages extends StatefulWidget {
   const Appmessages({super.key});
 
@@ -245,6 +246,7 @@ class _Appmessages extends State<Appmessages> {
   bool notifyFriendnewAchievment = true;
   bool notifynewAchievment = true;
   bool notifyAchievmentfasterricht = true;
+  bool notifyemailbirthday = true;
 
   // für Master Schalter
   bool get notifyAll =>
@@ -361,7 +363,31 @@ class _Appmessages extends State<Appmessages> {
               );
             },
           ),
-
+          const Divider(),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              "Email Benachrichtigungen",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ),
+          const Divider(),
+          SwitchListTile(
+            title: const Text("Geburstagswünsche"),
+            subtitle: const Text(
+              "Erhalte an deinem Geburstag eine email von uns.",
+            ),
+            value: notifyemailbirthday,
+            onChanged: (value) {
+              setState(() {
+                notifyemailbirthday = value;
+              });
+              saveSettings();
+              print(
+                "Benachrichtigungs Einstellungen Aktualliesiert: notifyemailbirthday = $notifyemailbirthday",
+              );
+            },
+          ),
           const Divider(),
         ],
       ),
@@ -374,7 +400,11 @@ class _Appmessages extends State<Appmessages> {
     await prefs.setBool('pushnewFriendship', notifynewFriendship);
     await prefs.setBool('pushFriendnewAchievment', notifyFriendnewAchievment);
     await prefs.setBool('pushnewAchievment', notifynewAchievment);
-    await prefs.setBool('Achievmentfasterricht', notifyAchievmentfasterricht);
+    await prefs.setBool(
+      'pufhAchievmentfasterricht',
+      notifyAchievmentfasterricht,
+    );
+    await prefs.setBool('notifyemailbirthday', notifyemailbirthday);
   }
 
   Future<void> loadSettings() async {
@@ -390,6 +420,8 @@ class _Appmessages extends State<Appmessages> {
 
       notifyAchievmentfasterricht =
           prefs.getBool('Achievmentfasterricht') ?? true;
+
+      notifyemailbirthday = prefs.getBool('notifyemailbirthday') ?? true;
     });
   }
 }

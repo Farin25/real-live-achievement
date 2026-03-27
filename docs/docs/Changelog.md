@@ -4,7 +4,6 @@
 - Push Systembenachrichtigungen evtl. mit firebase(Farin)
 - DB Policys (Farin & Liam)
 - Ladebalken Bug wenn man die app ohne acount bzw. Demo mode nutzt fixen (Farin)
-- EN Versiond er Docs bis zur MAkerfaire fertig Stellen(Liam ~ Farin)
 - App in Up mark umbennenen(Farin)
 - Bilder in docs richtig laden
 - Acount daten in den settings aus chache laden (Farin)
@@ -18,7 +17,7 @@
 - Rechtschreibfehler aus Webseite entfernen !vor Ferien(Markus & Farin)
 - Email Templates in Supabase mit den aus dem repo ersetzen(Liam ~ Farin)
 - Achievment Einreiche Formular Fixen(Farin)
-- Achievment Logik & System(Farin)
+- **Achievment Logik & System(Farin)**
 
 ### Idden & nice to haves bzw. in Planung
 - Dankesagung seite
@@ -26,11 +25,14 @@
 - Keine Nachnahmen/Vornahmen pflicht = Peronenbezogene Daten minimiren(Privacy First konzept)
 - Umbennenung in Up Mark
 - Eigene Domain
+- Benachtichtigungen
+
 
 ## 27.02.26
 - sing up klasse in login.dart verschoben und singup.dart gelöscht(Farin).
 - Dateinamen oben einkommentiert (Farin).
 - licens.dart gelöscht und lizenz seite in settings verschoben(Farin).
+- Settings für email benachrichtigung hinzugefügt(Farin).
 
 ## 26.03.2026
 - **Code Aufgerümt und unnötigen stuff entfernt:**
