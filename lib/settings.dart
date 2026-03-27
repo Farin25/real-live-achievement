@@ -1,6 +1,6 @@
+//settings.dart
 import 'package:flutter/material.dart';
 import 'acount.dart';
-import 'licenses.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -741,4 +741,19 @@ Widget linkTile(String title, String url) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
     },
   );
+}
+
+// Lizenzen Seite
+class LicensesPage extends StatelessWidget {
+  const LicensesPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: LicensePage(
+        applicationName: AppConfig.appname,
+        applicationVersion: AppConfig.version,
+      ),
+    );
+  }
 }

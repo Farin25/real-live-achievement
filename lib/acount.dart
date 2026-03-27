@@ -1,3 +1,4 @@
+//Acount.dart
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'user_SessionManager.dart';
@@ -11,15 +12,14 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
-
   Map<String, dynamic>? profile;
   String? _usernameError;
   String formatDate(String? date) {
-  if (date == null) return "";
+    if (date == null) return "";
 
-  final parsed = DateTime.parse(date);
-  return DateFormat('dd.MM.yyyy').format(parsed);
-}
+    final parsed = DateTime.parse(date);
+    return DateFormat('dd.MM.yyyy').format(parsed);
+  }
 
   @override
   void initState() {
@@ -31,13 +31,10 @@ class _AccountPageState extends State<AccountPage> {
   final _lastNameController = TextEditingController();
   final _usernameController = TextEditingController();
   final _birthdateController = TextEditingController();
-  
-
 
   Future<void> _loadProfile() async {
     final supabase = Supabase.instance.client;
     final user = supabase.auth.currentUser;
-
 
     if (user != null) {
       final data = await supabase
@@ -52,23 +49,25 @@ class _AccountPageState extends State<AccountPage> {
         _lastNameController.text = data['last_name'] ?? '';
         _usernameController.text = data['username'] ?? '';
         _birthdateController.text = data['birthdate'] ?? '';
-
       });
     }
   }
 
-  Future<void> _saveProfile() async { 
+  Future<void> _saveProfile() async {
     final supabase = Supabase.instance.client;
     final user = supabase.auth.currentUser;
-    
-    if (user ==  null) return;
 
-    await supabase.from('profiles').update({
-      'first_name':_firstNameController.text,
-      'last_name':_lastNameController.text,
-      'username':_usernameController.text,
-      'birthdate': _birthdateController.text,
-    }).eq('id', user.id);
+    if (user == null) return;
+
+    await supabase
+        .from('profiles')
+        .update({
+          'first_name': _firstNameController.text,
+          'last_name': _lastNameController.text,
+          'username': _usernameController.text,
+          'birthdate': _birthdateController.text,
+        })
+        .eq('id', user.id);
   }
 
   @override
@@ -76,14 +75,11 @@ class _AccountPageState extends State<AccountPage> {
     final supabase = Supabase.instance.client;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Account'),
-      ),
+      appBar: AppBar(title: const Text('Account')),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-
             /// PROFILE HEADER
             profile == null
                 ? const Center(child: CircularProgressIndicator())
@@ -91,8 +87,7 @@ class _AccountPageState extends State<AccountPage> {
                     children: [
                       CircleAvatar(
                         radius: 30,
-                        backgroundColor:
-                            Theme.of(context).primaryColor,
+                        backgroundColor: Theme.of(context).primaryColor,
                         child: const Icon(
                           Icons.person,
                           size: 35,
@@ -101,8 +96,7 @@ class _AccountPageState extends State<AccountPage> {
                       ),
                       const SizedBox(width: 15),
                       Column(
-                        crossAxisAlignment:
-                            CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             profile!['username'] ?? '',
@@ -124,84 +118,86 @@ class _AccountPageState extends State<AccountPage> {
                   ),
 
             const SizedBox(height: 30),
-            // Profiel bzw. Acount Settings:
 
+            // Profiel bzw. Acount Settings:
             Expanded(
               child: profile == null
-              ? const SizedBox()
-              : ListView(
-                children: [
+                  ? const SizedBox()
+                  : ListView(
+                      children: [
+                        TextField(
+                          controller: _firstNameController,
+                          decoration: const InputDecoration(
+                            labelText: 'Vornahme',
+                          ),
+                        ),
+                        const SizedBox(height: 15),
+                        TextField(
+                          controller: _lastNameController,
+                          decoration: const InputDecoration(
+                            labelText: 'Nachname',
+                          ),
+                        ),
+                        const SizedBox(height: 15),
+                        TextField(
+                          controller: _usernameController,
+                          decoration: InputDecoration(
+                            labelText: 'username ',
+                            errorText: _usernameError,
+                          ),
+                          onChanged: (_) =>
+                              setState(() => _usernameError = null),
+                        ),
+                        const SizedBox(height: 15),
+                        TextField(
+                          controller: _birthdateController,
+                          readOnly: true,
+                          decoration: const InputDecoration(
+                            labelText: 'Geburtsdatum',
+                            prefix: Icon(Icons.calendar_today),
+                            border: OutlineInputBorder(),
+                          ),
+                          onTap: () async {
+                            DateTime? pickedDate = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime(1900),
+                              lastDate: DateTime.now(),
+                            );
 
-                TextField(
-                  controller: _firstNameController,
-                  decoration: const InputDecoration(
-                    labelText: 'Vornahme',
-                  ),
-                ),
-                const SizedBox(height: 15,),
-                TextField(
-                  controller: _lastNameController,
-                  decoration: const InputDecoration(
-                    labelText: 'Nachname',
-                  ),
-                ),
-                const SizedBox(height: 15,),
-                TextField(
-                  controller: _usernameController,
-                  decoration: InputDecoration(
-                    labelText: 'username ',
-                    errorText: _usernameError 
-                  ),
-                  onChanged: (_) => setState(() => _usernameError = null),
-                ),
-                const SizedBox(height: 15,),
-                TextField(
-                  controller: _birthdateController,
-                  readOnly: true,
-                  decoration: const InputDecoration(
-                    labelText:'Geburtsdatum',
-                   prefix: Icon(Icons.calendar_today),
-                   border: OutlineInputBorder(), 
-                  ),
-                  onTap: () async {
-                    DateTime? pickedDate = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(1900),
-                      lastDate: DateTime.now(),
-                    );
+                            if (pickedDate != null) {
+                              String formattedDate = DateFormat(
+                                'yyyy-MM-dd',
+                              ).format(pickedDate);
 
-                    if (pickedDate != null) {
-                      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                              setState(() {
+                                _birthdateController.text = formattedDate;
+                              });
+                            }
+                          },
+                        ),
+                        const SizedBox(height: 25),
 
-                      setState(() {
-                        _birthdateController.text = formattedDate;
-                      });
-                    }
-                  },
-                ),
-                const SizedBox(height: 25,),
-
-                ElevatedButton(onPressed: _saveProfile, child: const Text('änderungen Speichern'),
-                )
-              ],
+                        ElevatedButton(
+                          onPressed: _saveProfile,
+                          child: const Text('änderungen Speichern'),
+                        ),
+                      ],
+                    ),
             ),
-           ),
-                     if (profile != null) ...[
-            Text(
-              "Letzte änderung: ${formatDate(profile!['updated_at'])}",
-              style: TextStyle(color: Colors.grey[600]),
-           ),
-           const SizedBox(height: 5,),
+            if (profile != null) ...[
+              Text(
+                "Letzte änderung: ${formatDate(profile!['updated_at'])}",
+                style: TextStyle(color: Colors.grey[600]),
+              ),
+              const SizedBox(height: 5),
 
-           Text(
-            "Account erstellt: ${formatDate(profile!['created_at'])}",
-            style: TextStyle(color: Colors.grey[600]),
-           ),
-          const SizedBox(height: 10,),
-           ],
-
-           
+              Text(
+                "Account erstellt: ${formatDate(profile!['created_at'])}",
+                style: TextStyle(color: Colors.grey[600]),
+              ),
+              const SizedBox(height: 10),
+            ],
 
             /// LOGOUT BUTTON
             SizedBox(
@@ -239,8 +235,7 @@ class _AccountPageState extends State<AccountPage> {
                         ),
                         TextButton(
                           onPressed: () async {
-                            final user =
-                                supabase.auth.currentUser;
+                            final user = supabase.auth.currentUser;
 
                             if (user != null) {
                               await supabase.rpc(
@@ -256,12 +251,10 @@ class _AccountPageState extends State<AccountPage> {
                           },
                           child: const Text(
                             'Löschen',
-                            style:
-                                TextStyle(color: Colors.red),
+                            style: TextStyle(color: Colors.red),
                           ),
                         ),
-                        const SizedBox(height: 15,),
-
+                        const SizedBox(height: 15),
                       ],
                     ),
                   );
@@ -269,10 +262,9 @@ class _AccountPageState extends State<AccountPage> {
                 child: const Text('Account löschen'),
               ),
             ),
-
-         ]
+          ],
         ),
       ),
     );
-   }
   }
+}

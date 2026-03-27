@@ -1,3 +1,4 @@
+//achievments.dart
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 // https://pub.dev/packages/shared_preferences
@@ -5,7 +6,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 //Für Nur Wlan download
 import 'package:connectivity_plus/connectivity_plus.dart';
-
 
 class AchievmentSeite extends StatefulWidget {
   const AchievmentSeite({super.key});
@@ -26,17 +26,11 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
     _loadAchievements();
   }
 
-
-
-
-
   Future<void> _loadAchievements() async {
-
-   final connectivityResult = await Connectivity().checkConnectivity();
-   final prefs = await SharedPreferences.getInstance();
-   final achievementDownloadOverWifi =
-    prefs.getBool('achievementDownloadOverWifi') ?? true;
-
+    final connectivityResult = await Connectivity().checkConnectivity();
+    final prefs = await SharedPreferences.getInstance();
+    final achievementDownloadOverWifi =
+        prefs.getBool('achievementDownloadOverWifi') ?? true;
 
     if (achievementDownloadOverWifi &&
         connectivityResult != ConnectivityResult.wifi) {
@@ -44,17 +38,13 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
       return;
     }
 
-
     final supabase = Supabase.instance.client;
     final user = supabase.auth.currentUser;
-
 
     if (user == null) return;
 
     try {
-      final achievements = await supabase
-          .from('achievements')
-          .select();
+      final achievements = await supabase.from('achievements').select();
 
       final userAchievements = await supabase
           .from('user_achievements')
@@ -63,23 +53,17 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
 
       final prefs = await SharedPreferences.getInstance();
 
-       await prefs.setString(
-          'cached_achievements',
-          jsonEncode(achievements),
-        );
+      await prefs.setString('cached_achievements', jsonEncode(achievements));
 
       setState(() {
         _achievements = achievements;
         _userAchievements = userAchievements;
         _isLoading = false;
       });
-
     } catch (e) {
       print("Fehler beim achievments Laden: $e");
     }
   }
-
-  
 
   Future<void> _loadlocalAchievments() async {
     final prefs = await SharedPreferences.getInstance();
@@ -102,7 +86,6 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
           : ListView.builder(
               itemCount: _achievements.length,
               itemBuilder: (context, index) {
-
                 final achievement = _achievements[index];
 
                 final unlocked = _userAchievements.any(

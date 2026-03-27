@@ -1,3 +1,4 @@
+//navbar.dart
 import 'package:flutter/material.dart';
 import 'package:real_live_achievments/achievments.dart';
 import 'package:real_live_achievments/home.dart';
@@ -5,22 +6,17 @@ import 'package:real_live_achievments/settings.dart';
 import 'package:real_live_achievments/social.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
-
-
-
-
 class GoogleBottomBar extends StatefulWidget {
   final int initalIndex;
   final Function(ThemeMode) onThemeChanged;
- final Function(int) onIndexChanged;
-  
+  final Function(int) onIndexChanged;
 
-  const GoogleBottomBar({super.key,
-  required this.onThemeChanged,
-  required this.initalIndex,
-  required this.onIndexChanged,
+  const GoogleBottomBar({
+    super.key,
+    required this.onThemeChanged,
+    required this.initalIndex,
+    required this.onIndexChanged,
   });
-  
 
   @override
   State<GoogleBottomBar> createState() => _GoogleBottomBarState();
@@ -29,25 +25,21 @@ class GoogleBottomBar extends StatefulWidget {
 class _GoogleBottomBarState extends State<GoogleBottomBar> {
   late int _selectedIndex;
 
-
-
   @override
   void initState() {
     super.initState();
     _selectedIndex = widget.initalIndex;
   }
-  Widget build(BuildContext context) {
 
+  Widget build(BuildContext context) {
     final pages = [
-    NewsFeedPage1(),
-    AchievmentSeite(),
-    Socialsite(),
-    SettingsPage(
-      onThemeChanged: widget.onThemeChanged,
-    ),
-  ];
+      NewsFeedPage1(),
+      AchievmentSeite(),
+      Socialsite(),
+      SettingsPage(onThemeChanged: widget.onThemeChanged),
+    ];
     return Scaffold(
-     // appBar: AppBar(title: const Text('Google Bottom Bar')), // Auskomentiert Weil app bar ist auf jeder seite festgelegt
+      // appBar: AppBar(title: const Text('Google Bottom Bar')), // Auskomentiert Weil app bar ist auf jeder seite festgelegt
       body: pages[_selectedIndex],
       bottomNavigationBar: SalomonBottomBar(
         currentIndex: _selectedIndex,

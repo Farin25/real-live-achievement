@@ -27,12 +27,19 @@
 - Umbennenung in Up Mark
 - Eigene Domain
 
+## 27.02.26
+- sing up klasse in login.dart verschoben und singup.dart gelöscht(Farin).
+- Dateinamen oben einkommentiert (Farin).
+- licens.dart gelöscht und lizenz seite in settings verschoben(Farin).
+
 ## 26.03.2026
 - **Code Aufgerümt und unnötigen stuff entfernt:**
 - Nervige und unötige komentare & Notizen aus code entfernt(Farin)
 - Eine Zentrale Servics.dart für services und helpers(Farin)
 - Unnötige Dateien Entfernt und addins.dart mit services.dart zusammengelegt(Farin)
 - about.dart gelöscht und AboutPage in Settings verschoben (Farin)
+- Text Auf Sponsor Seite ergäntz mit domain info(Farin)
+- 
 
 ## 23.03.2026
 - Kleine Formulierungsänderungen auf der Landing Page(Liam)
@@ -206,7 +213,9 @@ Die genauen änderungen sind auf Github ind den Commits zu [finden](https://gith
 ## Werbemaßnahmenn
 
 ### Ideen und in Umsetzung
+- Werbeplakate ÜBERALL
 - Kinowerbung
+- **JUFO 2027**
 
 
 
@@ -214,7 +223,7 @@ Die genauen änderungen sind auf Github ind den Commits zu [finden](https://gith
 - Up Mark Präsentation in der Schule(Liam & Farin) 27.02.2026
 - Artikel für Schülerzeitung(Liam) 16.03.2026
 - Werbe Plakate in der Schule Aufgehangen(Liam & Farin) 
-- Werbe Plakate auf Makerfaire aufgehangen(Farin) 14.03.2026
+- Werbe Plakate auf Makerfaire aufgehangen(Sarah & Farin) 14.03.2026
 - Präsenz auf der Makerfaire (Liam & Farin) 15+15.03.2026
 - Präsentation von Up Mark auf der Makerfaire(Farin)15.03.2026
 - Newsletter (Farin) 08.03.2026
@@ -223,6 +232,8 @@ Die genauen änderungen sind auf Github ind den Commits zu [finden](https://gith
 - Vimeo Acount banner (Liam)
 - Instagramm Acount (Liam)
 - Vimeo Acount (Farin)
+- Werbe Plakate in der DASA(Sarah & Farin)
+- User Bindendene Achievments.
 
 ## Gescheiterte Werbemaßnahmen
 

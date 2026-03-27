@@ -1,3 +1,4 @@
+//home.dart
 import 'package:flutter/material.dart';
 
 class NewsFeedPage1 extends StatelessWidget {
@@ -6,10 +7,7 @@ class NewsFeedPage1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Activity Feed"),
-        centerTitle: false,
-      ),
+      appBar: AppBar(title: const Text("Activity Feed"), centerTitle: false),
       body: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 520),
@@ -40,9 +38,7 @@ class _FeedCard extends StatelessWidget {
     return Card(
       elevation: 2,
       clipBehavior: Clip.antiAlias,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Padding(
         padding: const EdgeInsets.all(14),
         child: Column(
@@ -102,10 +98,7 @@ class _FeedCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
                 child: AspectRatio(
                   aspectRatio: 16 / 9,
-                  child: Image.network(
-                    item.imageUrl!,
-                    fit: BoxFit.cover,
-                  ),
+                  child: Image.network(item.imageUrl!, fit: BoxFit.cover),
                 ),
               ),
             ],
@@ -193,10 +186,7 @@ class _FeedTypeChip extends StatelessWidget {
         borderRadius: BorderRadius.circular(999),
         color: Theme.of(context).colorScheme.surfaceContainerHighest,
       ),
-      child: Text(
-        _label(type),
-        style: Theme.of(context).textTheme.labelMedium,
-      ),
+      child: Text(_label(type), style: Theme.of(context).textTheme.labelMedium),
     );
   }
 
@@ -214,12 +204,7 @@ class _FeedTypeChip extends StatelessWidget {
   }
 }
 
-enum FeedType {
-  achievement,
-  friend,
-  unlock,
-  promo,
-}
+enum FeedType { achievement, friend, unlock, promo }
 
 class FeedItem {
   final String title;
@@ -247,7 +232,8 @@ final List<FeedItem> _feedItems = [
   ),
   FeedItem(
     title: "Tutorial completed",
-    content: "Nice — your onboarding is finished. More achievements are now available.",
+    content:
+        "Nice — your onboarding is finished. More achievements are now available.",
     time: "12 min ago",
     type: FeedType.unlock,
   ),
