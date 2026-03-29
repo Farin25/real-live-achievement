@@ -27,6 +27,9 @@
 - Eigene Domain
 - Benachtichtigungen
 
+## 29.03.26
+- Up Mark is coming reel auf der ersten docs seite engebettet(Farin).
+- Erste datein für engine und grundgerüst angelegt(Farin).
 
 ## 27.02.26
 - sing up klasse in login.dart verschoben und singup.dart gelöscht(Farin).

@@ -13,6 +13,14 @@ sidebar_position: 1
         width="640" height="360" frameborder="0"
         allow="autoplay; fullscreen" allowfullscreen>
 </iframe>
+<iframe
+  src="https://www.instagram.com/reel/DWBbW3cAr7J/embed"
+  width="400"
+  height="480"
+  frameBorder="0"
+  scrolling="no"
+  allowTransparency={true}
+/>
 
 ## Technical Specifications
 
