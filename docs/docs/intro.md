@@ -13,12 +13,12 @@ sidebar_position: 1
         allow="autoplay; fullscreen" allowfullscreen>
 </iframe>
 <iframe
-  src="https://player.vimeo.com/video/1167330665"
-  width="100%"
-  height="360"
-  allow="autoplay; fullscreen"
-  allowFullScreen
-  style={{ border: "none", borderRadius: "12px" }}
+  src="https://www.instagram.com/reel/DWBbW3cAr7J/embed"
+  width="400"
+  height="480"
+  frameBorder="0"
+  scrolling="no"
+  allowTransparency={true}
 />
 
 
