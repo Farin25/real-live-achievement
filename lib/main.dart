@@ -5,6 +5,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'login.dart';
 import 'navbar.dart';
 import 'user_SessionManager.dart';
+import 'engine_helpers.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,6 +15,10 @@ Future<void> main() async {
     url: dotenv.env['SUPABASE_URL']!,
     anonKey: dotenv.env['SUPABASE_ANON_KEY']!,
   );
+
+  final engineRunner = await EngineRunner.create();
+  engineRunner.startWatching();
+  EngineHelpers();
 
   runApp(const MyApp());
 }

@@ -452,7 +452,7 @@ class _Design extends State<Design> {
             subtitle: const Text("Meine Empfehlung: Immer an"),
             trailing: Switch(
               value: Theme.of(context).brightness == Brightness.dark,
-              onChanged: (Value) {
+              onChanged: (Value) async {
                 if (Value) {
                   widget.onThemeChanged(ThemeMode.dark);
                 } else {
@@ -460,6 +460,10 @@ class _Design extends State<Design> {
                 }
                 print(
                   "Dark Mode Settings Aktualliesiert auf: ThemeMMode = $ThemeMode.",
+                );
+                (await SharedPreferences.getInstance()).setInt(
+                  'themeChangeTime',
+                  DateTime.now().millisecondsSinceEpoch,
                 );
               },
             ),
@@ -470,6 +474,9 @@ class _Design extends State<Design> {
   }
 }
 
+//---------------------------------------
+//-------Erweitertte Einstellungen-------
+//---------------------------------------
 class AdvancedSettings extends StatefulWidget {
   const AdvancedSettings({super.key});
 
@@ -479,6 +486,7 @@ class AdvancedSettings extends StatefulWidget {
 
 class _AdvancedSettingsState extends State<AdvancedSettings> {
   bool achievementDownloadOverWifi = true;
+  int engineTimerMinutes = 5; // Standardwert
 
   @override
   void initState() {
@@ -492,42 +500,59 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
       appBar: AppBar(title: const Text("Erweiterte Einstellungen")),
       body: ListView(
         children: [
+          // WLAN Switch
           SwitchListTile(
             secondary: const Icon(Icons.wifi),
             title: const Text("Achievements WLAN Download"),
             subtitle: const Text(
-              "Achievements nur bei WLAN Verbindung  herunterladen",
+              "Achievements nur bei WLAN Verbindung herunterladen",
             ),
             value: achievementDownloadOverWifi,
             onChanged: (value) {
-              setState(() {
-                achievementDownloadOverWifi = value;
-              });
+              setState(() => achievementDownloadOverWifi = value);
               saveSettings();
-              print(
-                "Achievment Wlan Einstellungen Aktualliesiert: Achievments über Wlan Downlaoden = $achievementDownloadOverWifi",
-              );
             },
           ),
           const Divider(),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              "Dev / Debuging Settings",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-          ),
 
-          // Cache
+          // Timer Setting
           ListTile(
-            leading: const Icon(Icons.delete),
-            title: const Text("Achievement Cache leeren"),
+            leading: const Icon(Icons.timer),
+            title: const Text("Engine Timer (Minuten)"),
+            subtitle: Text("Aktuell: $engineTimerMinutes Minuten"),
             onTap: () async {
-              await UserLocalServices.clearAchievementCache();
-
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text("Achievement Cache gelöscht")),
+              final newValue = await showDialog<int>(
+                context: context,
+                builder: (context) {
+                  int tempValue = engineTimerMinutes;
+                  return AlertDialog(
+                    title: const Text("Achievments Prüfen"),
+                    content: TextField(
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(labelText: "Minuten"),
+                      onChanged: (val) {
+                        tempValue = int.tryParse(val) ?? engineTimerMinutes;
+                      },
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, null),
+                        child: const Text("Abbrechen"),
+                      ),
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, tempValue),
+                        child: const Text("Speichern"),
+                      ),
+                    ],
+                  );
+                },
               );
+
+              if (newValue != null) {
+                setState(() => engineTimerMinutes = newValue);
+                saveSettings();
+                print("Engine Timer auf $engineTimerMinutes Minuten gesetzt");
+              }
             },
           ),
         ],
@@ -535,22 +560,21 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
     );
   }
 
-  //settingspeichern
   Future<void> saveSettings() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(
       'achievementDownloadOverWifi',
       achievementDownloadOverWifi,
     );
+    await prefs.setInt('engineTimerMinutes', engineTimerMinutes);
   }
 
-  //Einstellungenladen
   Future<void> loadSettings() async {
     final prefs = await SharedPreferences.getInstance();
-
     setState(() {
       achievementDownloadOverWifi =
           prefs.getBool('achievementDownloadOverWifi') ?? true;
+      engineTimerMinutes = prefs.getInt('engineTimerMinutes') ?? 30;
     });
   }
 }

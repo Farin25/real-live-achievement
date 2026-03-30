@@ -27,6 +27,10 @@
 - Eigene Domain
 - Benachtichtigungen
 
+## 30.03.26
+- Achievment runner mit Timer zum engine starte(Farin).
+- Einstellungen zumintervall in dem die Achievments geprüft werden(Farin).
+
 ## 29.03.26
 - Up Mark is coming reel auf der ersten docs seite engebettet(Farin).
 - Erste datein für engine und grundgerüst angelegt(Farin).
