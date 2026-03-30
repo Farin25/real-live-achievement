@@ -30,6 +30,8 @@
 ## 30.03.26
 - Achievment runner mit Timer zum engine starte(Farin).
 - Einstellungen zumintervall in dem die Achievments geprüft werden(Farin).
+- Dev / Debug Settings in den erweiterten einstellungen hinzugefügt(Farin).
+- Boutton um die Engine Manuell zu starten(AI, Farim).
 
 ## 29.03.26
 - Up Mark is coming reel auf der ersten docs seite engebettet(Farin).
@@ -43,68 +45,68 @@
 
 ## 26.03.2026
 - **Code Aufgerümt und unnötigen stuff entfernt:**
-- Nervige und unötige komentare & Notizen aus code entfernt(Farin)
-- Eine Zentrale Servics.dart für services und helpers(Farin)
-- Unnötige Dateien Entfernt und addins.dart mit services.dart zusammengelegt(Farin)
-- about.dart gelöscht und AboutPage in Settings verschoben (Farin)
-- Text Auf Sponsor Seite ergäntz mit domain info(Farin)
-- 
+- Nervige und unötige komentare & Notizen aus code entfernt(Farin).
+- Eine Zentrale Servics.dart für services und helpers(Farin).
+- Unnötige Dateien Entfernt und addins.dart mit services.dart zusammengelegt(Farin).
+- about.dart gelöscht und AboutPage in Settings verschoben (Farin).
+- Text Auf Sponsor Seite ergäntz mit domain info(Farin).
 
 ## 23.03.2026
-- Kleine Formulierungsänderungen auf der Landing Page(Liam)
-- Werbemaßnahmen zu  Changelog hinzugefügt(Farin)
+- Kleine Formulierungsänderungen auf der Landing Page(Liam).
+- Werbemaßnahmen zu  Changelog hinzugefügt(Farin).
 
 ## 18.03.2026
 - Werbe Reel(Liam)
-- Tabelle mit Technischen informationen zur intro hinzugefügt de und en(Farin)
-- FAQ Fragen hinzugefügt de(Farin)
+- Tabelle mit Technischen informationen zur intro hinzugefügt de und en(Farin).
+- FAQ Fragen hinzugefügt de(Farin).
 
 
 ## 17.03.2026
-- Menü punkte auf englisch üersetzt(Farin)
-- Insta acount erstellt (liam)
-- Werbe Viedeo für Newsletter (Liam)
-- umfrage ergebniss seite entfernt (liam & Farin)
+- Menü punkte auf englisch üersetzt(Farin).
+- Insta acount erstellt (liam).
+- Werbe Viedeo für Newsletter (Liam).
+- umfrage ergebniss seite entfernt (liam & Farin).
 
 
 ## 12.03.2026
-- FAQ Frage hinzugefügt: "wird die appp kostenlos sein?"
-- Emojis aus docs entfernt(Liam & farin)
-- Prüfung ob nutzername vergeben beim ändern(Farin)
+- FAQ Frage hinzugefügt: "wird die appp kostenlos sein?"(Farin und Liam).
+- Emojis aus docs entfernt(Liam & farin).
+- Prüfung ob nutzername vergeben beim ändern(Farin).
 
 
 ## 11.03.2026
-- Sponsor und Patners seite Kontaktmöglichkeit und Info hinzugefügt (Liam & Farin)
-- Werbe Plakat für Makerfaire (Liam)
-- En Version der docs angefangen und die wichtigsten Seiten übersetzt(Farin)
-- Home Seite auf Hochglanz gebracuht und komplett neu gebaut mit dark und light mode support und mit Multilanguage Support(Ai, Farin)
+- Sponsor und Patners seite Kontaktmöglichkeit und Info hinzugefügt (Liam & Farin).
+- Werbe Plakat für Makerfaire (Liam).
+- En Version der docs angefangen und die wichtigsten Seiten übersetzt(Farin).
+- Home Seite auf Hochglanz gebracuht und komplett neu gebaut mit dark und light mode(AI, Farin).
+- Multilanguage Support für Webseite(Ai, Farin).
 
 ## 10.03.2026
-- Newsletter Email Templeates hinzugefügt(Farin)
-- Name in Email Templates zu Up mark geändert(Farin)
-- persönliche wilkommens email beim nesletter(Frain)
-- Upload NEwsletter emailtempleates(Farin)
+- Newsletter Email Templeates hinzugefügt(Farin).
+- Name in Email Templates zu Up mark geändert(Farin).
+- persönliche wilkommens email beim nesletter(Frain).
+- Upload NEwsletter emailtempleates(Farin).
 - **Docs aufgräumt**
-- Fotter Links Aktualisiert(Farin)
-- Unnötie oder unfertige seiten entfernt(Farin)
+- Fotter Links Aktualisiert(Farin).
+- Unnötie oder unfertige seiten entfernt(Farin).
 
 
 ## 09.03.2026
-- Artikel für Schülerzeitung geschrieben und Designt(Liam)
-- Feed neu designt für Werbebilder(AI, Farin)
-- Viedeo zu den Umfrageergebnissen (Liam)
-- Super key zu AboutPage hinzugefügt(Farin)
-- Auwertung der Umfargae hinzugefügt(AI, Liam & Farin)
+- Artikel für Schülerzeitung geschrieben und Designt(Liam).
+- Feed neu designt für Werbebilder(AI, Farin).
+- Viedeo zu den Umfrageergebnissen (Liam).
+- Super key zu AboutPage hinzugefügt(Farin).
+- Auwertung der Umfargae hinzugefügt(AI, Liam & Farin).
 
 
 ## 08.03.2026
-- Newsletter Eingerichtet(Farin)
-- Newsletter Anmelde Seite zu Docs hinzugefügt(Farin + AI)
+- Newsletter Eingerichtet(Farin).
+- Newsletter Anmelde Seite zu Docs hinzugefügt(Farin + AI).
 
 ## 05.03.2026
-- Dev/ Debuging Settings zu den Settings hinzugefügt(Farin)
-- Standort BErechtigungen hinzugefügt und neue dartei für standort services und erkennenung welche Stadt(Farin)
-- Ersten 100 Achievments in die DB Eingetragen (Farin)
+- Dev/ Debuging Settings zu den Settings hinzugefügt(Farin).
+- Standort BErechtigungen hinzugefügt und neue dartei für standort services und erkennenung welche Stadt(Farin).
+- Ersten 100 Achievments in die DB Eingetragen (Farin).
 - Umfrage 
 
 ## 04.03.2026

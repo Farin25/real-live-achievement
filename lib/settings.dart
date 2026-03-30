@@ -1,5 +1,6 @@
 //settings.dart
 import 'package:flutter/material.dart';
+import 'package:real_live_achievments/engine_helpers.dart';
 import 'acount.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -7,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'services.dart';
 import 'package:flutter/gestures.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'engine_helpers.dart';
 
 class AppConfig {
   static const String appname = "Up Mark";
@@ -553,6 +555,29 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
                 saveSettings();
                 print("Engine Timer auf $engineTimerMinutes Minuten gesetzt");
               }
+            },
+          ),
+          const Divider(),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              "Debug/Developer Settings",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ),
+          const Divider(),
+
+          ListTile(
+            leading: const Icon(Icons.play_arrow),
+            title: const Text("Engine manuell starten"),
+            subtitle: const Text("Startet die Achievement-Engine sofort"),
+            onTap: () {
+              runEngine();
+
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text("Engine wurde gestartet")),
+              );
+              print('Engine wurde Manuell gestartet');
             },
           ),
         ],
