@@ -553,6 +553,7 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
               if (newValue != null) {
                 setState(() => engineTimerMinutes = newValue);
                 saveSettings();
+                EngineRunner.instance?.restartTimer();
                 print("Engine Timer auf $engineTimerMinutes Minuten gesetzt");
               }
             },

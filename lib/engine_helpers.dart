@@ -4,6 +4,8 @@ import 'engine.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class EngineRunner {
+  static EngineRunner? instance;
+
   final int runEngineMinutes;
   Timer? _timer;
 
@@ -37,6 +39,18 @@ class EngineRunner {
 
     _timer = Timer.periodic(Duration(minutes: runEngineMinutes), (timer) {
       print('Der Timer ist abgelaufen');
+      runEngine();
+    });
+  }
+
+  void restartTimer() async {
+    _timer?.cancel();
+
+    final prefs = await SharedPreferences.getInstance();
+    final minutes = prefs.getInt('engineTimerMinutes') ?? 30;
+
+    _timer = Timer.periodic(Duration(minutes: minutes), (timer) {
+      print('Timer abgelaufen');
       runEngine();
     });
   }

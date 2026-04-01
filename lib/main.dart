@@ -16,10 +16,6 @@ Future<void> main() async {
     anonKey: dotenv.env['SUPABASE_ANON_KEY']!,
   );
 
-  final engineRunner = await EngineRunner.create();
-  engineRunner.startWatching();
-  EngineHelpers();
-
   runApp(const MyApp());
 }
 
@@ -84,12 +80,10 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-class AuthGate extends StatelessWidget {
+class AuthGate extends StatefulWidget {
   final bool isGuest;
   final VoidCallback onContinueAsGuest;
-
   final Function(ThemeMode) onThemeChanged;
-
   final int selectedIndex;
   final Function(int) onIndexChanged;
 
@@ -103,35 +97,49 @@ class AuthGate extends StatelessWidget {
   });
 
   @override
+  _AuthGateState createState() => _AuthGateState();
+}
+
+class _AuthGateState extends State<AuthGate> {
+  bool _engineStarted = false;
+
+  Future<void> _startEngine() async {
+    await UserSessionmanager.initialize();
+    final runner = await EngineRunner.create();
+    runner.startWatching();
+    EngineHelpers();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return StreamBuilder<AuthState>(
       stream: Supabase.instance.client.auth.onAuthStateChange,
       builder: (context, snapshot) {
         final session = snapshot.data?.session;
 
-        if (isGuest) {
+        if (widget.isGuest) {
+          // ← widget. fehlte
           return GoogleBottomBar(
-            onThemeChanged: onThemeChanged,
-            initalIndex: selectedIndex,
-            onIndexChanged: onIndexChanged,
+            onThemeChanged: widget.onThemeChanged,
+            initalIndex: widget.selectedIndex,
+            onIndexChanged: widget.onIndexChanged,
           );
         }
 
         if (session == null) {
-          return SignInPage2(onContinueAsGuest: onContinueAsGuest);
+          _engineStarted = false;
+          return SignInPage2(onContinueAsGuest: widget.onContinueAsGuest);
         }
-        Future.microtask(() async {
-          await UserSessionmanager.initialize();
-          // AchievementRunner in separatem Isolate/compute laufen lassen
-          // Oder einfach mit kleiner Verzögerung starten
-          // damit die UI erstmal aufgebaut werden kann
-          await Future.delayed(const Duration(seconds: 3));
-        });
+
+        if (!_engineStarted) {
+          _engineStarted = true;
+          _startEngine();
+        }
 
         return GoogleBottomBar(
-          onThemeChanged: onThemeChanged,
-          initalIndex: selectedIndex,
-          onIndexChanged: onIndexChanged,
+          onThemeChanged: widget.onThemeChanged,
+          initalIndex: widget.selectedIndex,
+          onIndexChanged: widget.onIndexChanged,
         );
       },
     );

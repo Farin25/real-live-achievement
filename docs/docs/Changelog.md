@@ -27,6 +27,11 @@
 - Eigene Domain
 - Benachtichtigungen
 
+## 01.04.26
+- Engine runner wird jetzt in auth gate aufgerufen nur wnen ein user eingelogt ist statt in main(Farin).
+- Auth Gate von statless widget zu stateful widget(Farin).
+- Neue funktion zum timer neustarten(Farin)
+
 ## 30.03.26
 - Achievment runner mit Timer zum engine starte(Farin).
 - Einstellungen zumintervall in dem die Achievments geprüft werden(Farin).
