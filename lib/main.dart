@@ -44,7 +44,7 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  @override //Überschreibt das Widget Design
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: true,
@@ -56,7 +56,6 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       darkTheme: ThemeData(
-        // Hier wurde die Struktur korrigiert
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.blue,
           brightness: Brightness.dark,
@@ -118,7 +117,6 @@ class _AuthGateState extends State<AuthGate> {
         final session = snapshot.data?.session;
 
         if (widget.isGuest) {
-          // ← widget. fehlte
           return GoogleBottomBar(
             onThemeChanged: widget.onThemeChanged,
             initalIndex: widget.selectedIndex,

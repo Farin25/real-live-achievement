@@ -26,6 +26,7 @@
 - Umbennenung in Up Mark
 - Eigene Domain
 - Benachtichtigungen
+- Social Media in den emails verlinken(Liam).
 
 ## 01.04.26
 - Engine runner wird jetzt in auth gate aufgerufen nur wnen ein user eingelogt ist statt in main(Farin).
@@ -33,7 +34,8 @@
 - Neue funktion zum timer neustarten(Ai, Farin).
 - egine angefangen und erste prüfung für das achievment friday the 13th(Farin).
 - neue ordnerstruktur für emails stuff - Einen Zentralen ordner für email zeug und dann einenn unterordner für emailtemplates und einen für newsletetr emails(Farin).
-
+- Beta user Liste Angelegt(Farin).
+- Beta user Email Templates(AI, Farin).
 
 ## 30.03.26
 - Achievment runner mit Timer zum engine starte(Farin).
