@@ -13,9 +13,10 @@ class EngineRunner {
 
   static Future<EngineRunner> create() async {
     final prefs = await SharedPreferences.getInstance();
-    final minutes = prefs.getInt('engineTimerMinutes') ?? 5;
+    final minutes = prefs.getInt('engineTimerMinutes') ?? 30;
+    instance = EngineRunner._(minutes);
 
-    return EngineRunner._(minutes);
+    return instance!;
   }
 
   void startWatching() {
@@ -58,7 +59,7 @@ class EngineRunner {
 
 //startet die engine
 void runEngine() {
-  AchievementEngine();
+  AchievementEngine().run();
 }
 
 //-----------------------------------------------------------------------
@@ -69,7 +70,7 @@ class EngineHelpers {
     updateThemeDays();
   }
 
-  // datum siet dem Januar 1970, 00:00:00 UTC in tage umwandeln für thememdoe
+  // datum seit dem Januar 1970, 00:00:00 UTC in tage umwandeln für thememdoe
   Future<void> updateThemeDays() async {
     final prefs = await SharedPreferences.getInstance();
 
