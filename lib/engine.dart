@@ -56,14 +56,12 @@ class AchievementEngine {
                   'achievement_id': id,
                   'unlocked_at': DateTime.now().toIso8601String(),
                 });
-                print(
-                  'Friday the 13th erfolgreich an supabase backend übergeben',
-                );
+                _logUnlock(id, user.id);
               }
             }
             // Birthday
             if (type == 'is_users_birthday') {
-              final birthdayValue = userdata['birtdate'];
+              final birthdayValue = userdata['birthdate'];
               DateTime? birthdayDate;
               if (birthdayValue is String) {
                 birthdayDate = DateTime.tryParse(birthdayValue);
@@ -79,27 +77,48 @@ class AchievementEngine {
                   'achievement_id': id,
                   'unlocked_at': DateTime.now().toIso8601String(),
                 });
-                print('Geburtstag erfolgreich an supabase backend übergeben');
-              }
-              //Beta User
-              if (type == 'is_beta_user') {
-                final betauser = userdata['beta_user'];
-                if (betauser == true) {
-                  print('user ist Beta Uuser');
-                  await supabase.from('user_achievements').insert({
-                    'user_id': user.id,
-                    'achievement_id': id,
-                    'unlocked_at': DateTime.now().toIso8601String(),
-                  });
-                  print('Beta user Achievment an supabase backend übergeben');
-                }
+                _logUnlock(id, user.id);
               }
             }
-
+            //Beta User
+            if (type == 'is_beta_user') {
+              final betauser = userdata['beta_user'];
+              if (betauser == true) {
+                print('user ist Beta Uuser');
+                await supabase.from('user_achievements').insert({
+                  'user_id': user.id,
+                  'achievement_id': id,
+                  'unlocked_at': DateTime.now().toIso8601String(),
+                });
+                _logUnlock(id, user.id);
+              }
+            }
+          // First User
+          /* TODO :
+            if (type == 'user_number') {
+              final usernumber = userdata['id'].int.tryParse();
+              if (usernumber < 70) {
+                print('user ist unter den ersten 70 usern');
+                await supabase.from('user_achievements').insert({
+                  'user_id': user.id,
+                  'achievement_id': id,
+                  'unlocked_at': DateTime.now().toIso8601String(),
+                });
+                _logUnlock(id, user.id);
+              }
+            }
+*/
           case 'unique_count':
           case 'combined':
         }
       }
     }
+  }
+
+  //---------------------------------
+  //---------Hilfsfunktionen---------
+  //---------------------------------
+  void _logUnlock(int id, String userId) {
+    print('Achievement $id mit user id: $userId erfolgreich freigeschaltet');
   }
 }

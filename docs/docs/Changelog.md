@@ -36,8 +36,11 @@
 - Antwortemailadresse zu newsletter und beta programm emials hinzugefügt(Farin).
 - Beta Programm anmelde seite hinzugefügt in de und en(Farin).
 - Algorytmos für Birthday Achievment(Farin).
-- Algorytmos für Beta USer Achievment(Farin)
-- Algorytmos für first user achievment(Farin)
+- Algorytmos für Beta USer Achievment(Farin).
+- Algorytmos für first user achievment angefangen(Farin).
+- Settings für die sichtrabrkeit von noch nicht freigeschlateten achievments hinzugefügt (Farin).
+- Neue komplett neue Achievments Seite mit Pop ups(Ai, Farin).
+
 
 ## 01.04.26
 - Engine runner wird jetzt in auth gate aufgerufen nur wnen ein user eingelogt ist statt in main(Farin).
