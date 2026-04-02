@@ -11,13 +11,14 @@
 - Docs 
 - Prüfng ob username vergeben wenn in den stting sien neuer gesetzt wird(Farin)
 - dev/Debug settings(farin)
-- Engine grundprinzip
-- evtl. Blog einrichten und block artikel über Makerfaire(Laim ~ Farin)
 - Neuen werbespot oder die bilder auswechseln(Liam)
 - Rechtschreibfehler aus Webseite entfernen !vor Ferien(Markus & Farin)
 - Email Templates in Supabase mit den aus dem repo ersetzen(Liam ~ Farin)
 - Achievment Einreiche Formular Fixen(Farin)
 - **Achievment Logik & System(Farin)**
+- Settings ordentlich amchen mit übergreifenden funktionen usw(Farin).#
+- Automatisch generierten Feed.
+- Achievments in backend mit den iauf Webseite abgleichen(Farin ~ Liam)
 
 ### Idden & nice to haves bzw. in Planung
 - Dankesagung seite
@@ -30,17 +31,31 @@
 - EN Newsletter
 - De about site
 - Richtiges Designer Logo
+- Kolektionen
+- evtl. Blog einrichten und block artikel über Makerfaire(Laim ~ Farin)
+
+## 03.04.26
+- Generischer meachnismuss für einfache achievements(Farin).
+- Funktion die wärte bereitstellt und alter berechnet(Farin).
+- Supabase Speicherung in logDebug funktion verschoben(Farin).
+- **Neue Achivments:** (Farin)
+- Founder
+- First User
+- Early Adopte
+- The 100th
+- The 1000th
 
 
 ## 02.04.26
 - Antwortemailadresse zu newsletter und beta programm emials hinzugefügt(Farin).
 - Beta Programm anmelde seite hinzugefügt in de und en(Farin).
-- Algorytmos für Birthday Achievment(Farin).
-- Algorytmos für Beta USer Achievment(Farin).
-- Algorytmos für first user achievment angefangen(Farin).
+- Algorithmus für Birthday Achievment(Farin).
+- Algorithmus für Beta USer Achievment(Farin).
+- Algorithmus für first user achievmentW(Farin).
 - Settings für die sichtrabrkeit von noch nicht freigeschlateten achievments hinzugefügt (Farin).
 - Neue komplett neue Achievments Seite mit Pop up info(Ai, Farin).
 - Einstellungen für die sichtbarkeit von noch nicht freigeschlateten achievments(Farin)
+- Nue Spalte user_number von 1 bis unendlich fotlaufend(Farin).
 
 
 ## 01.04.26
