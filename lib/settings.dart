@@ -437,9 +437,12 @@ class Design extends StatefulWidget {
 }
 
 class _Design extends State<Design> {
+  String lockedVisibility = 'all';
+
   @override
   void initState() {
     super.initState();
+    loadSettings();
   }
 
   Widget build(BuildContext content) {
@@ -469,9 +472,40 @@ class _Design extends State<Design> {
               },
             ),
           ),
+          ListTile(
+            leading: const Icon(Icons.lock),
+            title: const Text("Gesperrte Achievements"),
+            subtitle: const Text("Was soll angezeigt werden?"),
+            trailing: DropdownButton<String>(
+              value: lockedVisibility,
+              items: [
+                DropdownMenuItem(value: 'all', child: Text('Alles')),
+                DropdownMenuItem(value: 'name_only', child: Text('Nur Name')),
+                DropdownMenuItem(value: 'hidden', child: Text('Versteckt')),
+              ],
+              onChanged: (value) {
+                if (value != null) {
+                  setState(() => lockedVisibility = value);
+                  saveSettings();
+                }
+              },
+            ),
+          ),
         ],
       ),
     );
+  }
+
+  Future<void> saveSettings() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('locked_visibility', lockedVisibility);
+  }
+
+  Future<void> loadSettings() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      lockedVisibility = prefs.getString('locked_visibility') ?? 'all';
+    });
   }
 }
 
@@ -487,7 +521,7 @@ class AdvancedSettings extends StatefulWidget {
 
 class _AdvancedSettingsState extends State<AdvancedSettings> {
   bool achievementDownloadOverWifi = true;
-  int engineTimerMinutes = 5; // Standardwert
+  int engineTimerMinutes = 30;
 
   @override
   void initState() {
@@ -789,7 +823,7 @@ class AboutPage extends StatelessWidget {
               ),
             ),
 
-            SizedBox(height: 30), // Footer mit Abstand 30px
+            SizedBox(height: 30),
             Text(
               '© 2025-2026 Farin Langner & Liam Selent Alle Rechte Vorbehalten',
               style: TextStyle(
@@ -807,6 +841,7 @@ class AboutPage extends StatelessWidget {
   }
 }
 
+// URLS
 Widget linkTile(String title, String url) {
   return ListTile(
     contentPadding: EdgeInsets.zero,
@@ -824,7 +859,9 @@ Widget linkTile(String title, String url) {
   );
 }
 
-// Lizenzen Seite
+//--------------------------
+//-------- Lizenzen Seite----
+//---------------------------
 class LicensesPage extends StatelessWidget {
   const LicensesPage({super.key});
 

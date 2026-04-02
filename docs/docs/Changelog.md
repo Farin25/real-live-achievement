@@ -39,7 +39,8 @@
 - Algorytmos für Beta USer Achievment(Farin).
 - Algorytmos für first user achievment angefangen(Farin).
 - Settings für die sichtrabrkeit von noch nicht freigeschlateten achievments hinzugefügt (Farin).
-- Neue komplett neue Achievments Seite mit Pop ups(Ai, Farin).
+- Neue komplett neue Achievments Seite mit Pop up info(Ai, Farin).
+- Einstellungen für die sichtbarkeit von noch nicht freigeschlateten achievments(Farin)
 
 
 ## 01.04.26
