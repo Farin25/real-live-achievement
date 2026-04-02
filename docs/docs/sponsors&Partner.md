@@ -33,4 +33,4 @@
 
 ## Wir suchen Werbepartner/Sponsoren, um die Serverkosten für unser Supabase-Backend bei einem EU- oder Schweizer Anbieter zu decken und um eine eigene Domain zu realisieren.
 
-## Bei Interesse melden Sie sich unter: markup@holzideen.org
+## Bei Interesse melden Sie sich bei markup@holzideen.org

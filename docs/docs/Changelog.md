@@ -27,6 +27,12 @@
 - Eigene Domain
 - Benachtichtigungen
 - Social Media in den emails verlinken(Liam).
+- EN Newsletter
+- De about site
+
+## 02.04.26
+- Antwortemailadresse zu newsletter und beta programm emials hinzugefügt(Farin).
+- Beta Programm anmelde seite hinzugefügt in de und en(Farin).
 
 ## 01.04.26
 - Engine runner wird jetzt in auth gate aufgerufen nur wnen ein user eingelogt ist statt in main(Farin).
