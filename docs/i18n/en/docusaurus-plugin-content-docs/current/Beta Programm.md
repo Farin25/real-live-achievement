@@ -19,6 +19,7 @@ description: Sign up for the UpMark beta and be one of the first to try out the 
 
  **Your feedback helps shape the app**
 
+ **Your name** in the acknowledgments
 
 ---
 

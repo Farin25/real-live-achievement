@@ -29,10 +29,15 @@
 - Social Media in den emails verlinken(Liam).
 - EN Newsletter
 - De about site
+- Richtiges Designer Logo
+
 
 ## 02.04.26
 - Antwortemailadresse zu newsletter und beta programm emials hinzugefügt(Farin).
 - Beta Programm anmelde seite hinzugefügt in de und en(Farin).
+- Algorytmos für Birthday Achievment(Farin).
+- Algorytmos für Beta USer Achievment(Farin)
+- Algorytmos für first user achievment(Farin)
 
 ## 01.04.26
 - Engine runner wird jetzt in auth gate aufgerufen nur wnen ein user eingelogt ist statt in main(Farin).
