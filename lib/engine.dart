@@ -133,14 +133,17 @@ class AchievementEngine {
               continue;
             }
 
+            final num minValue = req['min_value'] ?? 0;
+
             final conditionMet = switch (operator) {
-              'less_equal' => actualValue <= value,
-              'less_than' => actualValue < value,
+              'less_equal' => actualValue <= value && actualValue >= minValue,
+              'less_than' => actualValue < value && actualValue >= minValue,
               'equals' => actualValue == value,
               'greater_equal' => actualValue >= value,
               'greater_than' => actualValue > value,
               _ => false,
             };
+
             print('[$id] actualValue=$actualValue conditionMet=$conditionMet');
 
             if (conditionMet) {
