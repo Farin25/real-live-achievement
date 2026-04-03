@@ -1,6 +1,7 @@
 //engine.dart
 import 'dart:convert';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AchievementEngine {
   final supabase = Supabase.instance.client;
@@ -87,9 +88,45 @@ class AchievementEngine {
                 continue;
               }
             }
+            // Mathias mode
+            if (type == 'light_mode_days') {
+              final prefs = await SharedPreferences.getInstance();
+              final tageSeitThemeChange =
+                  prefs.getInt('tageSeitThemeChange') ?? 0;
+              final currentTheme =
+                  prefs.getString('currentThemeMode') ?? 'dark';
+              if (tageSeitThemeChange <= 30 && currentTheme == 'light') {
+                await _logUnlock(id, user.id);
+                continue;
+              }
+            }
+            // Dark Mode achievment (dark Side oder so)
+            if (type == 'dark_mode_days') {
+              final prefs = await SharedPreferences.getInstance();
+              final tageSeitThemeChange =
+                  prefs.getInt('tageSeitThemeChange') ?? 0;
+              final currentTheme =
+                  prefs.getString('currentThemeMode') ?? 'dark';
+              if (tageSeitThemeChange <= 30 && currentTheme == 'dark') {
+                await _logUnlock(id, user.id);
+                continue;
+              }
+            }
+            // Palimdrom day
+            if (type == 'is_palindrome_date') {
+              final dateString =
+                  '${now.day.toString().padLeft(2, '0')}'
+                  '${now.month.toString().padLeft(2, '0')}'
+                  '${now.year}';
 
-            // Einfacher vergleich
+              final reversed = dateString.split('').reversed.join();
 
+              if (dateString == reversed) {
+                await _logUnlock(id, user.id);
+                continue;
+              }
+            }
+            // Einfacher generischervergleich
             final num? actualValue = _getActualValue(type, userdata);
             if (actualValue == null) {
               print('[$id] Kein actualValue für type=$type = überspringen');
@@ -131,11 +168,14 @@ class AchievementEngine {
     print('Achievement $id mit user id: $userId erfolgreich freigeschaltet');
   }
 
-  //
+  // Ermittelt userdaten für genersichen algorytmohs
   num? _getActualValue(String type, Map<String, dynamic> userdata) {
     switch (type) {
+      // Der wie vielte user
       case 'user_number':
         return userdata['user_number'];
+
+      // Geburstag
       case 'age':
         final birthdayValue = userdata['birthdate'];
         if (birthdayValue == null) return null;
@@ -152,7 +192,7 @@ class AchievementEngine {
         }
 
         return age;
-
+      // Aktuell stunde
       case 'current_hour':
         return DateTime.now().hour;
       default:

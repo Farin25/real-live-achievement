@@ -469,6 +469,10 @@ class _Design extends State<Design> {
                   'themeChangeTime',
                   DateTime.now().millisecondsSinceEpoch,
                 );
+                (await SharedPreferences.getInstance()).setString(
+                  'currentThemeMode',
+                  Value ? 'dark' : 'light',
+                );
               },
             ),
           ),

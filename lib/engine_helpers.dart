@@ -51,7 +51,7 @@ class EngineRunner {
     final minutes = prefs.getInt('engineTimerMinutes') ?? 30;
 
     _timer = Timer.periodic(Duration(minutes: minutes), (timer) {
-      print('Timer abgelaufen');
+      print('Timer abgelaufen engine wird gestartet');
       runEngine();
     });
   }

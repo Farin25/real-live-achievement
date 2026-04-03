@@ -32,19 +32,24 @@
 - De about site
 - Richtiges Designer Logo
 - Kolektionen
-- evtl. Blog einrichten und block artikel über Makerfaire(Laim ~ Farin)
+- evtl. Blog einrichten und block artikel über Makerfaire(Laim ~ Farin).
+- Up Mark Score(s).
 
 ## 03.04.26
 - Generischer meachnismuss für einfache achievements(Farin).
 - Funktion die wärte bereitstellt und alter berechnet(Farin).
 - Supabase Speicherung in logDebug funktion verschoben(Farin).
-- **Neue Achivments:** (Farin)
+- Themode wird hjetzt mit sharedPreference gespeicher(Farin).
+- **Neue Achivments in App:** (Farin)
 - Founder
 - First User
 - Early Adopte
 - The 100th
 - The 1000th
-
+- Mathias Mode
+- Dark Side
+- Palimdrom day
+- und sonst alle aus simple_threshold
 
 ## 02.04.26
 - Antwortemailadresse zu newsletter und beta programm emials hinzugefügt(Farin).
