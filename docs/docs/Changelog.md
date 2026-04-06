@@ -34,6 +34,11 @@
 - Kolektionen
 - evtl. Blog einrichten und block artikel über Makerfaire(Laim ~ Farin).
 - Up Mark Score(s).
+- Gesponsorte Achievments
+
+## 06.04.26
+- Trigger für die Funktion zum eintragen in profieles gefixt(Farin).
+- Extra Section für Support informationen auf Acount Seite mit User Id und Nummer(Farin).
 
 ## 03.04.26
 - Generischer meachnismuss für einfache achievements(Farin).

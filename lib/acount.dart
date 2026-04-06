@@ -160,7 +160,8 @@ class _AccountPageState extends State<AccountPage> {
                           onTap: () async {
                             DateTime? pickedDate = await showDatePicker(
                               context: context,
-                              initialDate: DateTime.now(),
+                              initialDate:
+                                  DateTime.now(), // Später durch App Release date ersetzen cooles kleines easter egg
                               firstDate: DateTime(1900),
                               lastDate: DateTime.now(),
                             );
@@ -197,7 +198,24 @@ class _AccountPageState extends State<AccountPage> {
                 style: TextStyle(color: Colors.grey[600]),
               ),
               const SizedBox(height: 10),
+              const Divider(),
+              Text(
+                "Support Informationen",
+                style: TextStyle(color: Colors.blueGrey, fontSize: 17),
+              ),
+
+              const SizedBox(height: 10),
+              Text(
+                "Account id: ${(profile!['id'])}",
+                style: TextStyle(color: Colors.grey[600]),
+              ),
+              const SizedBox(height: 5),
+              Text(
+                "Account Nummer: ${(profile!['user_number'])}",
+                style: TextStyle(color: Colors.grey[600]),
+              ),
             ],
+            const Divider(),
 
             /// LOGOUT BUTTON
             SizedBox(
