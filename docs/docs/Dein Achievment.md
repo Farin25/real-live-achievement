@@ -44,8 +44,7 @@ Je klarer dein Vorschlag formuliert ist, desto besser können wir ihn umsetzen.
 
 ## Formular
 
-<div id="surveyhero-embed-scxnvvpw"></div>
-<script src="https://embed-cdn.surveyhero.com/js/user/embed.scxnvvpw.js" async></script>
+Aktuell können Achievement Ideen nur mit einer email an Upmark@holzideen.org eingereicht werden.
 
 ---
 

@@ -20,6 +20,7 @@
 - Automatisch generierten Feed.
 - Achievments in backend mit den iauf Webseite abgleichen(Farin ~ Liam)
 - Automatisch generierter Feed(Farin).
+- Neues Achievment einreiche Formular (evtl. Liame Survey)(Farin).
 
 
 ### Idden & nice to haves bzw. in Planung
@@ -37,6 +38,11 @@
 - evtl. Blog einrichten und block artikel über Makerfaire(Laim ~ Farin).
 - Up Mark Score(s).
 - Gesponsorte Achievments
+- Richtige Webseite mit Live daten usw...
+
+## 07.04.26
+- Achievmentseite überarbeitet(Ai, Farin).
+- Abgeluafenes Achievment einreiche forumlar aus Dein Achievment.md rausgenommen(Farin).
 
 ## 06.04.26
 - Trigger für die Funktion zum eintragen in profieles gefixt(Farin).
@@ -45,6 +51,7 @@
 - Bilder uas Statischem Platzhalter Feed entfernt(Farin).
 - App name in Up Mark geändert(Farin).
 - Erste Alpha APK erstellt(Farin).
+- Calback url von reallife://auth-callback zu upmark://auth-callback geändert(Farin).
 
 
 ## 03.04.26

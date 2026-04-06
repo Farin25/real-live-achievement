@@ -44,8 +44,8 @@ The clearer your suggestion is, the better we can implement it.
 
 ## Form
 
-<div id="surveyhero-embed-scxnvvpw"></div>
-<script src="https://embed-cdn.surveyhero.com/js/user/embed.scxnvvpw.js" async></script>
+
+Currently, achievement ideas can only be submitted by emailing Upmark@holzideen.org.
 
 ---
 
