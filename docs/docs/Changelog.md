@@ -19,6 +19,8 @@
 - Settings ordentlich amchen mit übergreifenden funktionen usw(Farin).#
 - Automatisch generierten Feed.
 - Achievments in backend mit den iauf Webseite abgleichen(Farin ~ Liam)
+- Automatisch generierter Feed(Farin).
+
 
 ### Idden & nice to haves bzw. in Planung
 - Dankesagung seite
@@ -39,6 +41,11 @@
 ## 06.04.26
 - Trigger für die Funktion zum eintragen in profieles gefixt(Farin).
 - Extra Section für Support informationen auf Acount Seite mit User Id und Nummer(Farin).
+- Fasw aus sponsor and Patners.md entfernt en und de(Farin).
+- Bilder uas Statischem Platzhalter Feed entfernt(Farin).
+- App name in Up Mark geändert(Farin).
+- Erste Alpha APK erstellt(Farin).
+
 
 ## 03.04.26
 - Generischer meachnismuss für einfache achievements(Farin).

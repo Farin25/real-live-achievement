@@ -13,13 +13,6 @@
     />
   </a>
 
-  <a href="https://fasw.de" target="_blank" rel="noopener noreferrer">
-    <img
-      src="https://www.fasw.de/logo.svg"
-      alt="FASW - Freie Aktive Schulen Wülfrath"
-      width="150"
-    />
-  </a>
 
   <a href="https://farin-langner.de" target="_blank" rel="noopener noreferrer">
     <img

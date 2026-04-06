@@ -91,17 +91,6 @@ class _FeedCard extends StatelessWidget {
                 style: theme.textTheme.bodyMedium?.copyWith(height: 1.4),
               ),
             ],
-
-            if (item.imageUrl != null) ...[
-              const SizedBox(height: 14),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: AspectRatio(
-                  aspectRatio: 16 / 9,
-                  child: Image.network(item.imageUrl!, fit: BoxFit.cover),
-                ),
-              ),
-            ],
           ],
         ),
       ),
@@ -209,14 +198,12 @@ enum FeedType { achievement, friend, unlock, promo }
 class FeedItem {
   final String title;
   final String? content;
-  final String? imageUrl;
   final String time;
   final FeedType type;
 
   FeedItem({
     required this.title,
     this.content,
-    this.imageUrl,
     required this.time,
     required this.type,
   });
@@ -228,7 +215,6 @@ final List<FeedItem> _feedItems = [
     content: "You visited a new place and earned 250 XP.",
     time: "5 min ago",
     type: FeedType.achievement,
-    imageUrl: "https://picsum.photos/id/1015/1200/700",
   ),
   FeedItem(
     title: "Tutorial completed",
@@ -248,13 +234,11 @@ final List<FeedItem> _feedItems = [
     content: "Your first maker-related achievement is now active.",
     time: "38 min ago",
     type: FeedType.achievement,
-    imageUrl: "https://picsum.photos/id/1060/1200/700",
   ),
   FeedItem(
     title: "Spring Challenge",
     content: "Join the limited community event and unlock exclusive rewards.",
     time: "1 h ago",
     type: FeedType.promo,
-    imageUrl: "https://picsum.photos/id/1040/1200/700",
   ),
 ];
