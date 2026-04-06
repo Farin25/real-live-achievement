@@ -13,7 +13,6 @@
     />
   </a>
 
-  </a>
 
   <a href="https://farin-langner.de" target="_blank" rel="noopener noreferrer">
     <img
