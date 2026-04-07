@@ -45,6 +45,7 @@
 - Abgeluafenes Achievment einreiche forumlar aus Dein Achievment.md rausgenommen(Farin).
 - Liam aus Lizenz entfernt(Farin).
 - _getActualValue stellt jetzt auch geburtsjahr zur verfügung(Farin).
+- navbar von navbar.dart in services.dart verschoben(Farin).
 - **Neu unterstützte Achievments**
 - Survive Covid 19
 

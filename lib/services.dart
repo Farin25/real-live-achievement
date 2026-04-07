@@ -2,6 +2,11 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:real_live_achievments/achievments.dart';
+import 'package:real_live_achievments/home.dart';
+import 'package:real_live_achievments/settings.dart';
+import 'package:real_live_achievments/social.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class UserLocalServices {
   static Future<void> saveUserProfile({
@@ -117,3 +122,80 @@ class _VimeoVideoState extends State<VimeoVideo> {
     );
   }
 }
+
+//----------------------------
+//-----------navbar-----------
+//----------------------------
+class GoogleBottomBar extends StatefulWidget {
+  final int initalIndex;
+  final Function(ThemeMode) onThemeChanged;
+  final Function(int) onIndexChanged;
+
+  const GoogleBottomBar({
+    super.key,
+    required this.onThemeChanged,
+    required this.initalIndex,
+    required this.onIndexChanged,
+  });
+
+  @override
+  State<GoogleBottomBar> createState() => _GoogleBottomBarState();
+}
+
+class _GoogleBottomBarState extends State<GoogleBottomBar> {
+  late int _selectedIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.initalIndex;
+  }
+
+  Widget build(BuildContext context) {
+    final pages = [
+      NewsFeedPage1(),
+      AchievmentSeite(),
+      Socialsite(),
+      SettingsPage(onThemeChanged: widget.onThemeChanged),
+    ];
+    return Scaffold(
+      // appBar: AppBar(title: const Text('Google Bottom Bar')), // Auskomentiert Weil app bar ist auf jeder seite festgelegt
+      body: pages[_selectedIndex],
+      bottomNavigationBar: SalomonBottomBar(
+        currentIndex: _selectedIndex,
+        selectedItemColor: const Color(0xff6200ee),
+        unselectedItemColor: const Color(0xff757575),
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+          widget.onIndexChanged(index);
+        },
+        items: _navBarItems,
+      ),
+    );
+  }
+}
+
+final _navBarItems = [
+  SalomonBottomBarItem(
+    icon: const Icon(Icons.home),
+    title: const Text("Home"),
+    selectedColor: Colors.purple,
+  ),
+  SalomonBottomBarItem(
+    icon: const Icon(Icons.emoji_events),
+    title: const Text("Achievments"),
+    selectedColor: Colors.pink,
+  ),
+  SalomonBottomBarItem(
+    icon: const Icon(Icons.people),
+    title: const Text("Social"),
+    selectedColor: Colors.orange,
+  ),
+  SalomonBottomBarItem(
+    icon: const Icon(Icons.settings),
+    title: const Text("Settings"),
+    selectedColor: Colors.teal,
+  ),
+];

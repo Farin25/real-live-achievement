@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'login.dart';
-import 'navbar.dart';
 import 'user_SessionManager.dart';
 import 'engine_helpers.dart';
+import 'services.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
