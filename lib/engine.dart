@@ -174,6 +174,12 @@ class AchievementEngine {
   // Ermittelt userdaten für genersichen algorytmohs
   num? _getActualValue(String type, Map<String, dynamic> userdata) {
     switch (type) {
+      // Geburts Jahr
+      case 'birth_year':
+        final birthdayValue = userdata['birthdate'];
+        if (birthdayValue == null) return null;
+        return DateTime.tryParse(birthdayValue)?.year;
+
       // Der wie vielte user
       case 'user_number':
         return userdata['user_number'];

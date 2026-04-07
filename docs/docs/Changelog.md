@@ -43,6 +43,11 @@
 ## 07.04.26
 - Achievmentseite überarbeitet(Ai, Farin).
 - Abgeluafenes Achievment einreiche forumlar aus Dein Achievment.md rausgenommen(Farin).
+- Liam aus Lizenz entfernt(Farin).
+- _getActualValue stellt jetzt auch geburtsjahr zur verfügung(Farin).
+- **Neu unterstützte Achievments**
+- Survive Covid 19
+
 
 ## 06.04.26
 - Trigger für die Funktion zum eintragen in profieles gefixt(Farin).
