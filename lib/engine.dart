@@ -2,6 +2,7 @@
 import 'dart:convert';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:battery_plus/battery_plus.dart';
 
 class AchievementEngine {
   final supabase = Supabase.instance.client;
@@ -127,7 +128,7 @@ class AchievementEngine {
               }
             }
             // Einfacher generischervergleich
-            final num? actualValue = _getActualValue(type, userdata);
+            final num? actualValue = await _getActualValue(type, userdata);
             if (actualValue == null) {
               print('[$id] Kein actualValue für type=$type = überspringen');
               continue;
@@ -172,7 +173,10 @@ class AchievementEngine {
   }
 
   // Ermittelt userdaten für genersichen algorytmohs
-  num? _getActualValue(String type, Map<String, dynamic> userdata) {
+  Future<num?> _getActualValue(
+    String type,
+    Map<String, dynamic> userdata,
+  ) async {
     switch (type) {
       // Geburts Jahr
       case 'birth_year':
@@ -204,6 +208,12 @@ class AchievementEngine {
       // Aktuell stunde
       case 'current_hour':
         return DateTime.now().hour;
+
+      // Akkustand
+      case 'battery_percent':
+        final battery = Battery();
+        return await battery.batteryLevel;
+
       default:
         return null;
     }

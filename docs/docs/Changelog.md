@@ -21,6 +21,7 @@
 - Achievments in backend mit den iauf Webseite abgleichen(Farin ~ Liam)
 - Automatisch generierter Feed(Farin).
 - Neues Achievment einreiche Formular (evtl. Liame Survey)(Farin).
+- App Email Templates und Absender Updaten(Farin).
 
 
 ### Idden & nice to haves bzw. in Planung
@@ -43,7 +44,15 @@
 ## 08.04.26
 - iframe höhe in beta anmedlung en gefixt(Farin).
 - collektion spalte zu achievment Datatable hinzugefügt(Farin).
-- endloslascreen auf achievment seite bei nutzung ohne acount gefixt(Farin).
+- Endlosladescreen auf achievment seite bei nutzung ohne acount gefixt(Farin).
+- Survive Covid 19 DB Eintrag gefixt von less_than zu simple_threshold(Farin).
+- _getActualValue ist jetzt async(Farin).
+- [battery_plus](https://pub.dev/packages/battery_plus) package hinzugefügt für Akku werte(Farin).
+- _getActualValue gibt jetzt auch akkustand tzurüch für achievgments mit akkustand(Farin).
+
+- **Neue unterstützte Achievments**
+  - Full Charge = 100% akku
+  - Low Battery = <= 5% Akku
 
 ## 07.04.26
 - Achievmentseite überarbeitet(Ai, Farin).
@@ -51,8 +60,9 @@
 - Liam aus Lizenz entfernt(Farin).
 - _getActualValue stellt jetzt auch geburtsjahr zur verfügung(Farin).
 - navbar von navbar.dart in services.dart verschoben(Farin).
+
 - **Neu unterstützte Achievments**
-- Survive Covid 19
+  - Survive Covid 19
 
 
 ## 06.04.26
@@ -70,16 +80,17 @@
 - Funktion die wärte bereitstellt und alter berechnet(Farin).
 - Supabase Speicherung in logDebug funktion verschoben(Farin).
 - Themode wird hjetzt mit sharedPreference gespeicher(Farin).
+
 - **Neue Achivments in App:** (Farin)
-- Founder
-- First User
-- Early Adopte
-- The 100th
-- The 1000th
-- Mathias Mode
-- Dark Side
-- Palimdrom day
-- und sonst alle aus simple_threshold
+  - Founder
+  - First User
+  - Early Adopte
+  - The 100th
+  - The 1000th
+  - Mathias Mode
+  - Dark Side
+  - Palimdrom day
+  - und sonst alle aus simple_threshold
 
 ## 02.04.26
 - Antwortemailadresse zu newsletter und beta programm emials hinzugefügt(Farin).
