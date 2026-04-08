@@ -52,7 +52,7 @@
 
 - **Neue unterstützte Achievments**
   - Full Charge = 100% akku
-  - Low Battery = <= 5% Akku
+  - Low Battery = \<= 5% Akku
 
 ## 07.04.26
 - Achievmentseite überarbeitet(Ai, Farin).
