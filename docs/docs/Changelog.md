@@ -42,6 +42,8 @@
 
 ## 08.04.26
 - iframe höhe in beta anmedlung en gefixt(Farin).
+- collektion spalte zu achievment Datatable hinzugefügt(Farin).
+- endloslascreen auf achievment seite bei nutzung ohne acount gefixt(Farin).
 
 ## 07.04.26
 - Achievmentseite überarbeitet(Ai, Farin).

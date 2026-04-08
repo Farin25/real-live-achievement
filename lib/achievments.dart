@@ -34,6 +34,7 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
   }
 
   Future<void> _loadAchievements() async {
+    // Wlan prüfung
     final connectivityResult = await Connectivity().checkConnectivity();
     final prefs = await SharedPreferences.getInstance();
     final achievementDownloadOverWifi =
@@ -47,7 +48,10 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
 
     final supabase = Supabase.instance.client;
     final user = supabase.auth.currentUser;
-    if (user == null) return;
+    if (user == null) {
+      setState(() => _isLoading = false);
+      return;
+    }
 
     try {
       final achievements = await supabase.from('achievements').select();
