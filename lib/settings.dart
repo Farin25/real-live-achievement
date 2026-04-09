@@ -637,7 +637,7 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
     setState(() {
       achievementDownloadOverWifi =
           prefs.getBool('achievementDownloadOverWifi') ?? true;
-      engineTimerMinutes = prefs.getInt('engineTimerMinutes') ?? 30;
+      engineTimerMinutes = prefs.getInt('engineTimerMinutes') ?? 10;
     });
   }
 }

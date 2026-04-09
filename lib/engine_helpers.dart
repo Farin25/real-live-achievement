@@ -13,7 +13,7 @@ class EngineRunner {
 
   static Future<EngineRunner> create() async {
     final prefs = await SharedPreferences.getInstance();
-    final minutes = prefs.getInt('engineTimerMinutes') ?? 30;
+    final minutes = prefs.getInt('engineTimerMinutes') ?? 10;
     instance = EngineRunner._(minutes);
 
     return instance!;
@@ -48,7 +48,7 @@ class EngineRunner {
     _timer?.cancel();
 
     final prefs = await SharedPreferences.getInstance();
-    final minutes = prefs.getInt('engineTimerMinutes') ?? 30;
+    final minutes = prefs.getInt('engineTimerMinutes') ?? 10;
 
     _timer = Timer.periodic(Duration(minutes: minutes), (timer) {
       print('Timer abgelaufen engine wird gestartet');

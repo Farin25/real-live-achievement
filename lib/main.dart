@@ -107,6 +107,7 @@ class _AuthGateState extends State<AuthGate> {
     final runner = await EngineRunner.create();
     runner.startWatching();
     EngineHelpers();
+    runEngine();
   }
 
   @override

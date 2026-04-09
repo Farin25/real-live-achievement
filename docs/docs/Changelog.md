@@ -41,6 +41,10 @@
 - Gesponsorte Achievments
 - Richtige Webseite mit Live daten usw...
 
+## 09.04..26
+- engintimmmer default von 30 auf 10 minten gesetzt(Farin).
+- Engine wird direkt beim starten der app wen user angemedet ist gestartet(Farin).
+
 ## 08.04.26
 - iframe höhe in beta anmedlung en gefixt(Farin).
 - collektion spalte zu achievment Datatable hinzugefügt(Farin).
