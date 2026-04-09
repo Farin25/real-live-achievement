@@ -45,9 +45,13 @@
 - engintimmmer default von 30 auf 10 minten gesetzt(Farin).
 - Engine wird direkt beim starten der app wen user angemedet ist gestartet(Farin).
 - [int](https://pub.dev/packages/intl/install) libary hinzugefügt(Farin).
+- Neue Achievments als Sonderfälle zur engine hinzugefügt(Farin).
 
 - **Neue unterstützte Achievments**
   - The Right Side Doe
+  - Night Coder
+  - Christmas
+  - New Year
 
 
 ## 08.04.26

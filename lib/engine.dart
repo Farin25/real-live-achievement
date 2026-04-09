@@ -139,6 +139,27 @@ class AchievementEngine {
                 continue;
               }
             }
+            // New Year
+            if (type == 'is_new_year') {
+              if (now.month == 1 && now.day == 1) {
+                await _logUnlock(id, user.id);
+                continue;
+              }
+            }
+            // Christmas
+            if (type == 'is_christmas') {
+              if (now.month == 12 && now.day == 24) {
+                await _logUnlock(id, user.id);
+                continue;
+              }
+            }
+            // Night Coder
+            if (type == 'night_coder_hours') {
+              if (now.hour >= 2 && now.hour < 4) {
+                await _logUnlock(id, user.id);
+                continue;
+              }
+            }
             // Einfacher generischervergleich
             final num? actualValue = await _getActualValue(type, userdata);
             if (actualValue == null) {
