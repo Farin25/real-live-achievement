@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:battery_plus/battery_plus.dart';
+import 'dart:io';
 
 class AchievementEngine {
   final supabase = Supabase.instance.client;
@@ -123,6 +124,17 @@ class AchievementEngine {
               final reversed = dateString.split('').reversed.join();
 
               if (dateString == reversed) {
+                await _logUnlock(id, user.id);
+                continue;
+              }
+            }
+
+            // The Right Side Doe
+            if (type == 'operating_system') {
+              final osName = Platform.operatingSystem.toLowerCase();
+              final targetOs = req['value'].toString().toLowerCase();
+
+              if (osName == targetOs) {
                 await _logUnlock(id, user.id);
                 continue;
               }

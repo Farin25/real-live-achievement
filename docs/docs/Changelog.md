@@ -44,6 +44,11 @@
 ## 09.04..26
 - engintimmmer default von 30 auf 10 minten gesetzt(Farin).
 - Engine wird direkt beim starten der app wen user angemedet ist gestartet(Farin).
+- [int](https://pub.dev/packages/intl/install) libary hinzugefügt(Farin).
+
+- **Neue unterstützte Achievments**
+  - The Right Side Doe
+
 
 ## 08.04.26
 - iframe höhe in beta anmedlung en gefixt(Farin).
