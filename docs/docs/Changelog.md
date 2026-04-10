@@ -41,6 +41,10 @@
 - Gesponsorte Achievments
 - Richtige Webseite mit Live daten usw...
 
+## 10.04.26
+- Beweise oder so ordner entfernt(Farin).
+- Notifications Builder hinzugefügt(AI, Farin).
+
 ## 09.04..26
 - engintimmmer default von 30 auf 10 minten gesetzt(Farin).
 - Engine wird direkt beim starten der app wen user angemedet ist gestartet(Farin).
