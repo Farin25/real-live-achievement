@@ -43,6 +43,7 @@
 
 ## 12.05.26
 - Reel mit Achievment notifications(Farin).
+- Beta Anmeldung Werbe Reel(Farin).
 - Repo Aufgeräumt(Farin).
 
 ## 11.04.26
