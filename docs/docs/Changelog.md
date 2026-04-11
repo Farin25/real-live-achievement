@@ -41,10 +41,15 @@
 - Gesponsorte Achievments
 - Richtige Webseite mit Live daten usw...
 
+## 12.05.26
+- Reel mit Achievment notifications(Farin).
+- Repo Aufgeräumt(Farin).
+
 ## 11.04.26
 - neue engine Funktion _getActualValueString für aktuell werte als string(Farin).
 - Neuer generischer vergleich für aschievments wo strings verglichen werden (Farin).
 - Achievmenet The right side doe wird jetzt nmicht mehr als spezialfall geprüft sondenr über string vergleich (Farin).
+- Werbe Instagramm Post: 404 Not Found Achievement-Teaser(Farin).
 
 ## 10.04.26
 - Beweise oder so ordner entfernt(Farin).
@@ -348,8 +353,7 @@ Die genauen änderungen sind auf Github ind den Commits zu [finden](https://gith
 - Newsletter (Farin) 08.03.2026
 - Leute solange nerven bis sie sich zum Newsletter anmelden(Liam & Farin)
 - Werbeviedeo für Newsletter (Liam)
-- Vimeo Acount banner (Liam)
-- Instagramm Acount (Liam)
+- Instagramm Acount (Liam & Farin)
 - Vimeo Acount (Farin)
 - Werbe Plakate in der DASA(Sarah & Farin)
 - User Bindendene Achievments.
