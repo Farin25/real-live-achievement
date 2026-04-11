@@ -1,5 +1,6 @@
 //engine.dart
 import 'dart:convert';
+import 'package:geolocator/geolocator.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:battery_plus/battery_plus.dart';
@@ -10,6 +11,7 @@ class AchievementEngine {
 
   Future<void> run() async {
     final user = supabase.auth.currentUser;
+    Position? position;
 
     if (user == null) return;
 
@@ -128,17 +130,6 @@ class AchievementEngine {
                 continue;
               }
             }
-
-            // The Right Side Doe
-            if (type == 'operating_system') {
-              final osName = Platform.operatingSystem.toLowerCase();
-              final targetOs = req['value'].toString().toLowerCase();
-
-              if (osName == targetOs) {
-                await _logUnlock(id, user.id);
-                continue;
-              }
-            }
             // New Year
             if (type == 'is_new_year') {
               if (now.month == 1 && now.day == 1) {
@@ -160,7 +151,20 @@ class AchievementEngine {
                 continue;
               }
             }
-            // Einfacher generischervergleich
+            // Einfacher generischer verglich für Strings
+            final String? actualString = await _getActualValueString(
+              type,
+              userdata,
+              position,
+            );
+            if (actualString != null) {
+              if (actualString == value.toString().toLowerCase()) {
+                await _logUnlock(id, user.id);
+              }
+              continue;
+            }
+
+            // Einfacher generischervergleich für int
             final num? actualValue = await _getActualValue(type, userdata);
             if (actualValue == null) {
               print('[$id] Kein actualValue für type=$type = überspringen');
@@ -205,7 +209,7 @@ class AchievementEngine {
     print('Achievement $id mit user id: $userId erfolgreich freigeschaltet');
   }
 
-  // Ermittelt userdaten für genersichen algorytmohs
+  // Ermittelt int userdaten für genersichen algorytmohs
   Future<num?> _getActualValue(
     String type,
     Map<String, dynamic> userdata,
@@ -247,6 +251,37 @@ class AchievementEngine {
         final battery = Battery();
         return await battery.batteryLevel;
 
+      default:
+        return null;
+    }
+  }
+
+  // Ermittelt Userdaten als String für generischen Algorythmos
+  Future<String?> _getActualValueString(
+    String type,
+    Map<String, dynamic> userdata,
+    Position? position,
+  ) async {
+    switch (type) {
+      case 'operating_system':
+        return Platform.operatingSystem.toLowerCase();
+      /*Auskommentiert weil kommt später
+      case 'visited_city':
+        if (position == null) return null;
+        final placemarks = await placemarkFromCoordinates(
+          position.latitude,
+          position.longitude,
+        );
+        return placemarks.first.locality?.toLowerCase();
+
+      case 'country':
+        if (position == null) return null;
+        final placemarks = await placemarkFromCoordinates(
+          position.latitude,
+          position.longitude,
+        );
+        return placemarks.first.isoCountryCode?.toLowerCase();
+*/
       default:
         return null;
     }

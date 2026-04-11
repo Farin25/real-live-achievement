@@ -41,6 +41,11 @@
 - Gesponsorte Achievments
 - Richtige Webseite mit Live daten usw...
 
+## 11.04.26
+- neue engine Funktion _getActualValueString für aktuell werte als string(Farin).
+- Neuer generischer vergleich für aschievments wo strings verglichen werden (Farin).
+- Achievmenet The right side doe wird jetzt nmicht mehr als spezialfall geprüft sondenr über string vergleich (Farin).
+
 ## 10.04.26
 - Beweise oder so ordner entfernt(Farin).
 - Notifications Builder hinzugefügt(AI, Farin).
