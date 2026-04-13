@@ -42,8 +42,9 @@
 - Richtige Webseite mit Live daten usw...
 
 ## 13.05.26
-- Ladescreen hinzugefügt.
-
+- Ladescreen hinzugefügt(Farin).
+- Leistungsverbesserungen(Farin).
+- Startverbesserungen(Farin).
 
 ## 12.05.26
 - Reel mit Achievment notifications(Farin).

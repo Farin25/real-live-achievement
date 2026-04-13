@@ -46,7 +46,6 @@ class UserLocalServices {
 //----------------------------------
 //----------Loading screen----------
 //----------------------------------
-
 class LoadingScreen extends StatefulWidget {
   final Duration? duration;
   final Future? until;
@@ -61,7 +60,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   int _frame = 0;
   Timer? _timer;
 
-  final List<String> frames = [
+  static const List<String> frames = [
     'assets/loading_1.png',
     'assets/loading_2.png',
     'assets/loading_3.png',
@@ -102,7 +101,16 @@ class _LoadingScreenState extends State<LoadingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Center(child: Image.asset(frames[_frame])),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(frames[_frame]),
+            const SizedBox(height: 16),
+            const Text('Loading...', style: TextStyle(color: Colors.white)),
+          ],
+        ),
+      ),
     );
   }
 }

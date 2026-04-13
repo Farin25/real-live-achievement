@@ -6,10 +6,15 @@ import 'login.dart';
 import 'user_SessionManager.dart';
 import 'engine_helpers.dart';
 import 'services.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 Future<void> main() async {
+  final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
+
+  FlutterNativeSplash.remove();
 
   await Supabase.initialize(
     url: dotenv.env['SUPABASE_URL']!,
@@ -17,6 +22,7 @@ Future<void> main() async {
   );
 
   runApp(const MyApp());
+  FlutterNativeSplash.remove();
 }
 
 class MyApp extends StatefulWidget {
@@ -103,6 +109,7 @@ class _AuthGateState extends State<AuthGate> {
   bool _engineStarted = false;
 
   Future<void> _startEngine() async {
+    FlutterNativeSplash.remove();
     final initFuture = UserSessionmanager.initialize();
 
     showDialog(
