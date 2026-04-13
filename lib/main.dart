@@ -103,7 +103,20 @@ class _AuthGateState extends State<AuthGate> {
   bool _engineStarted = false;
 
   Future<void> _startEngine() async {
-    await UserSessionmanager.initialize();
+    final initFuture = UserSessionmanager.initialize();
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => LoadingScreen(
+        until: Future.wait([
+          Future.delayed(const Duration(seconds: 2)),
+          initFuture,
+        ]),
+      ),
+    );
+
+    await initFuture;
     final runner = await EngineRunner.create();
     runner.startWatching();
     EngineHelpers();
@@ -132,7 +145,9 @@ class _AuthGateState extends State<AuthGate> {
 
         if (!_engineStarted) {
           _engineStarted = true;
-          _startEngine();
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            _startEngine();
+          });
         }
 
         return GoogleBottomBar(

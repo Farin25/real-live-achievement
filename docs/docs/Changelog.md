@@ -41,6 +41,10 @@
 - Gesponsorte Achievments
 - Richtige Webseite mit Live daten usw...
 
+## 13.05.26
+- Ladescreen hinzugefügt.
+
+
 ## 12.05.26
 - Reel mit Achievment notifications(Farin).
 - Beta Anmeldung Werbe Reel(Farin).

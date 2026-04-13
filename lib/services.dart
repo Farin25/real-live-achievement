@@ -7,6 +7,7 @@ import 'package:real_live_achievments/home.dart';
 import 'package:real_live_achievments/settings.dart';
 import 'package:real_live_achievments/social.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'dart:async';
 
 class UserLocalServices {
   static Future<void> saveUserProfile({
@@ -39,6 +40,70 @@ class UserLocalServices {
     await prefs.remove('cached_achievements');
     //Debug Ausgabe
     print("Achievement Cache gelöscht");
+  }
+}
+
+//----------------------------------
+//----------Loading screen----------
+//----------------------------------
+
+class LoadingScreen extends StatefulWidget {
+  final Duration? duration;
+  final Future? until;
+
+  const LoadingScreen({super.key, this.duration, this.until});
+
+  @override
+  State<LoadingScreen> createState() => _LoadingScreenState();
+}
+
+class _LoadingScreenState extends State<LoadingScreen> {
+  int _frame = 0;
+  Timer? _timer;
+
+  final List<String> frames = [
+    'assets/loading_1.png',
+    'assets/loading_2.png',
+    'assets/loading_3.png',
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Timer und fram rate
+    _timer = Timer.periodic(const Duration(milliseconds: 250), (timer) {
+      setState(() {
+        _frame = (_frame + 1) % frames.length;
+      });
+    });
+
+    // die feste dauer
+    if (widget.duration != null) {
+      Future.delayed(widget.duration!, () {
+        if (mounted) Navigator.pop(context);
+      });
+    }
+    // Warten bis fertig
+    if (widget.until != null) {
+      widget.until!.then((_) {
+        if (mounted) Navigator.pop(context);
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Center(child: Image.asset(frames[_frame])),
+    );
   }
 }
 
