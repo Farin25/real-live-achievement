@@ -45,6 +45,10 @@
 - Reel mit Achievment notifications(Farin).
 - Beta Anmeldung Werbe Reel(Farin).
 - Repo Aufgeräumt(Farin).
+- Achievment Teaser Mountain Goat(Liam & Farin).
+- Achievement Teaser Island Hoper (Liam & Farin).
+- Beta user achievement reel(Farin).
+- Upmark reel(Farin).
 
 ## 11.04.26
 - neue engine Funktion _getActualValueString für aktuell werte als string(Farin).
@@ -358,6 +362,7 @@ Die genauen änderungen sind auf Github ind den Commits zu [finden](https://gith
 - Vimeo Acount (Farin)
 - Werbe Plakate in der DASA(Sarah & Farin)
 - User Bindendene Achievments.
+- Verschiedene Reels und Beiträge auf Insta(Liam & Farin).
 
 ## Gescheiterte Werbemaßnahmen
 
