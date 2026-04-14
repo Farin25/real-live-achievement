@@ -122,11 +122,45 @@
       background: rgba(255, 255, 255, 0.15);
     }
 
+    .search-input {
+      width: 100%;
+      font-size: 13px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      outline: none;
+      -webkit-appearance: none;
+    }
+
+    .search-input::placeholder {
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    .search-input:focus {
+      border-color: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .category-section {
+      margin-top: 10px;
+    }
+
+    .category-label {
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.35);
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      margin-top: 10px;
+    }
+
     .achievements-grid {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      margin-top: 6px;
     }
 
     .ach-pill {
@@ -145,8 +179,13 @@
       color: #fff;
     }
 
+    .ach-pill.hidden {
+      display: none;
+    }
+
     .dl-btn {
-      margin-top: 20px;
+      margin-top: 4px;
+      width: 100%;
       padding: 10px 28px;
       border-radius: 10px;
       border: 1px solid rgba(255, 255, 255, 0.25);
@@ -197,36 +236,180 @@
       <div class="field-label">Text</div>
       <input type="text" id="input-text" value="Du hast einen Berg über 2000m bestiegen" oninput="update()">
     </div>
+    <button class="dl-btn" onclick="download()">PNG herunterladen (ohne Hintergrund)</button>
     <div>
       <div class="field-label">Schnellauswahl</div>
-      <div class="achievements-grid">
-        <span class="ach-pill"
-          onclick="set('Mountain Goat unlocked!', 'Du hast einen Berg über 2000m bestiegen')">Mountain Goat</span>
-        <span class="ach-pill" onclick="set('Traveler I unlocked!', 'Du hast 3 verschiedene Länder besucht')">Traveler
-          I</span>
-        <span class="ach-pill" onclick="set('Early Bird unlocked!', 'Vor 5 Uhr morgens aktiv gewesen')">Early
-          Bird</span>
-        <span class="ach-pill"
-          onclick="set('Explorer unlocked!', 'Mehr als 100 km von zuhause entfernt')">Explorer</span>
-        <span class="ach-pill" onclick="set('Cyclist unlocked!', '50 km Fahrrad an einem Tag geschafft')">Cyclist</span>
-        <span class="ach-pill" onclick="set('Island Hopper unlocked!', 'Du hast 3 verschiedene Inseln besucht')">Island
-          Hopper</span>
-        <span class="ach-pill" onclick="set('Wonder of the World!', 'Alle 7 Weltwunder besucht')">Wonder</span>
-        <span class="ach-pill"
-          onclick="set('Skyfall unlocked!', 'Du hast einen Fallschirmsprung gemacht')">Skyfall</span>
-        <span class="ach-pill"
-          onclick="set('Adventure unlocked!', '20.000 Schritte an einem neuen Ort')">Adventure</span>
-        <span class="ach-pill" onclick="set('Four Corners unlocked!', 'Du stehst wo 4 Länder zusammentreffen')">Four
-          Corners</span>
-      </div>
+      <input class="search-input" type="text" id="search-achievements" placeholder="Achievement suchen…" oninput="filterAchievements(this.value)">
+      <div id="achievements-container"></div>
     </div>
   </div>
 
-  <button class="dl-btn" onclick="download()">PNG herunterladen (ohne Hintergrund)</button>
   <p class="hint">Alle Rechte Vorbehlaten © Farin Langner</p>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script>
+    const ACHIEVEMENTS = {
+      'Adventure & Travel': [
+        ['Traveler I', 'Besuche 3 verschiedene Länder'],
+        ['Traveler II', 'Besuche 5 verschiedene Länder'],
+        ['Traveler III', 'Besuche 8 verschiedene Länder'],
+        ['Weltreisender', 'Besuche 194 Länder'],
+        ['Explorer', 'Sei mehr als 100 km von zuhause entfernt'],
+        ['Adventure', 'Mache mehr als 20.000 Schritte an einem neuen Ort'],
+        ['Landlocked', 'Besuche ein Land ohne Meereszugang'],
+        ['Island Hopper', 'Besuche 3 verschiedene Inseln'],
+        ['Capital Collector', 'Besuche 10 Hauptstädte'],
+        ['Border Crosser', 'Überquere 3 verschiedene Landesgrenzen an einem Tag'],
+        ['Border Crosser I', 'Überquere 5 verschiedene Landesgrenzen an einem Tag'],
+        ['Crossy Road', 'Stehe auf einer Landesgrenze zwischen zwei Ländern'],
+        ['Four Corners', 'Stehe an einem Punkt wo 4 Länder zusammentreffen'],
+        ['Time Traveler', 'Besuche 3 verschiedene Zeitzonen an einem Tag'],
+        ['Urban Explorer', 'Entdecke 10 verschiedene Städte innerhalb eines Monats'],
+        ['German Explorer', 'Besuche mindestens 10 deutsche Städte'],
+        ['Polar Bear', 'Bereise die Antarktis'],
+        ['Fly', 'Fliege in einem Flugzeug'],
+        ['Speedster', 'Bewege dich mit mehr als 200 km/h in einem Fahrzeug'],
+        ['Sailor Sarah', 'Besuche 8 Länder nur per Schiff'],
+        ['Skyfall', 'Mache einen Fallschirmsprung'],
+        ['Void', 'Besuche Bielefeld'],
+        ['Tokyo Drift', 'Besuche Tokio'],
+        ['Autopilot Disabled', 'Nimm einen anderen Weg als sonst zum gleichen Ziel'],
+        ['Unknown Chunk Loaded', 'Betrete nach einem Jahr Nutzung ein komplett neues Gebiet'],
+      ],
+      'Fitness & Health': [
+        ['Wanderer', 'Wandere an einem Tag mehr als 12 km'],
+        ['Wanderer II', 'Wandere an einem Tag mehr als 18 km'],
+        ['Marathoner', 'Laufe 42 km an einem Tag'],
+        ['Early Bird', 'Mache vor 5 Uhr morgens mehr als 200 Schritte'],
+        ['Night Walker', 'Laufe mehr als 5 km zwischen 22 und 4 Uhr'],
+        ['30k Club', 'Mache 30.000 Schritte an einem Tag'],
+        ['1 Week', 'Mache 7 Tage in Folge mindestens 10.000 Schritte pro Tag'],
+        ['Iron Legs', 'Mache 7 Tage in Folge mehr als 10.000 Schritte'],
+        ['Cyclist', 'Fahre mehr als 50 km Fahrrad an einem Tag'],
+        ['Elevator? Never!', 'Steige an einem Tag mehr als 50 Stockwerke zu Fuß'],
+        ['Mountain Goat', 'Besteige einen Berg über 2000 Meter'],
+        ['Tutorial Finished', 'Werde 18 Jahre alt'],
+        ['50%', 'Werde 50 Jahre alt'],
+        ['100%', 'Werde 100 Jahre alt'],
+        ['Survive Covid 19', 'Sei vor 2021 geboren'],
+        ['Homebody', 'Verlasse das Haus 48 Stunden nicht'],
+      ],
+      'Nature': [
+        ['Bushcamper I', 'Übernachte eine Nacht in der Wildnis'],
+        ['Bushcamper II', 'Bleibe länger als 3 Tage in der Wildnis'],
+        ['Golden Hour', 'Sei draußen bei einem Sonnenauf- oder Sonnenuntergang'],
+        ['Sunrise Chaser', 'Sieh mehr als 3 Sonnenaufgänge hintereinander'],
+        ['Night Owl', 'Sei mehr als 3 Nächte hintereinander draußen sobald es dunkel ist'],
+        ['Weather Resistant', 'Sei draußen trotz Regen und unter 5 Grad'],
+        ['First Snow', 'Sei beim ersten Schneefall des Jahres draußen'],
+        ['Snow Explorer', 'Verbringe mehr als 3 Stunden im Schnee'],
+        ['Rainbow Chaser', 'Sei draußen direkt nach einem Regen bei Sonnenschein'],
+        ['Beach', 'Besuche einen Strand'],
+        ['Miner', 'Sei 500 Meter unter dem Meeresspiegel'],
+        ['Lost Signal', 'Sei 2 Stunden ohne Internet und GPS Verbindung'],
+        ['Offline Mode', 'Sei einen ganzen Tag offline'],
+        ['Flat Earther', 'Sei an einem Tag an einer sehr tiefen und einer sehr hohen Stelle'],
+      ],
+      'Landmarks': [
+        ['Eiffel Gazer', 'Besuche den Eiffelturm in Paris'],
+        ['Colosseum Visitor', 'Besuche das Kolosseum in Rom'],
+        ['Big Ben Watcher', 'Besuche den Big Ben in London'],
+        ['Sagrada Familia', 'Besuche die Sagrada Familia in Barcelona'],
+        ['Statue of Liberty', 'Besuche die Freiheitsstatue in New York'],
+        ['Machu Picchu', 'Besuche Machu Picchu in Peru'],
+        ['Taj Mahal', 'Besuche das Taj Mahal in Indien'],
+        ['Great Wall Walker', 'Besuche die Chinesische Mauer'],
+        ['Chichen Itza', 'Besuche Chichen Itza in Mexiko'],
+        ['Christ the Redeemer', 'Besuche den Christus in Rio de Janeiro'],
+        ['Petra', 'Besuche Petra in Jordanien'],
+        ['Half Wonder', 'Besuche 3 der 7 Weltwunder'],
+        ['Wonder of the World', 'Besuche alle 7 Weltwunder'],
+        ['Gamer', 'Besuche eine Gamescom'],
+        ['Gamer I', 'Besuche 3 Gamescoms'],
+        ['Gamer II', 'Besuche 5 Gamescoms'],
+        ['Maker', 'Besuche eine Maker Faire'],
+        ['Maker I', 'Besuche 3 Maker Faires'],
+        ['Maker II', 'Besuche 5 Maker Faires'],
+        ['Culture Seeker', 'Besuche 5 Museen in einem Monat'],
+      ],
+      'Fun': [
+        ['Music Lover', 'Höre mehr als 5 Stunden Musik an einem Tag'],
+        ['Konami Code', 'Gib den Konami Code in der App ein'],
+        ['Hello World', 'Logge dich zum ersten Mal in der App ein'],
+        ['Old Phone', 'Benutze die App auf einem Handy das älter als 5 Jahre ist'],
+        ['Friday the 13th', 'Öffne die App an einem Freitag dem 13.'],
+        ['Palindrome Day', 'Öffne die App an einem Palindrom-Datum'],
+        ['Birthday', 'Öffne die App genau an deinem Geburtstag'],
+        ['404 Not Found', 'Laufe in der Natur mindestens 4 Mal an derselben Stelle vorbei'],
+        ['Mathias Mode', 'Benutze den Light Mode 30 Tage lang'],
+      ],
+      'App': [
+        ['Beta User', 'Nehme am Beta Programm teil und gebe Feedback'],
+        ['Up Mark Dev', 'Mache einen erfolgreichen Pull Request zu Up Mark'],
+        ['Open Source Hero', 'Mache 5 Pull Requests zu Open Source Projekten'],
+        ['Bug Hunter', 'Melde einen Bug in der App'],
+        ['Loyal', 'Nutze die App 365 Tage lang'],
+        ['Streak', 'Schalte 5 Wochen lang pro Woche 2 oder mehr Achievements frei'],
+        ['Speed Runner', 'Schalte 10 Achievements innerhalb einer Woche frei'],
+        ['Night Coder', 'Öffne die App zwischen 2 und 4 Uhr morgens'],
+        ['Dark Side', 'Benutze den Dark Mode 30 Tage lang'],
+        ['Duo', 'Erhalte mit einem Freund gleichzeitig ein Achievement'],
+        ['Jufo', 'Mache bei Jugend Forscht mit'],
+        ['Jufo I', 'Mache zum zweiten Mal bei Jugend Forscht mit'],
+        ['Jufo II', 'Mache 4 Mal bei Jugend Forscht mit'],
+        ['Founder', 'Du warst unter den ersten 10 Nutzern von Up Mark'],
+        ['First User', 'Du warst unter den ersten 50 Nutzern von Up Mark'],
+      ],
+    };
+
+    function buildAchievements() {
+      const container = document.getElementById('achievements-container');
+      container.innerHTML = '';
+      for (const [category, items] of Object.entries(ACHIEVEMENTS)) {
+        const section = document.createElement('div');
+        section.className = 'category-section';
+
+        const label = document.createElement('div');
+        label.className = 'category-label';
+        label.textContent = category;
+        section.appendChild(label);
+
+        const grid = document.createElement('div');
+        grid.className = 'achievements-grid';
+        grid.dataset.category = category;
+
+        for (const [name, desc] of items) {
+          const pill = document.createElement('span');
+          pill.className = 'ach-pill';
+          pill.textContent = name;
+          pill.dataset.name = name.toLowerCase();
+          pill.dataset.desc = desc.toLowerCase();
+          pill.onclick = () => set(name + ' unlocked!', desc);
+          grid.appendChild(pill);
+        }
+
+        section.appendChild(grid);
+        container.appendChild(section);
+      }
+    }
+
+    function filterAchievements(query) {
+      const q = query.toLowerCase().trim();
+      const container = document.getElementById('achievements-container');
+      const sections = container.querySelectorAll('.category-section');
+
+      sections.forEach(section => {
+        const pills = section.querySelectorAll('.ach-pill');
+        let anyVisible = false;
+        pills.forEach(pill => {
+          const matches = !q || pill.dataset.name.includes(q) || pill.dataset.desc.includes(q);
+          pill.classList.toggle('hidden', !matches);
+          if (matches) anyVisible = true;
+        });
+        section.style.display = anyVisible ? '' : 'none';
+      });
+    }
+
     function update() {
       document.getElementById('notif-title').textContent = document.getElementById('input-title').value;
       document.getElementById('notif-text').textContent = document.getElementById('input-text').value;
@@ -252,6 +435,8 @@
       link.href = canvas.toDataURL('image/png');
       link.click();
     }
+
+    buildAchievements();
   </script>
 
 </body>
