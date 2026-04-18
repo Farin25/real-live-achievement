@@ -1,5 +1,6 @@
 //Services.dart
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:real_live_achievments/achievments.dart';
@@ -8,6 +9,11 @@ import 'package:real_live_achievments/settings.dart';
 import 'package:real_live_achievments/social.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'dart:async';
+import 'dart:math';
+
+//---------------------------
+//-----------Cache-----------
+//---------------------------
 
 class UserLocalServices {
   static Future<void> saveUserProfile({
@@ -43,9 +49,9 @@ class UserLocalServices {
   }
 }
 
-//----------------------------------
-//----------Loading screen----------
-//----------------------------------
+//------------------------------
+//-----------Loadingscreen------
+//------------------------------
 class LoadingScreen extends StatefulWidget {
   final Duration? duration;
   final Future? until;
@@ -57,6 +63,163 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
+  String _funfact = 'funfacts weerden geladen..';
+  final supabase = Supabase.instance.client;
+  Timer? _funfactTimer;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadfunction();
+
+    _funfactTimer = Timer.periodic(const Duration(seconds: 30), (timer) {
+      _loadfunction();
+    });
+
+    if (widget.duration != null) {
+      Future.delayed(widget.duration!, () {
+        if (mounted) Navigator.pop(context);
+      });
+    }
+
+    if (widget.until != null) {
+      widget.until!.then((_) {
+        if (mounted) Navigator.pop(context);
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _funfactTimer?.cancel();
+    super.dispose();
+  }
+
+  Future<void> _loadfunction() async {
+    final funfacts = await supabase
+        .from('loading_funfacts')
+        .select('id, funfact');
+
+    final random = Random();
+    final rndomIndex = random.nextInt(funfacts.length);
+    final funfact = funfacts[rndomIndex]['funfact'];
+
+    setState(() {
+      _funfact = funfact;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const CircularProgressIndicator(color: Colors.white),
+            const SizedBox(height: 16),
+            const Text('Loading...', style: TextStyle(color: Colors.white)),
+            const SizedBox(height: 24),
+            Text(_funfact, style: TextStyle(color: Colors.grey)),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+//----------------------------
+//-----------navbar-----------
+//----------------------------
+class GoogleBottomBar extends StatefulWidget {
+  final int initalIndex;
+  final Function(ThemeMode) onThemeChanged;
+  final Function(int) onIndexChanged;
+
+  const GoogleBottomBar({
+    super.key,
+    required this.onThemeChanged,
+    required this.initalIndex,
+    required this.onIndexChanged,
+  });
+
+  @override
+  State<GoogleBottomBar> createState() => _GoogleBottomBarState();
+}
+
+class _GoogleBottomBarState extends State<GoogleBottomBar> {
+  late int _selectedIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.initalIndex;
+  }
+
+  Widget build(BuildContext context) {
+    final pages = [
+      NewsFeedPage1(),
+      AchievmentSeite(),
+      Socialsite(),
+      SettingsPage(onThemeChanged: widget.onThemeChanged),
+    ];
+    return Scaffold(
+      // appBar: AppBar(title: const Text('Google Bottom Bar')), // Auskomentiert Weil app bar ist auf jeder seite festgelegt
+      body: pages[_selectedIndex],
+      bottomNavigationBar: SalomonBottomBar(
+        currentIndex: _selectedIndex,
+        selectedItemColor: const Color(0xff6200ee),
+        unselectedItemColor: const Color(0xff757575),
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+          widget.onIndexChanged(index);
+        },
+        items: _navBarItems,
+      ),
+    );
+  }
+}
+
+final _navBarItems = [
+  SalomonBottomBarItem(
+    icon: const Icon(Icons.home),
+    title: const Text("Home"),
+    selectedColor: Colors.purple,
+  ),
+  SalomonBottomBarItem(
+    icon: const Icon(Icons.emoji_events),
+    title: const Text("Achievments"),
+    selectedColor: Colors.pink,
+  ),
+  SalomonBottomBarItem(
+    icon: const Icon(Icons.people),
+    title: const Text("Social"),
+    selectedColor: Colors.orange,
+  ),
+  SalomonBottomBarItem(
+    icon: const Icon(Icons.settings),
+    title: const Text("Settings"),
+    selectedColor: Colors.teal,
+  ),
+];
+
+//-------------------------------------------
+//----------Loading screen -- Wolke----------
+//-------------------------------------------
+class LoadingScreenWolke extends StatefulWidget {
+  final Duration? duration;
+  final Future? until;
+
+  const LoadingScreenWolke({super.key, this.duration, this.until});
+
+  @override
+  State<LoadingScreenWolke> createState() => _LoadingScreenWolkeState();
+}
+
+class _LoadingScreenWolkeState extends State<LoadingScreenWolke> {
   int _frame = 0;
   Timer? _timer;
 
@@ -195,80 +358,3 @@ class _VimeoVideoState extends State<VimeoVideo> {
     );
   }
 }
-
-//----------------------------
-//-----------navbar-----------
-//----------------------------
-class GoogleBottomBar extends StatefulWidget {
-  final int initalIndex;
-  final Function(ThemeMode) onThemeChanged;
-  final Function(int) onIndexChanged;
-
-  const GoogleBottomBar({
-    super.key,
-    required this.onThemeChanged,
-    required this.initalIndex,
-    required this.onIndexChanged,
-  });
-
-  @override
-  State<GoogleBottomBar> createState() => _GoogleBottomBarState();
-}
-
-class _GoogleBottomBarState extends State<GoogleBottomBar> {
-  late int _selectedIndex;
-
-  @override
-  void initState() {
-    super.initState();
-    _selectedIndex = widget.initalIndex;
-  }
-
-  Widget build(BuildContext context) {
-    final pages = [
-      NewsFeedPage1(),
-      AchievmentSeite(),
-      Socialsite(),
-      SettingsPage(onThemeChanged: widget.onThemeChanged),
-    ];
-    return Scaffold(
-      // appBar: AppBar(title: const Text('Google Bottom Bar')), // Auskomentiert Weil app bar ist auf jeder seite festgelegt
-      body: pages[_selectedIndex],
-      bottomNavigationBar: SalomonBottomBar(
-        currentIndex: _selectedIndex,
-        selectedItemColor: const Color(0xff6200ee),
-        unselectedItemColor: const Color(0xff757575),
-        onTap: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-          widget.onIndexChanged(index);
-        },
-        items: _navBarItems,
-      ),
-    );
-  }
-}
-
-final _navBarItems = [
-  SalomonBottomBarItem(
-    icon: const Icon(Icons.home),
-    title: const Text("Home"),
-    selectedColor: Colors.purple,
-  ),
-  SalomonBottomBarItem(
-    icon: const Icon(Icons.emoji_events),
-    title: const Text("Achievments"),
-    selectedColor: Colors.pink,
-  ),
-  SalomonBottomBarItem(
-    icon: const Icon(Icons.people),
-    title: const Text("Social"),
-    selectedColor: Colors.orange,
-  ),
-  SalomonBottomBarItem(
-    icon: const Icon(Icons.settings),
-    title: const Text("Settings"),
-    selectedColor: Colors.teal,
-  ),
-];

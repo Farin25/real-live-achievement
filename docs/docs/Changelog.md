@@ -41,19 +41,23 @@
 - Gesponsorte Achievments
 - Richtige Webseite mit Live daten usw...
 
-## 14.05.26
+## 14.04.26
+- funfact Ladescreen(Farin).
+
+
+## 14.04.26
 - Namsensideen Reels en und de(Farin).
 - Achievment Datatabell export geuploadet(Farin).
 - komplettte aktuell Achievementliste in den notfication_builder hinzugefügt(Ai & Farin).
 - Achievemnets suche zu notification builder hinzugefügt(Ai & farin).
 - Achievements nach kategorien sotiert in notification builder(Ai & Farin).
 
-## 13.05.26
+## 13.04.26
 - Ladescreen hinzugefügt(Farin).
 - Leistungsverbesserungen(Farin).
 - Startverbesserungen(Farin).
 
-## 12.05.26
+## 12.04.26
 - Reel mit Achievment notifications(Farin).
 - Beta Anmeldung Werbe Reel(Farin).
 - Repo Aufgeräumt(Farin).
