@@ -41,8 +41,23 @@
 - Gesponsorte Achievments
 - Richtige Webseite mit Live daten usw...
 
-## 14.04.26
+:::info Zur Transparenz
+Wir benutzen für die Entwicklung von Upmark teilweise KI, da es die Effizienz extrem steigert. Den generierten Code schauen wir uns selbstverständlich an und überprüfen ihn genau.
+:::
+
+
+## 19.04.26
+- Readme neu gemacht(AI, Farin).
+- Changelog geupdatet(Farin).
+- Location services in engine hlpers für Kordinaten, Stadt und Land hinzugefügt(Farin).
+
+## 18.04.26
 - funfact Ladescreen(Farin).
+- services.dart sotiert(Farin).
+- erste funfacts in funfacts Datatabell hinzugefügt(Farin).
+
+## 17.04.26
+- funfacts Tabelle in db mit testeinträgen erstellt.
 
 
 ## 14.04.26
@@ -373,7 +388,6 @@ Die genauen änderungen sind auf Github ind den Commits zu [finden](https://gith
 - Präsentation von Up Mark auf der Makerfaire(Farin)15.03.2026
 - Newsletter (Farin) 08.03.2026
 - Leute solange nerven bis sie sich zum Newsletter anmelden(Liam & Farin)
-- Werbeviedeo für Newsletter (Liam)
 - Instagramm Acount (Liam & Farin)
 - Vimeo Acount (Farin)
 - Werbe Plakate in der DASA(Sarah & Farin)

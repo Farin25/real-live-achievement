@@ -1,60 +1,38 @@
-# Up Mark
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&width=600&lines=Up+Mark+%E2%80%93+Achievements+for+real+life)](https://git.io/typing-svg)
 
-## Achievments for the real world
-<iframe src="https://player.vimeo.com/video/1167330665?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" width="1280" height="720" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" title="Upmark Werbung Finished"></iframe>
+> **Note:** We are currently looking for a new name for this project. If you have an idea, feel free to open an issue or contact us!
 
-## Links
-- [Website](https://farin25.github.io/real-live-achievement/)
-- [Changelog](https://farin25.github.io/real-live-achievement/docs/Changelog)
-- [Submit your own achievement](https://farin25.github.io/real-live-achievement/docs/Dein_Achievment)
-- [Newsletter](https://farin25.github.io/real-live-achievement/docs/newsletter)
+**Up Mark** is an achievement system for real life. Unlike games where you earn trophies by pressing buttons, Up Mark rewards you for actually going out and experiencing the world. Travel to new countries, climb mountain peaks, spend a night under the stars, or just go for an unusually long walk. Every achievement you unlock is something you actually experienced.
 
-**Social Media**
-- [Vimeo](https://vimeo.com/upmark)
-- [Instagramm](https://www.instagram.com/upmarkofficial/)
+## 🚀 Release
+Up Mark is planned for release on **July 10, 2026** – initially as an Android APK, later on Google Play.
 
-**Patner and Sponsors**
-- [HolzIdeen](https://holzideen.org)
+## 🛠 Tech Stack
+![Flutter](https://img.shields.io/badge/Flutter-02569B?style=flat&logo=flutter&logoColor=white)
+![Dart](https://img.shields.io/badge/Dart-0175C2?style=flat&logo=dart&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat&logo=supabase&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=flat&logo=postgresql&logoColor=white)
 
-
-
-## Achievments
-Some of the best Achievements in the App:
-
+## 🏆 Some Achievements
 | Achievement | How to unlock |
 |---|---|
 | Traveler I | Visit 3 countries |
 | Time Traveler | Visit 3 time zones in one day |
 | Miner | Be 500 meters below sea level |
+| Early Bird | Walk 200+ steps before 5 AM |
+| Friday the 13th | Open the app on a Friday the 13th |
 
+→ [Full achievement list](https://farin25.github.io/real-live-achievement/docs/Achievments)
 
-
-for the full Achievmentlist see: [https://farin25.github.io/real-live-achievement/docs/Achievments](https://farin25.github.io/real-live-achievement/docs/Achievments)
-
-## Become a beta tester
-
-
-## REALEASE:
- Upmark is currently scheduled for release on July 10, 2026. However, the exact release date may vary depending on the operating system and development progress. Delays are possible as we want to ensure that the app runs stably, performs well, and is user-friendly on all platforms.
-
-Our team is working with great motivation and commitment to realize this vision. Features are continuously being developed, the design is being optimized, and the app is being extensively tested to ensure a high-quality end product. We look forward to sharing Upmark with you soon and are excited about the joint launch.
-
-
-### Support & Community
+## 🔗 Links
+- [Website & Docs](https://farin25.github.io/real-live-achievement/)
+- [Beta Program](https://farin25.github.io/real-live-achievement/docs/Beta%20Programm)
+- [Newsletter](https://farin25.github.io/real-live-achievement/docs/newsletter)
+- [Instagram](https://www.instagram.com/upmarkofficial/)
 - [Discord](https://discord.gg/6J4Ws5ckYX)
-- [Stoat](https://stoat.chat/invite/V6hDbKnq)
 
-## Star History
+## 🤝 Partners and Sponsors
+[![HolzIdeen](https://img.shields.io/badge/Partner-HolzIdeen-green)](https://holzideen.org)
 
-<a href="https://www.star-history.com/#Farin25/real-live-achievement&type=date&legend=top-left">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Farin25/real-live-achievement&type=date&theme=dark&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Farin25/real-live-achievement&type=date&legend=top-left" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Farin25/real-live-achievement&type=date&legend=top-left" />
- </picture>
-</a>
-
- ### Copyright (C) 2026 of [Liam Selent](https://github.com/Lionhacker270411) and [Farin Langner](https://farin-langner.de)
- - Distributed under the terms of the MIT License.
-
-- The project name and associated logo are not part of the open source license. All rights to the name and logo are reserved.
+### Copyright (C) 2026 [Farin Langner](https://farin-langner.de) & [Liam Selent](https://github.com/Lionhacker270411)
+Distributed under the MIT License. The project name and logo are not part of the open source license.
