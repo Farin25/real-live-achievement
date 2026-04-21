@@ -1,6 +1,5 @@
 //engine.dart
 import 'dart:convert';
-import 'package:geolocator/geolocator.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:battery_plus/battery_plus.dart';
@@ -11,7 +10,6 @@ class AchievementEngine {
 
   Future<void> run() async {
     final user = supabase.auth.currentUser;
-    Position? position;
 
     if (user == null) return;
 
@@ -155,7 +153,6 @@ class AchievementEngine {
             final String? actualString = await _getActualValueString(
               type,
               userdata,
-              position,
             );
             if (actualString != null) {
               if (actualString == value.toString().toLowerCase()) {
@@ -260,28 +257,19 @@ class AchievementEngine {
   Future<String?> _getActualValueString(
     String type,
     Map<String, dynamic> userdata,
-    Position? position,
   ) async {
     switch (type) {
       case 'operating_system':
         return Platform.operatingSystem.toLowerCase();
-      /*Auskommentiert weil kommt später
+
       case 'visited_city':
-        if (position == null) return null;
-        final placemarks = await placemarkFromCoordinates(
-          position.latitude,
-          position.longitude,
-        );
-        return placemarks.first.locality?.toLowerCase();
+        final prefs = await SharedPreferences.getInstance();
+        return prefs.getString('current_city')?.toLowerCase();
 
       case 'country':
-        if (position == null) return null;
-        final placemarks = await placemarkFromCoordinates(
-          position.latitude,
-          position.longitude,
-        );
-        return placemarks.first.isoCountryCode?.toLowerCase();
-*/
+        final prefs = await SharedPreferences.getInstance();
+        return prefs.getString('current_country_code')?.toLowerCase();
+
       default:
         return null;
     }

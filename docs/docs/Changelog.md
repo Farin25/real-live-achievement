@@ -45,6 +45,10 @@
 Wir benutzen für die Entwicklung von Upmark teilweise KI, da es die Effizienz extrem steigert. Den generierten Code schauen wir uns selbstverständlich an und überprüfen ihn genau.
 :::
 
+## 21.04.26
+- Standort daten in engine(Farin)
+
+
 
 ## 19.04.26
 - Readme neu gemacht(AI, Farin).
