@@ -83,11 +83,19 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
     }
   }
 
-  bool _isUnlocked(dynamic achievement) {
-    return _userAchievements.any(
-      (ua) => ua['achievement_id'] == achievement['id'],
-    );
+  DateTime? _unlockedAt(dynamic achievement) {
+    try {
+      final ua = _userAchievements.firstWhere(
+        (ua) => ua['achievement_id'] == achievement['id'],
+      );
+      final raw = ua['unlocked_at'];
+      return raw != null ? DateTime.tryParse(raw) : null;
+    } catch (_) {
+      return null;
+    }
   }
+
+  bool _isUnlocked(dynamic achievement) => _unlockedAt(achievement) != null;
 
   void _showAchievementPopup(dynamic achievement, bool unlocked) {
     // lockedVisibility bestimmt was bei gesperrten angezeigt wird
@@ -189,9 +197,20 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
                 children: [
                   Icon(Icons.check_circle, size: 16, color: Colors.green[600]),
                   const SizedBox(width: 6),
-                  Text(
-                    'Freigeschaltet',
-                    style: TextStyle(fontSize: 13, color: Colors.green[600]),
+                  Builder(
+                    builder: (context) {
+                      final date = _unlockedAt(achievement);
+                      final label = date != null
+                          ? 'Freigeschaltet am ${date.day.toString().padLeft(2, '0')}.${date.month.toString().padLeft(2, '0')}.${date.year}'
+                          : 'Freigeschaltet';
+                      return Text(
+                        label,
+                        style: TextStyle(
+                          fontSize: 13,
+                          color: Colors.green[600],
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),

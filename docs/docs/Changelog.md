@@ -45,10 +45,19 @@
 Wir benutzen für die Entwicklung von Upmark teilweise KI, da es die Effizienz extrem steigert. Den generierten Code schauen wir uns selbstverständlich an und überprüfen ihn genau.
 :::
 
+## 24.04.26
+- Werbe Foto Germann Explorer(Liam).
+- Unlocked datum wird ejtzt in der pop up ansicht bei geunlockten Achievments angezeigt(Farin).
+
+## 23.04.26
+- Werbe Foto Speedster achievement(Liam).
+
+## 24.04.26
+- Werbe reel Beta Release(Liam).
+- Werbe real up mark (Liam).
+
 ## 21.04.26
 - Standort daten in engine(Farin)
-
-
 
 ## 19.04.26
 - Readme neu gemacht(AI, Farin).
