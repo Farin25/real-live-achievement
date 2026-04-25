@@ -143,9 +143,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     subtitle: const Text("Deutsch DE"),
                     trailing: const Icon(Icons.arrow_forward_ios),
                     onTap: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Sprachen kommen bald')),
-                      );
+                      showAppSnackBar(context, 'Sprachen kommen bald');
                     },
                   ),
 
@@ -612,9 +610,7 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
             onTap: () {
               runEngine();
 
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text("Engine wurde gestartet")),
-              );
+              showAppSnackBar(context, 'Engine wurde gestartet');
               print('Engine wurde Manuell gestartet');
             },
           ),

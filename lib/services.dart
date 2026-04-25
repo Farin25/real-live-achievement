@@ -10,6 +10,8 @@ import 'package:real_live_achievments/social.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'dart:async';
 import 'dart:math';
+import 'dart:ui';
+import 'package:flutter/material.dart';
 
 //---------------------------
 //-----------Cache-----------
@@ -165,7 +167,6 @@ class _GoogleBottomBarState extends State<GoogleBottomBar> {
       SettingsPage(onThemeChanged: widget.onThemeChanged),
     ];
     return Scaffold(
-      // appBar: AppBar(title: const Text('Google Bottom Bar')), // Auskomentiert Weil app bar ist auf jeder seite festgelegt
       body: pages[_selectedIndex],
       bottomNavigationBar: SalomonBottomBar(
         currentIndex: _selectedIndex,
@@ -205,6 +206,127 @@ final _navBarItems = [
     selectedColor: Colors.teal,
   ),
 ];
+//----------------------------
+//---------Snackbar-----------
+//----------------------------
+void showAppSnackBar(
+  BuildContext context,
+  String message, {
+  Duration duration = const Duration(seconds: 3),
+}) {
+  final isDark = Theme.of(context).brightness == Brightness.dark;
+
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      duration: duration,
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      behavior: SnackBarBehavior.floating,
+      margin: const EdgeInsets.all(16),
+      padding: EdgeInsets.zero,
+      content: _AppSnackBarContent(message: message, isDark: isDark),
+    ),
+  );
+}
+
+class _AppSnackBarContent extends StatelessWidget {
+  final String message;
+  final bool isDark;
+
+  const _AppSnackBarContent({required this.message, required this.isDark});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: isDark
+              ? [const Color(0xFF2C2C2E), const Color(0xFF1C1C1E)]
+              : [const Color(0xFFFFFFFF), const Color(0xFFF2F2F7)],
+        ),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: isDark
+              ? Colors.white.withOpacity(0.12)
+              : Colors.black.withOpacity(0.06),
+          width: 1,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(isDark ? 0.5 : 0.10),
+            blurRadius: 20,
+            spreadRadius: 0,
+            offset: const Offset(0, 6),
+          ),
+          if (!isDark)
+            BoxShadow(
+              color: Colors.white.withOpacity(0.9),
+              blurRadius: 0,
+              spreadRadius: 0,
+              offset: const Offset(0, 1),
+            ),
+        ],
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // App Icon mit leichtem Hintergrund
+          Container(
+            width: 34,
+            height: 34,
+            decoration: BoxDecoration(
+              color: isDark
+                  ? Colors.white.withOpacity(0.08)
+                  : Colors.black.withOpacity(0.04),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(3),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(7),
+                child: Image.asset(
+                  'assets/icon.png',
+                  fit: BoxFit.cover,
+                  errorBuilder: (_, __, ___) => Icon(
+                    Icons.notifications_rounded,
+                    size: 20,
+                    color: isDark ? Colors.white70 : Colors.black54,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(width: 12),
+          // Divider
+          Container(
+            width: 1,
+            height: 28,
+            color: isDark
+                ? Colors.white.withOpacity(0.10)
+                : Colors.black.withOpacity(0.08),
+          ),
+          const SizedBox(width: 12),
+          // Message
+          Flexible(
+            child: Text(
+              message,
+              style: TextStyle(
+                color: isDark ? Colors.white : const Color(0xFF1C1C1E),
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                letterSpacing: -0.1,
+                height: 1.3,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
 //-------------------------------------------
 //----------Loading screen -- Wolke----------

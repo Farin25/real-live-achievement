@@ -50,6 +50,7 @@ Wir benutzen für die Entwicklung von Upmark teilweise KI, da es die Effizienz e
 - achievments tabelle doppelte einträge entfernt(Farin).
 - engine Helpers speichert jetztz besuchte städte und Länder(Farin).
 - getActualValue gibt jetzt besuchte städte und länder zurück(Farin).
+- Neue Snackbar(AI, Farin).
 - unique_count fertigestelt(Farin).
 - **Neue unterstützte Achievments**
   - Travler I
