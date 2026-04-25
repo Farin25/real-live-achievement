@@ -4,6 +4,7 @@ import 'engine.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
+import 'dart:convert';
 
 class EngineRunner {
   static EngineRunner? instance;
@@ -146,5 +147,27 @@ class EngineHelpers {
     );
     await prefs.setDouble('current_latitude', position.latitude);
     await prefs.setDouble('current_longitude', position.longitude);
+
+    //Ländeer Liste
+    final List<String> visitedCountries = jsonDecode(
+      prefs.getString('visited_countries') ?? '[]',
+    );
+    final countryCode = placemark.isoCountryCode ?? '';
+
+    if (countryCode.isNotEmpty && !visitedCountries.contains(countryCode)) {
+      visitedCountries.add(countryCode);
+      await prefs.setString('visited_countries', jsonEncode(visitedCountries));
+    }
+
+    // Städte Liste
+    final List<String> visitedCitys = jsonDecode(
+      prefs.getString('visited_citys') ?? '[]',
+    );
+    final cityCode = placemark.locality ?? '';
+
+    if (cityCode.isNotEmpty && !visitedCitys.contains(cityCode)) {
+      visitedCitys.add(cityCode);
+      await prefs.setString('visited_citys', jsonEncode(visitedCitys));
+    }
   }
 }

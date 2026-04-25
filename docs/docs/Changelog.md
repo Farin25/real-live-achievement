@@ -45,6 +45,18 @@
 Wir benutzen für die Entwicklung von Upmark teilweise KI, da es die Effizienz extrem steigert. Den generierten Code schauen wir uns selbstverständlich an und überprüfen ihn genau.
 :::
 
+## 25.04.26
+- Werbe Foto EarlyBird(Liam).
+- achievments tabelle doppelte einträge entfernt(Farin).
+- engine Helpers speichert jetztz besuchte städte und Länder(Farin).
+- getActualValue gibt jetzt besuchte städte und länder zurück(Farin).
+- unique_count fertigestelt(Farin).
+- **Neue unterstützte Achievments**
+  - Travler I
+  - Travler II
+  - Travler III
+  - Weltreisender
+
 ## 24.04.26
 - Werbe Foto Germann Explorer(Liam).
 - Unlocked datum wird ejtzt in der pop up ansicht bei geunlockten Achievments angezeigt(Farin).
@@ -63,6 +75,10 @@ Wir benutzen für die Entwicklung von Upmark teilweise KI, da es die Effizienz e
 - Readme neu gemacht(AI, Farin).
 - Changelog geupdatet(Farin).
 - Location services in engine hlpers für Kordinaten, Stadt und Land hinzugefügt(Farin).
+- **Neue unterstützte Achievments**
+ - Tokio Drift
+ - Void
+ - Und alle zukünftigen eine stadt oder ein land besucht.
 
 ## 18.04.26
 - funfact Ladescreen(Farin).

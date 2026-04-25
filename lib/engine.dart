@@ -186,6 +186,14 @@ class AchievementEngine {
             }
 
           case 'unique_count':
+            final type = req['type'];
+            final value = req['value'];
+
+            final num? count = await _getActualValue(type, userdata);
+            if (count != null && count >= value) {
+              await _logUnlock(id, user.id);
+            }
+
           case 'combined':
         }
       }
@@ -247,6 +255,24 @@ class AchievementEngine {
       case 'battery_percent':
         final battery = Battery();
         return await battery.batteryLevel;
+
+      // Besuchte Länder
+      case 'countries_visited':
+        final prefs = await SharedPreferences.getInstance();
+        final List<String> visited = jsonDecode(
+          prefs.getString('visited_countries') ?? '[]',
+        );
+
+        return visited.length;
+
+      // Besuchte Städte
+      case 'citys_visited':
+        final prefs = await SharedPreferences.getInstance();
+        final List<String> visited = jsonDecode(
+          prefs.getString('visited_citys') ?? '[]',
+        );
+
+        return visited.length;
 
       default:
         return null;
