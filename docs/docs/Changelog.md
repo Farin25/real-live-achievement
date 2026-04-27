@@ -21,7 +21,7 @@
 - Achievments in backend mit den iauf Webseite abgleichen(Farin ~ Liam)
 - Automatisch generierter Feed(Farin).
 - Neues Achievment einreiche Formular (evtl. Liame Survey)(Farin).
-- App Email Templates und Absender Updaten(Farin).
+- App Email Templates und Absender Updaten(Farin, Liam).
 
 
 ### Idden & nice to haves bzw. in Planung
@@ -44,6 +44,17 @@
 :::info Zur Transparenz
 Wir benutzen für die Entwicklung von Upmark teilweise KI, da es die Effizienz extrem steigert. Den generierten Code schauen wir uns selbstverständlich an und überprüfen ihn genau.
 :::
+
+## 27.04.26
+- Eingine helpers speicehrt jetzt Listen mit Städten die Besucht worden sind pro Land(Farin).
+- getActualValue gibt die listen von oben jetzt an die engine weiter(Farin).
+- **Neue unterstützte Achievments**
+  - German Explorer
+
+## 26.04.26
+- Werbe Foto 404(Liam).
+- werbe Foto Half Wounder(Liam).
+
 
 ## 25.04.26
 - Werbe Foto EarlyBird(Liam).

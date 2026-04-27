@@ -11,7 +11,6 @@ import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'dart:async';
 import 'dart:math';
 import 'dart:ui';
-import 'package:flutter/material.dart';
 
 //---------------------------
 //-----------Cache-----------

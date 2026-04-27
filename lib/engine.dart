@@ -274,6 +274,21 @@ class AchievementEngine {
 
         return visited.length;
 
+      case String t when t.startsWith('cities_visited_'):
+        final countryCode = t.split('_').last;
+        final prefs = await SharedPreferences.getInstance();
+        final List<String> visited = jsonDecode(
+          prefs.getString('visited_citys_$countryCode') ?? '[]',
+        );
+        return visited.length;
+      case String t when t.startsWith('cities_visited_'):
+        final countryCode = t.split('_').last;
+        final prefs = await SharedPreferences.getInstance();
+        final List<String> visited = jsonDecode(
+          prefs.getString('visited_citys_$countryCode') ?? '[]',
+        );
+        return visited.length;
+
       default:
         return null;
     }

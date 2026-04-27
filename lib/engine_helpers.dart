@@ -169,5 +169,18 @@ class EngineHelpers {
       visitedCitys.add(cityCode);
       await prefs.setString('visited_citys', jsonEncode(visitedCitys));
     }
+
+    if (countryCode.isNotEmpty) {
+      final List<String> countryVisited = jsonDecode(
+        prefs.getString('visited_citys_$countryCode') ?? '[]',
+      );
+      if (cityCode.isNotEmpty && !countryVisited.contains(cityCode)) {
+        countryVisited.add(cityCode);
+        await prefs.setString(
+          'visited_citys_$countryCode',
+          jsonEncode(countryVisited),
+        );
+      }
+    }
   }
 }
