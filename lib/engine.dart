@@ -149,6 +149,18 @@ class AchievementEngine {
                 continue;
               }
             }
+            // Visited city: check against visited_citys list
+            if (type == 'visited_city') {
+              final prefs = await SharedPreferences.getInstance();
+              final List<String> visitedCitys = List<String>.from(
+                jsonDecode(prefs.getString('visited_citys') ?? '[]'),
+              );
+              final cityValue = value.toString().toLowerCase();
+              if (visitedCitys.any((c) => c.toLowerCase() == cityValue)) {
+                await _logUnlock(id, user.id);
+              }
+              continue;
+            }
             // Einfacher generischer verglich für Strings
             final String? actualString = await _getActualValueString(
               type,
@@ -259,8 +271,8 @@ class AchievementEngine {
       // Besuchte Länder
       case 'countries_visited':
         final prefs = await SharedPreferences.getInstance();
-        final List<String> visited = jsonDecode(
-          prefs.getString('visited_countries') ?? '[]',
+        final List<String> visited = List<String>.from(
+          jsonDecode(prefs.getString('visited_countries') ?? '[]'),
         );
 
         return visited.length;
@@ -268,8 +280,8 @@ class AchievementEngine {
       // Besuchte Städte
       case 'citys_visited':
         final prefs = await SharedPreferences.getInstance();
-        final List<String> visited = jsonDecode(
-          prefs.getString('visited_citys') ?? '[]',
+        final List<String> visited = List<String>.from(
+          jsonDecode(prefs.getString('visited_citys') ?? '[]'),
         );
 
         return visited.length;
@@ -277,15 +289,8 @@ class AchievementEngine {
       case String t when t.startsWith('cities_visited_'):
         final countryCode = t.split('_').last;
         final prefs = await SharedPreferences.getInstance();
-        final List<String> visited = jsonDecode(
-          prefs.getString('visited_citys_$countryCode') ?? '[]',
-        );
-        return visited.length;
-      case String t when t.startsWith('cities_visited_'):
-        final countryCode = t.split('_').last;
-        final prefs = await SharedPreferences.getInstance();
-        final List<String> visited = jsonDecode(
-          prefs.getString('visited_citys_$countryCode') ?? '[]',
+        final List<String> visited = List<String>.from(
+          jsonDecode(prefs.getString('visited_citys_$countryCode') ?? '[]'),
         );
         return visited.length;
 

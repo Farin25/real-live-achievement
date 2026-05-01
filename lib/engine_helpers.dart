@@ -97,46 +97,40 @@ class EngineHelpers {
     bool serviceEnabled;
     LocationPermission permission;
 
-    // Test if location services are enabled.
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    print('[Location] Service enabled: $serviceEnabled');
     if (!serviceEnabled) {
-      // Location services are not enabled don't continue
-      // accessing the position and request users of the
-      // App to enable the location services.
-      return Future.error('Location services are disabled.');
+      print('[Location] ABBRUCH: Location service deaktiviert');
+      return;
     }
 
     permission = await Geolocator.checkPermission();
+    print('[Location] Permission: $permission');
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
+      print('[Location] Permission nach Request: $permission');
       if (permission == LocationPermission.denied) {
-        // Permissions are denied, next time you could try
-        // requesting permissions again (this is also where
-        // Android's shouldShowRequestPermissionRationale
-        // returned true. According to Android guidelines
-        // your App should show an explanatory UI now.
-        return Future.error('Location permissions are denied');
+        print('[Location] ABBRUCH: Permission verweigert');
+        return;
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
-      // Permissions are denied forever, handle appropriately.
-      return Future.error(
-        'Location permissions are permanently denied, we cannot request permissions.',
-      );
+      print('[Location] ABBRUCH: Permission dauerhaft verweigert — in Android-Einstellungen freigeben');
+      return;
     }
 
-    // When we reach here, permissions are granted and we can
-    // continue accessing the position of the device.
+    print('[Location] Hole Position...');
     final position = await Geolocator.getCurrentPosition();
+    print('[Location] Position: ${position.latitude}, ${position.longitude}');
 
     // In Stadt und Land wechseln
     List<Placemark> placemarks = await placemarkFromCoordinates(
       position.latitude,
       position.longitude,
     );
-    // In Chache speichern
     final placemark = placemarks.first;
+    print('[Location] locality="${placemark.locality}" subLocality="${placemark.subLocality}" adminArea="${placemark.administrativeArea}"');
     final prefs = await SharedPreferences.getInstance();
 
     await prefs.setString('current_city', placemark.locality ?? '');
@@ -149,8 +143,8 @@ class EngineHelpers {
     await prefs.setDouble('current_longitude', position.longitude);
 
     //Ländeer Liste
-    final List<String> visitedCountries = jsonDecode(
-      prefs.getString('visited_countries') ?? '[]',
+    final List<String> visitedCountries = List<String>.from(
+      jsonDecode(prefs.getString('visited_countries') ?? '[]'),
     );
     final countryCode = placemark.isoCountryCode ?? '';
 
@@ -160,8 +154,8 @@ class EngineHelpers {
     }
 
     // Städte Liste
-    final List<String> visitedCitys = jsonDecode(
-      prefs.getString('visited_citys') ?? '[]',
+    final List<String> visitedCitys = List<String>.from(
+      jsonDecode(prefs.getString('visited_citys') ?? '[]'),
     );
     final cityCode = placemark.locality ?? '';
 
@@ -171,8 +165,8 @@ class EngineHelpers {
     }
 
     if (countryCode.isNotEmpty) {
-      final List<String> countryVisited = jsonDecode(
-        prefs.getString('visited_citys_$countryCode') ?? '[]',
+      final List<String> countryVisited = List<String>.from(
+        jsonDecode(prefs.getString('visited_citys_$countryCode') ?? '[]'),
       );
       if (cityCode.isNotEmpty && !countryVisited.contains(cityCode)) {
         countryVisited.add(cityCode);

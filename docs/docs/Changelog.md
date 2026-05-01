@@ -45,15 +45,20 @@
 Wir benutzen für die Entwicklung von Upmark teilweise KI, da es die Effizienz extrem steigert. Den generierten Code schauen wir uns selbstverständlich an und überprüfen ihn genau.
 :::
 
+## 28.04.26
+- Newsletter mail (Farin ~ Liam).
+
 ## 27.04.26
 - Eingine helpers speicehrt jetzt Listen mit Städten die Besucht worden sind pro Land(Farin).
 - getActualValue gibt die listen von oben jetzt an die engine weiter(Farin).
+- Werbe Beitrag/Poster Beta Release(Farin)
 - **Neue unterstützte Achievments**
   - German Explorer
 
 ## 26.04.26
 - Werbe Foto 404(Liam).
 - werbe Foto Half Wounder(Liam).
+
 
 
 ## 25.04.26
