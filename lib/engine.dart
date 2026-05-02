@@ -13,9 +13,19 @@ class AchievementEngine {
 
     if (user == null) return;
 
-    final achievements = await supabase
-        .from('achievements')
-        .select('id, requirement');
+    List<dynamic> achievements;
+    try {
+      achievements = await supabase
+          .from('achievements')
+          .select('id, requirement');
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('cached_achievements', jsonEncode(achievements));
+    } catch (e) {
+      final prefs = await SharedPreferences.getInstance();
+      final cached = prefs.getString('cached_achievements');
+      if (cached == null) return;
+      achievements = jsonDecode(cached);
+    }
 
     final unlocked = await supabase
         .from('user_achievements')
