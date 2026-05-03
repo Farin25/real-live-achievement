@@ -217,6 +217,37 @@ class AchievementEngine {
             }
 
           case 'combined':
+            final conditions = req['conditions'] as List;
+            bool allMet = true;
+
+            for (final condition in conditions) {
+              final type = condition['type'];
+              final value = condition['value'];
+              final operator = condition['operator'] ?? 'greater_equal';
+
+              //
+              final num? actual = await _getActualValue(type, userdata);
+              if (actual == null) {
+                allMet = false;
+                break;
+              }
+
+              final conditionMet = switch (operator) {
+                'less_equal' => actual <= value,
+                'less_than' => actual < value,
+                'equals' => actual == value,
+                'greater_equal' => actual >= value,
+                'greater_than' => actual > value,
+                _ => false,
+              };
+
+              if (!conditionMet) {
+                allMet = false;
+                break;
+              }
+            }
+
+            if (allMet) await _logUnlock(id, user.id);
         }
       }
     }
