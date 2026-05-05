@@ -18,6 +18,29 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
   bool _isLoading = true;
   String _lockedVisibility = 'all';
 
+  Color _categoryColor(String? category) {
+    switch (category) {
+      case 'Fun':
+        return Colors.red;
+      case 'Adventure & Travel':
+        return Colors.orange;
+      case 'Fitness & Health':
+        return Colors.pink;
+      case 'App':
+        return Colors.blue;
+      case 'Nature':
+        return Colors.green;
+      case 'Events':
+        return Colors.yellow;
+      default:
+        return Colors.black;
+    }
+  }
+
+  Color _categoryColorLight(String? category) {
+    return _categoryColor(category).withValues(alpha: 0.40);
+  }
+
   @override
   void initState() {
     super.initState();
@@ -158,11 +181,11 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(999),
-                  color: Colors.blue.withOpacity(0.1),
+                  color: _categoryColorLight(achievement['category']),
                 ),
                 child: Text(
                   achievement['category'],
-                  style: const TextStyle(fontSize: 13, color: Colors.blue),
+                  style: const TextStyle(fontSize: 13),
                 ),
               ),
             const SizedBox(height: 12),
