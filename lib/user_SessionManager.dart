@@ -1,5 +1,6 @@
 //user_SessionManager.dart
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:workmanager/workmanager.dart';
 import 'services.dart';
 
 class UserSessionmanager {
@@ -9,7 +10,17 @@ class UserSessionmanager {
     final user = supabase.auth.currentUser;
     if (user == null) return;
 
-    await _syncProfile(user);
+    try {
+      await _syncProfile(user).timeout(
+        Duration(seconds: 8),
+        onTimeout: () {
+          print('[SessionManager] Timeout - nutze lokalen Cache');
+        },
+      );
+    } catch (e) {
+      print('[SessionManager] Fehler beim Profil-Sync: $e');
+      print('[SessionManager] Fahre ohne Sync fort');
+    }
   }
 
   static Future<void> _syncProfile(User user) async {
@@ -28,6 +39,7 @@ class UserSessionmanager {
   }
 
   static Future<void> logout() async {
+    await Workmanager().cancelAll();
     await supabase.auth.signOut();
     await UserLocalServices.clearUserProfile();
   }

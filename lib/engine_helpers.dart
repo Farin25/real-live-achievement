@@ -5,6 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 import 'dart:convert';
+import 'package:workmanager/workmanager.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class EngineRunner {
   static EngineRunner? instance;
@@ -116,7 +118,9 @@ class EngineHelpers {
     }
 
     if (permission == LocationPermission.deniedForever) {
-      print('[Location] ABBRUCH: Permission dauerhaft verweigert — in Android-Einstellungen freigeben');
+      print(
+        '[Location] ABBRUCH: Permission dauerhaft verweigert — in Android-Einstellungen freigeben',
+      );
       return;
     }
 
@@ -130,7 +134,9 @@ class EngineHelpers {
       position.longitude,
     );
     final placemark = placemarks.first;
-    print('[Location] locality="${placemark.locality}" subLocality="${placemark.subLocality}" adminArea="${placemark.administrativeArea}"');
+    print(
+      '[Location] locality="${placemark.locality}" subLocality="${placemark.subLocality}" adminArea="${placemark.administrativeArea}"',
+    );
     final prefs = await SharedPreferences.getInstance();
 
     await prefs.setString('current_city', placemark.locality ?? '');
@@ -177,4 +183,37 @@ class EngineHelpers {
       }
     }
   }
+}
+//---------------------------------
+//------------BG Dienst------------
+//---------------------------------
+
+@pragma('vm:entry-point')
+void backgroundTaskCallback() {
+  Workmanager().executeTask((task, inputData) async {
+    print('[Background] Task gestartet: $task');
+
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final url = prefs.getString('supabase_url');
+      final key = prefs.getString('supabase_key');
+
+      if (url != null && key != null) {
+        await Supabase.initialize(url: url, anonKey: key);
+        print('[Background] Supabase initialisiert');
+
+        await AchievementEngine().run();
+
+        print('[Background] Engine erfolgreich ausgeführt');
+      } else {
+        print('[Background] FEHLER: Supabase-Credentials nicht gefunden!');
+        return Future.value(false);
+      }
+
+      return Future.value(true);
+    } catch (e) {
+      print('[Background] Fehler: $e');
+      return Future.value(false);
+    }
+  });
 }
