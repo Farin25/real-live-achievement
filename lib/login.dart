@@ -1,5 +1,6 @@
 //login.dart
 import 'package:flutter/material.dart';
+import 'package:real_live_achievments/services.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -146,6 +147,7 @@ class __FormContentState extends State<_FormContent> {
             const SizedBox(height: 10),
 
             // REGISTER BUTTON
+            /* 
             TextButton(
               onPressed: () {
                 Navigator.push(
@@ -155,6 +157,7 @@ class __FormContentState extends State<_FormContent> {
               },
               child: const Text("Noch keinen Account? Registrieren"),
             ),
+            */
             TextButton(
               onPressed: () {
                 showDialog(
@@ -212,11 +215,7 @@ class __FormContentState extends State<_FormContent> {
 
         if (!mounted) return;
 
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text("Bitte bestätige zuerst deine Email-Adresse."),
-          ),
-        );
+        showAppSnackBar(context, 'Erst E-Mail-Adresse bestätigen');
 
         setState(() => _isLoading = false);
         return;
@@ -226,9 +225,7 @@ class __FormContentState extends State<_FormContent> {
     } on AuthException catch (e) {
       if (!mounted) return;
 
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(e.message)));
+      showAppSnackBar(context, '$e.message)');
     }
 
     if (mounted) {
@@ -424,12 +421,9 @@ class _SignUpPageState extends State<SignUpPage> {
                             );
 
                             if (exists == true) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text(
-                                    "Dieser Uername ist bereits vergeben",
-                                  ),
-                                ),
+                              showAppSnackBar(
+                                context,
+                                'Username bereits vergeben',
                               );
                               setState(() {
                                 _usernameError =
@@ -455,10 +449,9 @@ class _SignUpPageState extends State<SignUpPage> {
 
                             if (!mounted) return;
 
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("Bitte Email bestätigen."),
-                              ),
+                            showAppSnackBar(
+                              context,
+                              ' E-Mail-Adresse bestätigen',
                             );
 
                             Navigator.pop(context);

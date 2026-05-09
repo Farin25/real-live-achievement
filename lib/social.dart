@@ -8,7 +8,7 @@ class Socialsite extends StatelessWidget {
       appBar: AppBar(title: Text('Social')),
       body: Center(
         child: Text(
-          'Das Wird Später die Social Seite /n Damit du Dich mit Frunden Ranken kannst musst du Cloud Sync ind en Einstellungen Aktivieren',
+          'Hier entsteht der Social Bereich.',
           style: TextStyle(fontSize: 20),
         ),
       ),
