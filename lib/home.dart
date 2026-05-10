@@ -19,13 +19,11 @@ Color _categoryColor(String? category) {
       return Colors.green;
     case 'Events':
       return Colors.yellow;
-    default:
+    case 'Sponsored':
       return Colors.grey;
+    default:
+      return Colors.black12;
   }
-}
-
-Color _categoryColorLight(String? category) {
-  return _categoryColor(category).withValues(alpha: 0.40);
 }
 
 class NewsFeedPage1 extends StatefulWidget {
@@ -133,121 +131,116 @@ class _NewsFeedPage1State extends State<NewsFeedPage1> {
     });
 
     if (mounted) {
-      showAppSnackBar(context, '${item.title} Benachrichtigung gelöscht');
+      showAppSnackBar(context, '${item.title} gelöscht');
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: colorScheme.surface,
-      appBar: AppBar(
-        title: const Text(
-          "Activity Feed",
-          style: TextStyle(fontWeight: FontWeight.w600),
+      backgroundColor: isDark
+          ? const Color(0xFF0A0A0A)
+          : const Color(0xFFF8F9FA),
+      body: Padding(
+        padding: const EdgeInsets.only(top: 60),
+        child: CustomScrollView(
+          slivers: [
+            _isLoading
+                ? const SliverFillRemaining(
+                    child: Center(child: CircularProgressIndicator()),
+                  )
+                : _feedItems.isEmpty
+                ? SliverFillRemaining(child: _buildEmptyState(isDark))
+                : SliverPadding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    sliver: SliverList(
+                      delegate: SliverChildBuilderDelegate((context, index) {
+                        final item = _feedItems[index];
+                        return Padding(
+                          padding: EdgeInsets.only(
+                            bottom: index == _feedItems.length - 1 ? 20 : 16,
+                          ),
+                          child: Dismissible(
+                            key: Key('${item.id}'),
+                            direction: DismissDirection.endToStart,
+                            background: _buildDismissBackground(item.category),
+                            onDismissed: (direction) =>
+                                _deleteItem(index, item),
+                            child: _FeedCard(item: item),
+                          ),
+                        );
+                      }, childCount: _feedItems.length),
+                    ),
+                  ),
+          ],
         ),
-        centerTitle: false,
-        elevation: 0,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.refresh_rounded),
-            onPressed: () {
-              setState(() => _isLoading = true);
-              _loadFeed();
-            },
-          ),
-          const SizedBox(width: 4),
-        ],
       ),
-      body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : _feedItems.isEmpty
-          ? Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(24),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: colorScheme.primaryContainer.withValues(
-                        alpha: 0.3,
-                      ),
-                    ),
-                    child: Icon(
-                      Icons.emoji_events_rounded,
-                      size: 64,
-                      color: colorScheme.primary.withValues(alpha: 0.6),
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  Text(
-                    'Noch keine Achievements freigeschaltet',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: colorScheme.onSurface.withValues(alpha: 0.7),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Geh raus und erleb was! 🚀',
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: colorScheme.onSurface.withValues(alpha: 0.5),
-                    ),
-                  ),
+    );
+  }
+
+  Widget _buildEmptyState(bool isDark) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            width: 120,
+            height: 120,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Colors.amber.withValues(alpha: 0.2),
+                  Colors.orange.withValues(alpha: 0.1),
                 ],
               ),
-            )
-          : RefreshIndicator(
-              onRefresh: _loadFeed,
-              child: Center(
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 520),
-                  child: ListView.separated(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 12,
-                    ),
-                    itemCount: _feedItems.length,
-                    separatorBuilder: (_, __) => const SizedBox(height: 12),
-                    itemBuilder: (context, index) {
-                      final item = _feedItems[index];
-
-                      return Dismissible(
-                        key: Key('${item.id}'),
-                        direction: DismissDirection.endToStart,
-                        background: Container(
-                          alignment: Alignment.centerRight,
-                          padding: const EdgeInsets.only(right: 24),
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              colors: [
-                                Colors.red.withValues(alpha: 0.0),
-                                Colors.red.withValues(alpha: 0.9),
-                              ],
-                            ),
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: const Icon(
-                            Icons.delete_rounded,
-                            color: Colors.white,
-                            size: 28,
-                          ),
-                        ),
-                        onDismissed: (direction) {
-                          _deleteItem(index, item);
-                        },
-                        child: _FeedCard(item: item),
-                      );
-                    },
-                  ),
-                ),
+            ),
+            child: Icon(
+              Icons.emoji_events_rounded,
+              size: 60,
+              color: Colors.amber.shade700,
+            ),
+          ),
+          const SizedBox(height: 32),
+          Text(
+            'Noch keine Erfolge',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w700,
+              color: isDark ? Colors.white : Colors.black87,
+            ),
+          ),
+          const SizedBox(height: 12),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 40),
+            child: Text(
+              'Geh raus und sammle deine ersten Achievements!',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 16,
+                color: isDark ? Colors.white54 : Colors.black45,
+                height: 1.5,
               ),
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDismissBackground(String? category) {
+    return Container(
+      alignment: Alignment.centerRight,
+      padding: const EdgeInsets.only(right: 24),
+      decoration: BoxDecoration(
+        color: Colors.red.shade600,
+        borderRadius: BorderRadius.circular(24),
+      ),
+      child: const Icon(Icons.delete_rounded, color: Colors.white, size: 28),
     );
   }
 }
@@ -259,141 +252,144 @@ class _FeedCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final categoryColor = _categoryColor(item.category);
 
     return Container(
       decoration: BoxDecoration(
-        color: colorScheme.surfaceContainerHighest,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: colorScheme.outlineVariant.withValues(alpha: 0.5),
-          width: 1,
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            categoryColor.withValues(alpha: isDark ? 0.15 : 0.12),
+            categoryColor.withValues(alpha: isDark ? 0.08 : 0.05),
+          ],
         ),
+        borderRadius: BorderRadius.circular(24),
+        boxShadow: [
+          BoxShadow(
+            color: categoryColor.withValues(alpha: 0.2),
+            blurRadius: 20,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Farbiger Header-Streifen
-            Container(
-              height: 4,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    _categoryColor(item.category),
-                    _categoryColor(item.category).withValues(alpha: 0.6),
-                  ],
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: 64,
+                  height: 64,
+                  decoration: BoxDecoration(
+                    color: isDark
+                        ? Colors.white.withValues(alpha: 0.1)
+                        : Colors.white.withValues(alpha: 0.6),
+                    borderRadius: BorderRadius.circular(18),
+                  ),
+                  child: Icon(
+                    Icons.emoji_events_rounded,
+                    size: 32,
+                    color: categoryColor,
+                  ),
+                ),
+                const SizedBox(width: 16),
+
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 2),
+                      Text(
+                        item.title,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                          height: 1.3,
+                          color: isDark ? Colors.white : Colors.black87,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      if (item.category != null)
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 6,
+                          ),
+                          decoration: BoxDecoration(
+                            color: isDark
+                                ? Colors.white.withValues(alpha: 0.15)
+                                : Colors.white.withValues(alpha: 0.7),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Text(
+                            item.category!,
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w700,
+                              color: categoryColor,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          if (item.content != null)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Text(
+                item.content!,
+                style: TextStyle(
+                  fontSize: 15,
+                  height: 1.6,
+                  color: isDark ? Colors.white70 : Colors.black54,
                 ),
               ),
             ),
 
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _TypeIconBubble(type: item.type, category: item.category),
-                      const SizedBox(width: 14),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              item.title,
-                              style: theme.textTheme.titleMedium?.copyWith(
-                                fontWeight: FontWeight.w700,
-                                height: 1.3,
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            if (item.category != null)
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 10,
-                                  vertical: 5,
-                                ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: _categoryColorLight(item.category),
-                                  border: Border.all(
-                                    color: _categoryColor(
-                                      item.category,
-                                    ).withValues(alpha: 0.2),
-                                    width: 1,
-                                  ),
-                                ),
-                                child: Text(
-                                  item.category!,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w600,
-                                    color: _categoryColor(item.category),
-                                  ),
-                                ),
-                              ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+          const SizedBox(height: 20),
 
-                  if (item.content != null) ...[
-                    const SizedBox(height: 14),
-                    Text(
-                      item.content!,
-                      style: theme.textTheme.bodyMedium?.copyWith(
-                        height: 1.5,
-                        color: colorScheme.onSurface.withValues(alpha: 0.8),
-                      ),
-                    ),
-                  ],
-
-                  const SizedBox(height: 14),
-
-                  // Moderne Zeitanzeige
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 6,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.green.withValues(alpha: 0.1),
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(
-                        color: Colors.green.withValues(alpha: 0.2),
-                        width: 1,
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          Icons.check_circle_rounded,
-                          size: 16,
-                          color: Colors.green[700],
-                        ),
-                        const SizedBox(width: 6),
-                        Text(
-                          'Freigeschaltet ${item.time}',
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.green[700],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+          Container(
+            margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            decoration: BoxDecoration(
+              color: isDark
+                  ? Colors.white.withValues(alpha: 0.1)
+                  : Colors.white.withValues(alpha: 0.6),
+              borderRadius: BorderRadius.circular(14),
             ),
-          ],
-        ),
+            child: Row(
+              children: [
+                Container(
+                  width: 8,
+                  height: 8,
+                  decoration: BoxDecoration(
+                    color: categoryColor,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Text(
+                  item.time,
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: isDark ? Colors.white60 : Colors.black45,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -401,69 +397,20 @@ class _FeedCard extends StatelessWidget {
 
 String _formatTimestamp(String timestamp) {
   try {
-    final dateTime = DateTime.parse(timestamp);
+    final dateTime = DateTime.parse(timestamp).toLocal();
     final now = DateTime.now();
     final difference = now.difference(dateTime);
 
-    if (difference.inHours < 24) {
-      if (difference.inMinutes < 1) return 'gerade eben';
-      if (difference.inMinutes < 60) return 'vor ${difference.inMinutes} min';
-      return 'vor ${difference.inHours} h';
-    } else {
-      return 'am ${DateFormat('dd.MM.yyyy').format(dateTime)}';
-    }
+    if (difference.inMinutes < 1) return 'Gerade eben';
+    if (difference.inMinutes < 60) return 'Vor ${difference.inMinutes} Min';
+    if (difference.inHours < 24) return 'Vor ${difference.inHours} Std';
+    if (difference.inDays == 1) return 'Vor 1 Tag';
+    if (difference.inDays < 7) return 'Vor ${difference.inDays} Tagen';
+
+    return DateFormat('dd.MM.yyyy').format(dateTime);
   } catch (e) {
-    return timestamp;
-  }
-}
-
-class _TypeIconBubble extends StatelessWidget {
-  final FeedType type;
-  final String? category;
-
-  const _TypeIconBubble({required this.type, this.category});
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
-    return Container(
-      width: 56,
-      height: 56,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            _categoryColor(category).withValues(alpha: 0.2),
-            _categoryColor(category).withValues(alpha: 0.1),
-          ],
-        ),
-        border: Border.all(
-          color: _categoryColor(category).withValues(alpha: 0.3),
-          width: 2,
-        ),
-      ),
-      child: Icon(
-        _iconForType(type),
-        size: 28,
-        color: _categoryColor(category),
-      ),
-    );
-  }
-
-  IconData _iconForType(FeedType type) {
-    switch (type) {
-      case FeedType.achievement:
-        return Icons.emoji_events_rounded;
-      case FeedType.friend:
-        return Icons.person_add_alt_1_rounded;
-      case FeedType.unlock:
-        return Icons.lock_open_rounded;
-      case FeedType.promo:
-        return Icons.campaign_rounded;
-    }
+    print('Fehler beim Timestamp formatieren: $e');
+    return 'Kürzlich';
   }
 }
 

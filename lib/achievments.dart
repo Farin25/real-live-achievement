@@ -32,8 +32,10 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
         return Colors.green;
       case 'Events':
         return Colors.yellow;
+      case 'Sponsored':
+        return Colors.grey;
       default:
-        return Colors.black;
+        return Colors.black12;
     }
   }
 
@@ -57,7 +59,6 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
   }
 
   Future<void> _loadAchievements() async {
-    // Wlan prüfung
     final connectivityResult = await Connectivity().checkConnectivity();
     final prefs = await SharedPreferences.getInstance();
     final achievementDownloadOverWifi =
@@ -121,7 +122,8 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
   bool _isUnlocked(dynamic achievement) => _unlockedAt(achievement) != null;
 
   void _showAchievementPopup(dynamic achievement, bool unlocked) {
-    // lockedVisibility bestimmt was bei gesperrten angezeigt wird
+    final categoryColor = _categoryColor(achievement['category']);
+
     final showDescription = unlocked || _lockedVisibility == 'all';
     final showName =
         unlocked ||
@@ -146,25 +148,23 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Icon oben
             Container(
               width: 64,
               height: 64,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: unlocked
-                    ? Colors.amber.withOpacity(0.2)
-                    : Colors.grey.withOpacity(0.2),
+                    ? categoryColor.withValues(alpha: 0.2)
+                    : Colors.grey.withValues(alpha: 0.2),
               ),
               child: Icon(
                 unlocked ? Icons.emoji_events : Icons.lock,
                 size: 36,
-                color: unlocked ? Colors.amber : Colors.grey,
+                color: unlocked ? categoryColor : Colors.grey,
               ),
             ),
             const SizedBox(height: 16),
 
-            // Name
             Text(
               showName ? achievement['name'] : '???',
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -172,7 +172,6 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
             ),
             const SizedBox(height: 8),
 
-            // Kategorie
             if (showName && achievement['category'] != null)
               Container(
                 padding: const EdgeInsets.symmetric(
@@ -185,12 +184,15 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
                 ),
                 child: Text(
                   achievement['category'],
-                  style: const TextStyle(fontSize: 13),
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: categoryColor,
+                  ),
                 ),
               ),
             const SizedBox(height: 12),
 
-            // Beschreibung
             if (showDescription && achievement['description'] != null)
               Text(
                 achievement['description'],
@@ -202,7 +204,6 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
                 textAlign: TextAlign.center,
               ),
 
-            // Wenn hidden
             if (!showName)
               Text(
                 'Dieses Achievement ist noch gesperrt.',
@@ -210,7 +211,6 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
                 textAlign: TextAlign.center,
               ),
 
-            // Freigeschaltet am
             if (unlocked) ...[
               const SizedBox(height: 12),
               const Divider(),
@@ -218,7 +218,7 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.check_circle, size: 16, color: Colors.green[600]),
+                  Icon(Icons.check_circle, size: 16, color: categoryColor),
                   const SizedBox(width: 6),
                   Builder(
                     builder: (context) {
@@ -230,7 +230,8 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
                         label,
                         style: TextStyle(
                           fontSize: 13,
-                          color: Colors.green[600],
+                          fontWeight: FontWeight.w600,
+                          color: categoryColor,
                         ),
                       );
                     },
@@ -246,14 +247,13 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
 
   @override
   Widget build(BuildContext context) {
-    // Achievements aufteilen in freigeschaltet und gesperrt
     final unlocked = _achievements.where((a) => _isUnlocked(a)).toList();
     final locked = _achievements.where((a) => !_isUnlocked(a)).toList();
 
     return Scaffold(
       appBar: AppBar(
         title: const Text("Achievements"),
-        // Zähler oben rechts
+
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16),
@@ -271,14 +271,12 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
           : ListView(
               padding: const EdgeInsets.all(16),
               children: [
-                // Freigeschaltete Sektion
                 if (unlocked.isNotEmpty) ...[
                   _sectionLabel('Freigeschaltet'),
                   _buildGrid(unlocked, true),
                   const SizedBox(height: 24),
                 ],
 
-                // Gesperrte Sektion
                 if (locked.isNotEmpty) ...[
                   _sectionLabel('Gesperrt'),
                   _buildGrid(locked, false),
@@ -288,7 +286,6 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
     );
   }
 
-  // Hilfsmethode: Überschrift für eine Sektion
   Widget _sectionLabel(String label) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
@@ -303,14 +300,12 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
     );
   }
 
-  // Hilfsmethode: baut das Grid für eine Liste von Achievements
   Widget _buildGrid(List<dynamic> achievements, bool unlocked) {
     return GridView.builder(
-      // wichtig: damit GridView in einem ListView funktioniert
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3, // 3 Kacheln pro Reihe
+        crossAxisCount: 3,
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
       ),
@@ -322,21 +317,30 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
     );
   }
 
-  // Hilfsmethode: eine einzelne Kachel
   Widget _buildTile(dynamic achievement, bool unlocked) {
+    final categoryColor = _categoryColor(achievement['category']);
+
     return GestureDetector(
       onTap: () => _showAchievementPopup(achievement, unlocked),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          color: unlocked
-              ? Colors.blue.withOpacity(0.1)
-              : Theme.of(context).cardColor,
+          gradient: unlocked
+              ? LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    categoryColor.withValues(alpha: 0.25),
+                    categoryColor.withValues(alpha: 0.10),
+                  ],
+                )
+              : null,
+          color: unlocked ? null : Theme.of(context).cardColor,
           border: Border.all(
             color: unlocked
-                ? Colors.blue.withOpacity(0.3)
-                : Colors.grey.withOpacity(0.2),
-            width: 0.5,
+                ? categoryColor.withValues(alpha: 0.4)
+                : Colors.grey.withValues(alpha: 0.2),
+            width: unlocked ? 1.5 : 0.5,
           ),
         ),
         child: Column(
@@ -345,20 +349,19 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
             Icon(
               unlocked ? Icons.emoji_events : Icons.lock,
               size: 28,
-              color: unlocked ? Colors.amber : Colors.grey,
+              color: unlocked ? categoryColor : Colors.grey,
             ),
             const SizedBox(height: 6),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 6),
               child: Text(
-                // bei name_only oder hidden gesperrte Namen verstecken
                 unlocked || _lockedVisibility != 'hidden'
                     ? achievement['name']
                     : '???',
                 style: TextStyle(
                   fontSize: 11,
-                  fontWeight: FontWeight.w500,
-                  color: unlocked ? Colors.blue[800] : Colors.grey[600],
+                  fontWeight: FontWeight.w600,
+                  color: unlocked ? categoryColor : Colors.grey[600],
                 ),
                 textAlign: TextAlign.center,
                 maxLines: 2,
