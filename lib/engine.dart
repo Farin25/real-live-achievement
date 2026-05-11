@@ -105,9 +105,8 @@ class AchievementEngine {
               final prefs = await SharedPreferences.getInstance();
               final tageSeitThemeChange =
                   prefs.getInt('tageSeitThemeChange') ?? 0;
-              final currentTheme =
-                  prefs.getString('currentThemeMode') ?? 'dark';
-              if (tageSeitThemeChange <= 30 && currentTheme == 'light') {
+              final currentTheme = prefs.getString('themeChangeTime') ?? 'dark';
+              if (tageSeitThemeChange >= 30 && currentTheme == 'light') {
                 await _logUnlock(id, user.id);
                 continue;
               }
@@ -115,11 +114,10 @@ class AchievementEngine {
             // Dark Mode achievment (dark Side oder so)
             if (type == 'dark_mode_days') {
               final prefs = await SharedPreferences.getInstance();
-              final tageSeitThemeChange =
-                  prefs.getInt('tageSeitThemeChange') ?? 0;
+              final tageSeitThemeChange = prefs.getInt('themeChangeTime') ?? 0;
               final currentTheme =
                   prefs.getString('currentThemeMode') ?? 'dark';
-              if (tageSeitThemeChange <= 30 && currentTheme == 'dark') {
+              if (tageSeitThemeChange >= 30 && currentTheme == 'dark') {
                 await _logUnlock(id, user.id);
                 continue;
               }

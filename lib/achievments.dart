@@ -156,12 +156,8 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
                 shape: BoxShape.circle,
                 color: unlocked
                     ? (isDark
-                          ? Colors.white.withValues(
-                              alpha: 0.15,
-                            ) // von 0.1 auf 0.15
-                          : Colors.white.withValues(
-                              alpha: 0.8,
-                            )) // von 0.6 auf 0.8
+                          ? Colors.white.withValues(alpha: 0.15)
+                          : Colors.white.withValues(alpha: 0.8))
                     : Colors.grey.withValues(alpha: 0.2),
               ),
               child: Icon(
@@ -192,12 +188,8 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(999),
                   color: isDark
-                      ? Colors.white.withValues(
-                          alpha: 0.20,
-                        ) // von 0.15 auf 0.20
-                      : Colors.white.withValues(
-                          alpha: 0.85,
-                        ), // von 0.7 auf 0.85
+                      ? Colors.white.withValues(alpha: 0.20)
+                      : Colors.white.withValues(alpha: 0.85),
                 ),
                 child: Text(
                   achievement['category'],
@@ -215,11 +207,9 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
                 achievement['description'],
                 style: TextStyle(
                   fontSize: 15,
-                  color: isDark
-                      ? Colors.white
-                      : Colors.black87, // Stärkere Farbe
+                  color: isDark ? Colors.white : Colors.black87,
                   height: 1.4,
-                  fontWeight: FontWeight.w500, // Etwas fetter
+                  fontWeight: FontWeight.w500,
                 ),
                 textAlign: TextAlign.center,
               ),
