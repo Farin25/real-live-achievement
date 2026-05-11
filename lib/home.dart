@@ -143,8 +143,7 @@ class _NewsFeedPage1State extends State<NewsFeedPage1> {
       backgroundColor: isDark
           ? const Color(0xFF0A0A0A)
           : const Color(0xFFF8F9FA),
-      body: Padding(
-        padding: const EdgeInsets.only(top: 60),
+      body: SafeArea(
         child: CustomScrollView(
           slivers: [
             _isLoading
@@ -154,7 +153,7 @@ class _NewsFeedPage1State extends State<NewsFeedPage1> {
                 : _feedItems.isEmpty
                 ? SliverFillRemaining(child: _buildEmptyState(isDark))
                 : SliverPadding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                     sliver: SliverList(
                       delegate: SliverChildBuilderDelegate((context, index) {
                         final item = _feedItems[index];
