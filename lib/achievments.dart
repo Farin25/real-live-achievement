@@ -39,10 +39,6 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
     }
   }
 
-  Color _categoryColorLight(String? category) {
-    return _categoryColor(category).withValues(alpha: 0.40);
-  }
-
   @override
   void initState() {
     super.initState();
@@ -120,9 +116,9 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
   }
 
   bool _isUnlocked(dynamic achievement) => _unlockedAt(achievement) != null;
-
   void _showAchievementPopup(dynamic achievement, bool unlocked) {
     final categoryColor = _categoryColor(achievement['category']);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     final showDescription = unlocked || _lockedVisibility == 'all';
     final showName =
@@ -134,12 +130,17 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
       context: context,
       builder: (context) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        backgroundColor: unlocked
+            ? (isDark
+                  ? Color.lerp(categoryColor, Colors.black, 0.7)
+                  : Color.lerp(categoryColor, Colors.white, 0.85))
+            : null,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             IconButton(
               onPressed: () => Navigator.pop(context),
-              icon: const Icon(Icons.close),
+              icon: Icon(Icons.close, color: unlocked ? categoryColor : null),
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(),
             ),
@@ -154,7 +155,13 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: unlocked
-                    ? categoryColor.withValues(alpha: 0.2)
+                    ? (isDark
+                          ? Colors.white.withValues(
+                              alpha: 0.15,
+                            ) // von 0.1 auf 0.15
+                          : Colors.white.withValues(
+                              alpha: 0.8,
+                            )) // von 0.6 auf 0.8
                     : Colors.grey.withValues(alpha: 0.2),
               ),
               child: Icon(
@@ -167,7 +174,11 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
 
             Text(
               showName ? achievement['name'] : '???',
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: unlocked ? categoryColor : null,
+              ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 8),
@@ -180,7 +191,13 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(999),
-                  color: _categoryColorLight(achievement['category']),
+                  color: isDark
+                      ? Colors.white.withValues(
+                          alpha: 0.20,
+                        ) // von 0.15 auf 0.20
+                      : Colors.white.withValues(
+                          alpha: 0.85,
+                        ), // von 0.7 auf 0.85
                 ),
                 child: Text(
                   achievement['category'],
@@ -198,8 +215,11 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
                 achievement['description'],
                 style: TextStyle(
                   fontSize: 15,
-                  color: Colors.grey[700],
+                  color: isDark
+                      ? Colors.white
+                      : Colors.black87, // Stärkere Farbe
                   height: 1.4,
+                  fontWeight: FontWeight.w500, // Etwas fetter
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -213,7 +233,9 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
 
             if (unlocked) ...[
               const SizedBox(height: 12),
-              const Divider(),
+              Divider(
+                color: categoryColor.withValues(alpha: 0.4),
+              ), // von 0.3 auf 0.4
               const SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
