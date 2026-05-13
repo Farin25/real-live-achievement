@@ -223,9 +223,7 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
 
             if (unlocked) ...[
               const SizedBox(height: 12),
-              Divider(
-                color: categoryColor.withValues(alpha: 0.4),
-              ), // von 0.3 auf 0.4
+              Divider(color: categoryColor.withValues(alpha: 0.4)),
               const SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -330,7 +328,7 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
   }
 
   Widget _buildTile(dynamic achievement, bool unlocked) {
-    final categoryColor = _categoryColor(achievement['category']);
+    final categoryColor = _categoryColor(achievement['category'] ?? '???');
 
     return GestureDetector(
       onTap: () => _showAchievementPopup(achievement, unlocked),
@@ -368,7 +366,7 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
               padding: const EdgeInsets.symmetric(horizontal: 6),
               child: Text(
                 unlocked || _lockedVisibility != 'hidden'
-                    ? achievement['name']
+                    ? achievement['name'] ?? '???'
                     : '???',
                 style: TextStyle(
                   fontSize: 11,

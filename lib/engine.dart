@@ -105,7 +105,7 @@ class AchievementEngine {
               final prefs = await SharedPreferences.getInstance();
               final tageSeitThemeChange =
                   prefs.getInt('tageSeitThemeChange') ?? 0;
-              final currentTheme = prefs.getString('themeChangeTime') ?? 'dark';
+              final currentTheme = prefs.getInt('themeChangeTime') ?? 'dark';
               if (tageSeitThemeChange >= 30 && currentTheme == 'light') {
                 await _logUnlock(id, user.id);
                 continue;
