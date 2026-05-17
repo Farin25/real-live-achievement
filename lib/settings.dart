@@ -1,4 +1,4 @@
-//settings.dart
+// settings.dart
 import 'package:flutter/material.dart';
 import 'package:real_live_achievments/engine_helpers.dart';
 import 'acount.dart';
@@ -16,6 +16,56 @@ class AppConfig {
       "https://farin25.github.io/real-live-achievement/";
 }
 
+//--------------------------
+//-------- Settings Service -
+//--------------------------
+class SettingsService {
+  static Future<void> saveBool(String key, bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(key, value);
+  }
+
+  static Future<bool> loadBool(String key, bool defaultValue) async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(key) ?? defaultValue;
+  }
+
+  static Future<void> saveTheme(ThemeMode mode) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(
+      'currentThemeMode',
+      mode == ThemeMode.dark ? 'dark' : 'light',
+    );
+    await prefs.setInt(
+      'themeChangeTime',
+      DateTime.now().millisecondsSinceEpoch,
+    );
+  }
+
+  static Future<void> saveInt(String key, int value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setInt(key, value);
+  }
+
+  static Future<int> loadInt(String key, int defaultValue) async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getInt(key) ?? defaultValue;
+  }
+
+  static Future<void> saveString(String key, String value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(key, value);
+  }
+
+  static Future<String> loadString(String key, String defaultValue) async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString(key) ?? defaultValue;
+  }
+}
+
+//--------------------------
+//-------- Settings Page ----
+//--------------------------
 class SettingsPage extends StatefulWidget {
   final Function(ThemeMode) onThemeChanged;
   const SettingsPage({super.key, required this.onThemeChanged});
@@ -42,7 +92,6 @@ class _SettingsPageState extends State<SettingsPage> {
           .select()
           .eq('id', user.id)
           .single();
-
       setState(() {
         profile = data;
       });
@@ -60,7 +109,6 @@ class _SettingsPageState extends State<SettingsPage> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            /// PROFILE CARD
             GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -111,11 +159,8 @@ class _SettingsPageState extends State<SettingsPage> {
                       ),
               ),
             ),
-
             const SizedBox(height: 10),
             const Divider(),
-
-            /// SETTINGS LIST
             Expanded(
               child: ListView(
                 children: [
@@ -123,7 +168,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     leading: const Icon(Icons.design_services),
                     title: const Text("Design"),
                     subtitle: const Text("Dark Mode, Farben, Theme"),
-                    trailing: Icon(Icons.arrow_forward_ios),
+                    trailing: const Icon(Icons.arrow_forward_ios),
                     onTap: () {
                       Navigator.push(
                         context,
@@ -134,9 +179,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       );
                     },
                   ),
-
                   const Divider(),
-
                   ListTile(
                     leading: const Icon(Icons.language),
                     title: const Text("Sprache"),
@@ -146,9 +189,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       showAppSnackBar(context, 'Sprachen kommen bald');
                     },
                   ),
-
                   const Divider(),
-
                   ListTile(
                     leading: const Icon(Icons.notifications_active),
                     title: const Text("App Benachrichtigungen"),
@@ -158,14 +199,12 @@ class _SettingsPageState extends State<SettingsPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const Appmessages(),
+                          builder: (context) => const AppMessages(),
                         ),
                       );
                     },
                   ),
-
                   const Divider(),
-
                   ListTile(
                     leading: const Icon(Icons.settings),
                     title: const Text("Erweiterte Einstellungen"),
@@ -180,9 +219,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       );
                     },
                   ),
-
                   const Divider(),
-
                   ListTile(
                     leading: const Icon(Icons.description),
                     title: const Text("Open Source Lizenzen"),
@@ -206,16 +243,18 @@ class _SettingsPageState extends State<SettingsPage> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => AboutPage()),
+                        MaterialPageRoute(
+                          builder: (context) => const AboutPage(),
+                        ),
                       );
                     },
                   ),
                   const Divider(),
                   ListTile(
-                    leading: Icon(Icons.settings),
-                    title: Text("App Settings"),
-                    subtitle: Text("Berechtigung, usw..."),
-                    trailing: Icon(Icons.arrow_forward_ios),
+                    leading: const Icon(Icons.settings),
+                    title: const Text("App Einstellungen"),
+                    subtitle: const Text("Berechtigungen, usw."),
+                    trailing: const Icon(Icons.arrow_forward_ios),
                     onTap: () async {
                       await openAppSettings();
                     },
@@ -231,42 +270,42 @@ class _SettingsPageState extends State<SettingsPage> {
 }
 
 //--------------------------
-//--------Notifications------
+//-------- Benachrichtigungen
 //--------------------------
-class Appmessages extends StatefulWidget {
-  const Appmessages({super.key});
+class AppMessages extends StatefulWidget {
+  const AppMessages({super.key});
 
   @override
-  State<Appmessages> createState() => _Appmessages();
+  State<AppMessages> createState() => _AppMessagesState();
 }
 
-class _Appmessages extends State<Appmessages> {
-  bool notifynewFriendship = true;
-  bool notifyFriendnewAchievment = true;
-  bool notifynewAchievment = true;
-  bool notifyAchievmentfasterricht = true;
-  bool notifyemailbirthday = true;
+class _AppMessagesState extends State<AppMessages> {
+  bool notifyNewFriendship = true;
+  bool notifyFriendNewAchievement = true;
+  bool notifyNewAchievement = true;
+  bool notifyAchievementAlmostReached = true;
+  bool notifyEmailBirthday = true;
 
-  // für Master Schalter
   bool get notifyAll =>
-      notifynewFriendship &&
-      notifyFriendnewAchievment &&
-      notifynewAchievment &&
-      notifyAchievmentfasterricht;
+      notifyNewFriendship &&
+      notifyFriendNewAchievement &&
+      notifyNewAchievement &&
+      notifyAchievementAlmostReached;
 
   @override
   void initState() {
     super.initState();
-    loadSettings();
+    _loadSettings();
   }
 
-  Widget build(BuildContext content) {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Benachrichtigungen")),
       body: ListView(
         children: [
           SwitchListTile(
-            title: Text("Benachrichtigungen"),
+            title: const Text("Benachrichtigungen"),
             subtitle: const Text(
               "Benachrichtigungen von der App",
               style: TextStyle(fontWeight: FontWeight.bold),
@@ -274,99 +313,72 @@ class _Appmessages extends State<Appmessages> {
             value: notifyAll,
             onChanged: (value) {
               setState(() {
-                notifynewFriendship = value;
-                notifyFriendnewAchievment = value;
-                notifynewAchievment = value;
-                notifyAchievmentfasterricht = value;
+                notifyNewFriendship = value;
+                notifyFriendNewAchievement = value;
+                notifyNewAchievement = value;
+                notifyAchievementAlmostReached = value;
               });
-              saveSettings();
+              _saveSettings();
             },
           ),
-
           const Divider(),
-
           SwitchListTile(
             title: const Text("Fast erreichtes Achievement"),
             subtitle: const Text(
               "Wenn du kurz davor bist ein Achievement zu erreichen",
             ),
-            value: notifyAchievmentfasterricht,
+            value: notifyAchievementAlmostReached,
             onChanged: (value) {
-              setState(() {
-                notifyAchievmentfasterricht = value;
-              });
-              saveSettings();
-              print(
-                "Benachrichtigungsettings Aktualliesiert: Achievmentfasteerreicht = $notifyAchievmentfasterricht ",
-              );
+              setState(() => notifyAchievementAlmostReached = value);
+              _saveSettings();
             },
           ),
-
           SwitchListTile(
             title: const Text("Neues Achievement"),
             subtitle: const Text(
               "Wenn du ein neues Achievement freigeschaltet hast",
             ),
-            value: notifynewAchievment,
+            value: notifyNewAchievement,
             onChanged: (value) {
-              setState(() {
-                notifynewAchievment = value;
-              });
-              saveSettings();
-              print(
-                "Benachrichtigungs Einstellungen Aktualliesiert: pushnewachievment = $notifynewAchievment",
-              );
+              setState(() => notifyNewAchievement = value);
+              _saveSettings();
             },
           ),
-
           const Divider(),
-          // Freunde Subtitel
-          Padding(
-            padding: const EdgeInsets.all(16.0),
+          const Padding(
+            padding: EdgeInsets.all(16.0),
             child: Text(
               "Freunde",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
-
           SwitchListTile(
-            title: const Text("Freunde Neues Achievment"),
+            title: const Text("Freunde neues Achievement"),
             subtitle: const Text(
-              "wenn einer deiner Freunde ein neues Achievement bekommen hat",
+              "Wenn einer deiner Freunde ein neues Achievement bekommen hat",
             ),
-            value: notifyFriendnewAchievment,
+            value: notifyFriendNewAchievement,
             onChanged: (value) {
-              setState(() {
-                notifyFriendnewAchievment = value;
-              });
-              saveSettings();
-              print(
-                "Benachrichtigungs Einstellungen Aktualliesiert: pushFriendnewAchievment = $notifyFriendnewAchievment",
-              );
+              setState(() => notifyFriendNewAchievement = value);
+              _saveSettings();
             },
           ),
-
           SwitchListTile(
             title: const Text("Freundschaftsanfragen"),
             subtitle: const Text(
               "Wenn du eine neue Freundschaftsanfrage bekommst",
             ),
-            value: notifynewFriendship,
+            value: notifyNewFriendship,
             onChanged: (value) {
-              setState(() {
-                notifynewFriendship = value;
-              });
-              saveSettings();
-              print(
-                "Benachrichtigungs Einstellungen Aktualliesiert: pushnewFriendship = $notifynewFriendship",
-              );
+              setState(() => notifyNewFriendship = value);
+              _saveSettings();
             },
           ),
           const Divider(),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
+          const Padding(
+            padding: EdgeInsets.all(16.0),
             child: Text(
-              "Email Benachrichtigungen",
+              "E-Mail Benachrichtigungen",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
@@ -376,15 +388,10 @@ class _Appmessages extends State<Appmessages> {
             subtitle: const Text(
               "Erhalte an deinem Geburtstag eine E-Mail von uns.",
             ),
-            value: notifyemailbirthday,
+            value: notifyEmailBirthday,
             onChanged: (value) {
-              setState(() {
-                notifyemailbirthday = value;
-              });
-              saveSettings();
-              print(
-                "Benachrichtigungs Einstellungen Aktualliesiert: notifyemailbirthday = $notifyemailbirthday",
-              );
+              setState(() => notifyEmailBirthday = value);
+              _saveSettings();
             },
           ),
           const Divider(),
@@ -393,57 +400,63 @@ class _Appmessages extends State<Appmessages> {
     );
   }
 
-  Future<void> saveSettings() async {
-    final prefs = await SharedPreferences.getInstance();
-
-    await prefs.setBool('pushnewFriendship', notifynewFriendship);
-    await prefs.setBool('pushFriendnewAchievment', notifyFriendnewAchievment);
-    await prefs.setBool('pushnewAchievment', notifynewAchievment);
-    await prefs.setBool(
-      'pufhAchievmentfasterricht',
-      notifyAchievmentfasterricht,
+  Future<void> _saveSettings() async {
+    await SettingsService.saveBool('pushNewFriendship', notifyNewFriendship);
+    await SettingsService.saveBool(
+      'pushFriendNewAchievement',
+      notifyFriendNewAchievement,
     );
-    await prefs.setBool('notifyemailbirthday', notifyemailbirthday);
+    await SettingsService.saveBool('pushNewAchievement', notifyNewAchievement);
+    await SettingsService.saveBool(
+      'pushAchievementAlmostReached',
+      notifyAchievementAlmostReached,
+    );
+    await SettingsService.saveBool('notifyEmailBirthday', notifyEmailBirthday);
   }
 
-  Future<void> loadSettings() async {
-    final prefs = await SharedPreferences.getInstance();
-
+  Future<void> _loadSettings() async {
+    final newFriendship =
+        await SettingsService.loadBool('pushNewFriendship', true);
+    final friendAchievement =
+        await SettingsService.loadBool('pushFriendNewAchievement', true);
+    final newAchievement =
+        await SettingsService.loadBool('pushNewAchievement', true);
+    final almostReached =
+        await SettingsService.loadBool('pushAchievementAlmostReached', true);
+    final emailBirthday =
+        await SettingsService.loadBool('notifyEmailBirthday', true);
     setState(() {
-      notifynewFriendship = prefs.getBool('pushnewFriendship') ?? true;
-
-      notifyFriendnewAchievment =
-          prefs.getBool('pushFriendnewAchievment') ?? true;
-
-      notifynewAchievment = prefs.getBool('pushnewAchievment') ?? true;
-
-      notifyAchievmentfasterricht =
-          prefs.getBool('Achievmentfasterricht') ?? true;
-
-      notifyemailbirthday = prefs.getBool('notifyemailbirthday') ?? true;
+      notifyNewFriendship = newFriendship;
+      notifyFriendNewAchievement = friendAchievement;
+      notifyNewAchievement = newAchievement;
+      notifyAchievementAlmostReached = almostReached;
+      notifyEmailBirthday = emailBirthday;
     });
   }
 }
-// Design Wichtig und Richtig
 
+//--------------------------
+//-------- Design -----------
+//--------------------------
 class Design extends StatefulWidget {
   final Function(ThemeMode) onThemeChanged;
   const Design({super.key, required this.onThemeChanged});
 
   @override
-  State<Design> createState() => _Design();
+  State<Design> createState() => _DesignState();
 }
 
-class _Design extends State<Design> {
+class _DesignState extends State<Design> {
   String lockedVisibility = 'all';
 
   @override
   void initState() {
     super.initState();
-    loadSettings();
+    _loadSettings();
   }
 
-  Widget build(BuildContext content) {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Design & Stil")),
       body: ListView(
@@ -454,23 +467,10 @@ class _Design extends State<Design> {
             subtitle: const Text("Meine Empfehlung: Immer an"),
             trailing: Switch(
               value: Theme.of(context).brightness == Brightness.dark,
-              onChanged: (Value) async {
-                if (Value) {
-                  widget.onThemeChanged(ThemeMode.dark);
-                } else {
-                  widget.onThemeChanged(ThemeMode.light);
-                }
-                print(
-                  "Dark Mode Settings Aktualliesiert auf: ThemeMMode = $ThemeMode.",
-                );
-                (await SharedPreferences.getInstance()).setInt(
-                  'themeChangeTime',
-                  DateTime.now().millisecondsSinceEpoch,
-                );
-                (await SharedPreferences.getInstance()).setString(
-                  'currentThemeMode',
-                  Value ? 'dark' : 'light',
-                );
+              onChanged: (value) async {
+                final newMode = value ? ThemeMode.dark : ThemeMode.light;
+                widget.onThemeChanged(newMode);
+                await SettingsService.saveTheme(newMode);
               },
             ),
           ),
@@ -480,7 +480,7 @@ class _Design extends State<Design> {
             subtitle: const Text("Was soll angezeigt werden?"),
             trailing: DropdownButton<String>(
               value: lockedVisibility,
-              items: [
+              items: const [
                 DropdownMenuItem(value: 'all', child: Text('Alles')),
                 DropdownMenuItem(value: 'name_only', child: Text('Nur Name')),
                 DropdownMenuItem(value: 'hidden', child: Text('Versteckt')),
@@ -488,7 +488,7 @@ class _Design extends State<Design> {
               onChanged: (value) {
                 if (value != null) {
                   setState(() => lockedVisibility = value);
-                  saveSettings();
+                  _saveSettings();
                 }
               },
             ),
@@ -498,22 +498,20 @@ class _Design extends State<Design> {
     );
   }
 
-  Future<void> saveSettings() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('locked_visibility', lockedVisibility);
+  Future<void> _saveSettings() async {
+    await SettingsService.saveString('locked_visibility', lockedVisibility);
   }
 
-  Future<void> loadSettings() async {
-    final prefs = await SharedPreferences.getInstance();
-    setState(() {
-      lockedVisibility = prefs.getString('locked_visibility') ?? 'all';
-    });
+  Future<void> _loadSettings() async {
+    final value =
+        await SettingsService.loadString('locked_visibility', lockedVisibility);
+    setState(() => lockedVisibility = value);
   }
 }
 
-//---------------------------------------
-//-------Erweitertte Einstellungen-------
-//---------------------------------------
+//-----------------------------------------
+//-------- Erweiterte Einstellungen --------
+//-----------------------------------------
 class AdvancedSettings extends StatefulWidget {
   const AdvancedSettings({super.key});
 
@@ -528,7 +526,7 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
   @override
   void initState() {
     super.initState();
-    loadSettings();
+    _loadSettings();
   }
 
   @override
@@ -537,22 +535,19 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
       appBar: AppBar(title: const Text("Erweiterte Einstellungen")),
       body: ListView(
         children: [
-          // WLAN Switch
           SwitchListTile(
             secondary: const Icon(Icons.wifi),
-            title: const Text("Achievements WLAN Download"),
+            title: const Text("Achievements WLAN-Download"),
             subtitle: const Text(
-              "Achievements nur bei WLAN Verbindung herunterladen",
+              "Achievements nur bei WLAN-Verbindung herunterladen",
             ),
             value: achievementDownloadOverWifi,
             onChanged: (value) {
               setState(() => achievementDownloadOverWifi = value);
-              saveSettings();
+              _saveSettings();
             },
           ),
           const Divider(),
-
-          // Timer Setting
           ListTile(
             leading: const Icon(Icons.timer),
             title: const Text("Engine Timer (Minuten)"),
@@ -563,10 +558,11 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
                 builder: (context) {
                   int tempValue = engineTimerMinutes;
                   return AlertDialog(
-                    title: const Text("Achievments Prüfen"),
+                    title: const Text("Achievements prüfen"),
                     content: TextField(
                       keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(labelText: "Minuten"),
+                      decoration:
+                          const InputDecoration(labelText: "Minuten"),
                       onChanged: (val) {
                         tempValue = int.tryParse(val) ?? engineTimerMinutes;
                       },
@@ -584,34 +580,29 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
                   );
                 },
               );
-
               if (newValue != null) {
                 setState(() => engineTimerMinutes = newValue);
-                saveSettings();
+                _saveSettings();
                 EngineRunner.instance?.restartTimer();
-                print("Engine Timer auf $engineTimerMinutes Minuten gesetzt");
               }
             },
           ),
           const Divider(),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
+          const Padding(
+            padding: EdgeInsets.all(16.0),
             child: Text(
-              "Debug/Developer Settings",
+              "Debug / Developer Settings",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
           const Divider(),
-
           ListTile(
             leading: const Icon(Icons.play_arrow),
             title: const Text("Engine manuell starten"),
             subtitle: const Text("Startet die Achievement-Engine sofort"),
             onTap: () {
               runEngine();
-
               showAppSnackBar(context, 'Engine wurde gestartet');
-              print('Engine wurde Manuell gestartet');
             },
           ),
         ],
@@ -619,96 +610,93 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
     );
   }
 
-  Future<void> saveSettings() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(
+  Future<void> _saveSettings() async {
+    await SettingsService.saveBool(
       'achievementDownloadOverWifi',
       achievementDownloadOverWifi,
     );
-    await prefs.setInt('engineTimerMinutes', engineTimerMinutes);
+    await SettingsService.saveInt('engineTimerMinutes', engineTimerMinutes);
   }
 
-  Future<void> loadSettings() async {
-    final prefs = await SharedPreferences.getInstance();
+  Future<void> _loadSettings() async {
+    final wifi =
+        await SettingsService.loadBool('achievementDownloadOverWifi', true);
+    final timer = await SettingsService.loadInt('engineTimerMinutes', 10);
     setState(() {
-      achievementDownloadOverWifi =
-          prefs.getBool('achievementDownloadOverWifi') ?? true;
-      engineTimerMinutes = prefs.getInt('engineTimerMinutes') ?? 10;
+      achievementDownloadOverWifi = wifi;
+      engineTimerMinutes = timer;
     });
   }
 }
 
-// About Seite
+//--------------------------
+//-------- Über die App ----
+//--------------------------
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
+
   @override
   Widget build(BuildContext context) {
+    final textColor =
+        Theme.of(context).textTheme.bodyLarge?.color ?? Colors.black;
+
     return Scaffold(
-      appBar: AppBar(title: Text('Über die App')),
+      appBar: AppBar(title: const Text('Über die App')),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
-              //Icon
               child: Container(
                 width: 80,
                 height: 80,
                 decoration: BoxDecoration(
-                  // Lädt Icon
                   borderRadius: BorderRadius.circular(16),
-                  image: DecorationImage(
+                  image: const DecorationImage(
                     image: AssetImage('assets/icon.png'),
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 20),
-            // App Name
+            const SizedBox(height: 20),
             Center(
               child: Text(
                 AppConfig.appname,
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-            SizedBox(height: 10),
-
-            // Version
+            const SizedBox(height: 10),
             Center(
               child: Text(
                 AppConfig.version,
                 style: TextStyle(fontSize: 16, color: Colors.grey[600]),
               ),
             ),
-            SizedBox(height: 30),
-
-            // Beschreibung
-            Text(
+            const SizedBox(height: 30),
+            const Text(
               'Über die App:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 10),
-            Text(
+            const SizedBox(height: 10),
+            const Text(
               'Up Mark motiviert dich, echte Ziele im Leben zu erreichen! '
-              'Sammle Achievements im Echten Leben! '
+              'Sammle Achievements im echten Leben! '
               'Teile deine Erfolge mit Freunden und lass dich von ihren Achievements inspirieren.',
               style: TextStyle(fontSize: 16),
             ),
-            SizedBox(height: 30),
-
+            const SizedBox(height: 30),
             VimeoVideo(),
-
-            SizedBox(height: 30),
-
-            Text(
+            const SizedBox(height: 30),
+            const Text(
               'Links:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-
-            SizedBox(height: 10),
-
+            const SizedBox(height: 10),
             linkTile(
               'Webseite',
               'https://farin25.github.io/real-live-achievement/',
@@ -729,10 +717,8 @@ class AboutPage extends StatelessWidget {
               'Changelog',
               'https://farin25.github.io/real-live-achievement/docs/Changelog',
             ),
-
-            SizedBox(height: 10),
-
-            Text(
+            const SizedBox(height: 10),
+            const Text(
               'Rechtliches:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
@@ -752,47 +738,33 @@ class AboutPage extends StatelessWidget {
               'FAQ',
               'https://farin25.github.io/real-live-achievement/docs/FAQ',
             ),
-
-            //MAil
             linkTile(
               'Support kontaktieren oder Fehler melden',
               'mailto:Achievments@holzideen.org?subject=Support%20RealLiveAchievement&body=Hallo,%0A%0Aich%20habe%20folgendes%20Problem:%0A',
             ),
-
-            SizedBox(height: 10),
-
-            Text(
+            const SizedBox(height: 10),
+            const Text(
               'Dankesagung:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 10),
-
-            RichText(
-              text: TextSpan(
-                style: TextStyle(fontSize: 16, color: Colors.white),
-                children: [
-                  TextSpan(
-                    text:
-                        'Ein großer Dank geht an alle Tester der Beta-Version und an alle Lehrer*innen, die an uns geglaubt haben und es ermöglicht haben, dieses Projekt im Rahmen des projektorientierten Lernens zu machen. Wir bedanken uns auch bei allen, die eine Idee für ein Achievement eingereicht und Feedback zur App gegeben haben.',
-                  ),
-                ],
-              ),
-            ),
-
-            SizedBox(height: 20),
-
+            const SizedBox(height: 10),
             Text(
+              'Ein großer Dank geht an alle Tester der Beta-Version und an alle Lehrer*innen, die an uns geglaubt haben und es ermöglicht haben, dieses Projekt im Rahmen des projektorientierten Lernens zu machen. Wir bedanken uns auch bei allen, die eine Idee für ein Achievement eingereicht und Feedback zur App gegeben haben.',
+              style: TextStyle(fontSize: 16, color: textColor),
+            ),
+            const SizedBox(height: 20),
+            const Text(
               'Entwickler / Herausgeber:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             RichText(
               text: TextSpan(
-                style: TextStyle(fontSize: 16, color: Colors.black),
+                style: TextStyle(fontSize: 16, color: textColor),
                 children: [
                   TextSpan(
                     text: 'Farin Langner',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.blue,
                       decoration: TextDecoration.underline,
                     ),
@@ -802,52 +774,35 @@ class AboutPage extends StatelessWidget {
                         await launchUrl(url, mode: LaunchMode.platformDefault);
                       },
                   ),
-
-                  TextSpan(
-                    text: ' & ',
-                    style: TextStyle(
-                      color:
-                          Theme.of(context).textTheme.bodyLarge?.color ??
-                          Colors.black,
-                    ),
-                  ),
+                  TextSpan(text: ' & ', style: TextStyle(color: textColor)),
                   TextSpan(
                     text: 'Liam Selent',
-                    style: TextStyle(
-                      color:
-                          Theme.of(context).textTheme.bodyLarge?.color ??
-                          Colors.black,
-                    ),
+                    style: TextStyle(color: textColor),
                   ),
                 ],
               ),
             ),
-
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Text(
               '© 2025-2026 Farin Langner & Liam Selent Alle Rechte Vorbehalten',
-              style: TextStyle(
-                fontSize: 14,
-                color:
-                    Theme.of(context).textTheme.bodyLarge?.color ??
-                    Colors.black,
-              ),
+              style: TextStyle(fontSize: 14, color: textColor),
             ),
           ],
         ),
       ),
-      //
     );
   }
 }
 
-// URLS
+//--------------------------
+//-------- Link Tile --------
+//--------------------------
 Widget linkTile(String title, String url) {
   return ListTile(
     contentPadding: EdgeInsets.zero,
     title: Text(
       title,
-      style: TextStyle(
+      style: const TextStyle(
         color: Colors.blue,
         decoration: TextDecoration.underline,
       ),
@@ -860,8 +815,8 @@ Widget linkTile(String title, String url) {
 }
 
 //--------------------------
-//-------- Lizenzen Seite----
-//---------------------------
+//-------- Lizenzen ---------
+//--------------------------
 class LicensesPage extends StatelessWidget {
   const LicensesPage({super.key});
 
