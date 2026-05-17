@@ -84,7 +84,7 @@ class __FormContentState extends State<_FormContent> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Eemail
+            // Email
             TextFormField(
               controller: _emailController,
               validator: (value) {
@@ -165,15 +165,15 @@ class __FormContentState extends State<_FormContent> {
                   builder: (context) => AlertDialog(
                     title: const Text("Ohne Anmeldung fortfahren"),
                     content: const Text(
-                      "Wenn du ohne Anmeldunk fotfährst,"
-                      "hast du keinen zugriff auf Cloud-Speicherung "
-                      "oder auf soziale Funktionen wie das Ranking usw."
-                      "Der Lokale Acount Befindet sich noch in der Entwicklung wodurch fehler auftreten können",
+                      "Wenn du ohne Anmeldung fortfährst, "
+                      "hast du keinen Zugriff auf Cloud-Speicherung "
+                      "oder auf soziale Funktionen wie das Ranking usw. "
+                      "Der lokale Account befindet sich noch in der Entwicklung, wodurch Fehler auftreten können.",
                     ),
                     actions: [
                       TextButton(
                         onPressed: () => Navigator.pop(context),
-                        child: const Text("Abbrsechen"),
+                        child: const Text("Abbrechen"),
                       ),
                       ElevatedButton(
                         onPressed: () {

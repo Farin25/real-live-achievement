@@ -64,7 +64,7 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
-  String _funfact = 'funfacts weerden geladen..';
+  String _funfact = 'Funfacts werden geladen..';
   final supabase = Supabase.instance.client;
   Timer? _funfactTimer;
 
@@ -191,7 +191,7 @@ final _navBarItems = [
   ),
   SalomonBottomBarItem(
     icon: const Icon(Icons.emoji_events),
-    title: const Text("Achievments"),
+    title: const Text("Achievements"),
     selectedColor: Colors.pink,
   ),
   SalomonBottomBarItem(
@@ -272,7 +272,7 @@ class _AppSnackBarContent extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // App Icon mit leichtem Hintergrund
+          // App Icon
           Container(
             width: 34,
             height: 34,

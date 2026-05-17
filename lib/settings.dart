@@ -266,7 +266,7 @@ class _Appmessages extends State<Appmessages> {
       body: ListView(
         children: [
           SwitchListTile(
-            title: Text("Beachrichtigungen"),
+            title: Text("Benachrichtigungen"),
             subtitle: const Text(
               "Benachrichtigungen von der App",
               style: TextStyle(fontWeight: FontWeight.bold),
@@ -286,9 +286,9 @@ class _Appmessages extends State<Appmessages> {
           const Divider(),
 
           SwitchListTile(
-            title: const Text("Fast ereichtes Achievment"),
+            title: const Text("Fast erreichtes Achievement"),
             subtitle: const Text(
-              "Wenn du kurtz davor bist ein Achivemnt zu ereichen",
+              "Wenn du kurz davor bist ein Achievement zu erreichen",
             ),
             value: notifyAchievmentfasterricht,
             onChanged: (value) {
@@ -303,9 +303,9 @@ class _Appmessages extends State<Appmessages> {
           ),
 
           SwitchListTile(
-            title: const Text("Neuem Achievment"),
+            title: const Text("Neues Achievement"),
             subtitle: const Text(
-              "Wenn due in neues Achievment Freigeschaltet hast",
+              "Wenn du ein neues Achievement freigeschaltet hast",
             ),
             value: notifynewAchievment,
             onChanged: (value) {
@@ -332,7 +332,7 @@ class _Appmessages extends State<Appmessages> {
           SwitchListTile(
             title: const Text("Freunde Neues Achievment"),
             subtitle: const Text(
-              "wenn einer deiner Freunde Ein Neues Achievment bekommen hat",
+              "wenn einer deiner Freunde ein neues Achievement bekommen hat",
             ),
             value: notifyFriendnewAchievment,
             onChanged: (value) {
@@ -349,7 +349,7 @@ class _Appmessages extends State<Appmessages> {
           SwitchListTile(
             title: const Text("Freundschaftsanfragen"),
             subtitle: const Text(
-              "Wennd du eine Neue Freundschaftsanftage bekommst",
+              "Wenn du eine neue Freundschaftsanfrage bekommst",
             ),
             value: notifynewFriendship,
             onChanged: (value) {
@@ -372,9 +372,9 @@ class _Appmessages extends State<Appmessages> {
           ),
           const Divider(),
           SwitchListTile(
-            title: const Text("Geburstagswünsche"),
+            title: const Text("Geburtstagswünsche"),
             subtitle: const Text(
-              "Erhalte an deinem Geburstag eine email von uns.",
+              "Erhalte an deinem Geburtstag eine E-Mail von uns.",
             ),
             value: notifyemailbirthday,
             onChanged: (value) {
@@ -714,7 +714,7 @@ class AboutPage extends StatelessWidget {
               'https://farin25.github.io/real-live-achievement/',
             ),
             linkTile(
-              'Eigenes Achievment Einreichen',
+              'Eigenes Achievement einreichen',
               'https://farin25.github.io/real-live-achievement/docs/Dein_Achievment/',
             ),
             linkTile(
@@ -745,7 +745,7 @@ class AboutPage extends StatelessWidget {
               'https://github.com/Farin25/real-live-achievement',
             ),
             linkTile(
-              'Algemeine Gschäfts Bedingungen',
+              'Allgemeine Geschäftsbedingungen',
               'http://localhost:3000/real-live-achievement/docs/Rechtliches/agb',
             ),
             linkTile(
@@ -773,7 +773,7 @@ class AboutPage extends StatelessWidget {
                 children: [
                   TextSpan(
                     text:
-                        'Ein großer dank geht an alle tester der Beta Version und an alle Lehrer*innen die an uns Geglaubt haben und es ermöglich haben dieses Projekt im rahmen den Projekt orientiertes lernen zu machen. Wir bedanken uns auch bei allen die Eine Idee für ein Acheievment Eingereicht haben un und Feedback zur App gegeben haben. ',
+                        'Ein großer Dank geht an alle Tester der Beta-Version und an alle Lehrer*innen, die an uns geglaubt haben und es ermöglicht haben, dieses Projekt im Rahmen des projektorientierten Lernens zu machen. Wir bedanken uns auch bei allen, die eine Idee für ein Achievement eingereicht und Feedback zur App gegeben haben.',
                   ),
                 ],
               ),

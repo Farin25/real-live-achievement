@@ -128,7 +128,7 @@ class _AccountPageState extends State<AccountPage> {
                         TextField(
                           controller: _firstNameController,
                           decoration: const InputDecoration(
-                            labelText: 'Vornahme',
+                            labelText: 'Vorname',
                           ),
                         ),
                         const SizedBox(height: 15),
@@ -181,7 +181,7 @@ class _AccountPageState extends State<AccountPage> {
 
                         ElevatedButton(
                           onPressed: _saveProfile,
-                          child: const Text('änderungen Speichern'),
+                          child: const Text('Änderungen speichern'),
                         ),
                       ],
                     ),
