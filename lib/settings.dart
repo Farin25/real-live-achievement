@@ -415,16 +415,26 @@ class _AppMessagesState extends State<AppMessages> {
   }
 
   Future<void> _loadSettings() async {
-    final newFriendship =
-        await SettingsService.loadBool('pushNewFriendship', true);
-    final friendAchievement =
-        await SettingsService.loadBool('pushFriendNewAchievement', true);
-    final newAchievement =
-        await SettingsService.loadBool('pushNewAchievement', true);
-    final almostReached =
-        await SettingsService.loadBool('pushAchievementAlmostReached', true);
-    final emailBirthday =
-        await SettingsService.loadBool('notifyEmailBirthday', true);
+    final newFriendship = await SettingsService.loadBool(
+      'pushNewFriendship',
+      true,
+    );
+    final friendAchievement = await SettingsService.loadBool(
+      'pushFriendNewAchievement',
+      true,
+    );
+    final newAchievement = await SettingsService.loadBool(
+      'pushNewAchievement',
+      true,
+    );
+    final almostReached = await SettingsService.loadBool(
+      'pushAchievementAlmostReached',
+      true,
+    );
+    final emailBirthday = await SettingsService.loadBool(
+      'notifyEmailBirthday',
+      true,
+    );
     setState(() {
       notifyNewFriendship = newFriendship;
       notifyFriendNewAchievement = friendAchievement;
@@ -503,8 +513,10 @@ class _DesignState extends State<Design> {
   }
 
   Future<void> _loadSettings() async {
-    final value =
-        await SettingsService.loadString('locked_visibility', lockedVisibility);
+    final value = await SettingsService.loadString(
+      'locked_visibility',
+      lockedVisibility,
+    );
     setState(() => lockedVisibility = value);
   }
 }
@@ -561,8 +573,7 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
                     title: const Text("Achievements prüfen"),
                     content: TextField(
                       keyboardType: TextInputType.number,
-                      decoration:
-                          const InputDecoration(labelText: "Minuten"),
+                      decoration: const InputDecoration(labelText: "Minuten"),
                       onChanged: (val) {
                         tempValue = int.tryParse(val) ?? engineTimerMinutes;
                       },
@@ -619,8 +630,10 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
   }
 
   Future<void> _loadSettings() async {
-    final wifi =
-        await SettingsService.loadBool('achievementDownloadOverWifi', true);
+    final wifi = await SettingsService.loadBool(
+      'achievementDownloadOverWifi',
+      true,
+    );
     final timer = await SettingsService.loadInt('engineTimerMinutes', 10);
     setState(() {
       achievementDownloadOverWifi = wifi;
@@ -690,68 +703,52 @@ class AboutPage extends StatelessWidget {
               style: TextStyle(fontSize: 16),
             ),
             const SizedBox(height: 30),
-            VimeoVideo(),
             const SizedBox(height: 30),
             const Text(
               'Links:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-            linkTile(
-              'Webseite',
-              'https://farin25.github.io/real-live-achievement/',
-            ),
+            linkTile('Webseite', 'https://upmark.farin-langner.de/'),
             linkTile(
               'Eigenes Achievement einreichen',
-              'https://farin25.github.io/real-live-achievement/docs/Dein_Achievment/',
+              'https://upmark.farin-langner.de/achievements/einreichen',
+            ),
+            linkTile(
+              'Dankesagung',
+              'https://upmark.farin-langner.de/danksagung',
             ),
             linkTile(
               'Newsletter',
-              'https://farin25.github.io/real-live-achievement/docs/newsletter',
+              'https://upmark.farin-langner.de/newsletter',
             ),
+            linkTile('Beta', 'https://upmark.farin-langner.de/beta'),
+
             linkTile(
               'SourceCode',
               'https://github.com/Farin25/real-live-achievement',
             ),
-            linkTile(
-              'Changelog',
-              'https://farin25.github.io/real-live-achievement/docs/Changelog',
-            ),
+            linkTile('Changelog', 'https://upmark.farin-langner.de/changelog'),
             const SizedBox(height: 10),
             const Text(
               'Rechtliches:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            linkTile(
-              'Impressum',
-              'https://farin25.github.io/real-live-achievement/docs/Rechtliches/impressum/',
-            ),
+            linkTile('Impressum', 'https://legal.farin-langner.de/#impressum'),
             linkTile(
               'Datenschutzerklärung',
-              'https://github.com/Farin25/real-live-achievement',
+              'https://legal.farin-langner.de/#ds-upmark',
             ),
             linkTile(
               'Allgemeine Geschäftsbedingungen',
-              'http://localhost:3000/real-live-achievement/docs/Rechtliches/agb',
+              'https://legal.farin-langner.de/#agb',
             ),
-            linkTile(
-              'FAQ',
-              'https://farin25.github.io/real-live-achievement/docs/FAQ',
-            ),
+            linkTile('FAQ', 'https://upmark.farin-langner.de/faq'),
             linkTile(
               'Support kontaktieren oder Fehler melden',
-              'mailto:Achievments@holzideen.org?subject=Support%20RealLiveAchievement&body=Hallo,%0A%0Aich%20habe%20folgendes%20Problem:%0A',
+              'mailto:liam_and_farin@holzideen.org?subject=Support%20RealLiveAchievement&body=Hallo,%0A%0Aich%20habe%20folgendes%20Problem:%0A',
             ),
-            const SizedBox(height: 10),
-            const Text(
-              'Dankesagung:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              'Ein großer Dank geht an alle Tester der Beta-Version und an alle Lehrer*innen, die an uns geglaubt haben und es ermöglicht haben, dieses Projekt im Rahmen des projektorientierten Lernens zu machen. Wir bedanken uns auch bei allen, die eine Idee für ein Achievement eingereicht und Feedback zur App gegeben haben.',
-              style: TextStyle(fontSize: 16, color: textColor),
-            ),
+
             const SizedBox(height: 20),
             const Text(
               'Entwickler / Herausgeber:',
@@ -774,7 +771,10 @@ class AboutPage extends StatelessWidget {
                         await launchUrl(url, mode: LaunchMode.platformDefault);
                       },
                   ),
-                  TextSpan(text: ' & ', style: TextStyle(color: textColor)),
+                  TextSpan(
+                    text: ' & ',
+                    style: TextStyle(color: textColor),
+                  ),
                   TextSpan(
                     text: 'Liam Selent',
                     style: TextStyle(color: textColor),
@@ -815,7 +815,7 @@ Widget linkTile(String title, String url) {
 }
 
 //--------------------------
-//-------- Lizenzen ---------
+//-------- Lizenzen --------
 //--------------------------
 class LicensesPage extends StatelessWidget {
   const LicensesPage({super.key});
