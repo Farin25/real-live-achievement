@@ -105,7 +105,8 @@ class AchievementEngine {
               final prefs = await SharedPreferences.getInstance();
               final tageSeitThemeChange =
                   prefs.getInt('tageSeitThemeChange') ?? 0;
-              final currentTheme = prefs.getInt('themeChangeTime') ?? 'dark';
+              final currentTheme =
+                  prefs.getString('currentThemeMode') ?? 'dark'; // ← getString!
               if (tageSeitThemeChange >= 30 && currentTheme == 'light') {
                 await _logUnlock(id, user.id);
                 continue;
@@ -153,6 +154,27 @@ class AchievementEngine {
             // Night Coder
             if (type == 'night_coder_hours') {
               if (now.hour >= 2 && now.hour < 4) {
+                await _logUnlock(id, user.id);
+                continue;
+              }
+            }
+            //Halloween
+            if (type == 'is_halloween') {
+              if (now.month == 10 && now.day == 31) {
+                await _logUnlock(id, user.id);
+                continue;
+              }
+            }
+            // Leap year
+            if (type == 'is_leap_day') {
+              if (now.month == 3 && now.day == 29) {
+                await _logUnlock(id, user.id);
+                continue;
+              }
+            }
+            // Pi Day
+            if (type == 'is_leep_day') {
+              if (now.month == 2 && now.day == 14) {
                 await _logUnlock(id, user.id);
                 continue;
               }
