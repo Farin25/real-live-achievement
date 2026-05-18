@@ -167,18 +167,20 @@ class AchievementEngine {
             }
             // Leap year
             if (type == 'is_leap_day') {
-              if (now.month == 3 && now.day == 29) {
+              if (now.month == 2 && now.day == 29) {
                 await _logUnlock(id, user.id);
                 continue;
               }
             }
             // Pi Day
-            if (type == 'is_leep_day') {
-              if (now.month == 2 && now.day == 14) {
+            if (type == 'is_PI_day') {
+              if (now.month == 3 && now.day == 14) {
                 await _logUnlock(id, user.id);
                 continue;
               }
             }
+            // EU Länder
+
             // Visited city: check against visited_citys list
             if (type == 'visited_city') {
               final prefs = await SharedPreferences.getInstance();
@@ -320,6 +322,41 @@ class AchievementEngine {
         }
 
         return age;
+      //EU Länder
+      case 'eu_countries_visited':
+        final prefs = await SharedPreferences.getInstance();
+        final List<String> visitedCountries = List<String>.from(
+          jsonDecode(prefs.getString('visited_countries') ?? '[]'),
+        );
+        const euCodes = [
+          'DE',
+          'FR',
+          'IT',
+          'ES',
+          'PL',
+          'NL',
+          'BE',
+          'SE',
+          'AT',
+          'DK',
+          'FI',
+          'IE',
+          'PT',
+          'CZ',
+          'RO',
+          'HU',
+          'SK',
+          'BG',
+          'HR',
+          'SI',
+          'LT',
+          'LV',
+          'EE',
+          'CY',
+          'LU',
+          'MT',
+        ];
+        return visitedCountries.where((c) => euCodes.contains(c)).length;
       // Aktuell stunde
       case 'current_hour':
         return DateTime.now().hour;
