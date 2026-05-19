@@ -8,17 +8,12 @@ import 'engine_helpers.dart';
 import 'services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:workmanager/workmanager.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
-
-  final prefs = await SharedPreferences.getInstance();
-  await prefs.setString('supabase_url', dotenv.env['SUPABASE_URL']!);
-  await prefs.setString('supabase_key', dotenv.env['SUPABASE_ANON_KEY']!);
 
   await Workmanager().initialize(backgroundTaskCallback);
 

@@ -7,6 +7,7 @@ import 'package:geocoding/geocoding.dart';
 import 'dart:convert';
 import 'package:workmanager/workmanager.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class EngineRunner {
   static EngineRunner? instance;
@@ -194,14 +195,14 @@ void backgroundTaskCallback() {
     print('[Background] Task gestartet: $task');
 
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final url = prefs.getString('supabase_url');
-      final key = prefs.getString('supabase_key');
+      await dotenv.load();
+      final supabaseUrl = dotenv.env['SUPABASE_URL'];
+      final supabaseKey = dotenv.env['SUPABASE_ANON_KEY'];
 
-      if (url != null && key != null) {
-        await Supabase.initialize(url: url, anonKey: key);
+      if (supabaseUrl != null && supabaseKey != null) {
         print('[Background] Supabase initialisiert');
 
+        await Supabase.initialize(url: supabaseUrl, anonKey: supabaseKey);
         await AchievementEngine().run();
 
         print('[Background] Engine erfolgreich ausgeführt');

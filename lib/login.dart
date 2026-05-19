@@ -225,7 +225,7 @@ class __FormContentState extends State<_FormContent> {
     } on AuthException catch (e) {
       if (!mounted) return;
 
-      showAppSnackBar(context, '$e.message)');
+      showAppSnackBar(context, e.message);
     }
 
     if (mounted) {
