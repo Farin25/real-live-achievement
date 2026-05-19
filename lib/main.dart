@@ -56,7 +56,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: true, // Solange true bis final beta version
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(

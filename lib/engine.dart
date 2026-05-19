@@ -9,269 +9,264 @@ class AchievementEngine {
   final supabase = Supabase.instance.client;
 
   Future<void> run() async {
-    final user = supabase.auth.currentUser;
-
-    if (user == null) return;
-
-    List<dynamic> achievements;
     try {
-      achievements = await supabase
-          .from('achievements')
-          .select('id, requirement');
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setString('cached_achievements', jsonEncode(achievements));
-    } catch (e) {
-      final prefs = await SharedPreferences.getInstance();
-      final cached = prefs.getString('cached_achievements');
-      if (cached == null) return;
-      achievements = jsonDecode(cached);
-    }
+      final user = supabase.auth.currentUser;
+      if (user == null) return;
 
-    final unlocked = await supabase
-        .from('user_achievements')
-        .select('achievement_id')
-        .eq('user_id', user.id);
+      final achievements = await supabase.from('achievements').select();
 
-    final userdata = await supabase
-        .from('profiles')
-        .select()
-        .eq('id', user.id)
-        .single();
+      final unlocked = await supabase
+          .from('user_achievements')
+          .select('achievement_id')
+          .eq('user_id', user.id);
 
-    final unlockedIds = unlocked.map((u) => u['achievement_id']).toSet();
+      final userdata = await supabase
+          .from('profiles')
+          .select()
+          .eq('id', user.id)
+          .single();
 
-    for (final achievement in achievements) {
-      final id = achievement['id'];
-      final requirement = achievement['requirement'];
+      final unlockedIds = unlocked.map((u) => u['achievement_id']).toSet();
 
-      if (unlockedIds.contains(id)) {
-        print('$id: Schon freigeschaltet');
-        continue;
-      } else {
-        print('$id: Noch nicht freigeschaltet: json decoding wird gestartet');
-        final Map<String, dynamic> req = requirement is String
-            ? jsonDecode(requirement)
-            : requirement;
+      for (final achievement in achievements) {
+        final id = achievement['id'];
+        final requirement = achievement['requirement'];
 
-        final mechanism = req['mechanism'];
-        print('Mechanism: $mechanism');
+        if (unlockedIds.contains(id)) {
+          print('$id: Schon freigeschaltet');
+          continue;
+        } else {
+          print('$id: Noch nicht freigeschaltet: json decoding wird gestartet');
+          final Map<String, dynamic> req = requirement is String
+              ? jsonDecode(requirement)
+              : requirement;
 
-        switch (mechanism) {
-          case 'simple_threshold':
-            final type = req['type'];
-            final now = DateTime.now();
+          final mechanism = req['mechanism'];
+          print('Mechanism: $mechanism');
 
-            final value = req['value'];
-            final operator = req['operator'] ?? 'greater_equal';
+          switch (mechanism) {
+            case 'simple_threshold':
+              final type = req['type'];
+              final now = DateTime.now();
 
-            print('[$id] Prüfe type=$type operator=$operator value=$value');
+              final value = req['value'];
+              final operator = req['operator'] ?? 'greater_equal';
 
-            // Friday the 13th
-            if (type == 'is_friday_13th') {
-              if (now.weekday == 5 && now.day == 13) {
-                print('Friday the 13th erfüllt!');
-                await _logUnlock(id, user.id);
+              print('[$id] Prüfe type=$type operator=$operator value=$value');
+
+              // Friday the 13th
+              if (type == 'is_friday_13th') {
+                if (now.weekday == 5 && now.day == 13) {
+                  print('Friday the 13th erfüllt!');
+                  await _logUnlock(id, user.id);
+                  continue;
+                }
+              }
+              // Birthday
+              if (type == 'is_users_birthday') {
+                final birthdayValue = userdata['birthdate'];
+                DateTime? birthdayDate;
+                if (birthdayValue is String) {
+                  birthdayDate = DateTime.tryParse(birthdayValue);
+                } else if (birthdayValue is DateTime) {
+                  birthdayDate = birthdayValue;
+                }
+                if (birthdayDate != null &&
+                    now.month == birthdayDate.month &&
+                    now.day == birthdayDate.day) {
+                  print('Geburtstag erfüllt!');
+                  await _logUnlock(id, user.id);
+                  continue;
+                }
+              }
+              //Beta User
+              if (type == 'is_beta_user') {
+                final betauser = userdata['beta_user'];
+                if (betauser == true) {
+                  print('user ist Beta Uuser');
+                  await _logUnlock(id, user.id);
+                  continue;
+                }
+              }
+              // Mathias mode
+              if (type == 'light_mode_days') {
+                final prefs = await SharedPreferences.getInstance();
+                final tageSeitThemeChange =
+                    prefs.getInt('tageSeitThemeChange') ?? 0;
+                final currentTheme =
+                    prefs.getString('currentThemeMode') ??
+                    'dark'; // ← getString!
+                if (tageSeitThemeChange >= 30 && currentTheme == 'light') {
+                  await _logUnlock(id, user.id);
+                  continue;
+                }
+              }
+              // Dark Mode achievment (dark Side oder so)
+              if (type == 'dark_mode_days') {
+                final prefs = await SharedPreferences.getInstance();
+                final tageSeitThemeChange =
+                    prefs.getInt('tageSeitThemeChange') ?? 0;
+                final currentTheme =
+                    prefs.getString('currentThemeMode') ?? 'dark';
+                if (tageSeitThemeChange >= 30 && currentTheme == 'dark') {
+                  await _logUnlock(id, user.id);
+                  continue;
+                }
+              }
+              // Palimdrom day
+              if (type == 'is_palindrome_date') {
+                final dateString =
+                    '${now.day.toString().padLeft(2, '0')}'
+                    '${now.month.toString().padLeft(2, '0')}'
+                    '${now.year}';
+
+                final reversed = dateString.split('').reversed.join();
+
+                if (dateString == reversed) {
+                  await _logUnlock(id, user.id);
+                  continue;
+                }
+              }
+              // New Year
+              if (type == 'is_new_year') {
+                if (now.month == 1 && now.day == 1) {
+                  await _logUnlock(id, user.id);
+                  continue;
+                }
+              }
+              // Christmas
+              if (type == 'is_christmas') {
+                if (now.month == 12 && now.day == 24) {
+                  await _logUnlock(id, user.id);
+                  continue;
+                }
+              }
+              // Night Coder
+              if (type == 'night_coder_hours') {
+                if (now.hour >= 2 && now.hour < 4) {
+                  await _logUnlock(id, user.id);
+                  continue;
+                }
+              }
+              //Halloween
+              if (type == 'is_halloween') {
+                if (now.month == 10 && now.day == 31) {
+                  await _logUnlock(id, user.id);
+                  continue;
+                }
+              }
+              // Leap year
+              if (type == 'is_leap_day') {
+                if (now.month == 2 && now.day == 29) {
+                  await _logUnlock(id, user.id);
+                  continue;
+                }
+              }
+              // Pi Day
+              if (type == 'is_PI_day') {
+                if (now.month == 3 && now.day == 14) {
+                  await _logUnlock(id, user.id);
+                  continue;
+                }
+              }
+              // EU Länder
+
+              // Visited city: check against visited_citys list
+              if (type == 'visited_city') {
+                final prefs = await SharedPreferences.getInstance();
+                final List<String> visitedCitys = List<String>.from(
+                  jsonDecode(prefs.getString('visited_citys') ?? '[]'),
+                );
+                final cityValue = value.toString().toLowerCase();
+                if (visitedCitys.any((c) => c.toLowerCase() == cityValue)) {
+                  await _logUnlock(id, user.id);
+                }
                 continue;
               }
-            }
-            // Birthday
-            if (type == 'is_users_birthday') {
-              final birthdayValue = userdata['birthdate'];
-              DateTime? birthdayDate;
-              if (birthdayValue is String) {
-                birthdayDate = DateTime.tryParse(birthdayValue);
-              } else if (birthdayValue is DateTime) {
-                birthdayDate = birthdayValue;
-              }
-              if (birthdayDate != null &&
-                  now.month == birthdayDate.month &&
-                  now.day == birthdayDate.day) {
-                print('Geburtstag erfüllt!');
-                await _logUnlock(id, user.id);
-                continue;
-              }
-            }
-            //Beta User
-            if (type == 'is_beta_user') {
-              final betauser = userdata['beta_user'];
-              if (betauser == true) {
-                print('user ist Beta Uuser');
-                await _logUnlock(id, user.id);
-                continue;
-              }
-            }
-            // Mathias mode
-            if (type == 'light_mode_days') {
-              final prefs = await SharedPreferences.getInstance();
-              final tageSeitThemeChange =
-                  prefs.getInt('tageSeitThemeChange') ?? 0;
-              final currentTheme =
-                  prefs.getString('currentThemeMode') ?? 'dark'; // ← getString!
-              if (tageSeitThemeChange >= 30 && currentTheme == 'light') {
-                await _logUnlock(id, user.id);
-                continue;
-              }
-            }
-            // Dark Mode achievment (dark Side oder so)
-            if (type == 'dark_mode_days') {
-              final prefs = await SharedPreferences.getInstance();
-              final tageSeitThemeChange = prefs.getInt('themeChangeTime') ?? 0;
-              final currentTheme =
-                  prefs.getString('currentThemeMode') ?? 'dark';
-              if (tageSeitThemeChange >= 30 && currentTheme == 'dark') {
-                await _logUnlock(id, user.id);
-                continue;
-              }
-            }
-            // Palimdrom day
-            if (type == 'is_palindrome_date') {
-              final dateString =
-                  '${now.day.toString().padLeft(2, '0')}'
-                  '${now.month.toString().padLeft(2, '0')}'
-                  '${now.year}';
-
-              final reversed = dateString.split('').reversed.join();
-
-              if (dateString == reversed) {
-                await _logUnlock(id, user.id);
-                continue;
-              }
-            }
-            // New Year
-            if (type == 'is_new_year') {
-              if (now.month == 1 && now.day == 1) {
-                await _logUnlock(id, user.id);
-                continue;
-              }
-            }
-            // Christmas
-            if (type == 'is_christmas') {
-              if (now.month == 12 && now.day == 24) {
-                await _logUnlock(id, user.id);
-                continue;
-              }
-            }
-            // Night Coder
-            if (type == 'night_coder_hours') {
-              if (now.hour >= 2 && now.hour < 4) {
-                await _logUnlock(id, user.id);
-                continue;
-              }
-            }
-            //Halloween
-            if (type == 'is_halloween') {
-              if (now.month == 10 && now.day == 31) {
-                await _logUnlock(id, user.id);
-                continue;
-              }
-            }
-            // Leap year
-            if (type == 'is_leap_day') {
-              if (now.month == 2 && now.day == 29) {
-                await _logUnlock(id, user.id);
-                continue;
-              }
-            }
-            // Pi Day
-            if (type == 'is_PI_day') {
-              if (now.month == 3 && now.day == 14) {
-                await _logUnlock(id, user.id);
-                continue;
-              }
-            }
-            // EU Länder
-
-            // Visited city: check against visited_citys list
-            if (type == 'visited_city') {
-              final prefs = await SharedPreferences.getInstance();
-              final List<String> visitedCitys = List<String>.from(
-                jsonDecode(prefs.getString('visited_citys') ?? '[]'),
+              // Einfacher generischer verglich für Strings
+              final String? actualString = await _getActualValueString(
+                type,
+                userdata,
               );
-              final cityValue = value.toString().toLowerCase();
-              if (visitedCitys.any((c) => c.toLowerCase() == cityValue)) {
-                await _logUnlock(id, user.id);
+              if (actualString != null) {
+                if (actualString == value.toString().toLowerCase()) {
+                  await _logUnlock(id, user.id);
+                }
+                continue;
               }
-              continue;
-            }
-            // Einfacher generischer verglich für Strings
-            final String? actualString = await _getActualValueString(
-              type,
-              userdata,
-            );
-            if (actualString != null) {
-              if (actualString == value.toString().toLowerCase()) {
-                await _logUnlock(id, user.id);
+
+              // Einfacher generischervergleich für int
+              final num? actualValue = await _getActualValue(type, userdata);
+              if (actualValue == null) {
+                print('[$id] Kein actualValue für type=$type = überspringen');
+                continue;
               }
-              continue;
-            }
 
-            // Einfacher generischervergleich für int
-            final num? actualValue = await _getActualValue(type, userdata);
-            if (actualValue == null) {
-              print('[$id] Kein actualValue für type=$type = überspringen');
-              continue;
-            }
-
-            final num minValue = req['min_value'] ?? 0;
-
-            final conditionMet = switch (operator) {
-              'less_equal' => actualValue <= value && actualValue >= minValue,
-              'less_than' => actualValue < value && actualValue >= minValue,
-              'equals' => actualValue == value,
-              'greater_equal' => actualValue >= value,
-              'greater_than' => actualValue > value,
-              _ => false,
-            };
-
-            print('[$id] actualValue=$actualValue conditionMet=$conditionMet');
-
-            if (conditionMet) {
-              await _logUnlock(id, user.id);
-            }
-
-          case 'unique_count':
-            final type = req['type'];
-            final value = req['value'];
-
-            final num? count = await _getActualValue(type, userdata);
-            if (count != null && count >= value) {
-              await _logUnlock(id, user.id);
-            }
-
-          case 'combined':
-            final conditions = req['conditions'] as List;
-            bool allMet = true;
-
-            for (final condition in conditions) {
-              final type = condition['type'];
-              final value = condition['value'];
-              final operator = condition['operator'] ?? 'greater_equal';
-
-              //
-              final num? actual = await _getActualValue(type, userdata);
-              if (actual == null) {
-                allMet = false;
-                break;
-              }
+              final num minValue = req['min_value'] ?? 0;
 
               final conditionMet = switch (operator) {
-                'less_equal' => actual <= value,
-                'less_than' => actual < value,
-                'equals' => actual == value,
-                'greater_equal' => actual >= value,
-                'greater_than' => actual > value,
+                'less_equal' => actualValue <= value && actualValue >= minValue,
+                'less_than' => actualValue < value && actualValue >= minValue,
+                'equals' => actualValue == value,
+                'greater_equal' => actualValue >= value,
+                'greater_than' => actualValue > value,
                 _ => false,
               };
 
-              if (!conditionMet) {
-                allMet = false;
-                break;
-              }
-            }
+              print(
+                '[$id] actualValue=$actualValue conditionMet=$conditionMet',
+              );
 
-            if (allMet) await _logUnlock(id, user.id);
+              if (conditionMet) {
+                await _logUnlock(id, user.id);
+              }
+
+            case 'unique_count':
+              final type = req['type'];
+              final value = req['value'];
+
+              final num? count = await _getActualValue(type, userdata);
+              if (count != null && count >= value) {
+                await _logUnlock(id, user.id);
+              }
+
+            case 'combined':
+              final conditions = req['conditions'] as List;
+              bool allMet = true;
+
+              for (final condition in conditions) {
+                final type = condition['type'];
+                final value = condition['value'];
+                final operator = condition['operator'] ?? 'greater_equal';
+
+                //
+                final num? actual = await _getActualValue(type, userdata);
+                if (actual == null) {
+                  allMet = false;
+                  break;
+                }
+
+                final conditionMet = switch (operator) {
+                  'less_equal' => actual <= value,
+                  'less_than' => actual < value,
+                  'equals' => actual == value,
+                  'greater_equal' => actual >= value,
+                  'greater_than' => actual > value,
+                  _ => false,
+                };
+
+                if (!conditionMet) {
+                  allMet = false;
+                  break;
+                }
+              }
+
+              if (allMet) await _logUnlock(id, user.id);
+          }
         }
       }
+    } catch (e) {
+      print('[Engine] Fehler: $e');
     }
   }
 

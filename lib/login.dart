@@ -107,8 +107,8 @@ class __FormContentState extends State<_FormContent> {
               controller: _passwordController,
               obscureText: !_isPasswordVisible,
               validator: (value) {
-                if (value == null || value.length < 6) {
-                  return 'Mindestens 6 Zeichen';
+                if (value == null || value.isEmpty) {
+                  return 'Passwort eingeben';
                 }
                 return null;
               },
