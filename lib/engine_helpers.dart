@@ -8,6 +8,7 @@ import 'dart:convert';
 import 'package:workmanager/workmanager.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter/foundation.dart';
 
 class EngineRunner {
   static EngineRunner? instance;
@@ -45,7 +46,7 @@ class EngineRunner {
     _timer?.cancel();
 
     _timer = Timer.periodic(Duration(minutes: runEngineMinutes), (timer) {
-      print('Der Timer ist abgelaufen');
+      if (kDebugMode) print('Der Timer ist abgelaufen');
       runEngine();
     });
   }
@@ -57,7 +58,7 @@ class EngineRunner {
     final minutes = prefs.getInt('engineTimerMinutes') ?? 10;
 
     _timer = Timer.periodic(Duration(minutes: minutes), (timer) {
-      print('Timer abgelaufen engine wird gestartet');
+      if (kDebugMode) print('Timer abgelaufen engine wird gestartet');
       runEngine();
     });
   }
@@ -101,33 +102,31 @@ class EngineHelpers {
     LocationPermission permission;
 
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    print('[Location] Service enabled: $serviceEnabled');
+    if (kDebugMode) print('[Location] Service enabled: $serviceEnabled');
     if (!serviceEnabled) {
-      print('[Location] ABBRUCH: Location service deaktiviert');
+      if (kDebugMode) print('[Location] ABBRUCH: Location service deaktiviert');
       return;
     }
 
     permission = await Geolocator.checkPermission();
-    print('[Location] Permission: $permission');
+    if (kDebugMode) print('[Location] Permission: $permission');
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
-      print('[Location] Permission nach Request: $permission');
+      if (kDebugMode) print('[Location] Permission nach Request: $permission');
       if (permission == LocationPermission.denied) {
-        print('[Location] ABBRUCH: Permission verweigert');
+        if (kDebugMode) print('[Location] ABBRUCH: Permission verweigert');
         return;
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
-      print(
-        '[Location] ABBRUCH: Permission dauerhaft verweigert — in Android-Einstellungen freigeben',
-      );
+      if (kDebugMode) print('[Location] ABBRUCH: Permission dauerhaft verweigert — in Android-Einstellungen freigeben');
       return;
     }
 
-    print('[Location] Hole Position...');
+    if (kDebugMode) print('[Location] Hole Position...');
     final position = await Geolocator.getCurrentPosition();
-    print('[Location] Position: ${position.latitude}, ${position.longitude}');
+    if (kDebugMode) print('[Location] Position: ${position.latitude}, ${position.longitude}');
 
     // In Stadt und Land wechseln
     List<Placemark> placemarks = await placemarkFromCoordinates(
@@ -135,9 +134,7 @@ class EngineHelpers {
       position.longitude,
     );
     final placemark = placemarks.first;
-    print(
-      '[Location] locality="${placemark.locality}" subLocality="${placemark.subLocality}" adminArea="${placemark.administrativeArea}"',
-    );
+    if (kDebugMode) print('[Location] locality="${placemark.locality}" subLocality="${placemark.subLocality}" adminArea="${placemark.administrativeArea}"');
     final prefs = await SharedPreferences.getInstance();
 
     await prefs.setString('current_city', placemark.locality ?? '');
@@ -192,7 +189,7 @@ class EngineHelpers {
 @pragma('vm:entry-point')
 void backgroundTaskCallback() {
   Workmanager().executeTask((task, inputData) async {
-    print('[Background] Task gestartet: $task');
+    if (kDebugMode) print('[Background] Task gestartet: $task');
 
     try {
       await dotenv.load();
@@ -200,20 +197,20 @@ void backgroundTaskCallback() {
       final supabaseKey = dotenv.env['SUPABASE_ANON_KEY'];
 
       if (supabaseUrl != null && supabaseKey != null) {
-        print('[Background] Supabase initialisiert');
+        if (kDebugMode) print('[Background] Supabase initialisiert');
 
         await Supabase.initialize(url: supabaseUrl, anonKey: supabaseKey);
         await AchievementEngine().run();
 
-        print('[Background] Engine erfolgreich ausgeführt');
+        if (kDebugMode) print('[Background] Engine erfolgreich ausgeführt');
       } else {
-        print('[Background] FEHLER: Supabase-Credentials nicht gefunden!');
+        if (kDebugMode) print('[Background] FEHLER: Supabase-Credentials nicht gefunden!');
         return Future.value(false);
       }
 
       return Future.value(true);
     } catch (e) {
-      print('[Background] Fehler: $e');
+      if (kDebugMode) print('[Background] Fehler: $e');
       return Future.value(false);
     }
   });

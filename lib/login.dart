@@ -338,7 +338,6 @@ class _SignUpPageState extends State<SignUpPage> {
                   if (picked != null) {
                     setState(() => _birthDate = picked);
                   }
-                  print("Singup Formular fertig geladen");
                 },
               ),
 
@@ -382,7 +381,6 @@ class _SignUpPageState extends State<SignUpPage> {
                                         url,
                                         mode: LaunchMode.externalApplication,
                                       );
-                                      print("AGB im Browser aufgerufen");
                                     },
                                     child: const Text("AGB anzeigen"),
                                   ),
@@ -402,8 +400,6 @@ class _SignUpPageState extends State<SignUpPage> {
                             ),
                           );
                           if (accepted != true) return;
-
-                          print("Sing up abgeschlossen");
 
                           // username
                           setState(() => _isLoading = true);
@@ -466,7 +462,6 @@ class _SignUpPageState extends State<SignUpPage> {
                           }
 
                           setState(() => _isLoading = false);
-                          print("Regestierung wir durchgeführt");
                         },
                   child: _isLoading
                       ? const CircularProgressIndicator(color: Colors.white)

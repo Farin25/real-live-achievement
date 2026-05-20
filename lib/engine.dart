@@ -1,5 +1,6 @@
 //engine.dart
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:battery_plus/battery_plus.dart';
@@ -33,16 +34,13 @@ class AchievementEngine {
         final requirement = achievement['requirement'];
 
         if (unlockedIds.contains(id)) {
-          print('$id: Schon freigeschaltet');
           continue;
         } else {
-          print('$id: Noch nicht freigeschaltet: json decoding wird gestartet');
           final Map<String, dynamic> req = requirement is String
               ? jsonDecode(requirement)
               : requirement;
 
           final mechanism = req['mechanism'];
-          print('Mechanism: $mechanism');
 
           switch (mechanism) {
             case 'simple_threshold':
@@ -52,12 +50,10 @@ class AchievementEngine {
               final value = req['value'];
               final operator = req['operator'] ?? 'greater_equal';
 
-              print('[$id] Prüfe type=$type operator=$operator value=$value');
-
               // Friday the 13th
               if (type == 'is_friday_13th') {
                 if (now.weekday == 5 && now.day == 13) {
-                  print('Friday the 13th erfüllt!');
+                  if (kDebugMode) print('Friday the 13th erfüllt!');
                   await _logUnlock(id, user.id);
                   continue;
                 }
@@ -74,7 +70,7 @@ class AchievementEngine {
                 if (birthdayDate != null &&
                     now.month == birthdayDate.month &&
                     now.day == birthdayDate.day) {
-                  print('Geburtstag erfüllt!');
+                  if (kDebugMode) print('Geburtstag erfüllt!');
                   await _logUnlock(id, user.id);
                   continue;
                 }
@@ -83,7 +79,7 @@ class AchievementEngine {
               if (type == 'is_beta_user') {
                 final betauser = userdata['beta_user'];
                 if (betauser == true) {
-                  print('user ist Beta Uuser');
+                  if (kDebugMode) print('user ist Beta Uuser');
                   await _logUnlock(id, user.id);
                   continue;
                 }
@@ -198,7 +194,7 @@ class AchievementEngine {
               // Einfacher generischervergleich für int
               final num? actualValue = await _getActualValue(type, userdata);
               if (actualValue == null) {
-                print('[$id] Kein actualValue für type=$type = überspringen');
+                if (kDebugMode) print('[$id] Kein actualValue für type=$type = überspringen');
                 continue;
               }
 
@@ -213,9 +209,7 @@ class AchievementEngine {
                 _ => false,
               };
 
-              print(
-                '[$id] actualValue=$actualValue conditionMet=$conditionMet',
-              );
+              if (kDebugMode) print('[$id] actualValue=$actualValue conditionMet=$conditionMet');
 
               if (conditionMet) {
                 await _logUnlock(id, user.id);
@@ -266,7 +260,7 @@ class AchievementEngine {
         }
       }
     } catch (e) {
-      print('[Engine] Fehler: $e');
+      if (kDebugMode) print('[Engine] Fehler: $e');
     }
   }
 
@@ -281,7 +275,7 @@ class AchievementEngine {
       'achievement_id': id,
       'unlocked_at': DateTime.now().toIso8601String(),
     });
-    print('Achievement $id mit user id: $userId erfolgreich freigeschaltet');
+    if (kDebugMode) print('Achievement $id mit user id: $userId erfolgreich freigeschaltet');
   }
 
   // Ermittelt int userdaten für genersichen algorytmohs

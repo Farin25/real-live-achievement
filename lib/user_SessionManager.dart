@@ -14,12 +14,12 @@ class UserSessionmanager {
       await _syncProfile(user).timeout(
         Duration(seconds: 8),
         onTimeout: () {
-          print('[SessionManager] Timeout - nutze lokalen Cache');
+          dLog('[SessionManager] Timeout - nutze lokalen Cache');
         },
       );
     } catch (e) {
-      print('[SessionManager] Fehler beim Profil-Sync: $e');
-      print('[SessionManager] Fahre ohne Sync fort');
+      dLog('[SessionManager] Fehler beim Profil-Sync: $e');
+      dLog('[SessionManager] Fahre ohne Sync fort');
     }
   }
 

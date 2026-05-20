@@ -1,5 +1,6 @@
 // achievements.dart
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -60,7 +61,7 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
 
     if (achievementDownloadOverWifi &&
         connectivityResult != ConnectivityResult.wifi) {
-      print("Keine WLAN verbindung Achievement Download übersprungen");
+      if (kDebugMode) print("Keine WLAN verbindung Achievement Download übersprungen");
       return;
     }
 
@@ -84,7 +85,7 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
         _isLoading = false;
       });
     } catch (e) {
-      print("Fehler beim Achievements Laden: $e");
+      if (kDebugMode) print("Fehler beim Achievements Laden: $e");
     }
   }
 

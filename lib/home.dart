@@ -111,7 +111,7 @@ class _NewsFeedPage1State extends State<NewsFeedPage1> {
         _isLoading = false;
       });
     } catch (e) {
-      print('Fehler beim Feed laden: $e');
+      dLog('Fehler beim Feed laden: $e');
       setState(() => _isLoading = false);
     }
   }
@@ -408,7 +408,7 @@ String _formatTimestamp(String timestamp) {
 
     return DateFormat('dd.MM.yyyy').format(dateTime);
   } catch (e) {
-    print('Fehler beim Timestamp formatieren: $e');
+    dLog('Fehler beim Timestamp formatieren: $e');
     return 'Kürzlich';
   }
 }

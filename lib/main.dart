@@ -149,7 +149,7 @@ class _AuthGateState extends State<AuthGate> {
       constraints: Constraints(networkType: NetworkType.connected),
     );
 
-    print('[WorkManager] Background-Task registriert');
+    dLog('[WorkManager] Background-Task registriert');
   }
 
   @override

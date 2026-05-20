@@ -2,6 +2,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:real_live_achievments/achievments.dart';
 import 'package:real_live_achievments/home.dart';
 import 'package:real_live_achievments/settings.dart';
@@ -9,7 +10,10 @@ import 'package:real_live_achievments/social.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'dart:async';
 import 'dart:math';
-import 'dart:ui';
+
+void dLog(String message) {
+  if (kDebugMode) print(message);
+}
 
 //---------------------------
 //-----------Cache-----------
