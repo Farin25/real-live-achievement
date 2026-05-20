@@ -39,14 +39,6 @@ class UserLocalServices {
     await prefs.remove('birthdate');
   }
 
-  // Cache Löschen
-  static Future<void> clearAchievementCache() async {
-    final prefs = await SharedPreferences.getInstance();
-
-    await prefs.remove('cached_achievements');
-    //Debug Ausgabe
-    print("Achievement Cache gelöscht");
-  }
 }
 
 //------------------------------
@@ -96,10 +88,15 @@ class _LoadingScreenState extends State<LoadingScreen> {
   }
 
   Future<void> _loadfunction() async {
+    if (!mounted) return;
+
     final funfacts = await supabase
         .from('loading_funfacts')
         .select('id, funfact');
 
+    if (!mounted) return;
+
+    if (funfacts.isEmpty) return;
     final random = Random();
     final rndomIndex = random.nextInt(funfacts.length);
     final funfact = funfacts[rndomIndex]['funfact'];
@@ -126,6 +123,50 @@ class _LoadingScreenState extends State<LoadingScreen> {
         ),
       ),
     );
+  }
+}
+
+//---------------------------------------
+//-----------SplashWrapper---------------
+//---------------------------------------
+class SplashWrapper extends StatefulWidget {
+  final Widget child;
+
+  const SplashWrapper({super.key, required this.child});
+
+  @override
+  State<SplashWrapper> createState() => _SplashWrapperState();
+}
+
+class _SplashWrapperState extends State<SplashWrapper> {
+  bool _isReady = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _initSplash();
+  }
+
+  Future<void> _initSplash() async {
+    final session = Supabase.instance.client.auth.currentSession;
+
+    if (session == null) {
+      await Future.delayed(const Duration(seconds: 3));
+    }
+
+    if (mounted) {
+      setState(() {
+        _isReady = true;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!_isReady) {
+      return LoadingScreen(duration: null, until: null);
+    }
+    return widget.child;
   }
 }
 

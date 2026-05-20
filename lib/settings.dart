@@ -547,18 +547,6 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
       appBar: AppBar(title: const Text("Erweiterte Einstellungen")),
       body: ListView(
         children: [
-          SwitchListTile(
-            secondary: const Icon(Icons.wifi),
-            title: const Text("Achievements WLAN-Download"),
-            subtitle: const Text(
-              "Achievements nur bei WLAN-Verbindung herunterladen",
-            ),
-            value: achievementDownloadOverWifi,
-            onChanged: (value) {
-              setState(() => achievementDownloadOverWifi = value);
-              _saveSettings();
-            },
-          ),
           const Divider(),
           ListTile(
             leading: const Icon(Icons.timer),
@@ -702,7 +690,6 @@ class AboutPage extends StatelessWidget {
               'Teile deine Erfolge mit Freunden und lass dich von ihren Achievements inspirieren.',
               style: TextStyle(fontSize: 16),
             ),
-            const SizedBox(height: 30),
             const SizedBox(height: 30),
             const Text(
               'Links:',

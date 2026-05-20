@@ -6,26 +6,18 @@ import 'login.dart';
 import 'user_SessionManager.dart';
 import 'engine_helpers.dart';
 import 'services.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:workmanager/workmanager.dart';
 
 Future<void> main() async {
-  final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   WidgetsFlutterBinding.ensureInitialized();
+
   await dotenv.load(fileName: ".env");
-
   await Workmanager().initialize(backgroundTaskCallback);
-
-  FlutterNativeSplash.remove();
-
   await Supabase.initialize(
     url: dotenv.env['SUPABASE_URL']!,
     anonKey: dotenv.env['SUPABASE_ANON_KEY']!,
   );
-
   runApp(const MyApp());
-  FlutterNativeSplash.remove();
 }
 
 class MyApp extends StatefulWidget {
@@ -90,16 +82,18 @@ class _MyAppState extends State<MyApp> {
 
       themeMode: _themeMode,
 
-      home: AuthGate(
-        onThemeChanged: changeTheme,
-        selectedIndex: _selectedIndex,
-        onIndexChanged: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-        isGuest: _isGuest,
-        onContinueAsGuest: continueAsGuest,
+      home: SplashWrapper(
+        child: AuthGate(
+          onThemeChanged: changeTheme,
+          selectedIndex: _selectedIndex,
+          onIndexChanged: (index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+          isGuest: _isGuest,
+          onContinueAsGuest: continueAsGuest,
+        ),
       ),
     );
   }
@@ -129,7 +123,6 @@ class _AuthGateState extends State<AuthGate> {
   bool _engineStarted = false;
 
   Future<void> _startEngine() async {
-    FlutterNativeSplash.remove();
     final initFuture = UserSessionmanager.initialize();
 
     showDialog(

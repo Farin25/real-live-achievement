@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:convert';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
 class AchievmentSeite extends StatefulWidget {
@@ -43,7 +42,6 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
   void initState() {
     super.initState();
     _loadLockedVisibility();
-    _loadlocalAchievments();
     _loadAchievements();
   }
 
@@ -80,8 +78,6 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
           .select()
           .eq('user_id', user.id);
 
-      await prefs.setString('cached_achievements', jsonEncode(achievements));
-
       setState(() {
         _achievements = achievements;
         _userAchievements = userAchievements;
@@ -89,17 +85,6 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
       });
     } catch (e) {
       print("Fehler beim Achievements Laden: $e");
-    }
-  }
-
-  Future<void> _loadlocalAchievments() async {
-    final prefs = await SharedPreferences.getInstance();
-    final cached = prefs.getString('cached_achievements');
-    if (cached != null) {
-      setState(() {
-        _achievements = jsonDecode(cached);
-        _isLoading = false;
-      });
     }
   }
 
