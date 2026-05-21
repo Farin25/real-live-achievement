@@ -1,5 +1,6 @@
 //Acount.dart
 import 'package:flutter/material.dart';
+import 'package:real_live_achievments/services.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'user_SessionManager.dart';
 import 'package:intl/intl.dart';
@@ -59,15 +60,20 @@ class _AccountPageState extends State<AccountPage> {
 
     if (user == null) return;
 
-    await supabase
-        .from('profiles')
-        .update({
-          'first_name': _firstNameController.text,
-          'last_name': _lastNameController.text,
-          'username': _usernameController.text,
-          'birthdate': _birthdateController.text,
-        })
-        .eq('id', user.id);
+    try {
+      await supabase
+          .from('profiles')
+          .update({
+            'first_name': _firstNameController.text,
+            'last_name': _lastNameController.text,
+            'username': _usernameController.text,
+            'birthdate': _birthdateController.text,
+          })
+          .eq('id', user.id);
+      showAppSnackBar(context, 'Profile erfolgreich geupdatet');
+    } catch (e) {
+      if (mounted) showAppSnackBar(context, 'Fehler: $e');
+    }
   }
 
   @override

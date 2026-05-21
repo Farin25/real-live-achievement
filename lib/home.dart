@@ -50,7 +50,7 @@ class _NewsFeedPage1State extends State<NewsFeedPage1> {
     final prefs = await SharedPreferences.getInstance();
     final hidden = prefs.getStringList('hidden_feed_ids') ?? [];
     setState(() {
-      _hiddenIds = hidden.map((e) => int.parse(e)).toSet();
+      _hiddenIds = hidden.map((e) => int.tryParse(e)).whereType<int>().toSet();
     });
   }
 

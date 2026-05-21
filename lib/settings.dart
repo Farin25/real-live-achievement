@@ -12,8 +12,7 @@ import 'package:url_launcher/url_launcher.dart';
 class AppConfig {
   static const String appname = "Up Mark";
   static const String version = "BETA 0.5(dev)";
-  static const String website =
-      "https://farin25.github.io/real-live-achievement/";
+  static const String website = "https://upmark.farin-langner.de";
 }
 
 //--------------------------
@@ -533,7 +532,7 @@ class AdvancedSettings extends StatefulWidget {
 
 class _AdvancedSettingsState extends State<AdvancedSettings> {
   bool achievementDownloadOverWifi = true;
-  int engineTimerMinutes = 30;
+  int engineTimerMinutes = 10;
 
   @override
   void initState() {
