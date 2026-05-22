@@ -116,7 +116,7 @@ class AuthGate extends StatefulWidget {
   });
 
   @override
-  _AuthGateState createState() => _AuthGateState();
+  State<AuthGate> createState() => _AuthGateState();
 }
 
 class _AuthGateState extends State<AuthGate> {

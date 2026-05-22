@@ -416,6 +416,8 @@ class _SignUpPageState extends State<SignUpPage> {
                               params: {'name': username},
                             );
 
+                            if (!context.mounted) return;
+
                             if (exists == true) {
                               showAppSnackBar(
                                 context,
@@ -443,22 +445,14 @@ class _SignUpPageState extends State<SignUpPage> {
                               },
                             );
 
-                            if (!mounted) return;
+                            if (!context.mounted) return;
 
-                            showAppSnackBar(
-                              context,
-                              ' E-Mail-Adresse bestätigen',
-                            );
-
+                            showAppSnackBar(context, 'E-Mail-Adresse bestätigen');
                             Navigator.pop(context);
                           } on AuthException catch (e) {
-                            ScaffoldMessenger.of(
-                              context,
-                            ).showSnackBar(SnackBar(content: Text(e.message)));
+                            if (context.mounted) showAppSnackBar(context, e.message);
                           } catch (e) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text("Fehler: $e")),
-                            );
+                            if (context.mounted) showAppSnackBar(context, 'Fehler: $e');
                           }
 
                           setState(() => _isLoading = false);

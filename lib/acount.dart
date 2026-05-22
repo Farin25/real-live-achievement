@@ -70,7 +70,7 @@ class _AccountPageState extends State<AccountPage> {
             'birthdate': _birthdateController.text,
           })
           .eq('id', user.id);
-      showAppSnackBar(context, 'Profile erfolgreich geupdatet');
+      if (mounted) showAppSnackBar(context, 'Profil erfolgreich gespeichert');
     } catch (e) {
       if (mounted) showAppSnackBar(context, 'Fehler: $e');
     }

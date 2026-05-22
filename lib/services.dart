@@ -202,6 +202,7 @@ class _GoogleBottomBarState extends State<GoogleBottomBar> {
     _selectedIndex = widget.initalIndex;
   }
 
+  @override
   Widget build(BuildContext context) {
     final pages = [
       NewsFeedPage1(),
@@ -293,20 +294,20 @@ class _AppSnackBarContent extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
           color: isDark
-              ? Colors.white.withOpacity(0.12)
-              : Colors.black.withOpacity(0.06),
+              ? Colors.white.withValues(alpha: 0.12)
+              : Colors.black.withValues(alpha: 0.06),
           width: 1,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(isDark ? 0.5 : 0.10),
+            color: Colors.black.withValues(alpha: isDark ? 0.5 : 0.10),
             blurRadius: 20,
             spreadRadius: 0,
             offset: const Offset(0, 6),
           ),
           if (!isDark)
             BoxShadow(
-              color: Colors.white.withOpacity(0.9),
+              color: Colors.white.withValues(alpha: 0.9),
               blurRadius: 0,
               spreadRadius: 0,
               offset: const Offset(0, 1),
@@ -322,8 +323,8 @@ class _AppSnackBarContent extends StatelessWidget {
             height: 34,
             decoration: BoxDecoration(
               color: isDark
-                  ? Colors.white.withOpacity(0.08)
-                  : Colors.black.withOpacity(0.04),
+                  ? Colors.white.withValues(alpha: 0.08)
+                  : Colors.black.withValues(alpha: 0.04),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Padding(
@@ -333,7 +334,7 @@ class _AppSnackBarContent extends StatelessWidget {
                 child: Image.asset(
                   'assets/icon.png',
                   fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => Icon(
+                  errorBuilder: (context, error, stack) => Icon(
                     Icons.notifications_rounded,
                     size: 20,
                     color: isDark ? Colors.white70 : Colors.black54,
@@ -348,8 +349,8 @@ class _AppSnackBarContent extends StatelessWidget {
             width: 1,
             height: 28,
             color: isDark
-                ? Colors.white.withOpacity(0.10)
-                : Colors.black.withOpacity(0.08),
+                ? Colors.white.withValues(alpha: 0.10)
+                : Colors.black.withValues(alpha: 0.08),
           ),
           const SizedBox(width: 12),
           // Message
