@@ -28,13 +28,13 @@
 		<string>LaunchScreen</string>
 		<key>UIMainStoryboardFile</key>
 		<string>Main</string>
-		<key>UISupportedInterfaceOrientations</key>
 		<key>NSLocationWhenInUseUsageDescription</key>
-		<key>NSLocationWhenInUseUsageDescription</key>
-		<string>Wird für Achievements benötigt</string>
-		<key>NSLocationAlwaysUsageDescription</key>
-		<string>Wird für Achievements benötigt</string>
 		<string>Diese App benötigt deinen Standort um Standort Basierte Achievments wie Traveler zu ermöglichen.</string>
+		<key>NSLocationAlwaysUsageDescription</key>
+		<string>Diese App benötigt deinen Standort um Standort Basierte Achievments wie Traveler zu ermöglichen.</string>
+		<key>NSUserNotificationsUsageDescription</key>
+		<string>Up Mark benötigt Benachrichtigungen um dich über neue Achievements und Fortschritte zu informieren.</string>
+		<key>UISupportedInterfaceOrientations</key>
 		<array>
 			<string>UIInterfaceOrientationPortrait</string>
 			<string>UIInterfaceOrientationLandscapeLeft</string>

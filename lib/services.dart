@@ -10,9 +10,77 @@ import 'package:real_live_achievments/social.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'dart:async';
 import 'dart:math';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 void dLog(String message) {
   if (kDebugMode) print(message);
+}
+
+class AppServices {
+  static final FlutterLocalNotificationsPlugin _notificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+
+  static bool _isInitialized = false;
+
+  //--------------------------------------------
+  //----------Local Notifications init----------
+  //--------------------------------------------
+  static Future<void> initializeNotifications() async {
+    if (_isInitialized) return;
+
+    await Permission.notification.request();
+
+    const initializationSettings = InitializationSettings(
+      android: AndroidInitializationSettings('icon'),
+      iOS: DarwinInitializationSettings(),
+    );
+
+    await _notificationsPlugin.initialize(
+      settings: initializationSettings,
+      onDidReceiveNotificationResponse: _onNotificationTapped,
+    );
+
+    _isInitialized = true;
+    dLog('Notifications initialized');
+  }
+
+  //--------------------------------------------
+  //----------Push Achievement Notification-----
+  //--------------------------------------------
+  static Future<void> pushAchievementNotification({
+    required String achievementId,
+    required String title,
+    required String body,
+  }) async {
+    if (!_isInitialized) {
+      await initializeNotifications();
+    }
+
+    await _notificationsPlugin.show(
+      id: achievementId.hashCode,
+      title: title,
+      body: body,
+      notificationDetails: const NotificationDetails(
+        android: AndroidNotificationDetails(
+          'achievements',
+          'Achievements',
+          channelDescription: 'Achievement Benachrichtigungen',
+          importance: Importance.high,
+          priority: Priority.high,
+          icon: 'app_icon',
+        ),
+        iOS: DarwinNotificationDetails(),
+      ),
+    );
+  }
+
+  //--------------------------------------------
+  //----------Notification Tap Handler----------
+  //--------------------------------------------
+  static void _onNotificationTapped(NotificationResponse response) {
+    dLog('Notification tapped: ${response.payload}');
+  }
 }
 
 //---------------------------
@@ -42,7 +110,6 @@ class UserLocalServices {
     await prefs.remove('username');
     await prefs.remove('birthdate');
   }
-
 }
 
 //------------------------------

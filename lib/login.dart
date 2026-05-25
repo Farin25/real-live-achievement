@@ -147,7 +147,6 @@ class __FormContentState extends State<_FormContent> {
             const SizedBox(height: 10),
 
             // REGISTER BUTTON
-            /* 
             TextButton(
               onPressed: () {
                 Navigator.push(
@@ -157,7 +156,7 @@ class __FormContentState extends State<_FormContent> {
               },
               child: const Text("Noch keinen Account? Registrieren"),
             ),
-            */
+
             TextButton(
               onPressed: () {
                 showDialog(
@@ -447,12 +446,17 @@ class _SignUpPageState extends State<SignUpPage> {
 
                             if (!context.mounted) return;
 
-                            showAppSnackBar(context, 'E-Mail-Adresse bestätigen');
+                            showAppSnackBar(
+                              context,
+                              'E-Mail-Adresse bestätigen',
+                            );
                             Navigator.pop(context);
                           } on AuthException catch (e) {
-                            if (context.mounted) showAppSnackBar(context, e.message);
+                            if (context.mounted)
+                              showAppSnackBar(context, e.message);
                           } catch (e) {
-                            if (context.mounted) showAppSnackBar(context, 'Fehler: $e');
+                            if (context.mounted)
+                              showAppSnackBar(context, 'Fehler: $e');
                           }
 
                           setState(() => _isLoading = false);

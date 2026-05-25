@@ -5,6 +5,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:battery_plus/battery_plus.dart';
 import 'dart:io';
+import 'services.dart';
 
 class AchievementEngine {
   final supabase = Supabase.instance.client;
@@ -194,7 +195,8 @@ class AchievementEngine {
               // Einfacher generischervergleich für int
               final num? actualValue = await _getActualValue(type, userdata);
               if (actualValue == null) {
-                if (kDebugMode) print('[$id] Kein actualValue für type=$type = überspringen');
+                if (kDebugMode)
+                  print('[$id] Kein actualValue für type=$type = überspringen');
                 continue;
               }
 
@@ -209,7 +211,10 @@ class AchievementEngine {
                 _ => false,
               };
 
-              if (kDebugMode) print('[$id] actualValue=$actualValue conditionMet=$conditionMet');
+              if (kDebugMode)
+                print(
+                  '[$id] actualValue=$actualValue conditionMet=$conditionMet',
+                );
 
               if (conditionMet) {
                 await _logUnlock(id, user.id);
@@ -268,14 +273,16 @@ class AchievementEngine {
   //---------Hilfsfunktionen---------
   //---------------------------------
 
-  //Debug Ausgabe und Supabase eintragung
+  //unlock prozess in supabase
   Future<void> _logUnlock(int id, String userId) async {
     await supabase.from('user_achievements').insert({
       'user_id': userId,
       'achievement_id': id,
       'unlocked_at': DateTime.now().toIso8601String(),
     });
-    if (kDebugMode) print('Achievement $id mit user id: $userId erfolgreich freigeschaltet');
+    if (kDebugMode)
+      print('Achievement $id mit user id: $userId erfolgreich freigeschaltet');
+    await _pushnotification(id);
   }
 
   // Ermittelt int userdaten für genersichen algorytmohs
@@ -406,5 +413,22 @@ class AchievementEngine {
       default:
         return null;
     }
+  }
+
+  Future<void> _pushnotification(int id) async {
+    final achievement = await supabase
+        .from('achievements')
+        .select('name, description')
+        .eq('id', id)
+        .single();
+
+    final String name = achievement['name'];
+    final String description = achievement['description'];
+
+    await AppServices.pushAchievementNotification(
+      achievementId: id.toString(),
+      title: '$name Freigeschaltet',
+      body: '$description :)',
+    );
   }
 }
