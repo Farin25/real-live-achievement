@@ -123,7 +123,68 @@ class AuthGate extends StatefulWidget {
 class _AuthGateState extends State<AuthGate> {
   bool _engineStarted = false;
 
+  Future<bool> _deletionStatus() async {
+    final supabase = Supabase.instance.client;
+    final user = supabase.auth.currentUser;
+
+    if (user == null) return false;
+
+    final deleteprofile = await supabase
+        .from('profiles')
+        .select('deleted_at, deletion_scheduled_for')
+        .eq('id', user.id)
+        .single();
+
+    if (deleteprofile['deleted_at'] == null) {
+      return false;
+    }
+
+    final deletedAt = deleteprofile['deleted_at'].toString();
+    final deletedSchedule = deleteprofile['deletion_scheduled_for'].toString();
+
+    if (!mounted) return true;
+
+    await showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
+        title: Text('Dein Account wurde am $deletedAt gelöscht'),
+        content: Text(
+          'Wird am $deletedSchedule vollständig gelöscht. Wiederherstellen?',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () async {
+              Navigator.pop(context);
+              await supabase.auth.signOut();
+            },
+            child: const Text('Abbrechen'),
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              await supabase.rpc(
+                'reactivate_user_account',
+                params: {'uid': user.id},
+              );
+              if (!context.mounted) return;
+              Navigator.pop(context);
+              await supabase.auth.signOut();
+              showAppSnackBar(
+                context,
+                'Wiederhergestellt! Bitte neu einloggen.',
+              );
+            },
+            child: const Text('Wiederherstellen'),
+          ),
+        ],
+      ),
+    );
+
+    return true;
+  }
+
   Future<void> _startEngine() async {
+    if (await _deletionStatus()) return;
     final initFuture = UserSessionmanager.initialize();
 
     showDialog(

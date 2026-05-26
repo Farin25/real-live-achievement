@@ -208,19 +208,18 @@ class __FormContentState extends State<_FormContent> {
 
       final user = response.user;
 
-      //  Email Bestätigung prüfen
       if (user != null && user.emailConfirmedAt == null) {
         await supabase.auth.signOut(scope: SignOutScope.local);
 
-        if (!mounted) return;
+        if (!mounted) {
+          return;
+        }
 
         showAppSnackBar(context, 'Erst E-Mail-Adresse bestätigen');
 
         setState(() => _isLoading = false);
         return;
       }
-
-      // Wenn email bestätigt dannb AuthGate übernimmt automatisch
     } on AuthException catch (e) {
       if (!mounted) return;
 
