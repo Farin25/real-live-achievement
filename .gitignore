@@ -18,6 +18,7 @@ android/.gradle/
 android/local.properties
 android/key.properties
 **/*.jks
+.keystore
 
 # iOS/macOS
 ios/Pods/
@@ -36,6 +37,7 @@ Thumbs.db
 
 # Secrets
 *.env
+env.json
 
 # Others
 *.log

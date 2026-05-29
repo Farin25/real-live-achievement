@@ -64,7 +64,7 @@ class AppServices {
       notificationDetails: const NotificationDetails(
         android: AndroidNotificationDetails(
           'achievements',
-          'Achievements',
+          'Achievements Freigeschaltet',
           channelDescription: 'Achievement Benachrichtigungen',
           importance: Importance.high,
           priority: Priority.high,

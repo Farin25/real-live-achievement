@@ -7,7 +7,6 @@ import 'package:geocoding/geocoding.dart';
 import 'dart:convert';
 import 'package:workmanager/workmanager.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/foundation.dart';
 
 class EngineRunner {
@@ -120,13 +119,17 @@ class EngineHelpers {
     }
 
     if (permission == LocationPermission.deniedForever) {
-      if (kDebugMode) print('[Location] ABBRUCH: Permission dauerhaft verweigert — in Android-Einstellungen freigeben');
+      if (kDebugMode)
+        print(
+          '[Location] ABBRUCH: Permission dauerhaft verweigert, in Android-Einstellungen freigeben',
+        );
       return;
     }
 
     if (kDebugMode) print('[Location] Hole Position...');
     final position = await Geolocator.getCurrentPosition();
-    if (kDebugMode) print('[Location] Position: ${position.latitude}, ${position.longitude}');
+    if (kDebugMode)
+      print('[Location] Position: ${position.latitude}, ${position.longitude}');
 
     // In Stadt und Land wechseln
     List<Placemark> placemarks = await placemarkFromCoordinates(
@@ -134,7 +137,10 @@ class EngineHelpers {
       position.longitude,
     );
     final placemark = placemarks.first;
-    if (kDebugMode) print('[Location] locality="${placemark.locality}" subLocality="${placemark.subLocality}" adminArea="${placemark.administrativeArea}"');
+    if (kDebugMode)
+      print(
+        '[Location] locality="${placemark.locality}" subLocality="${placemark.subLocality}" adminArea="${placemark.administrativeArea}"',
+      );
     final prefs = await SharedPreferences.getInstance();
 
     await prefs.setString('current_city', placemark.locality ?? '');
@@ -192,21 +198,15 @@ void backgroundTaskCallback() {
     if (kDebugMode) print('[Background] Task gestartet: $task');
 
     try {
-      await dotenv.load();
-      final supabaseUrl = dotenv.env['SUPABASE_URL'];
-      final supabaseKey = dotenv.env['SUPABASE_ANON_KEY'];
+      const supabaseUrl = String.fromEnvironment('SUPABASE_URL');
+      const supabaseAnonKey = String.fromEnvironment('SUPABASE_ANON_KEY');
 
-      if (supabaseUrl != null && supabaseKey != null) {
-        if (kDebugMode) print('[Background] Supabase initialisiert');
+      if (kDebugMode) print('[Background] Supabase initialisiert');
 
-        await Supabase.initialize(url: supabaseUrl, anonKey: supabaseKey);
-        await AchievementEngine().run();
+      await Supabase.initialize(url: supabaseUrl, anonKey: supabaseAnonKey);
+      await AchievementEngine().run();
 
-        if (kDebugMode) print('[Background] Engine erfolgreich ausgeführt');
-      } else {
-        if (kDebugMode) print('[Background] FEHLER: Supabase-Credentials nicht gefunden!');
-        return Future.value(false);
-      }
+      if (kDebugMode) print('[Background] Engine erfolgreich ausgeführt');
 
       return Future.value(true);
     } catch (e) {

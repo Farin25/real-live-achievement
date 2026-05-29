@@ -25,7 +25,18 @@ class SignInPage2 extends StatelessWidget {
             : Container(
                 padding: const EdgeInsets.all(32.0),
                 constraints: const BoxConstraints(maxWidth: 800),
-                child: Row(children: [Expanded(child: _Logo())]),
+                child: Row(
+                  children: [
+                    Expanded(child: Center(child: _Logo())),
+                    Expanded(
+                      child: Center(
+                        child: _FormContent(
+                          onContinueAsGuest: onContinueAsGuest,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
       ),
     );
@@ -84,7 +95,6 @@ class __FormContentState extends State<_FormContent> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Email
             TextFormField(
               controller: _emailController,
               validator: (value) {
@@ -102,7 +112,6 @@ class __FormContentState extends State<_FormContent> {
 
             const SizedBox(height: 16),
 
-            // pw feld
             TextFormField(
               controller: _passwordController,
               obscureText: !_isPasswordVisible,
@@ -133,7 +142,6 @@ class __FormContentState extends State<_FormContent> {
 
             const SizedBox(height: 20),
 
-            // LOGIN BUTTON
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
@@ -146,7 +154,6 @@ class __FormContentState extends State<_FormContent> {
 
             const SizedBox(height: 10),
 
-            // REGISTER BUTTON
             TextButton(
               onPressed: () {
                 Navigator.push(
@@ -275,17 +282,14 @@ class _SignUpPageState extends State<SignUpPage> {
           key: _formKey,
           child: Column(
             children: [
-              // Vorname
               _buildTextField(_firstNameController, "Vorname"),
 
               const SizedBox(height: 16),
 
-              // Nachname
               _buildTextField(_lastNameController, "Nachname"),
 
               const SizedBox(height: 16),
 
-              // Username
               TextFormField(
                 controller: _usernameController,
                 decoration: InputDecoration(
@@ -303,12 +307,10 @@ class _SignUpPageState extends State<SignUpPage> {
 
               const SizedBox(height: 16),
 
-              // Email
               _buildTextField(_emailController, "Email"),
 
               const SizedBox(height: 16),
 
-              // Passwort
               _buildTextField(
                 _passwordController,
                 "Passwort",
@@ -317,7 +319,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
               const SizedBox(height: 16),
 
-              // Geburtsdatum
               ListTile(
                 title: Text(
                   _birthDate == null
@@ -399,7 +400,6 @@ class _SignUpPageState extends State<SignUpPage> {
                           );
                           if (accepted != true) return;
 
-                          // username
                           setState(() => _isLoading = true);
 
                           try {
@@ -429,7 +429,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
                               return;
                             }
-                            // Sing up
+
                             await supabase.auth.signUp(
                               email: _emailController.text.trim(),
                               password: _passwordController.text.trim(),

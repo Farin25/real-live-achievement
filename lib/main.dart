@@ -1,7 +1,6 @@
 //main.dart
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'login.dart';
 import 'user_SessionManager.dart';
 import 'engine_helpers.dart';
@@ -11,12 +10,12 @@ import 'package:workmanager/workmanager.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await dotenv.load(fileName: ".env");
+  const supabaseUrl = String.fromEnvironment('SUPABASE_URL');
+  const supabaseAnonKey = String.fromEnvironment('SUPABASE_ANON_KEY');
+
   await Workmanager().initialize(backgroundTaskCallback);
-  await Supabase.initialize(
-    url: dotenv.env['SUPABASE_URL']!,
-    anonKey: dotenv.env['SUPABASE_ANON_KEY']!,
-  );
+  await Supabase.initialize(url: supabaseUrl, anonKey: supabaseAnonKey);
+
   await AppServices.initializeNotifications();
   runApp(const MyApp());
 }
