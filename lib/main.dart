@@ -52,7 +52,7 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.blue,
+          seedColor: Color(0xFF6366F1),
           brightness: Brightness.light,
         ),
 
@@ -70,7 +70,7 @@ class _MyAppState extends State<MyApp> {
       darkTheme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.blue,
+          seedColor: Color(0xFF6366F1),
           brightness: Brightness.dark,
         ),
         snackBarTheme: const SnackBarThemeData(

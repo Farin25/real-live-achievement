@@ -476,7 +476,7 @@ class _SignUpPageState extends State<SignUpPage> {
     TextEditingController controller,
     String label, {
     bool isPassword = false,
-    bool required = true
+    bool required = true,
   }) {
     return TextFormField(
       controller: controller,
