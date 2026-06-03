@@ -282,11 +282,11 @@ class _SignUpPageState extends State<SignUpPage> {
           key: _formKey,
           child: Column(
             children: [
-              _buildTextField(_firstNameController, "Vorname"),
+              _buildTextField(_firstNameController, "Vorname", required: false),
 
               const SizedBox(height: 16),
 
-              _buildTextField(_lastNameController, "Nachname"),
+              _buildTextField(_lastNameController, "Nachname", required: false),
 
               const SizedBox(height: 16),
 
@@ -476,16 +476,19 @@ class _SignUpPageState extends State<SignUpPage> {
     TextEditingController controller,
     String label, {
     bool isPassword = false,
+    bool required = true
   }) {
     return TextFormField(
       controller: controller,
       obscureText: isPassword,
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return "$label eingeben";
-        }
-        return null;
-      },
+      validator: required
+          ? (value) {
+              if (value == null || value.isEmpty) {
+                return "$label eingeben";
+              }
+              return null;
+            }
+          : null,
       decoration: InputDecoration(
         labelText: label,
         border: const OutlineInputBorder(),

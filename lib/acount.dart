@@ -59,6 +59,18 @@ class _AccountPageState extends State<AccountPage> {
     final user = supabase.auth.currentUser;
 
     if (user == null) return;
+    final newUsername = _usernameController.text.trim();
+
+    if (newUsername != profile!['username']) {
+      final exists = await supabase.rpc(
+        'username_exists',
+        params: {'name': newUsername},
+      );
+      if (exists == true) {
+        setState(() => _usernameError = "Dieser Username ist bereits vergeben");
+        return;
+      }
+    }
 
     try {
       await supabase
@@ -70,7 +82,10 @@ class _AccountPageState extends State<AccountPage> {
             'birthdate': _birthdateController.text,
           })
           .eq('id', user.id);
-      if (mounted) showAppSnackBar(context, 'Profil erfolgreich gespeichert');
+      if (mounted) {
+        showAppSnackBar(context, 'Profil erfolgreich gespeichert');
+        await _loadProfile();
+      }
     } catch (e) {
       if (mounted) showAppSnackBar(context, 'Fehler: $e');
     }
@@ -86,7 +101,6 @@ class _AccountPageState extends State<AccountPage> {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            /// PROFILE HEADER
             profile == null
                 ? const Center(child: CircularProgressIndicator())
                 : Row(
@@ -160,7 +174,7 @@ class _AccountPageState extends State<AccountPage> {
                           readOnly: true,
                           decoration: const InputDecoration(
                             labelText: 'Geburtsdatum',
-                            prefix: Icon(Icons.calendar_today),
+                            prefixIcon: Icon(Icons.calendar_today),
                             border: OutlineInputBorder(),
                           ),
                           onTap: () async {
