@@ -202,7 +202,7 @@ class _NewsFeedPage1State extends State<NewsFeedPage1> {
           ),
           const SizedBox(height: 32),
           Text(
-            'Noch keine Erfolge',
+            'Aktuell nichts zu sehen',
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.w700,
@@ -213,7 +213,7 @@ class _NewsFeedPage1State extends State<NewsFeedPage1> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40),
             child: Text(
-              'Geh raus und sammle deine ersten Achievements!',
+              'Keine Neigkeiten, schaue Später wieder vorbei',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,

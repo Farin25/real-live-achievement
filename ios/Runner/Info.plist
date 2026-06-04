@@ -13,7 +13,7 @@
 		<key>CFBundleInfoDictionaryVersion</key>
 		<string>6.0</string>
 		<key>CFBundleName</key>
-		<string>Up Mark</string>
+		<string>AchieveIRL</string>
 		<key>CFBundlePackageType</key>
 		<string>APPL</string>
 		<key>CFBundleShortVersionString</key>
@@ -33,7 +33,7 @@
 		<key>NSLocationAlwaysUsageDescription</key>
 		<string>Diese App benötigt deinen Standort um Standort Basierte Achievments wie Traveler zu ermöglichen.</string>
 		<key>NSUserNotificationsUsageDescription</key>
-		<string>Up Mark benötigt Benachrichtigungen um dich über neue Achievements und Fortschritte zu informieren.</string>
+		<string>AchieveIRL benötigt Benachrichtigungen um dich über neue Achievements und Fortschritte zu informieren.</string>
 		<key>UISupportedInterfaceOrientations</key>
 		<array>
 			<string>UIInterfaceOrientationPortrait</string>

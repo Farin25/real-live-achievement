@@ -678,7 +678,7 @@ class AboutPage extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             const Text(
-              'Up Mark motiviert dich, echte Ziele im Leben zu erreichen! '
+              'AchieveIRL motiviert dich, echte Ziele im Leben zu erreichen! '
               'Sammle Achievements im echten Leben! '
               'Teile deine Erfolge mit Freunden und lass dich von ihren Achievements inspirieren.',
               style: TextStyle(fontSize: 16),
@@ -689,26 +689,26 @@ class AboutPage extends StatelessWidget {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-            linkTile('Webseite', 'https://upmark.farin-langner.de/'),
+            linkTile('Webseite', 'https://achieveirl.de/'),
             linkTile(
               'Eigenes Achievement einreichen',
-              'https://upmark.farin-langner.de/achievements/einreichen',
+              'https://achieveirl.de/achievements/einreichen',
             ),
             linkTile(
               'Dankesagung',
-              'https://upmark.farin-langner.de/danksagung',
+              'https://achieveirl.de/danksagung',
             ),
             linkTile(
               'Newsletter',
-              'https://upmark.farin-langner.de/newsletter',
+              'https://achieveirl.de/newsletter',
             ),
-            linkTile('Beta', 'https://upmark.farin-langner.de/beta'),
+            linkTile('Beta', 'https://achieveirl.de/beta'),
 
             linkTile(
               'SourceCode',
               'https://github.com/Farin25/real-live-achievement',
             ),
-            linkTile('Changelog', 'https://upmark.farin-langner.de/changelog'),
+            linkTile('Changelog', 'https://achieveirl.de/changelog'),
             const SizedBox(height: 10),
             const Text(
               'Rechtliches:',
@@ -723,7 +723,7 @@ class AboutPage extends StatelessWidget {
               'Allgemeine Geschäftsbedingungen',
               'https://legal.farin-langner.de/#agb',
             ),
-            linkTile('FAQ', 'https://upmark.farin-langner.de/faq'),
+            linkTile('FAQ', 'https://achieveirl.de/faq'),
             linkTile(
               'Support kontaktieren oder Fehler melden',
               'mailto:liam_and_farin@holzideen.org?subject=Support%20RealLiveAchievement&body=Hallo,%0A%0Aich%20habe%20folgendes%20Problem:%0A',
