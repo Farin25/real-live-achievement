@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'services.dart';
 
 class AchievmentSeite extends StatefulWidget {
   const AchievmentSeite({super.key});
@@ -21,21 +22,21 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
   Color _categoryColor(String? category) {
     switch (category) {
       case 'Fun':
-        return Colors.red;
+        return AppColors.catFun;
       case 'Adventure & Travel':
-        return Colors.orange;
+        return AppColors.catTravel;
       case 'Fitness & Health':
-        return Colors.pink;
+        return AppColors.catFitness;
       case 'App':
-        return Colors.blue;
+        return AppColors.catApp;
       case 'Nature':
-        return Colors.green;
+        return AppColors.catNature;
       case 'Events':
-        return Colors.yellow;
+        return AppColors.catEvents;
       case 'Sponsored':
-        return Colors.grey;
+        return AppColors.textSubtle;
       default:
-        return Colors.black12;
+        return AppColors.textSubtle;
     }
   }
 
@@ -61,7 +62,8 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
 
     if (achievementDownloadOverWifi &&
         connectivityResult != ConnectivityResult.wifi) {
-      if (kDebugMode) print("Keine WLAN verbindung Achievement Download übersprungen");
+      if (kDebugMode)
+        print("Keine WLAN verbindung Achievement Download übersprungen");
       return;
     }
 
@@ -104,7 +106,6 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
   bool _isUnlocked(dynamic achievement) => _unlockedAt(achievement) != null;
   void _showAchievementPopup(dynamic achievement, bool unlocked) {
     final categoryColor = _categoryColor(achievement['category']);
-    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     final showDescription = unlocked || _lockedVisibility == 'all';
     final showName =
@@ -115,12 +116,13 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        backgroundColor: unlocked
-            ? (isDark
-                  ? Color.lerp(categoryColor, Colors.black, 0.7)
-                  : Color.lerp(categoryColor, Colors.white, 0.85))
-            : null,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+          side: BorderSide(
+            color: unlocked ? categoryColor.withValues(alpha: 0.4) : AppColors.border,
+          ),
+        ),
+        backgroundColor: AppColors.cardC(context),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -139,17 +141,17 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
               width: 64,
               height: 64,
               decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: unlocked
-                    ? (isDark
-                          ? Colors.white.withValues(alpha: 0.15)
-                          : Colors.white.withValues(alpha: 0.8))
-                    : Colors.grey.withValues(alpha: 0.2),
+                borderRadius: BorderRadiusDirectional.circular(12),
+                border: Border.all(
+                  color: unlocked
+                      ? categoryColor.withValues(alpha: 0.4)
+                      : AppColors.border,
+                ),
               ),
               child: Icon(
                 unlocked ? Icons.emoji_events : Icons.lock,
                 size: 36,
-                color: unlocked ? categoryColor : Colors.grey,
+                color: unlocked ? categoryColor : AppColors.subtle(context),
               ),
             ),
             const SizedBox(height: 16),
@@ -173,9 +175,7 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
                 ),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(999),
-                  color: isDark
-                      ? Colors.white.withValues(alpha: 0.20)
-                      : Colors.white.withValues(alpha: 0.85),
+                  color: categoryColor.withValues(alpha: 0.15),
                 ),
                 child: Text(
                   achievement['category'],
@@ -193,7 +193,7 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
                 achievement['description'],
                 style: TextStyle(
                   fontSize: 15,
-                  color: isDark ? Colors.white : Colors.black87,
+                  color: AppColors.fg(context),
                   height: 1.4,
                   fontWeight: FontWeight.w500,
                 ),
@@ -203,7 +203,7 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
             if (!showName)
               Text(
                 'Dieses Achievement ist noch gesperrt.',
-                style: TextStyle(fontSize: 15, color: Colors.grey[500]),
+                style: TextStyle(fontSize: 15, color: AppColors.subtle(context)),
                 textAlign: TextAlign.center,
               ),
 
@@ -256,7 +256,7 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
             child: Center(
               child: Text(
                 '${unlocked.length} / ${_achievements.length}',
-                style: TextStyle(color: Colors.grey[600]),
+                style: TextStyle(color: AppColors.textMuted),
               ),
             ),
           ),
@@ -290,7 +290,7 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
         style: TextStyle(
           fontSize: 13,
           fontWeight: FontWeight.w600,
-          color: Colors.grey[600],
+          color: AppColors.muted(context),
         ),
       ),
     );
@@ -331,11 +331,11 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
                   ],
                 )
               : null,
-          color: unlocked ? null : Theme.of(context).cardColor,
+          color: unlocked ? null : AppColors.cardC(context),
           border: Border.all(
             color: unlocked
                 ? categoryColor.withValues(alpha: 0.4)
-                : Colors.grey.withValues(alpha: 0.2),
+                : AppColors.border,
             width: unlocked ? 1.5 : 0.5,
           ),
         ),
@@ -345,7 +345,7 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
             Icon(
               unlocked ? Icons.emoji_events : Icons.lock,
               size: 28,
-              color: unlocked ? categoryColor : Colors.grey,
+              color: unlocked ? categoryColor : AppColors.subtle(context),
             ),
             const SizedBox(height: 6),
             Padding(
@@ -357,7 +357,7 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
                 style: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w600,
-                  color: unlocked ? categoryColor : Colors.grey[600],
+                  color: unlocked ? categoryColor : AppColors.subtle(context),
                 ),
                 textAlign: TextAlign.center,
                 maxLines: 2,

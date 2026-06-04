@@ -139,7 +139,6 @@ class _AccountPageState extends State<AccountPage> {
 
             const SizedBox(height: 30),
 
-            // Profiel bzw. Acount Settings:
             Expanded(
               child: profile == null
                   ? const SizedBox()
@@ -235,9 +234,10 @@ class _AccountPageState extends State<AccountPage> {
                 style: TextStyle(color: Colors.grey[600]),
               ),
             ],
+            SizedBox(height: 5),
             const Divider(),
+            SizedBox(height: 15),
 
-            /// LOGOUT BUTTON
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
@@ -250,7 +250,6 @@ class _AccountPageState extends State<AccountPage> {
 
             const SizedBox(height: 12),
 
-            /// ACCOUNT LÖSCHEN
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(

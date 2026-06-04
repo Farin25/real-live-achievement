@@ -13,6 +13,56 @@ import 'dart:math';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+class AppConfig {
+  static const String appname = "AchieveIRL";
+  static const String version = "BETA 0.5(dev)";
+  static const String website = "https://www.achieveirl.de";
+}
+
+class AppColors {
+  static const background = Color(0xFF0A0A0F);
+  static const card = Color(0xFF111118);
+  static const elevated = Color(0xFF16161F);
+  static const foreground = Color(0xFFF0F0F5);
+
+  static const primary = Color(0xFF6366F1);
+  static const primaryDark = Color(0xFF4F46E5);
+  static const accent = Color(0xFF10B981);
+
+  static Color get border => primary.withValues(alpha: 0.20);
+  static Color get borderHover => primary.withValues(alpha: 0.40);
+  static const textMuted = Color(0xFF9CA3AF);
+  static const textSubtle = Color(0xFF6B7280);
+
+  static const catTravel = Color(0xFFFB923C);
+  static const catFitness = Color(0xFFF472B6);
+  static const catNature = Color(0xFF4ADE80);
+  static const catFun = Color(0xFFF87171);
+  static const catApp = Color(0xFF60A5FA);
+  static const catEvents = Color(0xFFFACC15);
+
+  // Light Mode
+  static const lightBackground = Color(0xFFF8F9FB);
+  static const lightCard = Color(0xFFFFFFFF);
+  static const lightElevated = Color(0xFFF0F0F5);
+  static const lightForeground = Color(0xFF0A0A0F);
+  static const lightTextMuted = Color(0xFF4B5563);
+  static const lightTextSubtle = Color(0xFF9CA3AF);
+
+  static Color bg(BuildContext c) =>
+      Theme.of(c).brightness == Brightness.dark ? background : lightBackground;
+  static Color cardC(BuildContext c) =>
+      Theme.of(c).brightness == Brightness.dark ? card : lightCard;
+  static Color elev(BuildContext c) =>
+      Theme.of(c).brightness == Brightness.dark ? elevated : lightElevated;
+  static Color fg(BuildContext c) =>
+      Theme.of(c).brightness == Brightness.dark ? foreground : lightForeground;
+  static Color muted(BuildContext c) =>
+      Theme.of(c).brightness == Brightness.dark ? textMuted : lightTextMuted;
+  static Color subtle(BuildContext c) =>
+      Theme.of(c).brightness == Brightness.dark ? textSubtle : lightTextSubtle;
+}
+
 void dLog(String message) {
   if (kDebugMode) print(message);
 }
@@ -180,16 +230,16 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: AppColors.bg(context),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const CircularProgressIndicator(color: Colors.white),
+            CircularProgressIndicator(color: AppColors.fg(context)),
             const SizedBox(height: 16),
-            const Text('Loading...', style: TextStyle(color: Colors.white)),
+            Text('Loading...', style: TextStyle(color: AppColors.fg(context))),
             const SizedBox(height: 24),
-            Text(_funfact, style: TextStyle(color: Colors.grey)),
+            Text(_funfact, style: TextStyle(color: AppColors.muted(context))),
           ],
         ),
       ),
@@ -281,8 +331,8 @@ class _GoogleBottomBarState extends State<GoogleBottomBar> {
       body: pages[_selectedIndex],
       bottomNavigationBar: SalomonBottomBar(
         currentIndex: _selectedIndex,
-        selectedItemColor: const Color(0xff6200ee),
-        unselectedItemColor: const Color(0xff757575),
+        selectedItemColor: AppColors.primary,
+        unselectedItemColor: AppColors.subtle(context),
         onTap: (index) {
           setState(() {
             _selectedIndex = index;
@@ -299,22 +349,22 @@ final _navBarItems = [
   SalomonBottomBarItem(
     icon: const Icon(Icons.home),
     title: const Text("Home"),
-    selectedColor: Colors.purple,
+    selectedColor: AppColors.primary,
   ),
   SalomonBottomBarItem(
     icon: const Icon(Icons.emoji_events),
     title: const Text("Achievements"),
-    selectedColor: Colors.pink,
+    selectedColor: AppColors.primary,
   ),
   SalomonBottomBarItem(
     icon: const Icon(Icons.people),
     title: const Text("Social"),
-    selectedColor: Colors.orange,
+    selectedColor: AppColors.primary,
   ),
   SalomonBottomBarItem(
     icon: const Icon(Icons.settings),
     title: const Text("Settings"),
-    selectedColor: Colors.teal,
+    selectedColor: AppColors.primary,
   ),
 ];
 //----------------------------
@@ -411,7 +461,7 @@ class _AppSnackBarContent extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 12),
-          // Divider
+
           Container(
             width: 1,
             height: 28,
@@ -420,7 +470,7 @@ class _AppSnackBarContent extends StatelessWidget {
                 : Colors.black.withValues(alpha: 0.08),
           ),
           const SizedBox(width: 12),
-          // Message
+
           Flexible(
             child: Text(
               message,
@@ -466,20 +516,18 @@ class _LoadingScreenWolkeState extends State<LoadingScreenWolke> {
   void initState() {
     super.initState();
 
-    // Timer und fram rate
     _timer = Timer.periodic(const Duration(milliseconds: 250), (timer) {
       setState(() {
         _frame = (_frame + 1) % frames.length;
       });
     });
 
-    // die feste dauer
     if (widget.duration != null) {
       Future.delayed(widget.duration!, () {
         if (mounted) Navigator.pop(context);
       });
     }
-    // Warten bis fertig
+
     if (widget.until != null) {
       widget.until!.then((_) {
         if (mounted) Navigator.pop(context);
@@ -496,14 +544,14 @@ class _LoadingScreenWolkeState extends State<LoadingScreenWolke> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: AppColors.bg(context),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(frames[_frame]),
             const SizedBox(height: 16),
-            const Text('Loading...', style: TextStyle(color: Colors.white)),
+            Text('Loading...', style: TextStyle(color: AppColors.fg(context))),
           ],
         ),
       ),

@@ -8,21 +8,21 @@ import 'package:shared_preferences/shared_preferences.dart';
 Color _categoryColor(String? category) {
   switch (category) {
     case 'Fun':
-      return Colors.red;
+      return AppColors.catFun;
     case 'Adventure & Travel':
-      return Colors.orange;
+      return AppColors.catTravel;
     case 'Fitness & Health':
-      return Colors.pink;
+      return AppColors.catFitness;
     case 'App':
-      return Colors.blue;
+      return AppColors.catApp;
     case 'Nature':
-      return Colors.green;
+      return AppColors.catNature;
     case 'Events':
-      return Colors.yellow;
+      return AppColors.catEvents;
     case 'Sponsored':
-      return Colors.grey;
+      return AppColors.textSubtle;
     default:
-      return Colors.black12;
+      return AppColors.textSubtle;
   }
 }
 
@@ -137,12 +137,8 @@ class _NewsFeedPage1State extends State<NewsFeedPage1> {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
     return Scaffold(
-      backgroundColor: isDark
-          ? const Color(0xFF0A0A0A)
-          : const Color(0xFFF8F9FA),
+      backgroundColor: AppColors.bg(context),
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
@@ -151,7 +147,7 @@ class _NewsFeedPage1State extends State<NewsFeedPage1> {
                     child: Center(child: CircularProgressIndicator()),
                   )
                 : _feedItems.isEmpty
-                ? SliverFillRemaining(child: _buildEmptyState(isDark))
+                ? SliverFillRemaining(child: _buildEmptyState())
                 : SliverPadding(
                     padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                     sliver: SliverList(
@@ -179,7 +175,7 @@ class _NewsFeedPage1State extends State<NewsFeedPage1> {
     );
   }
 
-  Widget _buildEmptyState(bool isDark) {
+  Widget _buildEmptyState() {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -193,15 +189,15 @@ class _NewsFeedPage1State extends State<NewsFeedPage1> {
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-                  Colors.amber.withValues(alpha: 0.2),
-                  Colors.orange.withValues(alpha: 0.1),
+                  AppColors.primary.withValues(alpha: 0.2),
+                  AppColors.primary.withValues(alpha: 0.1),
                 ],
               ),
             ),
             child: Icon(
               Icons.emoji_events_rounded,
               size: 60,
-              color: Colors.amber.shade700,
+              color: AppColors.primary,
             ),
           ),
           const SizedBox(height: 32),
@@ -210,7 +206,7 @@ class _NewsFeedPage1State extends State<NewsFeedPage1> {
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.w700,
-              color: isDark ? Colors.white : Colors.black87,
+              color: AppColors.fg(context),
             ),
           ),
           const SizedBox(height: 12),
@@ -221,7 +217,7 @@ class _NewsFeedPage1State extends State<NewsFeedPage1> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,
-                color: isDark ? Colors.white54 : Colors.black45,
+                color: AppColors.muted(context),
                 height: 1.5,
               ),
             ),
@@ -236,7 +232,7 @@ class _NewsFeedPage1State extends State<NewsFeedPage1> {
       alignment: Alignment.centerRight,
       padding: const EdgeInsets.only(right: 24),
       decoration: BoxDecoration(
-        color: Colors.red.shade600,
+        color: AppColors.catFun,
         borderRadius: BorderRadius.circular(24),
       ),
       child: const Icon(Icons.delete_rounded, color: Colors.white, size: 28),
@@ -286,8 +282,8 @@ class _FeedCard extends StatelessWidget {
                   height: 64,
                   decoration: BoxDecoration(
                     color: isDark
-                        ? Colors.white.withValues(alpha: 0.1)
-                        : Colors.white.withValues(alpha: 0.6),
+                        ? Colors.white.withValues(alpha: 0.08)
+                        : Colors.black.withValues(alpha: 0.04),
                     borderRadius: BorderRadius.circular(18),
                   ),
                   child: Icon(
@@ -309,7 +305,7 @@ class _FeedCard extends StatelessWidget {
                           fontSize: 18,
                           fontWeight: FontWeight.w700,
                           height: 1.3,
-                          color: isDark ? Colors.white : Colors.black87,
+                          color: AppColors.fg(context),
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -321,8 +317,8 @@ class _FeedCard extends StatelessWidget {
                           ),
                           decoration: BoxDecoration(
                             color: isDark
-                                ? Colors.white.withValues(alpha: 0.15)
-                                : Colors.white.withValues(alpha: 0.7),
+                                ? Colors.white.withValues(alpha: 0.08)
+                                : Colors.black.withValues(alpha: 0.04),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
@@ -350,7 +346,7 @@ class _FeedCard extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 15,
                   height: 1.6,
-                  color: isDark ? Colors.white70 : Colors.black54,
+                  color: AppColors.muted(context),
                 ),
               ),
             ),
@@ -362,8 +358,8 @@ class _FeedCard extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
               color: isDark
-                  ? Colors.white.withValues(alpha: 0.1)
-                  : Colors.white.withValues(alpha: 0.6),
+                  ? Colors.white.withValues(alpha: 0.08)
+                  : Colors.black.withValues(alpha: 0.04),
               borderRadius: BorderRadius.circular(14),
             ),
             child: Row(
@@ -382,7 +378,7 @@ class _FeedCard extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
-                    color: isDark ? Colors.white60 : Colors.black45,
+                    color: AppColors.subtle(context),
                   ),
                 ),
               ],

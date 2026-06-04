@@ -51,28 +51,185 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: true, // Solange true bis final beta version
       theme: ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Color(0xFF6366F1),
-          brightness: Brightness.light,
+        brightness: Brightness.light,
+        scaffoldBackgroundColor: AppColors.lightBackground,
+        canvasColor: AppColors.lightBackground,
+
+        colorScheme:
+            ColorScheme.fromSeed(
+              seedColor: AppColors.primary,
+              brightness: Brightness.light,
+            ).copyWith(
+              primary: AppColors.primary,
+              secondary: AppColors.accent,
+              surface: AppColors.lightCard,
+              surfaceContainerHighest: AppColors.lightElevated,
+              onSurface: AppColors.lightForeground,
+              outline: AppColors.border,
+            ),
+
+        appBarTheme: const AppBarTheme(
+          backgroundColor: AppColors.lightBackground,
+          foregroundColor: AppColors.lightForeground,
+          elevation: 0,
+          scrolledUnderElevation: 0,
+          centerTitle: false,
         ),
 
-        snackBarTheme: SnackBarThemeData(
+        cardTheme: CardThemeData(
+          color: AppColors.lightCard,
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+            side: BorderSide(color: AppColors.border, width: 1),
+          ),
+        ),
+
+        dividerTheme: DividerThemeData(
+          color: Colors.black.withValues(alpha: 0.08),
+          thickness: 1,
+          space: 1,
+        ),
+
+        inputDecorationTheme: InputDecorationTheme(
+          filled: true,
+          fillColor: AppColors.lightCard,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: AppColors.border),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: AppColors.border),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: AppColors.primary, width: 1.5),
+          ),
+        ),
+
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppColors.primary,
+            foregroundColor: Colors.white,
+            elevation: 0,
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            textStyle: const TextStyle(fontWeight: FontWeight.w600),
+          ),
+        ),
+
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(foregroundColor: AppColors.primary),
+        ),
+
+        iconTheme: const IconThemeData(color: AppColors.lightForeground),
+
+        dialogTheme: DialogThemeData(
+          backgroundColor: AppColors.lightCard,
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+            side: BorderSide(color: AppColors.border),
+          ),
+        ),
+
+        snackBarTheme: const SnackBarThemeData(
           behavior: SnackBarBehavior.floating,
           elevation: 0,
           backgroundColor: Colors.transparent,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-          ),
-          insetPadding: EdgeInsets.all(16),
         ),
       ),
 
       darkTheme: ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Color(0xFF6366F1),
-          brightness: Brightness.dark,
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: AppColors.background,
+        canvasColor: AppColors.background,
+
+        colorScheme:
+            ColorScheme.fromSeed(
+              seedColor: AppColors.primary,
+              brightness: Brightness.dark,
+            ).copyWith(
+              primary: AppColors.primary,
+              secondary: AppColors.accent,
+              surface: AppColors.card,
+              surfaceContainerHighest: AppColors.elevated,
+              onSurface: AppColors.foreground,
+              outline: AppColors.border,
+            ),
+
+        appBarTheme: const AppBarTheme(
+          backgroundColor: AppColors.background,
+          foregroundColor: AppColors.foreground,
+          elevation: 0,
+          scrolledUnderElevation: 0,
+          centerTitle: false,
         ),
+
+        cardTheme: CardThemeData(
+          color: AppColors.card,
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+            side: BorderSide(color: AppColors.border, width: 1),
+          ),
+        ),
+
+        dividerTheme: DividerThemeData(
+          color: Colors.white.withValues(alpha: 0.08),
+          thickness: 1,
+          space: 1,
+        ),
+
+        inputDecorationTheme: InputDecorationTheme(
+          filled: true,
+          fillColor: AppColors.card,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: AppColors.border),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: AppColors.border),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: AppColors.primary, width: 1.5),
+          ),
+        ),
+
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppColors.primary,
+            foregroundColor: Colors.white,
+            elevation: 0,
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            textStyle: const TextStyle(fontWeight: FontWeight.w600),
+          ),
+        ),
+
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(foregroundColor: AppColors.primary),
+        ),
+
+        iconTheme: const IconThemeData(color: AppColors.foreground),
+
+        dialogTheme: DialogThemeData(
+          backgroundColor: AppColors.card,
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+            side: BorderSide(color: AppColors.border),
+          ),
+        ),
+
         snackBarTheme: const SnackBarThemeData(
           behavior: SnackBarBehavior.floating,
           elevation: 0,

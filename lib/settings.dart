@@ -9,12 +9,6 @@ import 'services.dart';
 import 'package:flutter/gestures.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class AppConfig {
-  static const String appname = "Up Mark";
-  static const String version = "BETA 0.5(dev)";
-  static const String website = "https://upmark.farin-langner.de";
-}
-
 //--------------------------
 //-------- Settings Service -
 //--------------------------
