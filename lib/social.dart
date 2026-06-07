@@ -12,7 +12,6 @@ class Socialsite extends StatelessWidget {
           style: TextStyle(fontSize: 20),
         ),
       ),
-      //  bottomNavigationBar: Navbar(),
     );
   }
 }

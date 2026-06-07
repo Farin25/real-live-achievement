@@ -6,6 +6,7 @@ import 'user_SessionManager.dart';
 import 'engine_helpers.dart';
 import 'services.dart';
 import 'package:workmanager/workmanager.dart';
+import 'settings.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,6 +29,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    _loadTheme();
+  }
+
   bool _isGuest = false;
 
   ThemeMode _themeMode = ThemeMode.system;
@@ -45,10 +52,18 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  Future<void> _loadTheme() async {
+    final saved = await SettingsService.loadString('currentThemeMode', 'dark');
+    final mode = saved == 'light' ? ThemeMode.light : ThemeMode.dark;
+    setState(() {
+      _themeMode = mode;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: true, // Solange true bis final beta version
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
         brightness: Brightness.light,

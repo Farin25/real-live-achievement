@@ -694,14 +694,8 @@ class AboutPage extends StatelessWidget {
               'Eigenes Achievement einreichen',
               'https://achieveirl.de/achievements/einreichen',
             ),
-            linkTile(
-              'Dankesagung',
-              'https://achieveirl.de/danksagung',
-            ),
-            linkTile(
-              'Newsletter',
-              'https://achieveirl.de/newsletter',
-            ),
+            linkTile('Dankesagung', 'https://achieveirl.de/danksagung'),
+            linkTile('Newsletter', 'https://achieveirl.de/newsletter'),
             linkTile('Beta', 'https://achieveirl.de/beta'),
 
             linkTile(

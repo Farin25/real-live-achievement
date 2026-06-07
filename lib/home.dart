@@ -131,7 +131,7 @@ class _NewsFeedPage1State extends State<NewsFeedPage1> {
     });
 
     if (mounted) {
-      showAppSnackBar(context, '${item.title} gelöscht');
+      // showAppSnackBar(context, '${item.title} gelöscht');
     }
   }
 
@@ -213,7 +213,7 @@ class _NewsFeedPage1State extends State<NewsFeedPage1> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40),
             child: Text(
-              'Keine Neigkeiten, schaue Später wieder vorbei',
+              'Keine Neuigkeiten, schaue später wieder vorbei',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,

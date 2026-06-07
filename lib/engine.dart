@@ -138,13 +138,6 @@ class AchievementEngine {
                   continue;
                 }
               }
-              // Night Coder
-              if (type == 'night_coder_hours') {
-                if (now.hour >= 2 && now.hour < 4) {
-                  await _logUnlock(id, user.id);
-                  continue;
-                }
-              }
               //Halloween
               if (type == 'is_halloween') {
                 if (now.month == 10 && now.day == 31) {
