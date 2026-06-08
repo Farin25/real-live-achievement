@@ -409,6 +409,10 @@ class AchievementEngine {
   }
 
   Future<void> _pushnotification(int id) async {
+    final prefs = await SharedPreferences.getInstance();
+    final pushEnabled = prefs.getBool('pushNewAchievement') ?? true;
+    if (!pushEnabled) return;
+
     final achievement = await supabase
         .from('achievements')
         .select('name, description')

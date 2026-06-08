@@ -309,22 +309,17 @@ class _AppMessagesState extends State<AppMessages> {
                 notifyNewFriendship = value;
                 notifyFriendNewAchievement = value;
                 notifyNewAchievement = value;
-                notifyAchievementAlmostReached = value;
               });
               _saveSettings();
             },
           ),
           const Divider(),
-          SwitchListTile(
-            title: const Text("Fast erreichtes Achievement"),
-            subtitle: const Text(
-              "Wenn du kurz davor bist ein Achievement zu erreichen",
+          const Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Text(
+              "Achievementsf",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            value: notifyAchievementAlmostReached,
-            onChanged: (value) {
-              setState(() => notifyAchievementAlmostReached = value);
-              _saveSettings();
-            },
           ),
           SwitchListTile(
             title: const Text("Neues Achievement"),
@@ -375,7 +370,6 @@ class _AppMessagesState extends State<AppMessages> {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
-          const Divider(),
           SwitchListTile(
             title: const Text("Geburtstagswünsche"),
             subtitle: const Text(
@@ -400,10 +394,6 @@ class _AppMessagesState extends State<AppMessages> {
       notifyFriendNewAchievement,
     );
     await SettingsService.saveBool('pushNewAchievement', notifyNewAchievement);
-    await SettingsService.saveBool(
-      'pushAchievementAlmostReached',
-      notifyAchievementAlmostReached,
-    );
     await SettingsService.saveBool('notifyEmailBirthday', notifyEmailBirthday);
   }
 
@@ -420,10 +410,7 @@ class _AppMessagesState extends State<AppMessages> {
       'pushNewAchievement',
       true,
     );
-    final almostReached = await SettingsService.loadBool(
-      'pushAchievementAlmostReached',
-      true,
-    );
+
     final emailBirthday = await SettingsService.loadBool(
       'notifyEmailBirthday',
       true,
@@ -432,7 +419,6 @@ class _AppMessagesState extends State<AppMessages> {
       notifyNewFriendship = newFriendship;
       notifyFriendNewAchievement = friendAchievement;
       notifyNewAchievement = newAchievement;
-      notifyAchievementAlmostReached = almostReached;
       notifyEmailBirthday = emailBirthday;
     });
   }
