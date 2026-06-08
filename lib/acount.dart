@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:real_live_achievments/services.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'user_SessionManager.dart';
+import 'user_sessionmanager.dart';
 import 'package:intl/intl.dart';
 
 class AccountPage extends StatefulWidget {
