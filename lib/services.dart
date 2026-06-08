@@ -405,8 +405,8 @@ class _AppSnackBarContent extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: isDark
-              ? [const Color(0xFF2C2C2E), const Color(0xFF1C1C1E)]
-              : [const Color(0xFFFFFFFF), const Color(0xFFF2F2F7)],
+              ? [AppColors.elevated, AppColors.card]
+              : [AppColors.lightCard, AppColors.lightElevated],
         ),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
@@ -454,7 +454,7 @@ class _AppSnackBarContent extends StatelessWidget {
                   errorBuilder: (context, error, stack) => Icon(
                     Icons.notifications_rounded,
                     size: 20,
-                    color: isDark ? Colors.white70 : Colors.black54,
+                    color: isDark ? AppColors.textMuted : AppColors.lightTextMuted,
                   ),
                 ),
               ),
@@ -475,7 +475,7 @@ class _AppSnackBarContent extends StatelessWidget {
             child: Text(
               message,
               style: TextStyle(
-                color: isDark ? Colors.white : const Color(0xFF1C1C1E),
+                color: isDark ? AppColors.foreground : AppColors.lightForeground,
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
                 letterSpacing: -0.1,

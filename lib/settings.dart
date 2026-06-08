@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'services.dart';
 import 'package:flutter/gestures.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 //--------------------------
 //-------- Settings Service -
@@ -513,6 +514,7 @@ class AdvancedSettings extends StatefulWidget {
 class _AdvancedSettingsState extends State<AdvancedSettings> {
   bool achievementDownloadOverWifi = true;
   int engineTimerMinutes = 10;
+  bool sentryEnabled = true;
 
   @override
   void initState() {
@@ -526,7 +528,13 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
       appBar: AppBar(title: const Text("Erweiterte Einstellungen")),
       body: ListView(
         children: [
-          const Divider(),
+          Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Text(
+              "Engine",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ),
           ListTile(
             leading: const Icon(Icons.timer),
             title: const Text("Engine Timer (Minuten)"),
@@ -565,15 +573,6 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
               }
             },
           ),
-          const Divider(),
-          const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text(
-              "Debug / Developer Settings",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-          ),
-          const Divider(),
           ListTile(
             leading: const Icon(Icons.play_arrow),
             title: const Text("Engine manuell starten"),
@@ -581,6 +580,24 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
             onTap: () {
               runEngine();
               showAppSnackBar(context, 'Engine wurde gestartet');
+            },
+          ),
+          const Divider(),
+          Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Text(
+              "Crash und Bug Reports",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ),
+          SwitchListTile(
+            secondary: const Icon(Icons.bug_report),
+            title: const Text("Crash & Bug Reports"),
+            subtitle: const Text("Hilft uns Fehler zu finden und zu beheben"),
+            value: sentryEnabled,
+            onChanged: (value) async {
+              setState(() => sentryEnabled = value);
+              await _saveSettings();
             },
           ),
         ],
@@ -594,9 +611,12 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
       achievementDownloadOverWifi,
     );
     await SettingsService.saveInt('engineTimerMinutes', engineTimerMinutes);
+    await SettingsService.saveBool('sentryEnabled', sentryEnabled);
   }
 
   Future<void> _loadSettings() async {
+    final sentry = await SettingsService.loadBool('sentryEnabled', true);
+    setState(() => sentryEnabled = sentry);
     final wifi = await SettingsService.loadBool(
       'achievementDownloadOverWifi',
       true,
