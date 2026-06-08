@@ -600,6 +600,51 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
               await _saveSettings();
             },
           ),
+          ListTile(
+            leading: const Icon(Icons.feedback),
+            title: const Text("Feedback & Bug melden"),
+            subtitle: const Text("Direkt an die Entwickler senden"),
+            trailing: const Icon(Icons.arrow_forward_ios),
+            onTap: () => _showFeedbackDialog(context),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showFeedbackDialog(BuildContext context) {
+    final controller = TextEditingController();
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Feedback senden"),
+        content: TextField(
+          controller: controller,
+          maxLines: 5,
+          decoration: const InputDecoration(
+            hintText: "Beschreibe das Problem oder dein Feedback...",
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text("Abbrechen"),
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              final prefs = await SharedPreferences.getInstance();
+              final username = prefs.getString('username') ?? 'Unbekannt';
+
+              await Sentry.captureFeedback(
+                SentryFeedback(message: controller.text, name: username),
+              );
+              if (context.mounted) {
+                Navigator.pop(context);
+                showAppSnackBar(context, 'Danke für dein Feedback!');
+              }
+            },
+            child: const Text("Senden"),
+          ),
         ],
       ),
     );

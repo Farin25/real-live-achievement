@@ -434,7 +434,6 @@ class _AppSnackBarContent extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // App Icon
           Container(
             width: 34,
             height: 34,
@@ -454,7 +453,9 @@ class _AppSnackBarContent extends StatelessWidget {
                   errorBuilder: (context, error, stack) => Icon(
                     Icons.notifications_rounded,
                     size: 20,
-                    color: isDark ? AppColors.textMuted : AppColors.lightTextMuted,
+                    color: isDark
+                        ? AppColors.textMuted
+                        : AppColors.lightTextMuted,
                   ),
                 ),
               ),
@@ -475,7 +476,9 @@ class _AppSnackBarContent extends StatelessWidget {
             child: Text(
               message,
               style: TextStyle(
-                color: isDark ? AppColors.foreground : AppColors.lightForeground,
+                color: isDark
+                    ? AppColors.foreground
+                    : AppColors.lightForeground,
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
                 letterSpacing: -0.1,
