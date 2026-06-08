@@ -317,7 +317,7 @@ class _AppMessagesState extends State<AppMessages> {
           const Padding(
             padding: EdgeInsets.all(16.0),
             child: Text(
-              "Achievementsf",
+              "Achievements",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),

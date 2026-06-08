@@ -49,6 +49,7 @@ class _NewsFeedPage1State extends State<NewsFeedPage1> {
   Future<void> _loadHiddenIds() async {
     final prefs = await SharedPreferences.getInstance();
     final hidden = prefs.getStringList('hidden_feed_ids') ?? [];
+    if (!mounted) return;
     setState(() {
       _hiddenIds = hidden.map((e) => int.tryParse(e)).whereType<int>().toSet();
     });
@@ -58,6 +59,7 @@ class _NewsFeedPage1State extends State<NewsFeedPage1> {
     final user = supabase.auth.currentUser;
 
     if (user == null) {
+      if (!mounted) return;
       setState(() => _isLoading = false);
       return;
     }
@@ -105,13 +107,14 @@ class _NewsFeedPage1State extends State<NewsFeedPage1> {
           );
         }
       }
-
+      if (!mounted) return;
       setState(() {
         _feedItems = items;
         _isLoading = false;
       });
     } catch (e) {
       dLog('Fehler beim Feed laden: $e');
+      if (!mounted) return;
       setState(() => _isLoading = false);
     }
   }
@@ -125,6 +128,8 @@ class _NewsFeedPage1State extends State<NewsFeedPage1> {
       'hidden_feed_ids',
       _hiddenIds.map((e) => e.toString()).toList(),
     );
+
+    if (!mounted) return;
 
     setState(() {
       _feedItems.removeAt(index);
