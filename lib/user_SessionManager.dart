@@ -2,6 +2,7 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:workmanager/workmanager.dart';
 import 'services.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 class UserSessionmanager {
   static final supabase = Supabase.instance.client;
@@ -21,6 +22,9 @@ class UserSessionmanager {
       dLog('[SessionManager] Fehler beim Profil-Sync: $e');
       dLog('[SessionManager] Fahre ohne Sync fort');
     }
+    await Sentry.configureScope((scope) {
+      scope.setUser(SentryUser(id: user.id));
+    });
   }
 
   static Future<void> _syncProfile(User user) async {
@@ -40,6 +44,9 @@ class UserSessionmanager {
 
   static Future<void> logout() async {
     await Workmanager().cancelAll();
+    await Sentry.configureScope((scope) {
+      scope.setUser(null);
+    });
     await supabase.auth.signOut();
     await UserLocalServices.clearUserProfile();
   }

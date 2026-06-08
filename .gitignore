@@ -52,3 +52,6 @@ env.json
 # backups
 *.backups
 *.Backup
+
+# Sentry / Carsh/bug report
+sentry.properties

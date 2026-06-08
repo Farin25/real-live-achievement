@@ -7,6 +7,7 @@ import 'engine_helpers.dart';
 import 'services.dart';
 import 'package:workmanager/workmanager.dart';
 import 'settings.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +19,16 @@ Future<void> main() async {
   await Supabase.initialize(url: supabaseUrl, anonKey: supabaseAnonKey);
 
   await AppServices.initializeNotifications();
-  runApp(const MyApp());
+  await SentryFlutter.init((options) {
+    options.dsn =
+        'https://718222f375e2a2fde953dfa3a68575c4@o4511530251255808.ingest.de.sentry.io/4511530257350736';
+    // Set tracesSampleRate to 1.0 to capture 100% of transactions for tracing.
+    // We recommend adjusting this value in production.
+    options.tracesSampleRate = 0.2;
+    // The sampling rate for profiling is relative to tracesSampleRate
+    // Setting to 1.0 will profile 100% of sampled transactions:
+    // options.profilesSampleRate = 1.0;
+  }, appRunner: () => runApp(SentryWidget(child: const MyApp())));
 }
 
 class MyApp extends StatefulWidget {
