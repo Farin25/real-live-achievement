@@ -8,7 +8,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'services.dart';
 import 'package:flutter/gestures.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
 
 //--------------------------
 //-------- Settings Service -
@@ -613,39 +612,83 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
   }
 
   void _showFeedbackDialog(BuildContext context) {
-    final controller = TextEditingController();
+    final messageController = TextEditingController();
+    final emailController = TextEditingController();
+    String selectedType = 'feedback';
+
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text("Feedback senden"),
-        content: TextField(
-          controller: controller,
-          maxLines: 5,
-          decoration: const InputDecoration(
-            hintText: "Beschreibe das Problem oder dein Feedback...",
+      builder: (context) => StatefulBuilder(
+        builder: (context, setDialogState) => AlertDialog(
+          title: const Text("Feedback senden"),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                DropdownButtonFormField<String>(
+                  value: selectedType,
+                  items: const [
+                    DropdownMenuItem(
+                      value: 'feedback',
+                      child: Text('Feedback'),
+                    ),
+                    DropdownMenuItem(value: 'bug', child: Text('Bug melden')),
+                    DropdownMenuItem(
+                      value: 'suggestion',
+                      child: Text('Vorschlag'),
+                    ),
+                  ],
+                  onChanged: (val) => setDialogState(() => selectedType = val!),
+                ),
+                const SizedBox(height: 12),
+                TextField(
+                  controller: messageController,
+                  maxLines: 5,
+                  decoration: const InputDecoration(
+                    hintText: "Beschreibe das Problem oder dein Feedback...",
+                  ),
+                ),
+                const SizedBox(height: 12),
+                TextField(
+                  controller: emailController,
+                  decoration: const InputDecoration(
+                    hintText: "E-Mail (optional, für Rückfragen)",
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text("Abbrechen"),
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              final prefs = await SharedPreferences.getInstance();
-              final username = prefs.getString('username') ?? 'Unbekannt';
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text("Abbrechen"),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                if (messageController.text.trim().isEmpty) return;
 
-              await Sentry.captureFeedback(
-                SentryFeedback(message: controller.text, name: username),
-              );
-              if (context.mounted) {
-                Navigator.pop(context);
-                showAppSnackBar(context, 'Danke für dein Feedback!');
-              }
-            },
-            child: const Text("Senden"),
-          ),
-        ],
+                final supabase = Supabase.instance.client;
+                final userId = supabase.auth.currentUser?.id;
+
+                await supabase.from('feedback').insert({
+                  'type': selectedType,
+                  'message': messageController.text.trim(),
+                  'email': emailController.text.trim().isEmpty
+                      ? null
+                      : emailController.text.trim(),
+                  'user_id': userId,
+                  'source': 'app',
+                });
+
+                if (context.mounted) {
+                  Navigator.pop(context);
+                  showAppSnackBar(context, 'Danke für dein Feedback!');
+                }
+              },
+              child: const Text("Senden"),
+            ),
+          ],
+        ),
       ),
     );
   }
