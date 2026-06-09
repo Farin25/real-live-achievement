@@ -327,10 +327,12 @@ class _AuthGateState extends State<AuthGate> {
 
     if (!mounted) return true;
 
+    final stateContext = context;
+
     await showDialog(
-      context: context,
+      context: stateContext,
       barrierDismissible: false,
-      builder: (context) => AlertDialog(
+      builder: (dialogContext) => AlertDialog(
         title: Text('Dein Account wurde am $deletedAt gelöscht'),
         content: Text(
           'Wird am $deletedSchedule vollständig gelöscht. Wiederherstellen?',
@@ -338,7 +340,7 @@ class _AuthGateState extends State<AuthGate> {
         actions: [
           TextButton(
             onPressed: () async {
-              Navigator.pop(context);
+              Navigator.pop(dialogContext);
               await supabase.auth.signOut();
             },
             child: const Text('Abbrechen'),
@@ -349,11 +351,12 @@ class _AuthGateState extends State<AuthGate> {
                 'reactivate_user_account',
                 params: {'uid': user.id},
               );
-              if (!context.mounted) return;
-              Navigator.pop(context);
+              if (!dialogContext.mounted) return;
+              Navigator.pop(dialogContext);
               await supabase.auth.signOut();
+              if (!stateContext.mounted) return;
               showAppSnackBar(
-                context,
+                stateContext,
                 'Wiederhergestellt! Bitte neu einloggen.',
               );
             },

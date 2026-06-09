@@ -370,6 +370,7 @@ final _navBarItems = [
 //----------------------------
 //---------Snackbar-----------
 //----------------------------
+
 void showAppSnackBar(
   BuildContext context,
   String message, {
