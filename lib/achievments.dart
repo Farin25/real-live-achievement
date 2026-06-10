@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'services.dart';
 
 class AchievmentSeite extends StatefulWidget {
@@ -55,18 +54,6 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
   }
 
   Future<void> _loadAchievements() async {
-    final connectivityResult = await Connectivity().checkConnectivity();
-    final prefs = await SharedPreferences.getInstance();
-    final achievementDownloadOverWifi =
-        prefs.getBool('achievementDownloadOverWifi') ?? true;
-
-    if (achievementDownloadOverWifi &&
-        connectivityResult != ConnectivityResult.wifi) {
-      if (kDebugMode)
-        print("Keine WLAN verbindung Achievement Download übersprungen");
-      return;
-    }
-
     final supabase = Supabase.instance.client;
     final user = supabase.auth.currentUser;
     if (user == null) {
@@ -119,7 +106,9 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
           side: BorderSide(
-            color: unlocked ? categoryColor.withValues(alpha: 0.4) : AppColors.border,
+            color: unlocked
+                ? categoryColor.withValues(alpha: 0.4)
+                : AppColors.border,
           ),
         ),
         backgroundColor: AppColors.cardC(context),
@@ -203,7 +192,10 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
             if (!showName)
               Text(
                 'Dieses Achievement ist noch gesperrt.',
-                style: TextStyle(fontSize: 15, color: AppColors.subtle(context)),
+                style: TextStyle(
+                  fontSize: 15,
+                  color: AppColors.subtle(context),
+                ),
                 textAlign: TextAlign.center,
               ),
 

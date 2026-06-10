@@ -8,6 +8,7 @@ import 'dart:convert';
 import 'package:workmanager/workmanager.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter/foundation.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 class EngineRunner {
   static EngineRunner? instance;
@@ -209,7 +210,8 @@ void backgroundTaskCallback() {
       if (kDebugMode) print('[Background] Engine erfolgreich ausgeführt');
 
       return Future.value(true);
-    } catch (e) {
+    } catch (e, stack) {
+      Sentry.captureException(e, stackTrace: stack);
       if (kDebugMode) print('[Background] Fehler: $e');
       return Future.value(false);
     }

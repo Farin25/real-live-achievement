@@ -309,71 +309,74 @@ class _AuthGateState extends State<AuthGate> {
   Future<bool> _deletionStatus() async {
     final supabase = Supabase.instance.client;
     final user = supabase.auth.currentUser;
-
     if (user == null) return false;
+    try {
+      final deleteprofile = await supabase
+          .from('profiles')
+          .select('deleted_at, deletion_scheduled_for')
+          .eq('id', user.id)
+          .single();
 
-    final deleteprofile = await supabase
-        .from('profiles')
-        .select('deleted_at, deletion_scheduled_for')
-        .eq('id', user.id)
-        .single();
+      if (deleteprofile['deleted_at'] == null) {
+        return false;
+      }
 
-    if (deleteprofile['deleted_at'] == null) {
+      final deletedAt = deleteprofile['deleted_at'].toString();
+      final deletedSchedule = deleteprofile['deletion_scheduled_for']
+          .toString();
+
+      if (!mounted) return true;
+
+      final stateContext = context;
+
+      await showDialog(
+        context: stateContext,
+        barrierDismissible: false,
+        builder: (dialogContext) => AlertDialog(
+          title: Text('Dein Account wurde am $deletedAt gelöscht'),
+          content: Text(
+            'Wird am $deletedSchedule vollständig gelöscht. Wiederherstellen?',
+          ),
+          actions: [
+            TextButton(
+              onPressed: () async {
+                Navigator.pop(dialogContext);
+                await supabase.auth.signOut();
+              },
+              child: const Text('Abbrechen'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await supabase.rpc(
+                  'reactivate_user_account',
+                  params: {'uid': user.id},
+                );
+                if (!dialogContext.mounted) return;
+                Navigator.pop(dialogContext);
+                await supabase.auth.signOut();
+                if (!stateContext.mounted) return;
+                showAppSnackBar(
+                  stateContext,
+                  'Wiederhergestellt! Bitte neu einloggen.',
+                );
+              },
+              child: const Text('Wiederherstellen'),
+            ),
+          ],
+        ),
+      );
+      return true;
+    } catch (e, stack) {
+      Sentry.captureException(e, stackTrace: stack);
       return false;
     }
-
-    final deletedAt = deleteprofile['deleted_at'].toString();
-    final deletedSchedule = deleteprofile['deletion_scheduled_for'].toString();
-
-    if (!mounted) return true;
-
-    final stateContext = context;
-
-    await showDialog(
-      context: stateContext,
-      barrierDismissible: false,
-      builder: (dialogContext) => AlertDialog(
-        title: Text('Dein Account wurde am $deletedAt gelöscht'),
-        content: Text(
-          'Wird am $deletedSchedule vollständig gelöscht. Wiederherstellen?',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () async {
-              Navigator.pop(dialogContext);
-              await supabase.auth.signOut();
-            },
-            child: const Text('Abbrechen'),
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              await supabase.rpc(
-                'reactivate_user_account',
-                params: {'uid': user.id},
-              );
-              if (!dialogContext.mounted) return;
-              Navigator.pop(dialogContext);
-              await supabase.auth.signOut();
-              if (!stateContext.mounted) return;
-              showAppSnackBar(
-                stateContext,
-                'Wiederhergestellt! Bitte neu einloggen.',
-              );
-            },
-            child: const Text('Wiederherstellen'),
-          ),
-        ],
-      ),
-    );
-
-    return true;
   }
 
   Future<void> _startEngine() async {
     if (await _deletionStatus()) return;
     final initFuture = UserSessionmanager.initialize();
 
-    showDialog(
+    await showDialog(
       context: context,
       barrierDismissible: false,
       builder: (_) => LoadingScreen(

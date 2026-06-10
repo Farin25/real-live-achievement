@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:battery_plus/battery_plus.dart';
 import 'dart:io';
 import 'services.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 class AchievementEngine {
   final supabase = Supabase.instance.client;
@@ -257,7 +258,8 @@ class AchievementEngine {
           }
         }
       }
-    } catch (e) {
+    } catch (e, stack) {
+      Sentry.captureException(e, stackTrace: stack);
       if (kDebugMode) print('[Engine] Fehler: $e');
     }
   }
@@ -268,14 +270,21 @@ class AchievementEngine {
 
   //unlock prozess in supabase
   Future<void> _logUnlock(int id, String userId) async {
-    await supabase.from('user_achievements').insert({
-      'user_id': userId,
-      'achievement_id': id,
-      'unlocked_at': DateTime.now().toIso8601String(),
-    });
-    if (kDebugMode)
-      print('Achievement $id mit user id: $userId erfolgreich freigeschaltet');
-    await _pushnotification(id);
+    try {
+      await supabase.from('user_achievements').insert({
+        'user_id': userId,
+        'achievement_id': id,
+        'unlocked_at': DateTime.now().toIso8601String(),
+      });
+      if (kDebugMode)
+        print(
+          'Achievement $id mit user id: $userId erfolgreich freigeschaltet',
+        );
+      await _pushnotification(id);
+    } catch (e, stack) {
+      Sentry.captureException(e, stackTrace: stack);
+      if (kDebugMode) print('[_logUnlock] Fehler bei Achievement $id: $e');
+    }
   }
 
   // Ermittelt int userdaten für genersichen algorytmohs
