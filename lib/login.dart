@@ -1,4 +1,6 @@
 //login.dart
+import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:real_live_achievments/services.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -85,6 +87,8 @@ class __FormContentState extends State<_FormContent> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  final supabase = Supabase.instance.client;
 
   @override
   Widget build(BuildContext context) {
@@ -205,8 +209,6 @@ class __FormContentState extends State<_FormContent> {
 
     setState(() => _isLoading = true);
 
-    final supabase = Supabase.instance.client;
-
     try {
       final response = await supabase.auth.signInWithPassword(
         email: _emailController.text.trim(),
@@ -229,8 +231,12 @@ class __FormContentState extends State<_FormContent> {
       }
     } on AuthException catch (e) {
       if (!mounted) return;
-
       showAppSnackBar(context, e.message);
+    } on SocketException {
+      if (mounted) {
+        showAppSnackBar(context, 'Keine Internetverbindung');
+      }
+      if (kDebugMode) print('Keine Internetverbindung');
     }
 
     if (mounted) {
@@ -246,9 +252,9 @@ class __FormContentState extends State<_FormContent> {
   }
 }
 
-//------------------
-//----Singup-------
-//-----------------
+//------------------------------
+//----Singup--------------------
+//-------------------------------
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -266,14 +272,14 @@ class _SignUpPageState extends State<SignUpPage> {
   final _lastNameController = TextEditingController();
   final _usernameController = TextEditingController();
 
+  final supabase = Supabase.instance.client;
+
   DateTime? _birthDate;
   bool _isLoading = false;
   String? _usernameError;
 
   @override
   Widget build(BuildContext context) {
-    final supabase = Supabase.instance.client;
-
     return Scaffold(
       appBar: AppBar(title: const Text("Sign Up")),
       body: SingleChildScrollView(
@@ -374,7 +380,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                   TextButton(
                                     onPressed: () async {
                                       final Uri url = Uri.parse(
-                                        "https://farin25.github.io/real-live-achievement/docs/Rechtliches/agb",
+                                        "https://legal.farin-langner.de/#agb",
                                       );
                                       await launchUrl(
                                         url,
@@ -450,6 +456,13 @@ class _SignUpPageState extends State<SignUpPage> {
                               'E-Mail-Adresse bestätigen',
                             );
                             Navigator.pop(context);
+                          } on SocketException {
+                            if (context.mounted) {
+                              showAppSnackBar(
+                                context,
+                                'Keine Internetverbindung',
+                              );
+                            }
                           } on AuthException catch (e) {
                             if (context.mounted)
                               showAppSnackBar(context, e.message);

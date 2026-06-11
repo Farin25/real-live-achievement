@@ -1,4 +1,6 @@
 // achievements.dart
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -18,26 +20,7 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
   bool _isLoading = true;
   String _lockedVisibility = 'all';
 
-  Color _categoryColor(String? category) {
-    switch (category) {
-      case 'Fun':
-        return AppColors.catFun;
-      case 'Adventure & Travel':
-        return AppColors.catTravel;
-      case 'Fitness & Health':
-        return AppColors.catFitness;
-      case 'App':
-        return AppColors.catApp;
-      case 'Nature':
-        return AppColors.catNature;
-      case 'Events':
-        return AppColors.catEvents;
-      case 'Sponsored':
-        return AppColors.textSubtle;
-      default:
-        return AppColors.textSubtle;
-    }
-  }
+  final supabase = Supabase.instance.client;
 
   @override
   void initState() {
@@ -54,7 +37,6 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
   }
 
   Future<void> _loadAchievements() async {
-    final supabase = Supabase.instance.client;
     final user = supabase.auth.currentUser;
     if (user == null) {
       setState(() => _isLoading = false);
@@ -73,6 +55,10 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
         _userAchievements = userAchievements;
         _isLoading = false;
       });
+    } on SocketException {
+      if (kDebugMode) print('Keine Internet Verbindung');
+      if (mounted) showAppSnackBar(context, 'Keine Internet Verbindung');
+      // Cooller offline screen wie in home
     } catch (e) {
       if (kDebugMode) print("Fehler beim Achievements Laden: $e");
     }
@@ -92,7 +78,7 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
 
   bool _isUnlocked(dynamic achievement) => _unlockedAt(achievement) != null;
   void _showAchievementPopup(dynamic achievement, bool unlocked) {
-    final categoryColor = _categoryColor(achievement['category']);
+    final categoryColor = AppConfig.categoryColor(achievement['category']);
 
     final showDescription = unlocked || _lockedVisibility == 'all';
     final showName =
@@ -306,7 +292,9 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
   }
 
   Widget _buildTile(dynamic achievement, bool unlocked) {
-    final categoryColor = _categoryColor(achievement['category'] ?? '???');
+    final categoryColor = AppConfig.categoryColor(
+      achievement['category'] ?? '???',
+    );
 
     return GestureDetector(
       onTap: () => _showAchievementPopup(achievement, unlocked),

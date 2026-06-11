@@ -1,4 +1,6 @@
 //Acount.dart
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:real_live_achievments/services.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -13,6 +15,8 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
+  final supabase = Supabase.instance.client;
+
   Map<String, dynamic>? profile;
   String? _usernameError;
   String formatDate(String? date) {
@@ -34,7 +38,6 @@ class _AccountPageState extends State<AccountPage> {
   final _birthdateController = TextEditingController();
 
   Future<void> _loadProfile() async {
-    final supabase = Supabase.instance.client;
     final user = supabase.auth.currentUser;
 
     if (user != null) {
@@ -42,7 +45,9 @@ class _AccountPageState extends State<AccountPage> {
           .from('profiles')
           .select()
           .eq('id', user.id)
-          .single();
+          .maybeSingle();
+
+      if (data == null) return;
 
       setState(() {
         profile = data;
@@ -55,7 +60,7 @@ class _AccountPageState extends State<AccountPage> {
   }
 
   Future<void> _saveProfile() async {
-    final supabase = Supabase.instance.client;
+    if (profile == null) return;
     final user = supabase.auth.currentUser;
 
     if (user == null) return;
@@ -86,6 +91,8 @@ class _AccountPageState extends State<AccountPage> {
         showAppSnackBar(context, 'Profil erfolgreich gespeichert');
         await _loadProfile();
       }
+    } on SocketException {
+      if (mounted) showAppSnackBar(context, 'Keine Netzwerkverbindung!');
     } catch (e) {
       if (mounted) showAppSnackBar(context, 'Fehler: $e');
     }
@@ -93,8 +100,6 @@ class _AccountPageState extends State<AccountPage> {
 
   @override
   Widget build(BuildContext context) {
-    final supabase = Supabase.instance.client;
-
     return Scaffold(
       appBar: AppBar(title: const Text('Account')),
       body: Padding(

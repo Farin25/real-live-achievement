@@ -17,6 +17,27 @@ class AppConfig {
   static const String appname = "AchieveIRL";
   static const String version = "BETA 0.5(dev)";
   static const String website = "https://www.achieveirl.de";
+
+  static Color categoryColor(String? category) {
+    switch (category) {
+      case 'Fun':
+        return AppColors.catFun;
+      case 'Adventure & Travel':
+        return AppColors.catTravel;
+      case 'Fitness & Health':
+        return AppColors.catFitness;
+      case 'App':
+        return AppColors.catApp;
+      case 'Nature':
+        return AppColors.catNature;
+      case 'Events':
+        return AppColors.catEvents;
+      case 'Sponsored':
+        return AppColors.textSubtle;
+      default:
+        return AppColors.textSubtle;
+    }
+  }
 }
 
 class AppColors {

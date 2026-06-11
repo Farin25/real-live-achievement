@@ -1,4 +1,5 @@
 //user_SessionManager.dart
+import 'dart:io';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:workmanager/workmanager.dart';
 import 'services.dart';
@@ -18,6 +19,8 @@ class UserSessionmanager {
           dLog('[SessionManager] Timeout - nutze lokalen Cache');
         },
       );
+    } on SocketException {
+      dLog('[SessionManaher] Keine Internetverbindung');
     } catch (e) {
       dLog('[SessionManager] Fehler beim Profil-Sync: $e');
       dLog('[SessionManager] Fahre ohne Sync fort');
@@ -32,7 +35,9 @@ class UserSessionmanager {
         .from('profiles')
         .select()
         .eq('id', user.id)
-        .single();
+        .maybeSingle();
+
+    if (profile == null) return;
 
     await UserLocalServices.saveUserProfile(
       firstName: profile['first_name'] ?? '',

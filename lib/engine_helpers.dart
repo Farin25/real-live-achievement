@@ -1,5 +1,6 @@
 // engine_helpers.dart
 import 'dart:async';
+import 'dart:io';
 import 'engine.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:geolocator/geolocator.dart';
@@ -120,10 +121,12 @@ class EngineHelpers {
     }
 
     if (permission == LocationPermission.deniedForever) {
-      if (kDebugMode)
+      if (kDebugMode) {
         print(
           '[Location] ABBRUCH: Permission dauerhaft verweigert, in Android-Einstellungen freigeben',
         );
+      }
+
       return;
     }
 
@@ -138,10 +141,12 @@ class EngineHelpers {
       position.longitude,
     );
     final placemark = placemarks.first;
-    if (kDebugMode)
+    if (kDebugMode) {
       print(
         '[Location] locality="${placemark.locality}" subLocality="${placemark.subLocality}" adminArea="${placemark.administrativeArea}"',
       );
+    }
+
     final prefs = await SharedPreferences.getInstance();
 
     await prefs.setString('current_city', placemark.locality ?? '');
@@ -210,6 +215,9 @@ void backgroundTaskCallback() {
       if (kDebugMode) print('[Background] Engine erfolgreich ausgeführt');
 
       return Future.value(true);
+    } on SocketException {
+      if (kDebugMode) print('Netzwerfehler');
+      return Future.value(false);
     } catch (e, stack) {
       Sentry.captureException(e, stackTrace: stack);
       if (kDebugMode) print('[Background] Fehler: $e');

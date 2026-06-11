@@ -1,4 +1,6 @@
 //main.dart
+import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'login.dart';
@@ -315,20 +317,19 @@ class _AuthGateState extends State<AuthGate> {
           .from('profiles')
           .select('deleted_at, deletion_scheduled_for')
           .eq('id', user.id)
-          .single();
+          .maybeSingle();
 
+      if (deleteprofile == null) return false;
       if (deleteprofile['deleted_at'] == null) {
         return false;
       }
-
       final deletedAt = deleteprofile['deleted_at'].toString();
-      final deletedSchedule = deleteprofile['deletion_scheduled_for']
-          .toString();
+      final deletedSchedule =
+          deleteprofile['deletion_scheduled_for']?.toString() ?? 'unbekannt';
 
       if (!mounted) return true;
 
       final stateContext = context;
-
       await showDialog(
         context: stateContext,
         barrierDismissible: false,
@@ -366,6 +367,11 @@ class _AuthGateState extends State<AuthGate> {
         ),
       );
       return true;
+    } on SocketException {
+      if (kDebugMode) {
+        print('Keine Internet Verbindung');
+      }
+      return false;
     } catch (e, stack) {
       Sentry.captureException(e, stackTrace: stack);
       return false;
@@ -374,6 +380,7 @@ class _AuthGateState extends State<AuthGate> {
 
   Future<void> _startEngine() async {
     if (await _deletionStatus()) return;
+
     final initFuture = UserSessionmanager.initialize();
 
     await showDialog(
@@ -425,6 +432,7 @@ class _AuthGateState extends State<AuthGate> {
 
         if (!_engineStarted) {
           _engineStarted = true;
+          //TODO Loadingstate cleaner machen
           WidgetsBinding.instance.addPostFrameCallback((_) {
             _startEngine();
           });

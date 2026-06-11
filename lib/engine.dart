@@ -27,8 +27,9 @@ class AchievementEngine {
           .from('profiles')
           .select()
           .eq('id', user.id)
-          .single();
+          .maybeSingle();
 
+      if (userdata == null) return;
       final unlockedIds = unlocked.map((u) => u['achievement_id']).toSet();
 
       for (final achievement in achievements) {
@@ -276,11 +277,16 @@ class AchievementEngine {
         'achievement_id': id,
         'unlocked_at': DateTime.now().toIso8601String(),
       });
-      if (kDebugMode)
+
+      if (kDebugMode) {
         print(
           'Achievement $id mit user id: $userId erfolgreich freigeschaltet',
         );
+      }
+
       await _pushnotification(id);
+    } on SocketException {
+      if (kDebugMode) print('[Engine]Keine Inernetverbindung');
     } catch (e, stack) {
       Sentry.captureException(e, stackTrace: stack);
       if (kDebugMode) print('[_logUnlock] Fehler bei Achievement $id: $e');
@@ -426,8 +432,9 @@ class AchievementEngine {
         .from('achievements')
         .select('name, description')
         .eq('id', id)
-        .single();
+        .maybeSingle();
 
+    if (achievement == null) return;
     final String name = achievement['name'];
     final String description = achievement['description'];
 

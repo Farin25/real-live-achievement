@@ -1,4 +1,6 @@
 // settings.dart
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:real_live_achievments/engine_helpers.dart';
 import 'acount.dart';
@@ -84,7 +86,8 @@ class _SettingsPageState extends State<SettingsPage> {
           .from('profiles')
           .select()
           .eq('id', user.id)
-          .single();
+          .maybeSingle();
+      if (data == null) return;
       setState(() {
         profile = data;
       });
@@ -669,20 +672,29 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
 
                 final supabase = Supabase.instance.client;
                 final userId = supabase.auth.currentUser?.id;
+                try {
+                  await supabase.from('feedback').insert({
+                    'type': selectedType,
+                    'message': messageController.text.trim(),
+                    'email': emailController.text.trim().isEmpty
+                        ? null
+                        : emailController.text.trim(),
+                    'user_id': userId,
+                    'source': 'app',
+                  });
 
-                await supabase.from('feedback').insert({
-                  'type': selectedType,
-                  'message': messageController.text.trim(),
-                  'email': emailController.text.trim().isEmpty
-                      ? null
-                      : emailController.text.trim(),
-                  'user_id': userId,
-                  'source': 'app',
-                });
-
-                if (context.mounted) {
-                  Navigator.pop(context);
-                  showAppSnackBar(context, 'Danke für dein Feedback!');
+                  if (context.mounted) {
+                    Navigator.pop(context);
+                    showAppSnackBar(context, 'Danke für dein Feedback!');
+                  }
+                } on SocketException {
+                  if (context.mounted) {
+                    showAppSnackBar(context, 'Keine Internetverbindung');
+                  }
+                } catch (e) {
+                  if (context.mounted) {
+                    showAppSnackBar(context, 'Fehler beim Senden');
+                  }
                 }
               },
               child: const Text("Senden"),

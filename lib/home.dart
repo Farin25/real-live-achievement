@@ -1,30 +1,11 @@
 //home.dart
+import 'dart:io';
+import 'services.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:intl/intl.dart';
-import 'services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-Color _categoryColor(String? category) {
-  switch (category) {
-    case 'Fun':
-      return AppColors.catFun;
-    case 'Adventure & Travel':
-      return AppColors.catTravel;
-    case 'Fitness & Health':
-      return AppColors.catFitness;
-    case 'App':
-      return AppColors.catApp;
-    case 'Nature':
-      return AppColors.catNature;
-    case 'Events':
-      return AppColors.catEvents;
-    case 'Sponsored':
-      return AppColors.textSubtle;
-    default:
-      return AppColors.textSubtle;
-  }
-}
 
 class NewsFeedPage1 extends StatefulWidget {
   const NewsFeedPage1({super.key});
@@ -112,6 +93,13 @@ class _NewsFeedPage1State extends State<NewsFeedPage1> {
         _feedItems = items;
         _isLoading = false;
       });
+    } on SocketException {
+      if (kDebugMode) print('Keine Internetverbindung');
+      if (mounted) showAppSnackBar(context, 'Keine Internetverbindung');
+      setState(() {
+        //TODO Cooler offline Screen
+      });
+      return;
     } catch (e) {
       dLog('Fehler beim Feed laden: $e');
       if (!mounted) return;
@@ -237,7 +225,7 @@ class _NewsFeedPage1State extends State<NewsFeedPage1> {
       alignment: Alignment.centerRight,
       padding: const EdgeInsets.only(right: 24),
       decoration: BoxDecoration(
-        color: AppColors.catFun,
+        color: AppConfig.categoryColor(category),
         borderRadius: BorderRadius.circular(24),
       ),
       child: const Icon(Icons.delete_rounded, color: Colors.white, size: 28),
@@ -253,7 +241,7 @@ class _FeedCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final categoryColor = _categoryColor(item.category);
+    final categoryColor = AppConfig.categoryColor(item.category);
 
     return Container(
       decoration: BoxDecoration(
