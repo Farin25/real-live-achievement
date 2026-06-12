@@ -576,7 +576,10 @@ class _LoadingScreenWolkeState extends State<LoadingScreenWolke> {
           children: [
             Image.asset(frames[_frame]),
             const SizedBox(height: 16),
-            Text('Loading...', style: TextStyle(color: AppColors.fg(context))),
+            Text(
+              'Du hast ein Esteregg gefunden',
+              style: TextStyle(color: AppColors.fg(context)),
+            ),
           ],
         ),
       ),

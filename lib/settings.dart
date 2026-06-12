@@ -772,9 +772,19 @@ class AboutPage extends StatelessWidget {
             ),
             const SizedBox(height: 10),
             Center(
-              child: Text(
-                AppConfig.version,
-                style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+              child: GestureDetector(
+                onDoubleTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (_) =>
+                        LoadingScreenWolke(duration: Duration(seconds: 5)),
+                  );
+                },
+
+                child: Text(
+                  AppConfig.version,
+                  style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+                ),
               ),
             ),
             const SizedBox(height: 30),
