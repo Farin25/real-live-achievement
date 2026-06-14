@@ -39,9 +39,11 @@ class AchievementEngine {
         if (unlockedIds.contains(id)) {
           continue;
         } else {
+          if (requirement == null) continue;
+
           final Map<String, dynamic> req = requirement is String
               ? jsonDecode(requirement)
-              : requirement;
+              : Map<String, dynamic>.from(requirement);
 
           final mechanism = req['mechanism'];
 
@@ -190,8 +192,9 @@ class AchievementEngine {
               // Einfacher generischervergleich für int
               final num? actualValue = await _getActualValue(type, userdata);
               if (actualValue == null) {
-                if (kDebugMode)
+                if (kDebugMode) {
                   print('[$id] Kein actualValue für type=$type = überspringen');
+                }
                 continue;
               }
 
@@ -206,10 +209,11 @@ class AchievementEngine {
                 _ => false,
               };
 
-              if (kDebugMode)
+              if (kDebugMode) {
                 print(
                   '[$id] actualValue=$actualValue conditionMet=$conditionMet',
                 );
+              }
 
               if (conditionMet) {
                 await _logUnlock(id, user.id);

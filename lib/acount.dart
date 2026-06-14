@@ -48,6 +48,7 @@ class _AccountPageState extends State<AccountPage> {
           .maybeSingle();
 
       if (data == null) return;
+      if (!mounted) return;
 
       setState(() {
         profile = data;
