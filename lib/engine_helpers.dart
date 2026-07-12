@@ -132,8 +132,9 @@ class EngineHelpers {
 
     if (kDebugMode) print('[Location] Hole Position...');
     final position = await Geolocator.getCurrentPosition();
-    if (kDebugMode)
+    if (kDebugMode) {
       print('[Location] Position: ${position.latitude}, ${position.longitude}');
+    }
 
     // In Stadt und Land wechseln
     List<Placemark> placemarks = await placemarkFromCoordinates(

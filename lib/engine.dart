@@ -13,6 +13,12 @@ class AchievementEngine {
 
   Future<void> run() async {
     try {
+      final ping = await InternetAddress.lookup('achieveirl.de');
+      if (ping.isEmpty || ping.first.rawAddress.isEmpty) return;
+    } on SocketException {
+      return;
+    }
+    try {
       final user = supabase.auth.currentUser;
       if (user == null) return;
 
@@ -41,9 +47,18 @@ class AchievementEngine {
         } else {
           if (requirement == null) continue;
 
-          final Map<String, dynamic> req = requirement is String
-              ? jsonDecode(requirement)
-              : Map<String, dynamic>.from(requirement);
+          Map<String, dynamic> req;
+          try {
+            req = requirement is String
+                ? Map<String, dynamic>.from(jsonDecode(requirement))
+                : Map<String, dynamic>.from(requirement);
+          } catch (e) {
+            if (kDebugMode) {
+              print('$id Ungültighes requierement-Format: $requirement');
+            }
+
+            continue;
+          }
 
           final mechanism = req['mechanism'];
 
