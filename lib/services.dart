@@ -586,3 +586,33 @@ class _LoadingScreenWolkeState extends State<LoadingScreenWolke> {
     );
   }
 }
+
+//------------------------
+//---Fehler Seite---------
+//------------------------
+
+class ConfigFail extends StatelessWidget {
+  const ConfigFail({super.key, required this.errorcode});
+  final int errorcode;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(Icons.error_outline, size: 48, color: Colors.red),
+              const SizedBox(height: 16),
+              Text(
+                'Ein fehler ist Aufgetreten! Fehlercode: $errorcode',
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

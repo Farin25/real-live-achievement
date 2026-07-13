@@ -283,7 +283,7 @@ class _AccountPageState extends State<AccountPage> {
                             if (user != null) {
                               await supabase.rpc(
                                 'delete_user_account',
-                                params: {'uid': user.id},
+                                params: {},
                               );
                               await supabase.auth.signOut(
                                 scope: SignOutScope.global,

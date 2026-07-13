@@ -17,6 +17,12 @@ Future<void> main() async {
   const supabaseUrl = String.fromEnvironment('SUPABASE_URL');
   const supabaseAnonKey = String.fromEnvironment('SUPABASE_ANON_KEY');
 
+  if (supabaseUrl.isEmpty || supabaseAnonKey.isEmpty) {
+    int errorcode = 301;
+    runApp(ConfigFail(errorcode: errorcode));
+    return;
+  }
+
   await Workmanager().initialize(backgroundTaskCallback);
   await Supabase.initialize(url: supabaseUrl, anonKey: supabaseAnonKey);
 
@@ -348,10 +354,7 @@ class _AuthGateState extends State<AuthGate> {
             ),
             ElevatedButton(
               onPressed: () async {
-                await supabase.rpc(
-                  'reactivate_user_account',
-                  params: {'uid': user.id},
-                );
+                await supabase.rpc('reactivate_user_account', params: {});
                 if (!dialogContext.mounted) return;
                 Navigator.pop(dialogContext);
                 await supabase.auth.signOut();
