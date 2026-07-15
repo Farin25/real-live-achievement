@@ -12,6 +12,7 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AppConfig {
   static const String appname = "AchieveIRL";
@@ -87,6 +88,8 @@ class AppColors {
 void dLog(String message) {
   if (kDebugMode) print(message);
 }
+
+final startupErrors = <String>[];
 
 class AppServices {
   static final FlutterLocalNotificationsPlugin _notificationsPlugin =
@@ -592,12 +595,16 @@ class _LoadingScreenWolkeState extends State<LoadingScreenWolke> {
 //------------------------
 
 class ConfigFail extends StatelessWidget {
-  const ConfigFail({super.key, required this.errorcode});
+  ConfigFail({super.key, required this.errorcode});
   final int errorcode;
+
+  Uri get _url =>
+      Uri.parse('https://support.achieveirl.de/docs/errors/$errorcode');
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Center(
           child: Column(
@@ -606,13 +613,31 @@ class ConfigFail extends StatelessWidget {
               const Icon(Icons.error_outline, size: 48, color: Colors.red),
               const SizedBox(height: 16),
               Text(
-                'Ein fehler ist Aufgetreten! Fehlercode: $errorcode',
+                'Ein Fehler ist aufgetreten! Fehlercode: $errorcode',
                 textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 12),
+              Text(
+                'Weitere Informationen findest du auf unserer Support-Seite:',
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 12),
+              ElevatedButton(
+                onPressed: _launchUrl,
+                child: Text(
+                  'https://support.achieveirl.de/docs/errors/$errorcode',
+                ),
               ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  Future<void> _launchUrl() async {
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
   }
 }

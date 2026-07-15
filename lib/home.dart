@@ -22,6 +22,15 @@ class _NewsFeedPage1State extends State<NewsFeedPage1> {
 
   @override
   void initState() {
+    //snachbar eerrror message
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      for (final msg in startupErrors) {
+        showAppSnackBar(context, msg);
+      }
+      startupErrors.clear();
+    });
+
     super.initState();
     _loadHiddenIds();
     _loadFeed();

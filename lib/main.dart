@@ -18,15 +18,34 @@ Future<void> main() async {
   const supabaseAnonKey = String.fromEnvironment('SUPABASE_ANON_KEY');
 
   if (supabaseUrl.isEmpty || supabaseAnonKey.isEmpty) {
-    int errorcode = 301;
+    int errorcode = 201;
     runApp(ConfigFail(errorcode: errorcode));
     return;
   }
+  try {
+    await Supabase.initialize(url: supabaseUrl, anonKey: supabaseAnonKey);
+  } catch (e) {
+    if (kDebugMode) print('[supabase] Init failed code: 203');
+    dLog('[supabase] Init failed code: 203: $e');
+    runApp(ConfigFail(errorcode: 203));
+    return;
+  }
 
-  await Workmanager().initialize(backgroundTaskCallback);
-  await Supabase.initialize(url: supabaseUrl, anonKey: supabaseAnonKey);
+  try {
+    await Workmanager().initialize(backgroundTaskCallback);
+  } catch (e) {
+    dLog('[Workmanager] Init failed code: 204: $e');
+    startupErrors.add('Error 204: fehler beim Starten des Backgroundtask.');
+  }
+  try {
+    await AppServices.initializeNotifications();
+  } catch (e) {
+    dLog('[Notifications] Init failed Code: 205: $e');
+    startupErrors.add(
+      'Error 205: Fehler beim Starten des Notificationservice.',
+    );
+  }
 
-  await AppServices.initializeNotifications();
   final sentryEnabled = await SettingsService.loadBool('sentryEnabled', false);
 
   await SentryFlutter.init((options) {
@@ -402,15 +421,21 @@ class _AuthGateState extends State<AuthGate> {
     runner.startWatching();
     EngineHelpers();
     runEngine();
+    try {
+      await Workmanager().registerPeriodicTask(
+        "achievementEngineTask",
+        "checkAchievements",
+        frequency: Duration(minutes: 15),
+        constraints: Constraints(networkType: NetworkType.connected),
+      );
 
-    await Workmanager().registerPeriodicTask(
-      "achievementEngineTask",
-      "checkAchievements",
-      frequency: Duration(minutes: 30),
-      constraints: Constraints(networkType: NetworkType.connected),
-    );
-
-    dLog('[WorkManager] Background-Task registriert');
+      dLog('[WorkManager] Background-Task registriert');
+    } catch (e, stack) {
+      await Sentry.captureException(e, stackTrace: stack);
+      if (mounted) {
+        showAppSnackBar(context, 'BG Task Initialization Failed, Code: 202');
+      }
+    }
   }
 
   @override
