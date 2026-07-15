@@ -604,6 +604,7 @@ class ConfigFail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // TODO: Dark/light Passendes Design...
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Center(
@@ -636,8 +637,10 @@ class ConfigFail extends StatelessWidget {
   }
 
   Future<void> _launchUrl() async {
-    if (!await launchUrl(_url)) {
-      throw Exception('Could not launch $_url');
+    try {
+      await launchUrl(_url, mode: LaunchMode.externalApplication);
+    } catch (e) {
+      dLog('Could not launch $_url. Fehler: $e');
     }
   }
 }
