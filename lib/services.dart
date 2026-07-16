@@ -420,26 +420,6 @@ void showAppSnackBar(
   );
 }
 
-void showGlobalError(String message) {
-  final messenger = rootMessengerKey.currentState;
-  final context = rootMessengerKey.currentContext;
-  if (messenger == null || context == null) return;
-
-  final isDark = Theme.of(context).brightness == Brightness.dark;
-
-  messenger.showSnackBar(
-    SnackBar(
-      duration: const Duration(seconds: 4),
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      behavior: SnackBarBehavior.floating,
-      margin: const EdgeInsets.all(16),
-      padding: EdgeInsets.zero,
-      content: _AppSnackBarContent(message: message, isDark: isDark),
-    ),
-  );
-}
-
 class _AppSnackBarContent extends StatelessWidget {
   final String message;
   final bool isDark;

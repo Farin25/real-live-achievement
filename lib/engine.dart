@@ -16,7 +16,10 @@ class AchievementEngine {
       final ping = await InternetAddress.lookup('achieveirl.de');
       if (ping.isEmpty || ping.first.rawAddress.isEmpty) return;
     } on SocketException {
-      dLog('[Engine] nicht gestartet Kein Internet');
+      dLog('[Engine] nicht gestartet, Kein Internet');
+      showAppSnackBar(
+        'Engine nicht verfügbar! Du kannst keine neuen Achievements Freischalten! Error: 100',
+      );
       return;
     }
     try {
@@ -281,7 +284,8 @@ class AchievementEngine {
       }
     } catch (e, stack) {
       Sentry.captureException(e, stackTrace: stack);
-      if (kDebugMode) print('[Engine] Fehler: $e');
+      dLog('[Engine] Fehler: $e');
+      showAppSnackBar('Fehler bei der Achievemnt Prüfung Error: 301');
     }
   }
 
@@ -307,9 +311,11 @@ class AchievementEngine {
       await _pushnotification(id);
     } on SocketException {
       if (kDebugMode) print('[Engine]Keine Inernetverbindung');
+      showAppSnackBar('Fehler beim Achievement Freischalten! Error: 100');
     } catch (e, stack) {
       Sentry.captureException(e, stackTrace: stack);
       if (kDebugMode) print('[_logUnlock] Fehler bei Achievement $id: $e');
+      showAppSnackBar('Fehler bei Achievement Freischaltung! Error: 302');
     }
   }
 
