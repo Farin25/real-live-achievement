@@ -57,7 +57,7 @@ class _AchievmentSeiteState extends State<AchievmentSeite> {
       });
     } on SocketException {
       if (kDebugMode) print('Keine Internet Verbindung');
-      if (mounted) showAppSnackBar(context, 'Keine Internet Verbindung');
+      showAppSnackBar('Keine Internet Verbindung');
       // Cooller offline screen wie in home
     } catch (e) {
       if (kDebugMode) print("Fehler beim Achievements Laden: $e");

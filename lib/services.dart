@@ -14,6 +14,8 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+final rootMessengerKey = GlobalKey<ScaffoldMessengerState>();
+
 class AppConfig {
   static const String appname = "AchieveIRL";
   static const String version = "BETA 0.5(dev)";
@@ -396,15 +398,38 @@ final _navBarItems = [
 //----------------------------
 
 void showAppSnackBar(
-  BuildContext context,
   String message, {
-  Duration duration = const Duration(seconds: 3),
+  Duration duration = const Duration(seconds: 5),
 }) {
+  final messenger = rootMessengerKey.currentState;
+  final context = rootMessengerKey.currentContext;
+  if (messenger == null || context == null) return;
+
   final isDark = Theme.of(context).brightness == Brightness.dark;
 
-  ScaffoldMessenger.of(context).showSnackBar(
+  messenger.showSnackBar(
     SnackBar(
       duration: duration,
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      behavior: SnackBarBehavior.floating,
+      margin: const EdgeInsets.all(16),
+      padding: EdgeInsets.zero,
+      content: _AppSnackBarContent(message: message, isDark: isDark),
+    ),
+  );
+}
+
+void showGlobalError(String message) {
+  final messenger = rootMessengerKey.currentState;
+  final context = rootMessengerKey.currentContext;
+  if (messenger == null || context == null) return;
+
+  final isDark = Theme.of(context).brightness == Brightness.dark;
+
+  messenger.showSnackBar(
+    SnackBar(
+      duration: const Duration(seconds: 4),
       backgroundColor: Colors.transparent,
       elevation: 0,
       behavior: SnackBarBehavior.floating,
@@ -595,7 +620,7 @@ class _LoadingScreenWolkeState extends State<LoadingScreenWolke> {
 //------------------------
 
 class ConfigFail extends StatelessWidget {
-  ConfigFail({super.key, required this.errorcode});
+  const ConfigFail({super.key, required this.errorcode});
   final int errorcode;
 
   Uri get _url =>

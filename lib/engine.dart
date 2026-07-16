@@ -16,6 +16,7 @@ class AchievementEngine {
       final ping = await InternetAddress.lookup('achieveirl.de');
       if (ping.isEmpty || ping.first.rawAddress.isEmpty) return;
     } on SocketException {
+      dLog('[Engine] nicht gestartet Kein Internet');
       return;
     }
     try {

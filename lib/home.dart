@@ -24,9 +24,8 @@ class _NewsFeedPage1State extends State<NewsFeedPage1> {
   void initState() {
     //snachbar eerrror message
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted) return;
       for (final msg in startupErrors) {
-        showAppSnackBar(context, msg);
+        showAppSnackBar(msg);
       }
       startupErrors.clear();
     });
@@ -104,7 +103,8 @@ class _NewsFeedPage1State extends State<NewsFeedPage1> {
       });
     } on SocketException {
       if (kDebugMode) print('Keine Internetverbindung');
-      if (mounted) showAppSnackBar(context, 'Keine Internetverbindung');
+      showAppSnackBar('Keine Internetverbindung');
+      if (!mounted) return;
       setState(() {
         //TODO Cooler offline Screen
       });
@@ -132,9 +132,7 @@ class _NewsFeedPage1State extends State<NewsFeedPage1> {
       _feedItems.removeAt(index);
     });
 
-    if (mounted) {
-      // showAppSnackBar(context, '${item.title} gelöscht');
-    }
+    // showAppSnackBar('${item.title} gelöscht');
   }
 
   @override

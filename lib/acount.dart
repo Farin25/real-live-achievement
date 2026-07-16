@@ -88,14 +88,14 @@ class _AccountPageState extends State<AccountPage> {
             'birthdate': _birthdateController.text,
           })
           .eq('id', user.id);
+      showAppSnackBar('Profil erfolgreich gespeichert');
       if (mounted) {
-        showAppSnackBar(context, 'Profil erfolgreich gespeichert');
         await _loadProfile();
       }
     } on SocketException {
-      if (mounted) showAppSnackBar(context, 'Keine Netzwerkverbindung!');
+      showAppSnackBar('Keine Netzwerkverbindung!');
     } catch (e) {
-      if (mounted) showAppSnackBar(context, 'Fehler: $e');
+      showAppSnackBar('Fehler: $e');
     }
   }
 

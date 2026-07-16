@@ -224,18 +224,15 @@ class __FormContentState extends State<_FormContent> {
           return;
         }
 
-        showAppSnackBar(context, 'Erst E-Mail-Adresse bestätigen');
+        showAppSnackBar('Erst E-Mail-Adresse bestätigen');
 
         setState(() => _isLoading = false);
         return;
       }
     } on AuthException catch (e) {
-      if (!mounted) return;
-      showAppSnackBar(context, e.message);
+      showAppSnackBar(e.message);
     } on SocketException {
-      if (mounted) {
-        showAppSnackBar(context, 'Keine Internetverbindung');
-      }
+      showAppSnackBar('Keine Internetverbindung');
       if (kDebugMode) print('Keine Internetverbindung');
     }
 
@@ -423,10 +420,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             if (!context.mounted) return;
 
                             if (exists == true) {
-                              showAppSnackBar(
-                                context,
-                                'Username bereits vergeben',
-                              );
+                              showAppSnackBar('Username bereits vergeben');
                               setState(() {
                                 _usernameError =
                                     "Dieser Username ist Bereits vergeben";
@@ -451,24 +445,14 @@ class _SignUpPageState extends State<SignUpPage> {
 
                             if (!context.mounted) return;
 
-                            showAppSnackBar(
-                              context,
-                              'E-Mail-Adresse bestätigen',
-                            );
+                            showAppSnackBar('E-Mail-Adresse bestätigen');
                             Navigator.pop(context);
                           } on SocketException {
-                            if (context.mounted) {
-                              showAppSnackBar(
-                                context,
-                                'Keine Internetverbindung',
-                              );
-                            }
+                            showAppSnackBar('Keine Internetverbindung');
                           } on AuthException catch (e) {
-                            if (context.mounted)
-                              showAppSnackBar(context, e.message);
+                            showAppSnackBar(e.message);
                           } catch (e) {
-                            if (context.mounted)
-                              showAppSnackBar(context, 'Fehler: $e');
+                            showAppSnackBar('Fehler: $e');
                           }
 
                           setState(() => _isLoading = false);

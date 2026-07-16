@@ -182,7 +182,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     subtitle: const Text("Deutsch DE"),
                     trailing: const Icon(Icons.arrow_forward_ios),
                     onTap: () {
-                      showAppSnackBar(context, 'Sprachen kommen bald');
+                      showAppSnackBar('Sprachen kommen bald');
                     },
                   ),
                   const Divider(),
@@ -581,7 +581,7 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
             subtitle: const Text("Startet die Achievement-Engine sofort"),
             onTap: () {
               runEngine();
-              showAppSnackBar(context, 'Engine wurde gestartet');
+              showAppSnackBar('Engine wurde gestartet');
             },
           ),
           const Divider(),
@@ -685,16 +685,12 @@ class _AdvancedSettingsState extends State<AdvancedSettings> {
 
                   if (context.mounted) {
                     Navigator.pop(context);
-                    showAppSnackBar(context, 'Danke für dein Feedback!');
                   }
+                  showAppSnackBar('Danke für dein Feedback!');
                 } on SocketException {
-                  if (context.mounted) {
-                    showAppSnackBar(context, 'Keine Internetverbindung');
-                  }
+                  showAppSnackBar('Keine Internetverbindung');
                 } catch (e) {
-                  if (context.mounted) {
-                    showAppSnackBar(context, 'Fehler beim Senden');
-                  }
+                  showAppSnackBar('Fehler beim Senden');
                 }
               },
               child: const Text("Senden"),

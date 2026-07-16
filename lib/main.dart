@@ -102,6 +102,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      scaffoldMessengerKey: rootMessengerKey,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
@@ -377,11 +378,7 @@ class _AuthGateState extends State<AuthGate> {
                 if (!dialogContext.mounted) return;
                 Navigator.pop(dialogContext);
                 await supabase.auth.signOut();
-                if (!stateContext.mounted) return;
-                showAppSnackBar(
-                  stateContext,
-                  'Wiederhergestellt! Bitte neu einloggen.',
-                );
+                showAppSnackBar('Wiederhergestellt! Bitte neu einloggen.');
               },
               child: const Text('Wiederherstellen'),
             ),
@@ -432,9 +429,7 @@ class _AuthGateState extends State<AuthGate> {
       dLog('[WorkManager] Background-Task registriert');
     } catch (e, stack) {
       await Sentry.captureException(e, stackTrace: stack);
-      if (mounted) {
-        showAppSnackBar(context, 'BG Task Initialization Failed, Code: 202');
-      }
+      showAppSnackBar('BG Task Initialization Failed, Code: 202');
     }
   }
 
