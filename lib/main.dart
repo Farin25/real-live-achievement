@@ -25,7 +25,6 @@ Future<void> main() async {
   try {
     await Supabase.initialize(url: supabaseUrl, anonKey: supabaseAnonKey);
   } catch (e) {
-    if (kDebugMode) print('[supabase] Init failed code: 203');
     dLog('[supabase] Init failed code: 203: $e');
     runApp(ConfigFail(errorcode: 203));
     return;
@@ -387,9 +386,7 @@ class _AuthGateState extends State<AuthGate> {
       );
       return true;
     } on SocketException {
-      if (kDebugMode) {
-        print('Keine Internet Verbindung');
-      }
+      dLog('Netzwerkfehler');
       return false;
     } catch (e, stack) {
       Sentry.captureException(e, stackTrace: stack);
@@ -416,6 +413,7 @@ class _AuthGateState extends State<AuthGate> {
     await initFuture;
     final runner = await EngineRunner.create();
     runner.startWatching();
+    //TODO: Engine helpers zu future umbauen damit await geht.
     EngineHelpers();
     runEngine();
     try {
